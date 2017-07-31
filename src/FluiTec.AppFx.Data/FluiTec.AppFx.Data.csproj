@@ -4,4 +4,9 @@
     <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>
 
+	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+	</Target>
+
 </Project>
