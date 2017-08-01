@@ -104,6 +104,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Instructions.txt = Instructions.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Ssl", "FluiTec.AppFx.Ssl\FluiTec.AppFx.Ssl.csproj", "{2CF6A310-E339-4812-8BEA-53F44A492F78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -226,6 +228,10 @@ Global
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CF6A310-E339-4812-8BEA-53F44A492F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CF6A310-E339-4812-8BEA-53F44A492F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CF6A310-E339-4812-8BEA-53F44A492F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CF6A310-E339-4812-8BEA-53F44A492F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -271,5 +277,6 @@ Global
 		{31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4} = {5845D5C4-5F47-406F-8812-115B0A33AC77}
 		{ACE90309-E7FC-4F84-AF5B-E8FD8E73F0FE} = {31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4}
 		{7CE4B224-DF00-4CB1-8A55-755A9F990BC4} = {8E4A73CA-B6D6-454D-A160-EF4395DE4A28}
+		{2CF6A310-E339-4812-8BEA-53F44A492F78} = {D55E4F1D-33C8-4939-B8D9-2BB1987FBB74}
 	EndGlobalSection
 EndGlobal
