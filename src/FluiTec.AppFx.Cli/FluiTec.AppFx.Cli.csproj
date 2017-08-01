@@ -44,4 +44,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<Target Name="AfterBuild" Condition="'$(ConfigurationName)'=='Release'">
+		<GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+			<Output TaskParameter="Assemblies" ItemName="Identity"/>
+		</GetAssemblyIdentity>
+		<Exec Command="nuget pack $(ProjectFileName) -Version $([System.Version]::Parse(%(Identity.Version)).ToString(3)) -OutputDirectory $(ProjectDir)bin\$(ConfigurationName)\"></Exec>
+		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$([System.Version]::Parse(%(Identity.Version)).ToString(3)).nupkg -Source \\localhost\nuget"></Exec>
+	</Target>
 </Project>
