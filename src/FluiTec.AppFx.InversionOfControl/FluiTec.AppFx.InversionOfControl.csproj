@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+	  <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+	  <NeutralLanguage>de</NeutralLanguage>
+	  <PostBuildEvent></PostBuildEvent>
+	  <PreBuildEvent></PreBuildEvent>
+	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	  <Version>1.0.0</Version>
   </PropertyGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
