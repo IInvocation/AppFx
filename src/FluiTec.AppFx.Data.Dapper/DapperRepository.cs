@@ -30,9 +30,12 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <returns>   The key. </returns>
 		protected static TKey GetKey(long id)
 		{
-			if (typeof(TKey) != typeof(int))
+			if (typeof(TKey) == typeof(int))
+				return (TKey)(object)Convert.ToInt32(id);
+			if (typeof(TKey) == typeof(int))
+				return (TKey)(object)Convert.ToInt64(id);
+			else
 				throw new NotImplementedException(message: "Currently there's only support for int as Primary Key");
-			return (TKey) (object) Convert.ToInt32(id);
 		}
 
 		#endregion
