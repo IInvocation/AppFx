@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FluiTec.AppFx.Data
 {
@@ -8,7 +7,6 @@ namespace FluiTec.AppFx.Data
 	/// <typeparam name="TKey">   	Type of the key. </typeparam>
 	public interface IDataRepository<TEntity, in TKey> : IReadOnlyDataRepository<TEntity, TKey>
 		where TEntity : class, IEntity<TKey>, new()
-		where TKey : IConvertible
 	{
 		/// <summary>	Adds entity. </summary>
 		/// <param name="entity">	The entity to add. </param>
