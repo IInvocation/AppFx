@@ -11,7 +11,6 @@ namespace FluiTec.AppFx.Data.Dapper
 	public abstract class DapperRepository<TEntity, TKey> : DapperReadOnlyRepository<TEntity, TKey>,
 		IDataRepository<TEntity, TKey>
 		where TEntity : class, IEntity<TKey>, new()
-		where TKey : IConvertible
 	{
 		#region Constructors
 
@@ -32,15 +31,26 @@ namespace FluiTec.AppFx.Data.Dapper
 		{
 			if (typeof(TKey) == typeof(int))
 				return (TKey)(object)Convert.ToInt32(id);
-			if (typeof(TKey) == typeof(int))
+			if (typeof(TKey) == typeof(uint))
+				return (TKey)(object)Convert.ToUInt32(id);
+
+			if (typeof(TKey) == typeof(long))
 				return (TKey)(object)Convert.ToInt64(id);
+			if (typeof(TKey) == typeof(ulong))
+				return (TKey)(object)Convert.ToUInt64(id);
+
+			if (typeof(TKey) == typeof(short))
+				return (TKey)(object)Convert.ToInt16(id);
+			if (typeof(TKey) == typeof(ushort))
+				return (TKey) (object) Convert.ToUInt16(id);
+
 			else
-				throw new NotImplementedException(message: "Currently there's only support for int as Primary Key");
+				throw new NotImplementedException(message: "This repository only supports int/uint long/ulong short/ushort as primary key.");
 		}
 
-		#endregion
+#endregion
 
-		#region IDataRepository
+#region IDataRepository
 
 		/// <summary>	Adds entity. </summary>
 		/// <param name="entity">	The entity to add. </param>
@@ -82,6 +92,6 @@ namespace FluiTec.AppFx.Data.Dapper
 			Delete(entity.Id);
 		}
 
-		#endregion
+#endregion
 	}
 }

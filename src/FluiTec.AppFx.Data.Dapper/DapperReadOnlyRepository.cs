@@ -9,7 +9,6 @@ namespace FluiTec.AppFx.Data.Dapper
 	/// <typeparam name="TKey">   	Type of the key. </typeparam>
 	public abstract class DapperReadOnlyRepository<TEntity, TKey> : IReadOnlyDataRepository<TEntity, TKey>
 		where TEntity : class, IEntity<TKey>, new()
-		where TKey : IConvertible
 	{
 		#region Constructors
 

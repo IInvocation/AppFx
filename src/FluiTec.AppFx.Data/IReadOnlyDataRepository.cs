@@ -1,4 +1,4 @@
-﻿using System;
+﻿using global::System;
 using System.Collections.Generic;
 
 namespace FluiTec.AppFx.Data
@@ -8,7 +8,6 @@ namespace FluiTec.AppFx.Data
 	/// <typeparam name="TKey">   	Type of the key. </typeparam>
 	public interface IReadOnlyDataRepository<out TEntity, in TKey> : IRepository
 		where TEntity : class, IEntity<TKey>, new()
-		where TKey : IConvertible
 	{
 		/// <summary>	Gets an entity using the given identifier. </summary>
 		/// <param name="id">	The Identifier to use. </param>
