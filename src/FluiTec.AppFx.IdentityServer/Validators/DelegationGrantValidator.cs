@@ -64,7 +64,7 @@ namespace FluiTec.AppFx.IdentityServer.Validators
 				$"Issuing DelegationGrant for {result.Claims.FirstOrDefault(c => c.Type == "email")?.Value}.");
 
 			// grant
-			context.Result = new GrantValidationResult(sub, authenticationMethod: "delegation");
+			context.Result = new GrantValidationResult(sub, authenticationMethod: "delegation", claims: result.Claims);
 		}
 	}
 }
