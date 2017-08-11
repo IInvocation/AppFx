@@ -75,7 +75,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 
 					return tempElem;
 				}, new {ClientId = clientId}, UnitOfWork.Transaction);
-			return lookup.Values.Single();
+			return lookup.Values.SingleOrDefault();
 		}
 
 		#endregion
