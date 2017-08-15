@@ -6,6 +6,16 @@ namespace FluiTec.AppFx.Mail.Configuration
 	[ConfigurationName(name: "Mail")]
 	public class MailServiceOptions
 	{
+		/// <summary>	Default constructor. </summary>
+		public MailServiceOptions()
+		{
+			Authenticate = true;
+		}
+
+		/// <summary>	Gets or sets a value indicating whether the authenticate. </summary>
+		/// <value>	True if authenticate, false if not. </value>
+		public bool Authenticate { get; set; }
+
 		/// <summary>	Gets or sets the SMTP server. </summary>
 		/// <value>	The SMTP server. </value>
 		public string SmtpServer { get; set; }

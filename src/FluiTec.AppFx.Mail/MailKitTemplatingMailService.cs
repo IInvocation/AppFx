@@ -42,8 +42,10 @@ namespace FluiTec.AppFx.Mail
 				// the XOAUTH2 authentication mechanism.
 				client.AuthenticationMechanisms.Remove(item: "XOAUTH2");
 
-				// Note: only needed if the SMTP server requires authentication
-				client.Authenticate(Options.Username, Options.Password);
+				if (Options.Authenticate)
+				{
+					client.Authenticate(Options.Username, Options.Password);
+				}
 
 				client.Send(message);
 				client.Disconnect(quit: true);
