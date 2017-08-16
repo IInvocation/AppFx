@@ -34,9 +34,30 @@ namespace FluiTec.AppFx.Data.Dapper
 		}
 
 		/// <summary>	Specialised constructor for use only by derived class. </summary>
+		/// <exception cref="ArgumentNullException"> Thrown when one or more required arguments are null. </exception>
+		/// <param name="connectionString"> 	The connection string. </param>
+		/// <param name="connectionFactory">	The connectionfactory. </param>
+		/// <param name="nameService">			The name service. </param>
+		protected DapperDataService(string connectionString, IConnectionFactory connectionFactory,
+			IEntityNameService nameService) : base(nameService)
+		{
+			ConnectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+			ConnectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
+			SqlMapperExtensions.TableNameMapper = NameService.NameByType;
+		}
+
+		/// <summary>	Specialised constructor for use only by derived class. </summary>
 		/// <param name="options">	Options for controlling the operation. </param>
-		protected DapperDataService(IDapperServiceOptions options) : this(options?.ConnectionString,
-			options?.ConnectionFactory)
+		protected DapperDataService(IDapperServiceOptions options) : 
+			this(options?.ConnectionString, options?.ConnectionFactory)
+		{
+		}
+
+		/// <summary>	Specialised constructor for use only by derived class. </summary>
+		/// <param name="options">	  	Options for controlling the operation. </param>
+		/// <param name="nameService">	The name service. </param>
+		protected DapperDataService(IDapperServiceOptions options, IEntityNameService nameService) :
+			this(options?.ConnectionString, options?.ConnectionFactory, nameService)
 		{
 		}
 

@@ -15,12 +15,11 @@ namespace FluiTec.AppFx.Data
 		}
 
 		/// <summary>	Specialised constructor for use only by derived class. </summary>
-		/// <exception cref="ArgumentNullException"> Thrown when one or more required arguments are null. </exception>
 		/// <param name="nameService">	The name service. </param>
 		protected DataService(IEntityNameService nameService)
 		{
 			RepositoryProviders = new Dictionary<Type, Func<IUnitOfWork, IRepository>>();
-			NameService = nameService ?? throw new ArgumentNullException(nameof(nameService));
+			NameService = nameService ?? new EntityNameAttributeNameService();
 		}
 
 		#endregion

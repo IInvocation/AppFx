@@ -1,4 +1,6 @@
-﻿namespace FluiTec.AppFx.Data.Dapper.Mysql
+﻿using Dapper.Contrib.Extensions;
+
+namespace FluiTec.AppFx.Data.Dapper.Mysql
 {
     /// <summary>	A mysql dapper data service. </summary>
     public abstract class MysqlDapperDataService : DapperDataService
@@ -10,12 +12,14 @@
 		/// <param name="connectionFactory">	The connection factory. </param>
 		protected MysqlDapperDataService(string connectionString, IConnectionFactory connectionFactory) : base(connectionString, connectionFactory)
 		{
+			SqlMapperExtensions.GetDatabaseType = connection => "mysqlconnection";
 		}
 
 		/// <summary>	Constructor. </summary>
 		/// <param name="options">	Options for controlling the operation. </param>
 		protected MysqlDapperDataService(IDapperServiceOptions options) : base(options)
 		{
+			SqlMapperExtensions.GetDatabaseType = connection => "mysqlconnection";
 		}
 
 		#endregion

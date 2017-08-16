@@ -118,6 +118,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pgsql", "Pgsql", "{2F688780
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dapper.Pgsql", "FluiTec.AppFx.Data.Dapper.Pgsql\FluiTec.AppFx.Data.Dapper.Pgsql.csproj", "{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dapper.Pgsql.Test", "FluiTec.AppFx.Data.Dapper.Pgsql.Test\FluiTec.AppFx.Data.Dapper.Pgsql.Test.csproj", "{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +262,10 @@ Global
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -312,6 +318,7 @@ Global
 		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF} = {96DC05AA-D450-458D-91AA-1016B419964C}
 		{2F688780-8D4E-4881-80D7-48EE402A2B8C} = {B5CD1340-3032-49E1-9EB0-CE90B9D5664B}
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
+		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}

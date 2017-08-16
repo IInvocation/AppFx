@@ -21,7 +21,7 @@ namespace FluiTec.AppFx.Data
 		/// <summary>	Name by type. </summary>
 		/// <param name="entityType">	Type of the entity. </param>
 		/// <returns>	A string. </returns>
-		public string NameByType(Type entityType)
+		public virtual string NameByType(Type entityType)
 		{
 			if (EntityNames.ContainsKey(entityType)) return EntityNames[entityType];
 			var attribute =
