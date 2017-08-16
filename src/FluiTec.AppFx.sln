@@ -116,9 +116,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pgsql", "Pgsql", "{2F688780-8D4E-4881-80D7-48EE402A2B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dapper.Pgsql", "FluiTec.AppFx.Data.Dapper.Pgsql\FluiTec.AppFx.Data.Dapper.Pgsql.csproj", "{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.Pgsql", "FluiTec.AppFx.Data.Dapper.Pgsql\FluiTec.AppFx.Data.Dapper.Pgsql.csproj", "{16B29815-D11C-4A5E-8680-F9DE9DAAC79D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dapper.Pgsql.Test", "FluiTec.AppFx.Data.Dapper.Pgsql.Test\FluiTec.AppFx.Data.Dapper.Pgsql.Test.csproj", "{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.Pgsql.Test", "FluiTec.AppFx.Data.Dapper.Pgsql.Test\FluiTec.AppFx.Data.Dapper.Pgsql.Test.csproj", "{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{04920849-EF1C-4FFF-8DFF-74112CA3DB12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Sql", "FluiTec.AppFx.Data.Sql\FluiTec.AppFx.Data.Sql.csproj", "{E483B10D-EB7F-437A-88D7-44A9BB8DE147}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -266,6 +270,10 @@ Global
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -319,6 +327,8 @@ Global
 		{2F688780-8D4E-4881-80D7-48EE402A2B8C} = {B5CD1340-3032-49E1-9EB0-CE90B9D5664B}
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
+		{04920849-EF1C-4FFF-8DFF-74112CA3DB12} = {5BAE7134-8694-4D41-987C-2D9FCB6BADB6}
+		{E483B10D-EB7F-437A-88D7-44A9BB8DE147} = {04920849-EF1C-4FFF-8DFF-74112CA3DB12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
