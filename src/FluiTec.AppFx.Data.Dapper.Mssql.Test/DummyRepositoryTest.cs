@@ -23,8 +23,8 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 	    public virtual void Cleanup()
 	    {
 		    Repository = null;
-			UnitOfWork?.Dispose();
-			DataService?.Dispose();
+			UnitOfWork.Dispose();
+			DataService.Dispose();
 	    }
 
 		[TestMethod]
@@ -34,17 +34,16 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 		    try
 		    {
 			    const string name = "My TestName";
-			    var entity = new DummyEntity { Name = name };
+			    var entity = new DummyEntity {Name = name};
 
 			    entity = Repository.Add(entity);
 			    entity = Repository.Get(entity.Id);
 
 			    Assert.AreEqual(entity.Name, name);
-			}
-		    catch (Exception)
+		    }
+		    finally
 		    {
-				Cleanup();
-				throw;
+			    Cleanup();
 		    }
 	    }
 
@@ -55,15 +54,14 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 		    try
 		    {
 			    var entities = new[] {new DummyEntity(), new DummyEntity()};
-				Repository.AddRange(entities);
+			    Repository.AddRange(entities);
 			    var repoCount = Repository.GetAll().Count();
 
-				Assert.AreEqual(entities.Length, repoCount);
+			    Assert.AreEqual(entities.Length, repoCount);
 		    }
-		    catch (Exception)
+			finally
 		    {
 			    Cleanup();
-			    throw;
 		    }
 		}
 
@@ -83,10 +81,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 				
 			    Assert.AreEqual(updateName, entity.Name);
 		    }
-		    catch (Exception)
+			finally
 		    {
 			    Cleanup();
-			    throw;
 		    }
 		}
 
@@ -103,10 +100,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 
 				Assert.IsNull(Repository.Get(entity.Id));
 			}
-			catch (Exception)
+			finally
 			{
 				Cleanup();
-				throw;
 			}
 		}
 
@@ -123,12 +119,11 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 
 			    Assert.IsNull(Repository.Get(entity.Id));
 		    }
-		    catch (Exception)
+			finally
 		    {
 			    Cleanup();
-			    throw;
 		    }
-	    }
+		}
 
 		[TestMethod]
 	    public void TestCommit()
@@ -139,10 +134,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 			    Repository.Add(new DummyEntity());
 			    UnitOfWork.Commit();
 		    }
-		    catch (Exception)
+			finally
 		    {
 			    Cleanup();
-			    throw;
 		    }
 
 			Initialize();
@@ -152,11 +146,10 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 				Repository.Delete(Repository.GetAll().First());
 				UnitOfWork.Commit();
 		    }
-		    catch (Exception)
+			finally
 		    {
-				Cleanup();
-			    throw;
-			}
+			    Cleanup();
+		    }
 		}
 	}
 }

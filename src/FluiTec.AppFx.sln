@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{5C078D35-DFE0-4692-9DC7-37DE83FC7079}"
 EndProject
@@ -106,7 +106,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Ssl", "FluiTec.AppFx.Ssl\FluiTec.AppFx.Ssl.csproj", "{2CF6A310-E339-4812-8BEA-53F44A492F78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Mail", "FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj", "{BA63A951-B43F-4023-BAAB-798D5DEBC3D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Mail", "FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj", "{BA63A951-B43F-4023-BAAB-798D5DEBC3D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mysql", "Mysql", "{96DC05AA-D450-458D-91AA-1016B419964C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.Mysql", "FluiTec.AppFx.Data.Dapper.Mysql\FluiTec.AppFx.Data.Dapper.Mysql.csproj", "{E7A86934-82E8-4116-8100-5127497CB74A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.Mysql.Test", "FluiTec.AppFx.Data.Dapper.Mysql.Test\FluiTec.AppFx.Data.Dapper.Mysql.Test.csproj", "{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -238,6 +244,14 @@ Global
 		{BA63A951-B43F-4023-BAAB-798D5DEBC3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA63A951-B43F-4023-BAAB-798D5DEBC3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA63A951-B43F-4023-BAAB-798D5DEBC3D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A86934-82E8-4116-8100-5127497CB74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A86934-82E8-4116-8100-5127497CB74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A86934-82E8-4116-8100-5127497CB74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A86934-82E8-4116-8100-5127497CB74A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -285,5 +299,11 @@ Global
 		{7CE4B224-DF00-4CB1-8A55-755A9F990BC4} = {8E4A73CA-B6D6-454D-A160-EF4395DE4A28}
 		{2CF6A310-E339-4812-8BEA-53F44A492F78} = {D55E4F1D-33C8-4939-B8D9-2BB1987FBB74}
 		{BA63A951-B43F-4023-BAAB-798D5DEBC3D0} = {81C1EC44-A430-4261-AE7C-AA70040578BA}
+		{96DC05AA-D450-458D-91AA-1016B419964C} = {B5CD1340-3032-49E1-9EB0-CE90B9D5664B}
+		{E7A86934-82E8-4116-8100-5127497CB74A} = {96DC05AA-D450-458D-91AA-1016B419964C}
+		{13C486E5-0F91-47EA-B5A9-C17F7A4F15EF} = {96DC05AA-D450-458D-91AA-1016B419964C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
 	EndGlobalSection
 EndGlobal

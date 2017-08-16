@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 
-namespace FluiTec.AppFx.Data.Dapper.Mssql
+namespace FluiTec.AppFx.Data.Dapper
 {
 	/// <summary>	A wrapped database command. </summary>
 	public class WrappedDbCommand : IDbCommand

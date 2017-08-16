@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace FluiTec.AppFx.Data.Dapper.Mssql
+namespace FluiTec.AppFx.Data.Dapper
 {
 	/// <summary>	A wrapped database connection. </summary>
 	public class WrappedDbConnection : IDbConnection

@@ -44,7 +44,6 @@ namespace FluiTec.AppFx.Data.Dapper
 			if (typeof(TKey) == typeof(ushort))
 				return (TKey) (object) Convert.ToUInt16(id);
 
-			else
 				throw new NotImplementedException(message: "This repository only supports int/uint long/ulong short/ushort as primary key.");
 		}
 
