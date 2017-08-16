@@ -7,7 +7,7 @@ using System.Reflection;
 namespace FluiTec.AppFx.Data.Sql
 {
     /// <summary>	A SQL entity cache. </summary>
-    public static class SqlPropertyCache
+    public static class SqlCache
     {
 		/// <summary>	The type properties. </summary>
 		private static readonly ConcurrentDictionary<RuntimeTypeHandle, IList<PropertyInfo>> TypeProperties = new ConcurrentDictionary<RuntimeTypeHandle, IList<PropertyInfo>>();
@@ -24,5 +24,8 @@ namespace FluiTec.AppFx.Data.Sql
 		    TypeProperties[type.TypeHandle] = properties.ToList();
 		    return properties;
 	    }
-    }
+
+		/// <summary>	The entity name cache. </summary>
+		public static ConcurrentDictionary<RuntimeTypeHandle, string> EntityNameCache = new ConcurrentDictionary<RuntimeTypeHandle, string>();
+	}
 }
