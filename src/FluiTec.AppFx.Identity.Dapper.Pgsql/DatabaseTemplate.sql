@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
+-- Dumped from database version 9.6.3
 -- Dumped by pg_dump version 9.6.3
 
--- Started on 2017-08-16 16:51:33
+-- Started on 2017-08-20 17:39:06
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -25,7 +25,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2181 (class 0 OID 0)
+-- TOC entry 2182 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -40,26 +40,24 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 192 (class 1259 OID 16445)
--- Name: IdentityClaim; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 186 (class 1259 OID 16413)
+-- Name: Dummy; Type: TABLE; Schema: public; Owner: appfx
 --
 
-CREATE TABLE "IdentityClaim" (
+CREATE TABLE "Dummy" (
     "Id" integer NOT NULL,
-    "UserId" integer NOT NULL,
-    "Type" character varying(256) NOT NULL,
-    "Value" character varying(256)
+    "Name" character varying(256)
 );
 
 
-ALTER TABLE "IdentityClaim" OWNER TO postgres;
+ALTER TABLE "Dummy" OWNER TO appfx;
 
 --
--- TOC entry 191 (class 1259 OID 16443)
--- Name: IdentityClaim_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 185 (class 1259 OID 16411)
+-- Name: Dummy_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
 --
 
-CREATE SEQUENCE "IdentityClaim_Id_seq"
+CREATE SEQUENCE "Dummy_Id_seq"
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -67,37 +65,37 @@ CREATE SEQUENCE "IdentityClaim_Id_seq"
     CACHE 1;
 
 
-ALTER TABLE "IdentityClaim_Id_seq" OWNER TO postgres;
+ALTER TABLE "Dummy_Id_seq" OWNER TO appfx;
 
 --
--- TOC entry 2182 (class 0 OID 0)
--- Dependencies: 191
--- Name: IdentityClaim_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 2183 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: Dummy_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
 --
 
-ALTER SEQUENCE "IdentityClaim_Id_seq" OWNED BY "IdentityClaim"."Id";
+ALTER SEQUENCE "Dummy_Id_seq" OWNED BY "Dummy"."Id";
 
 
 --
--- TOC entry 188 (class 1259 OID 16426)
--- Name: IdentityRole; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 190 (class 1259 OID 16432)
+-- Name: IdentityRole; Type: TABLE; Schema: public; Owner: appfx
 --
 
 CREATE TABLE "IdentityRole" (
     "Id" integer NOT NULL,
-    "Identifier" uuid NOT NULL,
     "ApplicationId" integer NOT NULL,
+    "Identifier" uuid NOT NULL,
     "Name" character varying(256) NOT NULL,
     "LoweredName" character varying(256) NOT NULL,
     "Description" character varying(256)
 );
 
 
-ALTER TABLE "IdentityRole" OWNER TO postgres;
+ALTER TABLE "IdentityRole" OWNER TO appfx;
 
 --
--- TOC entry 187 (class 1259 OID 16424)
--- Name: IdentityRole_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 189 (class 1259 OID 16430)
+-- Name: IdentityRole_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
 --
 
 CREATE SEQUENCE "IdentityRole_Id_seq"
@@ -108,66 +106,65 @@ CREATE SEQUENCE "IdentityRole_Id_seq"
     CACHE 1;
 
 
-ALTER TABLE "IdentityRole_Id_seq" OWNER TO postgres;
+ALTER TABLE "IdentityRole_Id_seq" OWNER TO appfx;
 
 --
--- TOC entry 2183 (class 0 OID 0)
--- Dependencies: 187
--- Name: IdentityRole_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 2184 (class 0 OID 0)
+-- Dependencies: 189
+-- Name: IdentityRole_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
 --
 
 ALTER SEQUENCE "IdentityRole_Id_seq" OWNED BY "IdentityRole"."Id";
 
 
 --
--- TOC entry 186 (class 1259 OID 16415)
--- Name: IdentityUser; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 188 (class 1259 OID 16421)
+-- Name: IdentityUser; Type: TABLE; Schema: public; Owner: appfx
 --
 
 CREATE TABLE "IdentityUser" (
-    "MobileAlias" character varying(16),
-    "NormalizedEmail" character varying(256),
-    "PasswordHash" character varying(256),
-    "SecurityStamp" character varying(256),
-    "Phone" character varying(256),
-    "LockedOutTill" timestamp with time zone,
-    "AccessFailedCount" integer NOT NULL,
-    "LockoutEnabled" boolean NOT NULL,
-    "TwoFactorEnabled" boolean NOT NULL,
-    "PhoneConfirmed" boolean NOT NULL,
-    "EmailConfirmed" boolean NOT NULL,
+    "AccessFailedCount" boolean NOT NULL,
     "ApplicationId" integer NOT NULL,
     "Email" character varying(256) NOT NULL,
+    "EmailConfirmed" boolean NOT NULL,
     "Id" integer NOT NULL,
     "Identifier" uuid NOT NULL,
     "IsAnonymous" boolean NOT NULL,
     "LastActivityDate" timestamp without time zone NOT NULL,
     "LoweredUserName" character varying(256) NOT NULL,
-    "Name" character varying(256) NOT NULL
+    "MobileAlias" character varying(16),
+    "Name" character varying(256) NOT NULL,
+    "NormalizedEmail" character varying(256),
+    "PasswordHash" character varying(256),
+    "Phone" character varying(256),
+    "PhoneConfirmed" boolean NOT NULL,
+    "SecurityStamp" character varying(256),
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockedOutTill" timestamp with time zone
 );
 
 
-ALTER TABLE "IdentityUser" OWNER TO postgres;
+ALTER TABLE "IdentityUser" OWNER TO appfx;
 
 --
--- TOC entry 194 (class 1259 OID 16476)
--- Name: IdentityUserLogin; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 192 (class 1259 OID 16443)
+-- Name: IdentityUserLogin; Type: TABLE; Schema: public; Owner: appfx
 --
 
 CREATE TABLE "IdentityUserLogin" (
     "Id" integer NOT NULL,
     "ProviderName" character varying(255) NOT NULL,
-    "ProviderKey" character varying(4) NOT NULL,
+    "ProviderKey" character varying(45) NOT NULL,
     "ProviderDisplayName" character varying(255),
-    "UserId" integer NOT NULL
+    "UserId" uuid NOT NULL
 );
 
 
-ALTER TABLE "IdentityUserLogin" OWNER TO postgres;
+ALTER TABLE "IdentityUserLogin" OWNER TO appfx;
 
 --
--- TOC entry 193 (class 1259 OID 16474)
--- Name: IdentityUserLogin_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 191 (class 1259 OID 16441)
+-- Name: IdentityUserLogin_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
 --
 
 CREATE SEQUENCE "IdentityUserLogin_Id_seq"
@@ -178,20 +175,20 @@ CREATE SEQUENCE "IdentityUserLogin_Id_seq"
     CACHE 1;
 
 
-ALTER TABLE "IdentityUserLogin_Id_seq" OWNER TO postgres;
+ALTER TABLE "IdentityUserLogin_Id_seq" OWNER TO appfx;
 
 --
--- TOC entry 2184 (class 0 OID 0)
--- Dependencies: 193
--- Name: IdentityUserLogin_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 2185 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: IdentityUserLogin_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
 --
 
 ALTER SEQUENCE "IdentityUserLogin_Id_seq" OWNED BY "IdentityUserLogin"."Id";
 
 
 --
--- TOC entry 190 (class 1259 OID 16437)
--- Name: IdentityUserRole; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 194 (class 1259 OID 16454)
+-- Name: IdentityUserRole; Type: TABLE; Schema: public; Owner: appfx
 --
 
 CREATE TABLE "IdentityUserRole" (
@@ -201,11 +198,11 @@ CREATE TABLE "IdentityUserRole" (
 );
 
 
-ALTER TABLE "IdentityUserRole" OWNER TO postgres;
+ALTER TABLE "IdentityUserRole" OWNER TO appfx;
 
 --
--- TOC entry 189 (class 1259 OID 16435)
--- Name: IdentityUserRole_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 193 (class 1259 OID 16452)
+-- Name: IdentityUserRole_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
 --
 
 CREATE SEQUENCE "IdentityUserRole_Id_seq"
@@ -216,20 +213,20 @@ CREATE SEQUENCE "IdentityUserRole_Id_seq"
     CACHE 1;
 
 
-ALTER TABLE "IdentityUserRole_Id_seq" OWNER TO postgres;
+ALTER TABLE "IdentityUserRole_Id_seq" OWNER TO appfx;
 
 --
--- TOC entry 2185 (class 0 OID 0)
--- Dependencies: 189
--- Name: IdentityUserRole_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 2186 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: IdentityUserRole_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
 --
 
 ALTER SEQUENCE "IdentityUserRole_Id_seq" OWNED BY "IdentityUserRole"."Id";
 
 
 --
--- TOC entry 185 (class 1259 OID 16413)
--- Name: IdentityUser_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 187 (class 1259 OID 16419)
+-- Name: IdentityUser_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
 --
 
 CREATE SEQUENCE "IdentityUser_Id_seq"
@@ -240,164 +237,116 @@ CREATE SEQUENCE "IdentityUser_Id_seq"
     CACHE 1;
 
 
-ALTER TABLE "IdentityUser_Id_seq" OWNER TO postgres;
+ALTER TABLE "IdentityUser_Id_seq" OWNER TO appfx;
 
 --
--- TOC entry 2186 (class 0 OID 0)
--- Dependencies: 185
--- Name: IdentityUser_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- TOC entry 2187 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: IdentityUser_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
 --
 
 ALTER SEQUENCE "IdentityUser_Id_seq" OWNED BY "IdentityUser"."Id";
 
 
 --
--- TOC entry 2032 (class 2604 OID 16448)
--- Name: IdentityClaim Id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 196 (class 1259 OID 16462)
+-- Name: identityClaim; Type: TABLE; Schema: public; Owner: appfx
 --
 
-ALTER TABLE ONLY "IdentityClaim" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityClaim_Id_seq"'::regclass);
+CREATE TABLE "identityClaim" (
+    "Id" integer NOT NULL,
+    "UserId" integer NOT NULL,
+    "Type" character varying(256) NOT NULL,
+    "Value" character varying(256)
+);
+
+
+ALTER TABLE "identityClaim" OWNER TO appfx;
+
+--
+-- TOC entry 195 (class 1259 OID 16460)
+-- Name: identityClaim_Id_seq; Type: SEQUENCE; Schema: public; Owner: appfx
+--
+
+CREATE SEQUENCE "identityClaim_Id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "identityClaim_Id_seq" OWNER TO appfx;
+
+--
+-- TOC entry 2188 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: identityClaim_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: appfx
+--
+
+ALTER SEQUENCE "identityClaim_Id_seq" OWNED BY "identityClaim"."Id";
 
 
 --
--- TOC entry 2030 (class 2604 OID 16429)
--- Name: IdentityRole Id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2035 (class 2604 OID 16416)
+-- Name: Dummy Id; Type: DEFAULT; Schema: public; Owner: appfx
+--
+
+ALTER TABLE ONLY "Dummy" ALTER COLUMN "Id" SET DEFAULT nextval('"Dummy_Id_seq"'::regclass);
+
+
+--
+-- TOC entry 2037 (class 2604 OID 16435)
+-- Name: IdentityRole Id; Type: DEFAULT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityRole" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityRole_Id_seq"'::regclass);
 
 
 --
--- TOC entry 2029 (class 2604 OID 16418)
--- Name: IdentityUser Id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2036 (class 2604 OID 16424)
+-- Name: IdentityUser Id; Type: DEFAULT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUser" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUser_Id_seq"'::regclass);
 
 
 --
--- TOC entry 2033 (class 2604 OID 16479)
--- Name: IdentityUserLogin Id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2038 (class 2604 OID 16446)
+-- Name: IdentityUserLogin Id; Type: DEFAULT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserLogin" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUserLogin_Id_seq"'::regclass);
 
 
 --
--- TOC entry 2031 (class 2604 OID 16440)
--- Name: IdentityUserRole Id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2039 (class 2604 OID 16457)
+-- Name: IdentityUserRole Id; Type: DEFAULT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserRole" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUserRole_Id_seq"'::regclass);
 
 
 --
--- TOC entry 2172 (class 0 OID 16445)
--- Dependencies: 192
--- Data for Name: IdentityClaim; Type: TABLE DATA; Schema: public; Owner: postgres
+-- TOC entry 2040 (class 2604 OID 16465)
+-- Name: identityClaim Id; Type: DEFAULT; Schema: public; Owner: appfx
 --
 
-COPY "IdentityClaim" ("Id", "UserId", "Type", "Value") FROM stdin;
-\.
+ALTER TABLE ONLY "identityClaim" ALTER COLUMN "Id" SET DEFAULT nextval('"identityClaim_Id_seq"'::regclass);
 
 
 --
--- TOC entry 2187 (class 0 OID 0)
--- Dependencies: 191
--- Name: IdentityClaim_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- TOC entry 2042 (class 2606 OID 16418)
+-- Name: Dummy Dummy_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
-SELECT pg_catalog.setval('"IdentityClaim_Id_seq"', 1, false);
-
-
---
--- TOC entry 2168 (class 0 OID 16426)
--- Dependencies: 188
--- Data for Name: IdentityRole; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "IdentityRole" ("Id", "Identifier", "ApplicationId", "Name", "LoweredName", "Description") FROM stdin;
-\.
+ALTER TABLE ONLY "Dummy"
+    ADD CONSTRAINT "Dummy_pkey" PRIMARY KEY ("Id");
 
 
 --
--- TOC entry 2188 (class 0 OID 0)
--- Dependencies: 187
--- Name: IdentityRole_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('"IdentityRole_Id_seq"', 1, false);
-
-
---
--- TOC entry 2166 (class 0 OID 16415)
--- Dependencies: 186
--- Data for Name: IdentityUser; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "IdentityUser" ("MobileAlias", "NormalizedEmail", "PasswordHash", "SecurityStamp", "Phone", "LockedOutTill", "AccessFailedCount", "LockoutEnabled", "TwoFactorEnabled", "PhoneConfirmed", "EmailConfirmed", "ApplicationId", "Email", "Id", "Identifier", "IsAnonymous", "LastActivityDate", "LoweredUserName", "Name") FROM stdin;
-\.
-
-
---
--- TOC entry 2174 (class 0 OID 16476)
--- Dependencies: 194
--- Data for Name: IdentityUserLogin; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "IdentityUserLogin" ("Id", "ProviderName", "ProviderKey", "ProviderDisplayName", "UserId") FROM stdin;
-\.
-
-
---
--- TOC entry 2189 (class 0 OID 0)
--- Dependencies: 193
--- Name: IdentityUserLogin_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('"IdentityUserLogin_Id_seq"', 1, false);
-
-
---
--- TOC entry 2170 (class 0 OID 16437)
--- Dependencies: 190
--- Data for Name: IdentityUserRole; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "IdentityUserRole" ("Id", "UserId", "RoleId") FROM stdin;
-\.
-
-
---
--- TOC entry 2190 (class 0 OID 0)
--- Dependencies: 189
--- Name: IdentityUserRole_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('"IdentityUserRole_Id_seq"', 1, false);
-
-
---
--- TOC entry 2191 (class 0 OID 0)
--- Dependencies: 185
--- Name: IdentityUser_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('"IdentityUser_Id_seq"', 1, false);
-
-
---
--- TOC entry 2041 (class 2606 OID 16453)
--- Name: IdentityClaim IdentityClaim_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY "IdentityClaim"
-    ADD CONSTRAINT "IdentityClaim_pkey" PRIMARY KEY ("Id");
-
-
---
--- TOC entry 2037 (class 2606 OID 16434)
--- Name: IdentityRole IdentityRole_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2048 (class 2606 OID 16440)
+-- Name: IdentityRole IdentityRole_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityRole"
@@ -405,8 +354,8 @@ ALTER TABLE ONLY "IdentityRole"
 
 
 --
--- TOC entry 2043 (class 2606 OID 16484)
--- Name: IdentityUserLogin IdentityUserLogin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2050 (class 2606 OID 16451)
+-- Name: IdentityUserLogin IdentityUserLogin_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserLogin"
@@ -414,8 +363,8 @@ ALTER TABLE ONLY "IdentityUserLogin"
 
 
 --
--- TOC entry 2039 (class 2606 OID 16442)
--- Name: IdentityUserRole IdentityUserRole_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2052 (class 2606 OID 16459)
+-- Name: IdentityUserRole IdentityUserRole_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserRole"
@@ -423,8 +372,8 @@ ALTER TABLE ONLY "IdentityUserRole"
 
 
 --
--- TOC entry 2035 (class 2606 OID 16423)
--- Name: IdentityUser IdentityUser_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2044 (class 2606 OID 16429)
+-- Name: IdentityUser IdentityUser_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUser"
@@ -432,26 +381,44 @@ ALTER TABLE ONLY "IdentityUser"
 
 
 --
--- TOC entry 2046 (class 2606 OID 16459)
--- Name: IdentityClaim FK_IdentityClaim_IdentityUser; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2046 (class 2606 OID 16487)
+-- Name: IdentityUser UX_Identifier; Type: CONSTRAINT; Schema: public; Owner: appfx
 --
 
-ALTER TABLE ONLY "IdentityClaim"
+ALTER TABLE ONLY "IdentityUser"
+    ADD CONSTRAINT "UX_Identifier" UNIQUE ("Identifier");
+
+
+--
+-- TOC entry 2054 (class 2606 OID 16470)
+-- Name: identityClaim identityClaim_pkey; Type: CONSTRAINT; Schema: public; Owner: appfx
+--
+
+ALTER TABLE ONLY "identityClaim"
+    ADD CONSTRAINT "identityClaim_pkey" PRIMARY KEY ("Id");
+
+
+--
+-- TOC entry 2058 (class 2606 OID 16471)
+-- Name: identityClaim FK_IdentityClaim_IdentityUser; Type: FK CONSTRAINT; Schema: public; Owner: appfx
+--
+
+ALTER TABLE ONLY "identityClaim"
     ADD CONSTRAINT "FK_IdentityClaim_IdentityUser" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Id");
 
 
 --
--- TOC entry 2047 (class 2606 OID 16485)
--- Name: IdentityUserLogin FK_IdentityUserLogin; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2055 (class 2606 OID 16488)
+-- Name: IdentityUserLogin FK_IdentityUserLogin_IdentityUser; Type: FK CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserLogin"
-    ADD CONSTRAINT "FK_IdentityUserLogin" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Id");
+    ADD CONSTRAINT "FK_IdentityUserLogin_IdentityUser" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Identifier");
 
 
 --
--- TOC entry 2044 (class 2606 OID 16464)
--- Name: IdentityUserRole FK_IdentityUserRole_IdentityRole; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2056 (class 2606 OID 16476)
+-- Name: IdentityUserRole FK_IdentityUserRole_IdentityRole; Type: FK CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserRole"
@@ -459,15 +426,15 @@ ALTER TABLE ONLY "IdentityUserRole"
 
 
 --
--- TOC entry 2045 (class 2606 OID 16469)
--- Name: IdentityUserRole FK_IdentityUserRole_IdentityUser; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2057 (class 2606 OID 16481)
+-- Name: IdentityUserRole FK_IdentityUserRole_IdentityUser; Type: FK CONSTRAINT; Schema: public; Owner: appfx
 --
 
 ALTER TABLE ONLY "IdentityUserRole"
     ADD CONSTRAINT "FK_IdentityUserRole_IdentityUser" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Id");
 
 
--- Completed on 2017-08-16 16:51:33
+-- Completed on 2017-08-20 17:39:06
 
 --
 -- PostgreSQL database dump complete

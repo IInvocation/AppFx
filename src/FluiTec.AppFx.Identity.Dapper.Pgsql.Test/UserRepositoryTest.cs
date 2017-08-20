@@ -1,12 +1,11 @@
 ﻿using System;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Pgsql;
-using FluiTec.AppFx.Identity.Dapper.Pgsql;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
+namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 {
 	[TestClass]
 	public class UserRepositoryTest
@@ -21,7 +20,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 			{
 				ConnectionFactory = new PgsqlConnectionFactory(),
 				ConnectionString =
-					"User ID=srv-callrouting;Password=test123;Host=localhost;Port=5432;Database=callrouting;Pooling=true;"
+					"User ID=appfx;Password=appfx;Host=localhost;Port=5432;Database=AppFx;Pooling=true;"
 			};
 			DataService = new PgsqlDapperIdentityDataService(options);
 			UnitOfWork = DataService.StartUnitOfWork();
@@ -46,7 +45,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 					IsAnonymous = false,
 					LastActivityDate = DateTime.Now,
 					LoweredUserName = "a.schnell@wtschnell.de",
-					Name = "a.schnell@wtschnell.de"
+					Name = "Achim Schnell",
+					Email = "a.schnell@wtschnell.de"
 				};
 				user = Repository.Add(user);
 				Assert.AreNotEqual(0, user.Id);

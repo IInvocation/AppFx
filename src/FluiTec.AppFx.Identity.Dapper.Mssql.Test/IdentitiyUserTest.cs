@@ -1,0 +1,135 @@
+﻿using System;
+using System.Linq;
+using FluiTec.AppFx.Identity.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
+{
+	/// <summary>	(Unit Test Class) an identitiy user test. </summary>
+	[TestClass]
+	public class IdentitiyUserTest : IdentityTest
+	{
+		/// <summary>	Default constructor. </summary>
+		public IdentitiyUserTest() : base(Helper.GetDataService()) { }
+
+		
+		/// <summary>	(Unit Test Method) can add and get user. </summary>
+		[TestMethod]
+		public void CanAddAndGetUser()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+				Assert.AreEqual(user.Name, uow.UserRepository.Get(user.Id).Name);
+			}
+		}
+
+		
+		/// <summary>	(Unit Test Method) can add and get users. </summary>
+		[TestMethod]
+		public void CanAddAndGetUsers()
+		{
+			var users = new[]
+			{
+				new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				},
+				new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Stefan Schnell",
+					LoweredUserName = "STEFAN SCHNELL",
+					Email = "s.schnell@wtschnell.de",
+					NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				}
+			};
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				uow.UserRepository.AddRange(users);
+				Assert.AreEqual(users.Length, uow.UserRepository.GetAll().Count());
+			}
+		}
+
+		/// <summary>	(Unit Test Method) can update user. </summary>
+		[TestMethod]
+		public void CanUpdateUser()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = uow.UserRepository.Add(new IdentityUserEntity
+					{
+						Identifier = Guid.NewGuid(),
+						Name = "Stefan Schnell",
+						LoweredUserName = "STEFAN SCHNELL",
+						Email = "s.schnell@wtschnell.de",
+						NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
+						AccessFailedCount = 0,
+						ApplicationId = 0,
+						EmailConfirmed = true,
+						IsAnonymous = false,
+						LastActivityDate = DateTime.Now
+					}
+				);
+
+				user.Name = "Changed";
+				uow.UserRepository.Update(user);
+				Assert.AreEqual(user.Name, uow.UserRepository.Get(user.Id).Name);
+			}
+		}
+
+		/// <summary>	(Unit Test Method) can delete user. </summary>
+		[TestMethod]
+		public void CanDeleteUser()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = uow.UserRepository.Add(new IdentityUserEntity
+					{
+						Identifier = Guid.NewGuid(),
+						Name = "Stefan Schnell",
+						LoweredUserName = "STEFAN SCHNELL",
+						Email = "s.schnell@wtschnell.de",
+						NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
+						AccessFailedCount = 0,
+						ApplicationId = 0,
+						EmailConfirmed = true,
+						IsAnonymous = false,
+						LastActivityDate = DateTime.Now
+					}
+				);
+
+				uow.UserRepository.Delete(user.Id);
+				Assert.AreEqual(expected: null, actual: uow.UserRepository.Get(user.Id));
+			}
+		}
+	}
+}

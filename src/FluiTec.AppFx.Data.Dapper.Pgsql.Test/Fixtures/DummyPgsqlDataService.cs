@@ -4,7 +4,7 @@
     public class DummyPgsqlDataService : PgsqlDapperDataService
     {
 	    /// <summary>	Default constructor. </summary>
-	    public DummyPgsqlDataService() : base("User ID=srv-callrouting;Password=test123;Host=localhost;Port=5432;Database=Test;Pooling=true;", new PgsqlConnectionFactory())
+	    public DummyPgsqlDataService() : base("User ID=appfx;Password=appfx;Host=localhost;Port=5432;Database=AppFx;Pooling=true;")
 	    {
 	    }
 
