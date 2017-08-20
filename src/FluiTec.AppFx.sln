@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{5C078D35-DFE0-4692-9DC7-37DE83FC7079}"
 EndProject
@@ -120,17 +120,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.Pgsql.Test", "FluiTec.AppFx.Data.Dapper.Pgsql.Test\FluiTec.AppFx.Data.Dapper.Pgsql.Test.csproj", "{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}"
 EndProject
-<<<<<<< HEAD
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pgsql", "Pgsql", "{26229F05-A4EB-4F65-A5AC-FB4418DE50D5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Identity.Dapper.Pgsql", "FluiTec.AppFx.Identity.Dapper.Pgsql\FluiTec.AppFx.Identity.Dapper.Pgsql.csproj", "{EF68F4D6-0DA1-406D-B664-206A58B1D694}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Identity.Dapper.Pgsql.Test", "FluiTec.AppFx.Identity.Dapper.Pgsql.Test\FluiTec.AppFx.Identity.Dapper.Pgsql.Test.csproj", "{59E8490F-3318-486C-96B2-0D6828A3A725}"
-=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Identity.Dapper.Pgsql.Test", "FluiTec.AppFx.Identity.Dapper.Pgsql.Test\FluiTec.AppFx.Identity.Dapper.Pgsql.Test.csproj", "{59E8490F-3318-486C-96B2-0D6828A3A725}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{04920849-EF1C-4FFF-8DFF-74112CA3DB12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Sql", "FluiTec.AppFx.Data.Sql\FluiTec.AppFx.Data.Sql.csproj", "{E483B10D-EB7F-437A-88D7-44A9BB8DE147}"
->>>>>>> 3ce759ce5e100a0ffec145a6838f3fe6484f9faa
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Sql", "FluiTec.AppFx.Data.Sql\FluiTec.AppFx.Data.Sql.csproj", "{E483B10D-EB7F-437A-88D7-44A9BB8DE147}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Sql.Test", "FluiTec.AppFx.Data.Sql.Test\FluiTec.AppFx.Data.Sql.Test.csproj", "{BD90772A-4429-4652-89E6-46DB8EA106C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -278,7 +278,6 @@ Global
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{EF68F4D6-0DA1-406D-B664-206A58B1D694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF68F4D6-0DA1-406D-B664-206A58B1D694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF68F4D6-0DA1-406D-B664-206A58B1D694}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -287,12 +286,14 @@ Global
 		{59E8490F-3318-486C-96B2-0D6828A3A725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59E8490F-3318-486C-96B2-0D6828A3A725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59E8490F-3318-486C-96B2-0D6828A3A725}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E483B10D-EB7F-437A-88D7-44A9BB8DE147}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> 3ce759ce5e100a0ffec145a6838f3fe6484f9faa
+		{BD90772A-4429-4652-89E6-46DB8EA106C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD90772A-4429-4652-89E6-46DB8EA106C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD90772A-4429-4652-89E6-46DB8EA106C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD90772A-4429-4652-89E6-46DB8EA106C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -346,14 +347,12 @@ Global
 		{2F688780-8D4E-4881-80D7-48EE402A2B8C} = {B5CD1340-3032-49E1-9EB0-CE90B9D5664B}
 		{16B29815-D11C-4A5E-8680-F9DE9DAAC79D} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
 		{5E086B0F-6AB8-422F-BA9E-7F31BC37FE14} = {2F688780-8D4E-4881-80D7-48EE402A2B8C}
-<<<<<<< HEAD
 		{26229F05-A4EB-4F65-A5AC-FB4418DE50D5} = {FFAF67E6-1D08-43E7-B15B-002231358EE4}
 		{EF68F4D6-0DA1-406D-B664-206A58B1D694} = {26229F05-A4EB-4F65-A5AC-FB4418DE50D5}
 		{59E8490F-3318-486C-96B2-0D6828A3A725} = {26229F05-A4EB-4F65-A5AC-FB4418DE50D5}
-=======
 		{04920849-EF1C-4FFF-8DFF-74112CA3DB12} = {5BAE7134-8694-4D41-987C-2D9FCB6BADB6}
 		{E483B10D-EB7F-437A-88D7-44A9BB8DE147} = {04920849-EF1C-4FFF-8DFF-74112CA3DB12}
->>>>>>> 3ce759ce5e100a0ffec145a6838f3fe6484f9faa
+		{BD90772A-4429-4652-89E6-46DB8EA106C1} = {04920849-EF1C-4FFF-8DFF-74112CA3DB12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}

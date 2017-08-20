@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.Data.Sql.Mappers;
+﻿using System.Reflection;
+using FluiTec.AppFx.Data.Sql.Mappers;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
 {
@@ -14,6 +15,14 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <param name="entityNameMapper">	The entity name mapper. </param>
 		public MicrosoftSqlAdapter(IEntityNameMapper entityNameMapper) : base(entityNameMapper)
 		{
+		}
+
+		/// <summary>	Gets automatic key statement. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	The automatic key statement. </returns>
+		public override string GetAutoKeyStatement(PropertyInfo propertyInfo)
+		{
+			return $";SELECT SCOPE_IDENTITY() {RenderPropertyName(propertyInfo)}";
 		}
 	}
 }

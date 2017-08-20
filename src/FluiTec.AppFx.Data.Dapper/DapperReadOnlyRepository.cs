@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dapper.Contrib.Extensions;
+using FluiTec.AppFx.Data.Sql;
 
 namespace FluiTec.AppFx.Data.Dapper
 {

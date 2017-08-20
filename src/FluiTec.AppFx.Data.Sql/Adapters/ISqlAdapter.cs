@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
 {
@@ -9,5 +10,40 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <param name="type">	The type. </param>
 		/// <returns>	A string. </returns>
 		string SelectAllStatement(Type type);
+
+		/// <summary>	Gets by key statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The by key statement. </returns>
+		string GetByKeyStatement(Type type);
+
+		/// <summary>	Gets key parameter. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The key parameter. </returns>
+		string GetKeyParameter(Type type);
+
+		/// <summary>	Gets insert automatic key statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The insert automatic key statement. </returns>
+		string GetInsertAutoKeyStatement(Type type);
+
+		/// <summary>	Gets insert automatic key multiple statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The insert automatic key multiple statement. </returns>
+		string GetInsertAutoKeyMultipleStatement(Type type);
+
+		/// <summary>	Gets update statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The update statement. </returns>
+		string GetUpdateStatement(Type type);
+
+		/// <summary>	Gets delete statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The delete statement. </returns>
+		string GetDeleteStatememt(Type type);
+
+		/// <summary>	Renders the parameter property described by propertyInfo. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	A string. </returns>
+		string RenderParameterProperty(PropertyInfo propertyInfo);
 	}
 }

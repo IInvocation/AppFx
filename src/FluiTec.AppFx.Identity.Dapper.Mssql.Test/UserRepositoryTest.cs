@@ -45,7 +45,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 					IsAnonymous = false,
 					LastActivityDate = DateTime.Now,
 					LoweredUserName = "a.schnell@wtschnell.de",
-					Name = "a.schnell@wtschnell.de"
+					Name = "Achim Schnell",
+					Email = "a.schnell@wtschnell.de"
 				};
 				user = Repository.Add(user);
 				Assert.AreNotEqual(0, user.Id);

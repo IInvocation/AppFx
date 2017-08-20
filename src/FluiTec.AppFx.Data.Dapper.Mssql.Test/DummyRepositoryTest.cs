@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using FluiTec.AppFx.Data.Dapper.Mssql.Test.Fixtures;
+using FluiTec.AppFx.Data.Sql;
+using FluiTec.AppFx.Data.Sql.Adapters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
@@ -11,6 +14,12 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
 		protected IDataService DataService { get; set; }
 		protected IUnitOfWork UnitOfWork { get; set; }
 		protected IDummyRepository Repository { get; set; }
+
+	    public DummyRepositoryTest()
+	    {
+			var builder = new SqlBuilder(new MicrosoftSqlAdapter());
+		    DefaultSqlBuilder.GetSqlBuilder = connection => builder;
+	    }
 
 	    public virtual void Initialize()
 	    {

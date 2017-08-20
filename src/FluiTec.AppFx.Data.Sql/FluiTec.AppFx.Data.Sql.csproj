@@ -2,9 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+	  <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+	  <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+	  <NeutralLanguage>de</NeutralLanguage>
+	  <PostBuildEvent></PostBuildEvent>
+	  <PreBuildEvent></PreBuildEvent>
+	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	  <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
   </ItemGroup>
 
@@ -12,4 +24,9 @@
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
   </ItemGroup>
 
+	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+	</Target>
+	
 </Project>

@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Text;
-using Dapper;
+﻿using Dapper;
+using FluiTec.AppFx.Data.Sql;
 
 namespace FluiTec.AppFx.Data.Dapper
 {
@@ -37,38 +36,11 @@ namespace FluiTec.AppFx.Data.Dapper
 		public override TEntity Add(TEntity entity)
 		{
 			var type = typeof(TEntity);
-			
-			// compute type infos
-			var allProperties = SqlMapperExtensionsOwn.TypePropertiesCache(type);
-			var keyProperties = SqlMapperExtensionsOwn.KeyPropertiesCache(type);
-			var computedProperties = SqlMapperExtensionsOwn.ComputedPropertiesCache(type);
-			var allPropertiesExceptComputed = allProperties.Except(computedProperties).ToList();
 
-			// get sql-adapter
-			var adapter = SqlMapperExtensionsOwn.GetFormatter(UnitOfWork.Connection);
+			var builder = UnitOfWork.Connection.GetBuilder();
+			var sql = builder.InsertAutoMultiple(type);
 
-			// generate sql for columns
-			var sbColumnList = new StringBuilder(value: null);
-			for (var i = 0; i < allPropertiesExceptComputed.Count; i++)
-			{
-				var property = allPropertiesExceptComputed[i];
-				adapter.AppendColumnName(sbColumnList, property.Name);
-				if (i < allPropertiesExceptComputed.Count - 1)
-					sbColumnList.Append(value: ", ");
-			}
-
-			// generate sql for parameters
-			var sbParameterList = new StringBuilder(value: null);
-			for (var i = 0; i < allPropertiesExceptComputed.Count; i++)
-			{
-				var property = allPropertiesExceptComputed[i];
-				sbParameterList.AppendFormat(format: "@{0}", arg0: property.Name);
-				if (i < allPropertiesExceptComputed.Count - 1)
-					sbParameterList.Append(value: ", ");
-			}
-
-			var cmd = $"insert into {TableName} ({sbColumnList}) values ({sbParameterList})";
-			var multi = UnitOfWork.Connection.Execute(cmd, entity, UnitOfWork.Transaction);
+			var num = UnitOfWork.Connection.Execute(sql, entity, UnitOfWork.Transaction);
 
 			return entity;
 		}

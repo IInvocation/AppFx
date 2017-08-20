@@ -11,11 +11,7 @@ namespace FluiTec.AppFx.Data.Dapper.Pgsql
 		/// <returns>	The new connection. </returns>
 		public IDbConnection CreateConnection(string connectionString)
 		{
-#if DEBUG
-			return new WrappedDbConnection(new NpgsqlConnection(connectionString));
-#else
 			return new NpgsqlConnection(connectionString);
-#endif
 		}
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dapper;
-using Dapper.Contrib.Extensions;
+using FluiTec.AppFx.Data.Sql;
 
 namespace FluiTec.AppFx.Data.Dapper
 {
@@ -49,14 +48,14 @@ namespace FluiTec.AppFx.Data.Dapper
 
 #endregion
 
-#region IDataRepository
+		#region IDataRepository
 
 		/// <summary>	Adds entity. </summary>
 		/// <param name="entity">	The entity to add. </param>
 		/// <returns>	A TEntity. </returns>
 		public virtual TEntity Add(TEntity entity)
 		{
-			var lkey = UnitOfWork.Connection.Insert(entity, UnitOfWork.Transaction);
+			var lkey = UnitOfWork.Connection.InsertAuto(entity, UnitOfWork.Transaction);
 			entity.Id = GetKey(lkey);
 			return entity;
 		}
@@ -65,7 +64,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <param name="entities">	An IEnumerable&lt;TEntity&gt; of items to append to this. </param>
 		public virtual void AddRange(IEnumerable<TEntity> entities)
 		{
-			UnitOfWork.Connection.Insert(entities, UnitOfWork.Transaction);
+			UnitOfWork.Connection.InsertAutoMultiple(entities, UnitOfWork.Transaction);
 		}
 
 		/// <summary>	Updates the given entity. </summary>
@@ -81,7 +80,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <param name="id">	The Identifier to delete. </param>
 		public virtual void Delete(TKey id)
 		{
-			UnitOfWork.Connection.Execute($"DELETE FROM {TableName} WHERE Id = @Id", new {id}, UnitOfWork.Transaction);
+			UnitOfWork.Connection.Delete<TEntity>(id, UnitOfWork.Transaction);
 		}
 
 		/// <summary>	Deletes the given entity. </summary>
@@ -91,6 +90,6 @@ namespace FluiTec.AppFx.Data.Dapper
 			Delete(entity.Id);
 		}
 
-#endregion
+		#endregion
 	}
 }

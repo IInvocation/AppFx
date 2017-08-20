@@ -150,7 +150,3 @@ REFERENCES [dbo].[IdentityUser] ([Id])
 GO
 ALTER TABLE [dbo].[IdentityUserRole] CHECK CONSTRAINT [FK_IdentityUserRole_IdentityUser]
 GO
-USE [master]
-GO
-ALTER DATABASE [CallRouting] SET  READ_WRITE 
-GO

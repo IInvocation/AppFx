@@ -11,11 +11,7 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql
 		/// <returns>	The new connection. </returns>
 		public IDbConnection CreateConnection(string connectionString)
 		{
-#if DEBUG
-			return new WrappedDbConnection(new SqlConnection(connectionString));
-#else
 			return new SqlConnection(connectionString);
-#endif
 		}
 	}
 }

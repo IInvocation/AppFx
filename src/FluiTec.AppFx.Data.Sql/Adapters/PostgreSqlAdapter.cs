@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.Data.Sql.Mappers;
+﻿using System.Reflection;
+using FluiTec.AppFx.Data.Sql.Mappers;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
 {
@@ -16,6 +17,28 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		{
 		}
 
-		public override string RenderTableName(string tableName) => $"\"{tableName}\"";
+		/// <summary>	Gets automatic key statement. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	The automatic key statement. </returns>
+		public override string GetAutoKeyStatement(PropertyInfo propertyInfo)
+		{
+			return $" RETURNING {RenderPropertyName(propertyInfo)}";
+		}
+
+		/// <summary>	Renders the table name described by tableName. </summary>
+		/// <param name="tableName">	Name of the table. </param>
+		/// <returns>	A string. </returns>
+		public override string RenderTableName(string tableName)
+		{
+			return $"\"{tableName}\"";
+		}
+
+		/// <summary>	Renders the property name described by propertyInfo. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	A string. </returns>
+		public override string RenderPropertyName(PropertyInfo propertyInfo)
+		{
+			return $"\"{propertyInfo.Name}\"";
+		}
 	}
 }

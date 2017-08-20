@@ -11,11 +11,7 @@ namespace FluiTec.AppFx.Data.Dapper.Mysql
 		/// <returns>	The new connection. </returns>
 		public IDbConnection CreateConnection(string connectionString)
 		{
-#if DEBUG
-			return new WrappedDbConnection(new MySqlConnection(connectionString));
-#else
 			return new MySqlConnection(connectionString);
-#endif
 		}
 	}
 }

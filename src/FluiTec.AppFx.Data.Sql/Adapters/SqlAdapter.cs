@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using FluiTec.AppFx.Data.Sql.Mappers;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
@@ -26,7 +30,79 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <summary>	The select all statement. </summary>
 		public virtual string SelectAllStatement(Type type)
 		{
-			return $"SELECT * FROM {RenderTableName(type)}";
+			return  $"SELECT * FROM {RenderTableName(type)}";
+		}
+
+		/// <summary>	Gets by identifier statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The by identifier statement. </returns>
+		public virtual string GetByKeyStatement(Type type)
+		{
+			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
+			return $"SELECT * FROM {RenderTableName(type)} WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
+		}
+
+		/// <summary>	Gets insert automatic key statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The insert automatic key statement. </returns>
+		public virtual string GetInsertAutoKeyStatement(Type type)
+		{
+			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
+			var columnList = RenderAutoKeyColumnList(type).ToString();
+			var parameterList = RenderAutoKeyParameterList(type).ToString();
+
+			return $"INSERT INTO {RenderTableName(type)} ({columnList}) VALUES ({parameterList}){GetAutoKeyStatement(key)}";
+		}
+
+		/// <summary>	Gets insert automatic key multiple statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The insert automatic key multiple statement. </returns>
+		public string GetInsertAutoKeyMultipleStatement(Type type)
+		{
+			var columnList = RenderAutoKeyColumnList(type).ToString();
+			var parameterList = RenderAutoKeyParameterList(type).ToString();
+
+			return $"INSERT INTO {RenderTableName(type)} ({columnList}) VALUES ({parameterList})";
+		}
+
+		/// <summary>	Gets automatic key statement. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	The automatic key statement. </returns>
+		public abstract string GetAutoKeyStatement(PropertyInfo propertyInfo);
+
+		/// <summary>	Gets update statement. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The update statement. </returns>
+		public virtual string GetUpdateStatement(Type type)
+		{
+			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
+			var setClauses = RenderSetStatements(type).ToString();
+			return
+				$"UPDATE {RenderTableName(type)} " +
+				$"SET {setClauses} " +
+				$"WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
+		}
+
+		/// <summary>	Gets delete statememt. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The delete statememt. </returns>
+		public virtual string GetDeleteStatememt(Type type)
+		{
+			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
+			return $"DELETE FROM {RenderTableName(type)} WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
+		}
+
+		#endregion
+
+		#region Parameters
+
+		/// <summary>	Gets key parameter. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	The key parameter. </returns>
+		public virtual string GetKeyParameter(Type type)
+		{
+			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
+			return RenderParameterProperty(key);
 		}
 
 		#endregion
@@ -44,6 +120,81 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		public virtual string RenderTableName(Type type)
 		{
 			return RenderTableName(EntityNameMapper.GetName(type));
+		}
+
+		/// <summary>	Renders the property name described by propertyInfo. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	A string. </returns>
+		public virtual string RenderPropertyName(PropertyInfo propertyInfo)
+		{
+			return propertyInfo.Name;
+		}
+
+		/// <summary>	Renders the parameter property described by propertyInfo. </summary>
+		/// <param name="propertyInfo">	Information describing the property. </param>
+		/// <returns>	A string. </returns>
+		public virtual string RenderParameterProperty(PropertyInfo propertyInfo)
+		{
+			return $"@{propertyInfo.Name}";
+		}
+
+		/// <summary>	Renders the column list described by type. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	A StringBuilder. </returns>
+		public virtual StringBuilder RenderAutoKeyColumnList(Type type)
+		{
+			var sb = new StringBuilder();
+			var propertiesWithoutKey = GetPropertiesWithoutKey(type).ToArray();
+			for (var i = 0; i < propertiesWithoutKey.Length; i++)
+			{
+				if (i > 0)
+					sb.Append(value: ", ");
+				sb.Append(RenderPropertyName(propertiesWithoutKey[i]));
+			}
+			return sb;
+		}
+
+		/// <summary>	Renders the parameter list described by type. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	A StringBuilder. </returns>
+		public virtual StringBuilder RenderAutoKeyParameterList(Type type)
+		{
+			var sb = new StringBuilder();
+			var propertiesWithoutKey = GetPropertiesWithoutKey(type).ToArray();
+			for (var i = 0; i < propertiesWithoutKey.Length; i++)
+			{
+				if (i > 0)
+					sb.Append(value: ", ");
+				sb.Append(RenderParameterProperty(propertiesWithoutKey[i]));
+			}
+			return sb;
+		}
+
+		/// <summary>	Renders the set statements described by type. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	A StringBuilder. </returns>
+		public virtual StringBuilder RenderSetStatements(Type type)
+		{
+			var sb = new StringBuilder();
+			var propertiesExceptKey = GetPropertiesWithoutKey(type).ToArray();
+			for (var i = 0; i < propertiesExceptKey.Length; i++)
+			{
+				if (i > 0)
+					sb.Append(value: ", ");
+				sb.Append($"{RenderPropertyName(propertiesExceptKey[i])} = {RenderParameterProperty(propertiesExceptKey[i])}");
+			}
+			return sb;
+		}
+
+		/// <summary>	Gets the columns without keys in this collection. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>
+		/// An enumerator that allows foreach to be used to process the columns without keys in this
+		/// collection.
+		/// </returns>
+		public virtual IEnumerable<PropertyInfo> GetPropertiesWithoutKey(Type type)
+		{
+			return SqlCache.TypePropertiesChache(type).Except(new[] {SqlCache.TypeKeyPropertiesCache(type).Single()});
 		}
 
 		#endregion
