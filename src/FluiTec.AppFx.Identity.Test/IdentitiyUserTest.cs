@@ -3,19 +3,17 @@ using System.Linq;
 using FluiTec.AppFx.Identity.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
+namespace FluiTec.AppFx.Identity.Test
 {
 	/// <summary>	(Unit Test Class) an identitiy user test. </summary>
 	[TestClass]
 	public class IdentitiyUserTest : IdentityTest
 	{
 		/// <summary>	Default constructor. </summary>
-		public IdentitiyUserTest() : base(Helper.GetDataService()) { }
+		public IdentitiyUserTest(IIdentityDataService dataService) : base(dataService) { }
 
-		
 		/// <summary>	(Unit Test Method) can add and get user. </summary>
-		[TestMethod]
-		public void CanAddAndGetUser()
+		public virtual void CanAddAndGetUser()
 		{
 			using (var uow = DataService.StartUnitOfWork())
 			{
@@ -40,8 +38,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 
 		
 		/// <summary>	(Unit Test Method) can add and get users. </summary>
-		[TestMethod]
-		public void CanAddAndGetUsers()
+		public virtual void CanAddAndGetUsers()
 		{
 			var users = new[]
 			{
@@ -80,8 +77,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 		}
 
 		/// <summary>	(Unit Test Method) can update user. </summary>
-		[TestMethod]
-		public void CanUpdateUser()
+		public virtual void CanUpdateUser()
 		{
 			using (var uow = DataService.StartUnitOfWork())
 			{
@@ -107,8 +103,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 		}
 
 		/// <summary>	(Unit Test Method) can delete user. </summary>
-		[TestMethod]
-		public void CanDeleteUser()
+		public virtual void CanDeleteUser()
 		{
 			using (var uow = DataService.StartUnitOfWork())
 			{

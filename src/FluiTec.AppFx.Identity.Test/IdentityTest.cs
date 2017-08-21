@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
+﻿namespace FluiTec.AppFx.Identity.Test
 {
 	/// <summary>	An identity test. </summary>
 	public abstract class IdentityTest

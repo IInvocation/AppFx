@@ -1,4 +1,4 @@
-﻿USE <YourDatabaseName>
+﻿USE AppFx
 
 GO
 /****** Object:  Table [dbo].[IdentityClaim]    Script Date: 11.08.2017 13:34:23 ******/

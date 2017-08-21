@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Identity.Dapper.Mssql\FluiTec.AppFx.Identity.Dapper.Mssql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Identity.Test\FluiTec.AppFx.Identity.Test.csproj" />
   </ItemGroup>
 
 </Project>
