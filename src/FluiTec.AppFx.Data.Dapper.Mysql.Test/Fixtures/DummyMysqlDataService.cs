@@ -7,7 +7,7 @@
 		/// <remarks>
 		/// ConnectionReset=true is required because of a MySql-bug, see https://bugs.mysql.com/bug.php?id=71502
 		/// </remarks>
-		public DummyMysqlDataService() : base("server=intranet2.wtschnell.local;user=dummy;database=CallRouting;port=3306;password=dummy;SslMode=none;ConnectionReset=true", new MysqlConnectionFactory())
+		public DummyMysqlDataService() : base("server=intranet2.wtschnell.local;user=appfx;database=AppFx;port=3306;password=appfx;SslMode=none;ConnectionReset=true", new MysqlConnectionFactory())
 	    {
 	    }
 
