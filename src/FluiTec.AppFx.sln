@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{5C078D35-DFE0-4692-9DC7-37DE83FC7079}"
 EndProject
@@ -128,7 +128,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Sql.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Identity.Dapper.Mssql.Test", "FluiTec.AppFx.Identity.Dapper.Mssql.Test\FluiTec.AppFx.Identity.Dapper.Mssql.Test.csproj", "{8FA53C28-5740-47A8-B678-B76B97287A75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Identity.Test", "FluiTec.AppFx.Identity.Test\FluiTec.AppFx.Identity.Test.csproj", "{45049B86-13BB-4E05-AF1B-0C5A64BD66CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Identity.Test", "FluiTec.AppFx.Identity.Test\FluiTec.AppFx.Identity.Test.csproj", "{45049B86-13BB-4E05-AF1B-0C5A64BD66CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mysql", "Mysql", "{FABA832F-C7B1-48C6-ACFE-57834E4AF265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Identity.Dapper.Mysql", "FluiTec.AppFx.Identity.Dapper.Mysql\FluiTec.AppFx.Identity.Dapper.Mysql.csproj", "{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Identity.Dapper.Mysql.Test", "FluiTec.AppFx.Identity.Dapper.Mysql.Test\FluiTec.AppFx.Identity.Dapper.Mysql.Test.csproj", "{EDF76892-A1B6-4C22-841B-34D63F8DFF7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -288,6 +294,14 @@ Global
 		{45049B86-13BB-4E05-AF1B-0C5A64BD66CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45049B86-13BB-4E05-AF1B-0C5A64BD66CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45049B86-13BB-4E05-AF1B-0C5A64BD66CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF76892-A1B6-4C22-841B-34D63F8DFF7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF76892-A1B6-4C22-841B-34D63F8DFF7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF76892-A1B6-4C22-841B-34D63F8DFF7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF76892-A1B6-4C22-841B-34D63F8DFF7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -346,6 +360,9 @@ Global
 		{BD90772A-4429-4652-89E6-46DB8EA106C1} = {04920849-EF1C-4FFF-8DFF-74112CA3DB12}
 		{8FA53C28-5740-47A8-B678-B76B97287A75} = {6B00CD88-5021-4B02-80CC-A5F6DB23C202}
 		{45049B86-13BB-4E05-AF1B-0C5A64BD66CD} = {1AF2D652-F1F7-4C07-855C-89D46E7F3DD4}
+		{FABA832F-C7B1-48C6-ACFE-57834E4AF265} = {FFAF67E6-1D08-43E7-B15B-002231358EE4}
+		{C4816BE8-3AC9-42D0-876C-F9F4F565B5C2} = {FABA832F-C7B1-48C6-ACFE-57834E4AF265}
+		{EDF76892-A1B6-4C22-841B-34D63F8DFF7D} = {FABA832F-C7B1-48C6-ACFE-57834E4AF265}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
