@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 {
 	[TestClass]
-	public class MssqlIdentityUserTest : IdentitiyUserTest
+	public class MssqlIdentityUserTest : IdentityUserTest
 	{
 		public MssqlIdentityUserTest() : base(Helper.GetDataService())
 		{

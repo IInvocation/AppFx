@@ -40,7 +40,7 @@ CREATE TABLE `IdentityUserLogin` (
   `ProviderName` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `ProviderKey` varchar(45) COLLATE latin1_general_ci NOT NULL,
   `ProviderDisplayName` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  `UserId` int(36) NOT NULL
+  `UserId` char(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 CREATE TABLE `IdentityUserRole` (
   `Id` int(10) NOT NULL,

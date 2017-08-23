@@ -7,10 +7,10 @@ namespace FluiTec.AppFx.Identity.Test
 {
 	/// <summary>	(Unit Test Class) an identitiy user test. </summary>
 	[TestClass]
-	public class IdentitiyUserTest : IdentityTest
+	public class IdentityUserTest : IdentityTest
 	{
 		/// <summary>	Default constructor. </summary>
-		public IdentitiyUserTest(IIdentityDataService dataService) : base(dataService) { }
+		public IdentityUserTest(IIdentityDataService dataService) : base(dataService) { }
 
 		/// <summary>	(Unit Test Method) can add and get user. </summary>
 		public virtual void CanAddAndGetUser()

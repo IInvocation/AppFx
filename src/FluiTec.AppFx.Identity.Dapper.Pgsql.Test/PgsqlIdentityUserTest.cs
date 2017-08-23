@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 {
 	[TestClass]
-	public class PgsqlIdentityUserTest : IdentitiyUserTest
+	public class PgsqlIdentityUserTest : IdentityUserTest
 	{
 		public PgsqlIdentityUserTest() : base(Helper.GetDataService())
 		{
