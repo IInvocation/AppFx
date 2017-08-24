@@ -1,4 +1,4 @@
-﻿USE <YourDbName>
+﻿USE AppFx
 GO
 /****** Object:  Table [dbo].[ApiResource]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
@@ -102,36 +102,6 @@ CREATE TABLE [dbo].[ClientScope](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-
-GO
-/****** Object:  Table [dbo].[IdentityClient]    Script Date: 11.08.2017 13:39:59 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[IdentityClient](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ClientId] [nvarchar](255) NOT NULL,
-	[ClientName] [nvarchar](255) NOT NULL,
-	[ClientSecet] [nvarchar](max) NOT NULL,
-	[Enabled] [bit] NOT NULL,
-	[AllowOfflineAccess] [bit] NOT NULL,
-	[AllowRememberConsent] [bit] NOT NULL,
-	[AlwaysIncludeUserClaimsInIdToken] [bit] NOT NULL,
-	[EnableLocalLogin] [bit] NOT NULL,
-	[AbsoluteRefreshTokenLifetime] [int] NOT NULL,
-	[AccessTokenLifetime] [int] NOT NULL,
-	[AuthorizationCodeLifetime] [int] NOT NULL,
-	[IdentityTokenLifetime] [int] NOT NULL,
-	[SlidingRefreshTokenLifetime] [int] NOT NULL,
-	[LogoUri] [nvarchar](max) NULL,
-	[RefreshTokenExpiration] [int] NOT NULL,
-	[RefreshTokenUsage] [int] NOT NULL,
- CONSTRAINT [PK_IdentityClient] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
 /****** Object:  Table [dbo].[IdentityGrant]    Script Date: 11.08.2017 13:39:59 ******/

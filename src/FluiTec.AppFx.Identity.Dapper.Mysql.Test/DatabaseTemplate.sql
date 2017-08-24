@@ -1,12 +1,12 @@
 ﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-CREATE TABLE `IdentityClaim` (
+CREATE TABLE `AppFxIdentity_Claim` (
   `Id` int(10) NOT NULL,
   `UserId` int(10) NOT NULL,
   `Type` varchar(256) COLLATE latin1_general_ci NOT NULL,
   `Value` varchar(256) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-CREATE TABLE `IdentityRole` (
+CREATE TABLE `AppFxIdentity_Role` (
   `Id` int(10) NOT NULL,
   `ApplicationId` int(10) NOT NULL,
   `Identifier` char(36) COLLATE latin1_general_ci NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE `IdentityRole` (
   `LoweredName` varchar(256) COLLATE latin1_general_ci NOT NULL,
   `Description` varchar(256) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-CREATE TABLE `IdentityUser` (
+CREATE TABLE `AppFxIdentity_User` (
   `Id` int(10) NOT NULL,
   `ApplicationId` int(10) NOT NULL,
   `Identifier` char(36) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
@@ -35,35 +35,35 @@ CREATE TABLE `IdentityUser` (
   `AccessFailedCount` tinyint(1) NOT NULL,
   `LockedOutTill` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-CREATE TABLE `IdentityUserLogin` (
+CREATE TABLE `AppFxIdentity_UserLogin` (
   `Id` int(10) NOT NULL,
   `ProviderName` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `ProviderKey` varchar(45) COLLATE latin1_general_ci NOT NULL,
   `ProviderDisplayName` varchar(255) COLLATE latin1_general_ci DEFAULT NULL,
-  `UserId` char(36) NOT NULL
+  `UserId` char(36) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-CREATE TABLE `IdentityUserRole` (
+CREATE TABLE `AppFxIdentity_UserRole` (
   `Id` int(10) NOT NULL,
   `UserId` int(10) NOT NULL,
   `RoleId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-ALTER TABLE `IdentityClaim`
+ALTER TABLE `AppFxIdentity_Claim`
   ADD PRIMARY KEY (`Id`);
-ALTER TABLE `IdentityRole`
+ALTER TABLE `AppFxIdentity_Role`
   ADD PRIMARY KEY (`Id`);
-ALTER TABLE `IdentityUser`
+ALTER TABLE `AppFxIdentity_User`
   ADD PRIMARY KEY (`Id`);
-ALTER TABLE `IdentityUserLogin`
+ALTER TABLE `AppFxIdentity_UserLogin`
   ADD PRIMARY KEY (`Id`);
-ALTER TABLE `IdentityUserRole`
+ALTER TABLE `AppFxIdentity_UserRole`
   ADD PRIMARY KEY (`Id`);
-ALTER TABLE `IdentityClaim`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `IdentityRole`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `IdentityUser`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `IdentityUserLogin`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `IdentityUserRole`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `AppFxIdentity_Claim`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE `AppFxIdentity_Role`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+ALTER TABLE `AppFxIdentity_User`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+ALTER TABLE `AppFxIdentity_UserLogin`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+ALTER TABLE `AppFxIdentity_UserRole`
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;

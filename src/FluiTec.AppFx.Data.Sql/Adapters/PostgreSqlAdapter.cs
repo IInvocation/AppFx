@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 using FluiTec.AppFx.Data.Sql.Mappers;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
@@ -30,7 +31,19 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <returns>	A string. </returns>
 		public override string RenderTableName(string tableName)
 		{
-			return $"\"{tableName}\"";
+			if (string.IsNullOrWhiteSpace(tableName))
+				return base.RenderTableName(tableName);
+			if (!tableName.Contains(value: "."))
+				return $"\"public\".\"{tableName}\"";
+			var sb = new StringBuilder();
+			var split = tableName.Split('.');
+			for (var i = 0; i < split.Length; i++)
+			{
+				if (i != 0)
+					sb.Append(value: '.');
+				sb.Append($"\"{split[i]}\"");
+			}
+			return sb.ToString();
 		}
 
 		/// <summary>	Renders the property name described by propertyInfo. </summary>

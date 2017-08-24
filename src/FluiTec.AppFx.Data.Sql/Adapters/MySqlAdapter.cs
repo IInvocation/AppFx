@@ -17,6 +17,16 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		{
 		}
 
+		/// <summary>	Renders the table name described by tableName. </summary>
+		/// <param name="tableName">	Name of the table. </param>
+		/// <returns>	A string. </returns>
+		public override string RenderTableName(string tableName)
+		{
+			return string.IsNullOrWhiteSpace(tableName)
+				? base.RenderTableName(tableName)
+				: tableName.Replace(oldChar: '.', newChar: '_');
+		}
+
 		/// <summary>	Gets automatic key statement. </summary>
 		/// <param name="propertyInfo">	Information describing the property. </param>
 		/// <returns>	The automatic key statement. </returns>
