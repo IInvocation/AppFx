@@ -26,7 +26,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			if (string.IsNullOrWhiteSpace(tableName))
 				return base.RenderTableName(tableName);
 			if (!tableName.Contains(value: "."))
-				return $"[dbo].{tableName}";
+				return $"[dbo].[{tableName}]";
 			var sb = new StringBuilder();
 			var split = tableName.Split('.');
 			for (var i = 0; i < split.Length; i++)
