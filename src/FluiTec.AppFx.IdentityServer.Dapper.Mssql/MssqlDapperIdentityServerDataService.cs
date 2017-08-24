@@ -47,7 +47,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql
 		protected virtual void RegisterIdentityRepositories()
 		{
 			RegisterRepositoryProvider(
-				new Func<IUnitOfWork, IApiResourceClaimRepository>(work => new MssqlApiResourceClaimRepository(work)));
+				new Func<IUnitOfWork, IApiResourceClaimRepository>(work => new ApiResourceClaimRepository(work)));
 			RegisterRepositoryProvider(
 				new Func<IUnitOfWork, IApiResourceRepository>(work => new MssqlApiResourceRepository(work)));
 			RegisterRepositoryProvider(

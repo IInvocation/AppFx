@@ -23,16 +23,6 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 
 		#region ApiResourceRepository
 
-		/// <summary>	Gets by name. </summary>
-		/// <param name="name">	The name. </param>
-		/// <returns>	The by name. </returns>
-		public override ApiResourceEntity GetByName(string name)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(ApiResourceEntity.Name)} = @Name";
-			return UnitOfWork.Connection.QuerySingleOrDefault<ApiResourceEntity>(command, new {Name = name},
-				UnitOfWork.Transaction);
-		}
-
 		/// <summary>	Gets the identifiers in this collection. </summary>
 		/// <param name="ids">	The identifiers. </param>
 		/// <returns>

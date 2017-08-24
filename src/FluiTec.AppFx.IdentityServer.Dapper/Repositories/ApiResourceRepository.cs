@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.IdentityServer.Compound;
@@ -19,7 +20,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		/// <summary>	Gets by name. </summary>
 		/// <param name="name">	The name. </param>
 		/// <returns>	The by name. </returns>
-		public abstract ApiResourceEntity GetByName(string name);
+		public virtual ApiResourceEntity GetByName(string name)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(ApiResourceEntity), nameof(ApiResourceEntity.Name));
+			return UnitOfWork.Connection.QuerySingleOrDefault<ApiResourceEntity>(command, new { Name = name },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Gets the identifiers in this collection. </summary>
 		/// <param name="ids">	The identifiers. </param>

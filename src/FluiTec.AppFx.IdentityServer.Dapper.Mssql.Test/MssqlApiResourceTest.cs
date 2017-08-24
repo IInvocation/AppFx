@@ -31,5 +31,17 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanDeleteResource();
 		}
+
+		[TestMethod]
+		public override void CanAddAndGetByName()
+		{
+			base.CanAddAndGetByName();
+		}
+
+		[TestMethod]
+		public override void CanAddAndGetByIds()
+		{
+			base.CanAddAndGetByIds();
+		}
 	}
 }

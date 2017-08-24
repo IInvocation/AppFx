@@ -24,7 +24,39 @@ namespace FluiTec.AppFx.IdentityServer.Test
 		    }
 	    }
 
-	    public virtual void CanAddAndGetApiResources()
+	    public virtual void CanAddAndGetByName()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+				Assert.AreEqual(resource.Name, uow.ApiResourceRepository.GetByName(resource.Name).Name);
+			}
+		}
+
+	    public virtual void CanAddAndGetByIds()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+				Assert.AreEqual(resource.Name, uow.ApiResourceRepository.GetByIds(new[] {resource.Id}).Single().Name);
+			}
+		}
+
+		public virtual void CanAddAndGetApiResources()
 	    {
 		    using (var uow = DataService.StartUnitOfWork())
 		    {

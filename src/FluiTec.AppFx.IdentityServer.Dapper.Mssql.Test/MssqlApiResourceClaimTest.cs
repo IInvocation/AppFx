@@ -31,5 +31,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanDeleteApiResource();
 		}
+
+		[TestMethod]
+		public override void CanAddAndGetApiResourceClaimByApiResourceId()
+		{
+			base.CanAddAndGetApiResourceClaimByApiResourceId();
+		}
 	}
 }
