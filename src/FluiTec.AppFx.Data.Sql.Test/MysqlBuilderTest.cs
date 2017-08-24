@@ -38,6 +38,13 @@ namespace FluiTec.AppFx.Data.Sql.Test
 		}
 
 		[TestMethod]
+		public void TestSelectCustom()
+		{
+			var sql = _connection.GetBuilder().SelectByFilter(typeof(Dummy), nameof(Dummy.Id));
+			Assert.AreEqual($"SELECT * FROM [dbo].[{nameof(Dummy)}] WHERE Id = @Id", sql);
+		}
+
+		[TestMethod]
 		public void TestInsertAutoKey()
 		{
 			var sql = _connection.GetBuilder().InsertAutoKey(typeof(Dummy));
