@@ -88,26 +88,26 @@ CREATE SEQUENCE "IdentityUser_Id_seq"
     CACHE 1;
 ALTER TABLE "IdentityUser_Id_seq" OWNER TO appfx;
 ALTER SEQUENCE "IdentityUser_Id_seq" OWNED BY "IdentityUser"."Id";
-CREATE TABLE "identityClaim" (
+CREATE TABLE "IdentityClaim" (
     "Id" integer NOT NULL,
     "UserId" integer NOT NULL,
     "Type" character varying(256) NOT NULL,
     "Value" character varying(256)
 );
-ALTER TABLE "identityClaim" OWNER TO appfx;
+ALTER TABLE "IdentityClaim" OWNER TO appfx;
 CREATE SEQUENCE "identityClaim_Id_seq"
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-ALTER TABLE "identityClaim_Id_seq" OWNER TO appfx;
-ALTER SEQUENCE "identityClaim_Id_seq" OWNED BY "identityClaim"."Id";
+ALTER TABLE "IdentityClaim_Id_seq" OWNER TO appfx;
+ALTER SEQUENCE "IdentityClaim_Id_seq" OWNED BY "IdentityClaim"."Id";
 ALTER TABLE ONLY "IdentityRole" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityRole_Id_seq"'::regclass);
 ALTER TABLE ONLY "IdentityUser" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUser_Id_seq"'::regclass);
 ALTER TABLE ONLY "IdentityUserLogin" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUserLogin_Id_seq"'::regclass);
 ALTER TABLE ONLY "IdentityUserRole" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUserRole_Id_seq"'::regclass);
-ALTER TABLE ONLY "identityClaim" ALTER COLUMN "Id" SET DEFAULT nextval('"identityClaim_Id_seq"'::regclass);
+ALTER TABLE ONLY "IdentityClaim" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityClaim_Id_seq"'::regclass);
 ALTER TABLE ONLY "IdentityRole"
     ADD CONSTRAINT "IdentityRole_pkey" PRIMARY KEY ("Id");
 ALTER TABLE ONLY "IdentityUserLogin"
@@ -118,9 +118,9 @@ ALTER TABLE ONLY "IdentityUser"
     ADD CONSTRAINT "IdentityUser_pkey" PRIMARY KEY ("Id");
 ALTER TABLE ONLY "IdentityUser"
     ADD CONSTRAINT "UX_Identifier" UNIQUE ("Identifier");
-ALTER TABLE ONLY "identityClaim"
-    ADD CONSTRAINT "identityClaim_pkey" PRIMARY KEY ("Id");
-ALTER TABLE ONLY "identityClaim"
+ALTER TABLE ONLY "IdentityClaim"
+    ADD CONSTRAINT "IdentityClaim_pkey" PRIMARY KEY ("Id");
+ALTER TABLE ONLY "IdentityClaim"
     ADD CONSTRAINT "FK_IdentityClaim_IdentityUser" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Id");
 ALTER TABLE ONLY "IdentityUserLogin"
     ADD CONSTRAINT "FK_IdentityUserLogin_IdentityUser" FOREIGN KEY ("UserId") REFERENCES "IdentityUser"("Identifier");

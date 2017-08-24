@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluiTec.AppFx.Identity.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -38,6 +39,116 @@ namespace FluiTec.AppFx.Identity.Test
 				};
 				uow.ClaimRepository.Add(claim);
 				Assert.AreEqual(claim.Value, uow.ClaimRepository.Get(claim.Id).Value);
+			}
+		}
+
+		public virtual void CanAddAndGetClaims()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+
+				var claims = new[] {
+					new IdentityClaimEntity
+					{
+						UserId = user.Id,
+						Type = "Age",
+						Value = "18"
+					},
+					new IdentityClaimEntity
+					{
+						UserId = user.Id,
+						Type = "Sex",
+						Value = "male"
+					}
+				};
+				uow.ClaimRepository.AddRange(claims);
+
+				Assert.AreEqual(claims.Length, uow.ClaimRepository.GetAll().Count());
+			}
+		}
+
+		public virtual void CanUpdateClaim()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+
+				var claim = new IdentityClaimEntity
+				{
+					UserId = user.Id,
+					Type = "Age",
+					Value = "18"
+				};
+				uow.ClaimRepository.Add(claim);
+
+
+				claim.Value = "20";
+				uow.ClaimRepository.Update(claim);
+
+				Assert.AreEqual(claim.Value, uow.ClaimRepository.Get(claim.Id).Value);
+			}
+		}
+
+		public virtual void CanDeleteClaim()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+
+				var claim = new IdentityClaimEntity
+				{
+					UserId = user.Id,
+					Type = "Age",
+					Value = "18"
+				};
+				uow.ClaimRepository.Add(claim);
+
+				uow.ClaimRepository.Delete(claim);
+				
+				Assert.AreEqual(expected: null, actual: uow.ClaimRepository.Get(claim.Id));
 			}
 		}
 	}
