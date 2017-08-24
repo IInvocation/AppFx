@@ -4,7 +4,7 @@ using FluiTec.AppFx.Data;
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
 	/// <summary>	A signing credential entity. </summary>
-	[EntityName(name: "SigningCredential")]
+	[EntityName(name: "AppFxIdentityServer.SigningCredential")]
 	public class SigningCredentialEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the Date/Time of the issued. </summary>

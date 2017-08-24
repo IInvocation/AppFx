@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
 	/// <summary>	A scope entity. </summary>
-	[EntityName(name: "Scope")]
+	[EntityName(name: "AppFxIdentityServer.Scope")]
 	public class ScopeEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the name. </summary>

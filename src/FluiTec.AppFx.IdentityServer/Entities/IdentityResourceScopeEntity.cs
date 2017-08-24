@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
 	/// <summary>	An identity resource scope entity. </summary>
-	[EntityName(name: "IdentityResourceScope")]
+	[EntityName(name: "AppFxIdentityServer.IdentityResourceScope")]
 	public class IdentityResourceScopeEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the identifier of the identity resource. </summary>

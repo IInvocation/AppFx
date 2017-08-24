@@ -1,11 +1,11 @@
 ﻿USE AppFx
 GO
-/****** Object:  Table [dbo].[ApiResource]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[ApiResource]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ApiResource](
+CREATE TABLE [AppFxIdentityServer.].[ApiResource](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](255) NOT NULL,
 	[DisplayName] [nvarchar](255) NOT NULL,
@@ -18,12 +18,12 @@ CREATE TABLE [dbo].[ApiResource](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ApiResourceClaim]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[ApiResourceClaim]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ApiResourceClaim](
+CREATE TABLE [AppFxIdentityServer.].[ApiResourceClaim](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ApiResourceId] [int] NOT NULL,
 	[ClaimType] [nvarchar](255) NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE [dbo].[ApiResourceClaim](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ApiResourceScope]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[ApiResourceScope]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ApiResourceScope](
+CREATE TABLE [AppFxIdentityServer.].[ApiResourceScope](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ApiResourceId] [int] NOT NULL,
 	[ScopeId] [int] NOT NULL,
@@ -50,12 +50,12 @@ CREATE TABLE [dbo].[ApiResourceScope](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Client]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[Client]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Client](
+CREATE TABLE [AppFxIdentityServer.].[Client](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ClientId] [nvarchar](255) NOT NULL,
 	[Name] [nvarchar](255) NULL,
@@ -71,12 +71,12 @@ CREATE TABLE [dbo].[Client](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ClientClaim]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[ClientClaim]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ClientClaim](
+CREATE TABLE [AppFxIdentityServer.].[ClientClaim](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ClientId] [int] NOT NULL,
 	[ClaimType] [nvarchar](255) NOT NULL,
@@ -88,12 +88,12 @@ CREATE TABLE [dbo].[ClientClaim](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ClientScope]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[ClientScope]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[ClientScope](
+CREATE TABLE [AppFxIdentityServer.].[ClientScope](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ClientId] [int] NOT NULL,
 	[ScopeId] [int] NOT NULL,
@@ -104,12 +104,12 @@ CREATE TABLE [dbo].[ClientScope](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IdentityGrant]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[IdentityGrant]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[IdentityGrant](
+CREATE TABLE [AppFxIdentityServer.].[IdentityGrant](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[GrantKey] [nvarchar](255) NOT NULL,
 	[Type] [nvarchar](255) NOT NULL,
@@ -125,12 +125,12 @@ CREATE TABLE [dbo].[IdentityGrant](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IdentityResource]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[IdentityResource]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[IdentityResource](
+CREATE TABLE [AppFxIdentityServer.].[IdentityResource](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](255) NOT NULL,
 	[DisplayName] [nvarchar](255) NOT NULL,
@@ -146,12 +146,12 @@ CREATE TABLE [dbo].[IdentityResource](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IdentityResourceClaim]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[IdentityResourceClaim]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[IdentityResourceClaim](
+CREATE TABLE [AppFxIdentityServer.].[IdentityResourceClaim](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[IdentityResourceId] [int] NOT NULL,
 	[ClaimType] [nvarchar](255) NOT NULL,
@@ -162,12 +162,12 @@ CREATE TABLE [dbo].[IdentityResourceClaim](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[IdentityResourceScope]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[IdentityResourceScope]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[IdentityResourceScope](
+CREATE TABLE [AppFxIdentityServer.].[IdentityResourceScope](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[IdentityResourceId] [int] NOT NULL,
 	[ScopeId] [int] NOT NULL,
@@ -178,12 +178,12 @@ CREATE TABLE [dbo].[IdentityResourceScope](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Scope]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[Scope]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Scope](
+CREATE TABLE [AppFxIdentityServer.].[Scope](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](255) NOT NULL,
 	[DisplayName] [nvarchar](255) NOT NULL,
@@ -198,12 +198,12 @@ CREATE TABLE [dbo].[Scope](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[SigningCredential]    Script Date: 11.08.2017 13:39:59 ******/
+/****** Object:  Table [AppFxIdentityServer.].[SigningCredential]    Script Date: 11.08.2017 13:39:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[SigningCredential](
+CREATE TABLE [AppFxIdentityServer.].[SigningCredential](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Issued] [datetime] NOT NULL,
 	[Contents] [nvarchar](max) NOT NULL,
@@ -218,7 +218,7 @@ SET ANSI_PADDING ON
 
 GO
 /****** Object:  Index [IX_IdentityClient]    Script Date: 11.08.2017 13:39:59 ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_IdentityClient] ON [dbo].[IdentityClient]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_IdentityClient] ON [AppFxIdentityServer.].[IdentityClient]
 (
 	[ClientId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -227,7 +227,7 @@ SET ANSI_PADDING ON
 
 GO
 /****** Object:  Index [IX_IdentityClient_1]    Script Date: 11.08.2017 13:39:59 ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_IdentityClient_1] ON [dbo].[IdentityClient]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_IdentityClient_1] ON [AppFxIdentityServer.].[IdentityClient]
 (
 	[ClientName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -236,79 +236,79 @@ SET ANSI_PADDING ON
 
 GO
 /****** Object:  Index [IX_Grant]    Script Date: 11.08.2017 13:39:59 ******/
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Grant] ON [dbo].[IdentityGrant]
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Grant] ON [AppFxIdentityServer.].[IdentityGrant]
 (
 	[GrantKey] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_Enabled]  DEFAULT ((1)) FOR [Enabled]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_Enabled]  DEFAULT ((1)) FOR [Enabled]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AllowOfflineAccess]  DEFAULT ((1)) FOR [AllowOfflineAccess]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AllowOfflineAccess]  DEFAULT ((1)) FOR [AllowOfflineAccess]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AllowRememberConsent]  DEFAULT ((1)) FOR [AllowRememberConsent]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AllowRememberConsent]  DEFAULT ((1)) FOR [AllowRememberConsent]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AlwaysIncludeUserClaimsInIdToken]  DEFAULT ((0)) FOR [AlwaysIncludeUserClaimsInIdToken]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AlwaysIncludeUserClaimsInIdToken]  DEFAULT ((0)) FOR [AlwaysIncludeUserClaimsInIdToken]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_EnableLocalLogin]  DEFAULT ((1)) FOR [EnableLocalLogin]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_EnableLocalLogin]  DEFAULT ((1)) FOR [EnableLocalLogin]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AbsoluteRefreshTokenLifetime]  DEFAULT ((2592000)) FOR [AbsoluteRefreshTokenLifetime]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AbsoluteRefreshTokenLifetime]  DEFAULT ((2592000)) FOR [AbsoluteRefreshTokenLifetime]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AccessTokenLifetime]  DEFAULT ((3600)) FOR [AccessTokenLifetime]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AccessTokenLifetime]  DEFAULT ((3600)) FOR [AccessTokenLifetime]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AuthorizationCodeLifetime]  DEFAULT ((3600)) FOR [AuthorizationCodeLifetime]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_AuthorizationCodeLifetime]  DEFAULT ((3600)) FOR [AuthorizationCodeLifetime]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_IdentityTokenLifetime]  DEFAULT ((300)) FOR [IdentityTokenLifetime]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_IdentityTokenLifetime]  DEFAULT ((300)) FOR [IdentityTokenLifetime]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_SlidingRefreshTokenLifetime]  DEFAULT ((1296000)) FOR [SlidingRefreshTokenLifetime]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_SlidingRefreshTokenLifetime]  DEFAULT ((1296000)) FOR [SlidingRefreshTokenLifetime]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_RefreshTokenExpiration]  DEFAULT ((0)) FOR [RefreshTokenExpiration]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_RefreshTokenExpiration]  DEFAULT ((0)) FOR [RefreshTokenExpiration]
 GO
-ALTER TABLE [dbo].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_RefreshTokenUsage]  DEFAULT ((0)) FOR [RefreshTokenUsage]
+ALTER TABLE [AppFxIdentityServer.].[IdentityClient] ADD  CONSTRAINT [DF_IdentityClient_RefreshTokenUsage]  DEFAULT ((0)) FOR [RefreshTokenUsage]
 GO
-ALTER TABLE [dbo].[ApiResourceClaim]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceClaim_ApiResource] FOREIGN KEY([ApiResourceId])
-REFERENCES [dbo].[ApiResource] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceClaim]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceClaim_ApiResource] FOREIGN KEY([ApiResourceId])
+REFERENCES [AppFxIdentityServer.].[ApiResource] ([Id])
 GO
-ALTER TABLE [dbo].[ApiResourceClaim] CHECK CONSTRAINT [FK_ApiResourceClaim_ApiResource]
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceClaim] CHECK CONSTRAINT [FK_ApiResourceClaim_ApiResource]
 GO
-ALTER TABLE [dbo].[ApiResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceScope_ApiResource] FOREIGN KEY([ApiResourceId])
-REFERENCES [dbo].[ApiResource] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceScope_ApiResource] FOREIGN KEY([ApiResourceId])
+REFERENCES [AppFxIdentityServer.].[ApiResource] ([Id])
 GO
-ALTER TABLE [dbo].[ApiResourceScope] CHECK CONSTRAINT [FK_ApiResourceScope_ApiResource]
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceScope] CHECK CONSTRAINT [FK_ApiResourceScope_ApiResource]
 GO
-ALTER TABLE [dbo].[ApiResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceScope_Scope] FOREIGN KEY([ScopeId])
-REFERENCES [dbo].[Scope] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_ApiResourceScope_Scope] FOREIGN KEY([ScopeId])
+REFERENCES [AppFxIdentityServer.].[Scope] ([Id])
 GO
-ALTER TABLE [dbo].[ApiResourceScope] CHECK CONSTRAINT [FK_ApiResourceScope_Scope]
+ALTER TABLE [AppFxIdentityServer.].[ApiResourceScope] CHECK CONSTRAINT [FK_ApiResourceScope_Scope]
 GO
-ALTER TABLE [dbo].[ClientClaim]  WITH CHECK ADD  CONSTRAINT [FK_ClientClaim_Client] FOREIGN KEY([ClientId])
-REFERENCES [dbo].[Client] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ClientClaim]  WITH CHECK ADD  CONSTRAINT [FK_ClientClaim_Client] FOREIGN KEY([ClientId])
+REFERENCES [AppFxIdentityServer.].[Client] ([Id])
 GO
-ALTER TABLE [dbo].[ClientClaim] CHECK CONSTRAINT [FK_ClientClaim_Client]
+ALTER TABLE [AppFxIdentityServer.].[ClientClaim] CHECK CONSTRAINT [FK_ClientClaim_Client]
 GO
-ALTER TABLE [dbo].[ClientScope]  WITH CHECK ADD  CONSTRAINT [FK_ClientScope_Client] FOREIGN KEY([ClientId])
-REFERENCES [dbo].[Client] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ClientScope]  WITH CHECK ADD  CONSTRAINT [FK_ClientScope_Client] FOREIGN KEY([ClientId])
+REFERENCES [AppFxIdentityServer.].[Client] ([Id])
 GO
-ALTER TABLE [dbo].[ClientScope] CHECK CONSTRAINT [FK_ClientScope_Client]
+ALTER TABLE [AppFxIdentityServer.].[ClientScope] CHECK CONSTRAINT [FK_ClientScope_Client]
 GO
-ALTER TABLE [dbo].[ClientScope]  WITH CHECK ADD  CONSTRAINT [FK_ClientScope_Scope] FOREIGN KEY([ScopeId])
-REFERENCES [dbo].[Scope] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[ClientScope]  WITH CHECK ADD  CONSTRAINT [FK_ClientScope_Scope] FOREIGN KEY([ScopeId])
+REFERENCES [AppFxIdentityServer.].[Scope] ([Id])
 GO
-ALTER TABLE [dbo].[ClientScope] CHECK CONSTRAINT [FK_ClientScope_Scope]
+ALTER TABLE [AppFxIdentityServer.].[ClientScope] CHECK CONSTRAINT [FK_ClientScope_Scope]
 GO
-ALTER TABLE [dbo].[IdentityResourceClaim]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceClaim_IdentityResource] FOREIGN KEY([IdentityResourceId])
-REFERENCES [dbo].[IdentityResource] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceClaim]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceClaim_IdentityResource] FOREIGN KEY([IdentityResourceId])
+REFERENCES [AppFxIdentityServer.].[IdentityResource] ([Id])
 GO
-ALTER TABLE [dbo].[IdentityResourceClaim] CHECK CONSTRAINT [FK_IdentityResourceClaim_IdentityResource]
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceClaim] CHECK CONSTRAINT [FK_IdentityResourceClaim_IdentityResource]
 GO
-ALTER TABLE [dbo].[IdentityResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceScope_IdentityResource] FOREIGN KEY([IdentityResourceId])
-REFERENCES [dbo].[IdentityResource] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceScope_IdentityResource] FOREIGN KEY([IdentityResourceId])
+REFERENCES [AppFxIdentityServer.].[IdentityResource] ([Id])
 GO
-ALTER TABLE [dbo].[IdentityResourceScope] CHECK CONSTRAINT [FK_IdentityResourceScope_IdentityResource]
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceScope] CHECK CONSTRAINT [FK_IdentityResourceScope_IdentityResource]
 GO
-ALTER TABLE [dbo].[IdentityResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceScope_Scope] FOREIGN KEY([ScopeId])
-REFERENCES [dbo].[Scope] ([Id])
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceScope]  WITH CHECK ADD  CONSTRAINT [FK_IdentityResourceScope_Scope] FOREIGN KEY([ScopeId])
+REFERENCES [AppFxIdentityServer.].[Scope] ([Id])
 GO
-ALTER TABLE [dbo].[IdentityResourceScope] CHECK CONSTRAINT [FK_IdentityResourceScope_Scope]
+ALTER TABLE [AppFxIdentityServer.].[IdentityResourceScope] CHECK CONSTRAINT [FK_IdentityResourceScope_Scope]
 GO
 USE [master]
 GO

@@ -4,7 +4,7 @@ using FluiTec.AppFx.Data;
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
 	/// <summary>	A grant entity. </summary>
-	[EntityName(name: "IdentityGrant")]
+	[EntityName(name: "AppFxIdentityServer.Grant")]
 	public class GrantEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the grant key. </summary>
