@@ -12,5 +12,15 @@ namespace FluiTec.AppFx.Data.Dapper.Mysql.Test
 			Assert.IsNotNull(options);
 			Assert.IsNotNull(options.ConnectionFactory);
 	    }
-    }
+
+	    [TestMethod]
+	    public void CanGetAndModifyConnectionString()
+	    {
+		    var options = new MysqlDapperServiceOptions();
+		    Assert.IsNotNull(options);
+
+		    options.ConnectionString = "abc";
+		    Assert.AreEqual(expected: "abc", actual: options.ConnectionString);
+	    }
+	}
 }

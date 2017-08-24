@@ -12,5 +12,15 @@ namespace FluiTec.AppFx.Data.Dapper.Pgsql.Test
 			Assert.IsNotNull(options);
 			Assert.IsNotNull(options.ConnectionFactory);
 	    }
-    }
+
+	    [TestMethod]
+	    public void CanGetAndModifyConnectionString()
+	    {
+		    var options = new PgsqlDapperServiceOptions();
+		    Assert.IsNotNull(options);
+
+		    options.ConnectionString = "abc";
+		    Assert.AreEqual(expected: "abc", actual: options.ConnectionString);
+	    }
+	}
 }
