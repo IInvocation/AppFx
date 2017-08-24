@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Identity.Entities;
@@ -27,6 +28,11 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		///     An enumerator that allows foreach to be used to process the user identifiers in this
 		///     collection.
 		/// </returns>
-		public abstract IEnumerable<IdentityUserLoginEntity> FindByUserId(Guid userId);
+		public virtual IEnumerable<IdentityUserLoginEntity> FindByUserId(Guid userId)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserLoginEntity), nameof(IdentityUserLoginEntity.UserId));
+			return UnitOfWork.Connection.Query<IdentityUserLoginEntity>(command, new { UserId = userId },
+				UnitOfWork.Transaction);
+		}
 	}
 }

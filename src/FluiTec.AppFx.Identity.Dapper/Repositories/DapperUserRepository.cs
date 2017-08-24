@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Identity.Entities;
@@ -20,17 +21,33 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <summary>	Gets an identity user entity using the given identifier. </summary>
 		/// <param name="identifier">	The identifier to get. </param>
 		/// <returns>	An IdentityUserEntity. </returns>
-		public abstract IdentityUserEntity Get(string identifier);
+		public virtual IdentityUserEntity Get(string identifier)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.Identifier));
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { Identifier = identifier },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Searches for the first lowered name. </summary>
 		/// <param name="loweredName">	Name of the lowered. </param>
 		/// <returns>	The found lowered name. </returns>
-		public abstract IdentityUserEntity FindByLoweredName(string loweredName);
+		public virtual IdentityUserEntity FindByLoweredName(string loweredName)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.LoweredUserName));
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { LoweredUserName = loweredName },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Searches for the first normalized email. </summary>
 		/// <param name="normalizedEmail">	The normalized email. </param>
 		/// <returns>	The found normalized email. </returns>
-		public abstract IdentityUserEntity FindByNormalizedEmail(string normalizedEmail);
+		public virtual IdentityUserEntity FindByNormalizedEmail(string normalizedEmail)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.NormalizedEmail));
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command,
+				new { NormalizedEmail = normalizedEmail },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Finds the identifiers in this collection. </summary>
 		/// <param name="userIds">	List of identifiers for the users. </param>

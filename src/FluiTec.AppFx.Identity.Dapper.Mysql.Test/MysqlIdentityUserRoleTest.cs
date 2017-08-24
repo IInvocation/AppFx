@@ -33,5 +33,23 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql.Test
 		{
 			base.CanUpdateUserRole();
 		}
+
+		[TestMethod]
+		public override void CanAddAndFindByUserIdAndRoleId()
+		{
+			base.CanAddAndFindByUserIdAndRoleId();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByUser()
+		{
+			base.CanAddAndFindByUser();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByRole()
+		{
+			base.CanAddAndFindByRole();
+		}
 	}
 }

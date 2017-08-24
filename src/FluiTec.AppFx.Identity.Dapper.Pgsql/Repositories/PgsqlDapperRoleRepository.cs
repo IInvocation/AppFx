@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Identity.Dapper.Repositories;
@@ -15,26 +16,6 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		{
 		}
 
-		/// <summary>	Gets an identity role entity using the given identifier. </summary>
-		/// <param name="identifier">	The identifier to get. </param>
-		/// <returns>	An IdentityRoleEntity. </returns>
-		public override IdentityRoleEntity Get(string identifier)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityRoleEntity.Identifier)}\" = @Identifier";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new {Identifier = identifier},
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Searches for the first lowered name. </summary>
-		/// <param name="loweredName">	Name of the lowered. </param>
-		/// <returns>	The found lowered name. </returns>
-		public override IdentityRoleEntity FindByLoweredName(string loweredName)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityRoleEntity.LoweredName)}\" = @LoweredRoleName";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new {LoweredRoleName = loweredName},
-				UnitOfWork.Transaction);
-		}
-
 		/// <summary>	Finds the identifiers in this collection. </summary>
 		/// <param name="roleIds">	List of identifiers for the roles. </param>
 		/// <returns>
@@ -42,8 +23,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		/// </returns>
 		public override IEnumerable<IdentityRoleEntity> FindByIds(IEnumerable<int> roleIds)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" IN @Ids";
-			return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new {Ids = roleIds},
+			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" = ANY(@Ids)";
+			return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new {Ids = roleIds.ToArray()},
 				UnitOfWork.Transaction);
 		}
 	}

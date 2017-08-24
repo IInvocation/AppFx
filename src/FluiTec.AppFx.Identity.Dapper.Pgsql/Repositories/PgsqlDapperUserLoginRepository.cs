@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Dapper;
+﻿using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Identity.Dapper.Repositories;
 using FluiTec.AppFx.Identity.Entities;
@@ -24,19 +22,6 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 			var command =
 				$"DELETE FROM {TableName} WHERE \"{nameof(IdentityUserLoginEntity.ProviderName)}\" = @ProviderName AND \"{nameof(IdentityUserLoginEntity.ProviderKey)}\" = @ProviderKey";
 			UnitOfWork.Connection.Execute(command, new { ProviderName = providerName, ProviderKey = providerKey },
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Finds the user identifiers in this collection. </summary>
-		/// <param name="userId">	Identifier for the user. </param>
-		/// <returns>
-		///     An enumerator that allows foreach to be used to process the user identifiers in this
-		///     collection.
-		/// </returns>
-		public override IEnumerable<IdentityUserLoginEntity> FindByUserId(Guid userId)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserLoginEntity.UserId)}\" = @Identifier";
-			return UnitOfWork.Connection.Query<IdentityUserLoginEntity>(command, new { Identifier = userId },
 				UnitOfWork.Transaction);
 		}
 	}

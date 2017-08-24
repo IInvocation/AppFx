@@ -3,6 +3,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mssql;
 using FluiTec.AppFx.Identity.Dapper.Mssql.Repositories;
+using FluiTec.AppFx.Identity.Dapper.Repositories;
 using FluiTec.AppFx.Identity.Repositories;
 
 namespace FluiTec.AppFx.Identity.Dapper.Mssql
@@ -45,10 +46,10 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql
 		protected virtual void RegisterIdentityRepositories()
 		{
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IUserRepository>(work => new MssqlDapperUserRepository(work)));
-			RegisterRepositoryProvider(new Func<IUnitOfWork, IClaimRepository>(work => new MssqlDapperClaimRepository(work)));
+			RegisterRepositoryProvider(new Func<IUnitOfWork, IClaimRepository>(work => new DapperClaimRepository(work)));
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IRoleRepository>(work => new MssqlDapperRoleRepository(work)));
 			RegisterRepositoryProvider(
-				new Func<IUnitOfWork, IUserRoleRepository>(work => new MssqlDapperUserRoleRepository(work)));
+				new Func<IUnitOfWork, IUserRoleRepository>(work => new DapperUserRoleRepository(work)));
 			RegisterRepositoryProvider(
 				new Func<IUnitOfWork, IUserLoginRepository>(work => new MssqlDapperUserLoginRepository(work)));
 		}

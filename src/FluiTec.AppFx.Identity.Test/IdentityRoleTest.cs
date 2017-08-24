@@ -31,6 +31,61 @@ namespace FluiTec.AppFx.Identity.Test
 			}
 		}
 
+		/// <summary>	Can add and get role. </summary>
+		public virtual void CanAddAndGetRoleByIdentifier()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+
+				uow.RoleRepository.Add(role);
+				Assert.AreEqual(role.Name, uow.RoleRepository.Get(role.Identifier.ToString()).Name);
+			}
+		}
+
+		public virtual void CanAddAndFindByLoweredName()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+
+				uow.RoleRepository.Add(role);
+				Assert.AreEqual(role.Name, uow.RoleRepository.FindByLoweredName(role.LoweredName).Name);
+			}
+		}
+
+		public virtual void CanAddAndFindByIds()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+
+				uow.RoleRepository.Add(role);
+				Assert.AreEqual(expected: 1, actual: uow.RoleRepository.FindByIds(new [] {role.Id}).Count());
+			}
+		}
+
 		/// <summary>	Can add and get roles. </summary>
 		public virtual void CanAddAndGetRoles()
 		{

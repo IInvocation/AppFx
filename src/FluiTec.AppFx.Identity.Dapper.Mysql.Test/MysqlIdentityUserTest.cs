@@ -34,5 +34,23 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql.Test
 		{
 			base.CanDeleteUser();
 		}
+
+		[TestMethod]
+		public override void CanAddAndGetUserByIdentifier()
+		{
+			base.CanAddAndGetUserByIdentifier();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByLoweredName()
+		{
+			base.CanAddAndFindByLoweredName();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByNormalizedEmail()
+		{
+			base.CanAddAndFindByNormalizedEmail();
+		}
 	}
 }

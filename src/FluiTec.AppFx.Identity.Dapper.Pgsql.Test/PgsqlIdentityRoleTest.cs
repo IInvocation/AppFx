@@ -33,5 +33,23 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 		{
 			base.CanUpdateRole();
 		}
+
+		[TestMethod]
+		public override void CanAddAndGetRoleByIdentifier()
+		{
+			base.CanAddAndGetRoleByIdentifier();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByLoweredName()
+		{
+			base.CanAddAndFindByLoweredName();
+		}
+
+		[TestMethod]
+		public override void CanAddAndFindByIds()
+		{
+			base.CanAddAndFindByIds();
+		}
 	}
 }

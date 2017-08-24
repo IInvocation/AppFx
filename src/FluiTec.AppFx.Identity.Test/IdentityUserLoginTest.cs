@@ -46,6 +46,38 @@ namespace FluiTec.AppFx.Identity.Test
 			}
 		}
 
+		public virtual void CanAddAndFindByUserId()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+
+				var login = new IdentityUserLoginEntity
+				{
+					UserId = user.Identifier,
+					ProviderName = "Google",
+					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderDisplayName = null
+				};
+				uow.LoginRepository.Add(login);
+				Assert.AreEqual(login.ProviderKey, uow.LoginRepository.FindByUserId(user.Identifier).Single().ProviderKey);
+			}
+		}
+
 		public virtual void CanAddAndGetLogins()
 		{
 			using (var uow = DataService.StartUnitOfWork())
@@ -153,6 +185,40 @@ namespace FluiTec.AppFx.Identity.Test
 				uow.LoginRepository.Add(login);
 
 				uow.LoginRepository.Delete(login.Id);
+				Assert.AreEqual(expected: null, actual: uow.LoginRepository.Get(login.Id));
+			}
+		}
+
+		public virtual void CanRemoveByNameAndKey()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+
+				uow.UserRepository.Add(user);
+
+				var login = new IdentityUserLoginEntity
+				{
+					UserId = user.Identifier,
+					ProviderName = "Google",
+					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderDisplayName = null
+				};
+				uow.LoginRepository.Add(login);
+
+				uow.LoginRepository.RemoveByNameAndKey(login.ProviderName, login.ProviderKey);
 				Assert.AreEqual(expected: null, actual: uow.LoginRepository.Get(login.Id));
 			}
 		}

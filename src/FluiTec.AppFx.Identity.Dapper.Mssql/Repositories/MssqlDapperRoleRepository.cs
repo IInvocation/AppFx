@@ -15,26 +15,6 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Repositories
 		{
 		}
 
-		/// <summary>	Gets an identity role entity using the given identifier. </summary>
-		/// <param name="identifier">	The identifier to get. </param>
-		/// <returns>	An IdentityRoleEntity. </returns>
-		public override IdentityRoleEntity Get(string identifier)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(IdentityRoleEntity.Identifier)} = @Identifier";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new {Identifier = identifier},
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Searches for the first lowered name. </summary>
-		/// <param name="loweredName">	Name of the lowered. </param>
-		/// <returns>	The found lowered name. </returns>
-		public override IdentityRoleEntity FindByLoweredName(string loweredName)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(IdentityRoleEntity.LoweredName)} = @LoweredRoleName";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new {LoweredRoleName = loweredName},
-				UnitOfWork.Transaction);
-		}
-
 		/// <summary>	Finds the identifiers in this collection. </summary>
 		/// <param name="roleIds">	List of identifiers for the roles. </param>
 		/// <returns>

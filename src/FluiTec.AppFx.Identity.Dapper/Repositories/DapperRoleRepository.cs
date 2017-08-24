@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Identity.Entities;
@@ -18,12 +20,22 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <summary>	Gets an identity role entity using the given identifier. </summary>
 		/// <param name="identifier">	The identifier to get. </param>
 		/// <returns>	An IdentityRoleEntity. </returns>
-		public abstract IdentityRoleEntity Get(string identifier);
+		public virtual IdentityRoleEntity Get(string identifier)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityRoleEntity), nameof(IdentityRoleEntity.Identifier));
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new { Identifier = Guid.Parse(identifier) },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Searches for the first lowered name. </summary>
 		/// <param name="loweredName">	Name of the lowered. </param>
 		/// <returns>	The found lowered name. </returns>
-		public abstract IdentityRoleEntity FindByLoweredName(string loweredName);
+		public virtual IdentityRoleEntity FindByLoweredName(string loweredName)
+		{
+			var command = SqlBuilder.SelectByFilter(typeof(IdentityRoleEntity), nameof(IdentityRoleEntity.LoweredName));
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new { LoweredName = loweredName },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Finds the identifiers in this collection. </summary>
 		/// <param name="roleIds">	List of identifiers for the roles. </param>

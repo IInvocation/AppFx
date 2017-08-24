@@ -45,5 +45,24 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <param name="propertyInfo">	Information describing the property. </param>
 		/// <returns>	A string. </returns>
 		string RenderParameterProperty(PropertyInfo propertyInfo);
+
+		/// <summary>	Renders the table name described by type. </summary>
+		/// <param name="type">	The type. </param>
+		/// <returns>	A string. </returns>
+		string RenderTableName(Type type);
+
+		/// <summary>	Gets by filter statement. </summary>
+		/// <param name="type">			 	The type. </param>
+		/// <param name="filterProperty">	The filter property. </param>
+		/// <param name="selectFields">  	The select fields. </param>
+		/// <returns>	The by filter statement. </returns>
+		string GetByFilterStatement(Type type, string filterProperty, string[] selectFields);
+
+		/// <summary>	Gets by filter statement. </summary>
+		/// <param name="type">			   	The type. </param>
+		/// <param name="filterProperties">	The filter properties. </param>
+		/// <param name="selectFields">	   	The select fields. </param>
+		/// <returns>	The by filter statement. </returns>
+		string GetByFilterStatement(Type type, string[] filterProperties, string[] selectFields);
 	}
 }

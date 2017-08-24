@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Identity.Dapper.Repositories;
@@ -21,28 +22,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		public override IdentityUserEntity Get(string identifier)
 		{
 			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Identifier)}\" = @Identifier";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { Identifier = identifier },
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Searches for the first lowered name. </summary>
-		/// <param name="loweredName">	Name of the lowered. </param>
-		/// <returns>	The found lowered name. </returns>
-		public override IdentityUserEntity FindByLoweredName(string loweredName)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.LoweredUserName)}\" = @LoweredUserName";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { LoweredUserName = loweredName },
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Searches for the first normalized email. </summary>
-		/// <param name="normalizedEmail">	The normalized email. </param>
-		/// <returns>	The found normalized email. </returns>
-		public override IdentityUserEntity FindByNormalizedEmail(string normalizedEmail)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.NormalizedEmail)}\" = @NormalizedEmail";
-			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command,
-				new { NormalizedEmail = normalizedEmail },
+			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { Identifier = Guid.Parse(identifier) },
 				UnitOfWork.Transaction);
 		}
 
@@ -53,7 +33,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		/// </returns>
 		public override IEnumerable<IdentityUserEntity> FindByIds(IEnumerable<int> userIds)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" IN @Ids";
+			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" = ANY(@Ids)";
 			return UnitOfWork.Connection.Query<IdentityUserEntity>(command, new { Ids = userIds },
 				UnitOfWork.Transaction);
 		}

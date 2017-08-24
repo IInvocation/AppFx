@@ -53,6 +53,126 @@ namespace FluiTec.AppFx.Identity.Test
 			}
 		}
 
+		public virtual void CanAddAndFindByUserIdAndRoleId()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+				uow.UserRepository.Add(user);
+
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+				uow.RoleRepository.Add(role);
+
+				var userRole = new IdentityUserRoleEntity
+				{
+					UserId = user.Id,
+					RoleId = role.Id
+				};
+				userRole = uow.UserRoleRepository.Add(userRole);
+
+				Assert.AreEqual(userRole.RoleId, uow.UserRoleRepository.FindByUserIdAndRoleId(user.Id, role.Id).RoleId);
+			}
+		}
+
+		public virtual void CanAddAndFindByUser()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+				uow.UserRepository.Add(user);
+
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+				uow.RoleRepository.Add(role);
+
+				var userRole = new IdentityUserRoleEntity
+				{
+					UserId = user.Id,
+					RoleId = role.Id
+				};
+				userRole = uow.UserRoleRepository.Add(userRole);
+
+				Assert.AreEqual(userRole.RoleId, uow.UserRoleRepository.FindByUser(user).Single());
+			}
+		}
+
+		public virtual void CanAddAndFindByRole()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var user = new IdentityUserEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "Achim Schnell",
+					LoweredUserName = "ACHIM SCHNELL",
+					Email = "a.schnell@wtschnell.de",
+					NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+					AccessFailedCount = 0,
+					ApplicationId = 0,
+					EmailConfirmed = true,
+					IsAnonymous = false,
+					LastActivityDate = DateTime.Now
+				};
+				uow.UserRepository.Add(user);
+
+				var role = new IdentityRoleEntity
+				{
+					Identifier = Guid.NewGuid(),
+					Name = "DummyRole",
+					ApplicationId = 0,
+					Description = "DummyRole",
+					LoweredName = "dummyrole"
+				};
+				uow.RoleRepository.Add(role);
+
+				var userRole = new IdentityUserRoleEntity
+				{
+					UserId = user.Id,
+					RoleId = role.Id
+				};
+				uow.UserRoleRepository.Add(userRole);
+
+				Assert.AreEqual(user.Id, uow.UserRoleRepository.FindByRole(role).Single());
+			}
+		}
+
 		public virtual void CanAddAndGetUserRoles()
 		{
 			using (var uow = DataService.StartUnitOfWork())

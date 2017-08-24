@@ -3,6 +3,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mysql;
 using FluiTec.AppFx.Identity.Dapper.Mysql.Repositories;
+using FluiTec.AppFx.Identity.Dapper.Repositories;
 using FluiTec.AppFx.Identity.Repositories;
 
 namespace FluiTec.AppFx.Identity.Dapper.Mysql
@@ -45,10 +46,10 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql
 		protected virtual void RegisterIdentityRepositories()
 		{
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IUserRepository>(work => new MysqlDapperUserRepository(work)));
-			RegisterRepositoryProvider(new Func<IUnitOfWork, IClaimRepository>(work => new MysqlDapperClaimRepository(work)));
+			RegisterRepositoryProvider(new Func<IUnitOfWork, IClaimRepository>(work => new DapperClaimRepository(work)));
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IRoleRepository>(work => new MysqlDapperRoleRepository(work)));
 			RegisterRepositoryProvider(
-				new Func<IUnitOfWork, IUserRoleRepository>(work => new MysqlDapperUserRoleRepository(work)));
+				new Func<IUnitOfWork, IUserRoleRepository>(work => new DapperUserRoleRepository(work)));
 			RegisterRepositoryProvider(
 				new Func<IUnitOfWork, IUserLoginRepository>(work => new MysqlDapperUserLoginRepository(work)));
 		}

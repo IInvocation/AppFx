@@ -21,6 +21,7 @@ namespace FluiTec.AppFx.Data.Dapper
 				throw new ArgumentException(
 					$"{nameof(unitOfWork)} was either null or does not implement {nameof(DapperUnitOfWork)}!");
 
+			SqlBuilder = UnitOfWork.Connection.GetBuilder();
 			TableName = GetTableName(typeof(TEntity));
 		}
 
@@ -32,7 +33,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <returns>	The table name. </returns>
 		protected string GetTableName(Type t)
 		{
-			return UnitOfWork.DataService.NameService.NameByType(t);
+			return SqlBuilder.Adapter.RenderTableName(t);
 		}
 
 		#endregion
@@ -46,6 +47,10 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <summary>   Gets the unit of work. </summary>
 		/// <value> The unit of work. </value>
 		public DapperUnitOfWork UnitOfWork { get; }
+
+		/// <summary>	Gets the SQL builder. </summary>
+		/// <value>	The SQL builder. </value>
+		protected SqlBuilder SqlBuilder { get; }
 
 		#endregion
 

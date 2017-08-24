@@ -42,6 +42,47 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			return $"SELECT * FROM {RenderTableName(type)} WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
 		}
 
+		/// <summary>	Gets by filter statement. </summary>
+		/// <param name="type">			 	The type. </param>
+		/// <param name="filterProperty">	The filter property. </param>
+		/// <param name="selectFields">  	The select fields. </param>
+		/// <returns>	The by filter statement. </returns>
+		public virtual string GetByFilterStatement(Type type, string filterProperty, string[] selectFields)
+		{
+			var fProp = SqlCache.TypePropertiesChache(type).Single(pi => pi.Name == filterProperty);
+			if (selectFields == null || selectFields.Length < 1)
+				return $"SELECT * FROM {RenderTableName(type)} WHERE {RenderPropertyName(fProp)} = {RenderParameterProperty(fProp)}";
+
+			var sProps = SqlCache.TypePropertiesChache(type).Where(pi => selectFields.Contains(pi.Name)).ToArray();
+			return
+				$"SELECT {RenderPropertyList(sProps)} FROM {RenderTableName(type)} WHERE {RenderPropertyName(fProp)} = {RenderParameterProperty(fProp)}";
+		}
+
+		/// <summary>	Gets by filter statement. </summary>
+		/// <param name="type">			   	The type. </param>
+		/// <param name="filterProperties">	The filter properties. </param>
+		/// <param name="selectFields">	   	The select fields. </param>
+		/// <returns>	The by filter statement. </returns>
+		public virtual string GetByFilterStatement(Type type, string[] filterProperties, string[] selectFields)
+		{
+			var fProps = SqlCache.TypePropertiesChache(type).Where(pi => filterProperties.Contains(pi.Name)).ToArray();
+			var sb = new StringBuilder();
+			for (var i = 0; i < filterProperties.Length; i++)
+			{
+				if (i > 0)
+					sb.Append(value: " AND ");
+				sb.Append($"{RenderPropertyName(fProps[i])} = {RenderParameterProperty(fProps[i])}");
+			}
+			var filterSql = sb.ToString();
+
+			if (selectFields == null || selectFields.Length < 1)
+				return $"SELECT * FROM {RenderTableName(type)} WHERE {filterSql}";
+
+			var sProps = SqlCache.TypePropertiesChache(type).Where(pi => selectFields.Contains(pi.Name)).ToArray();
+			return
+				$"SELECT {RenderPropertyList(sProps)} FROM {RenderTableName(type)} WHERE {filterSql}";
+		}
+
 		/// <summary>	Gets insert automatic key statement. </summary>
 		/// <param name="type">	The type. </param>
 		/// <returns>	The insert automatic key statement. </returns>
@@ -109,6 +150,21 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 
 		#region Rendering
 
+		/// <summary>	Renders the property list described by properties. </summary>
+		/// <param name="properties">	The properties. </param>
+		/// <returns>	A string. </returns>
+		public virtual StringBuilder RenderPropertyList(PropertyInfo[] properties)
+		{
+			var sb = new StringBuilder();
+			for (var i = 0; i < properties.Length; i++)
+			{
+				if (i > 0)
+					sb.Append(value: ", ");
+				sb.Append(RenderPropertyName(properties[i]));
+			}
+			return sb;
+		}
+
 		/// <summary>	Renders the table name described by tableName. </summary>
 		/// <param name="tableName">	Name of the table. </param>
 		/// <returns>	A string. </returns>
@@ -143,15 +199,8 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <returns>	A StringBuilder. </returns>
 		public virtual StringBuilder RenderAutoKeyColumnList(Type type)
 		{
-			var sb = new StringBuilder();
 			var propertiesWithoutKey = GetPropertiesWithoutKey(type).ToArray();
-			for (var i = 0; i < propertiesWithoutKey.Length; i++)
-			{
-				if (i > 0)
-					sb.Append(value: ", ");
-				sb.Append(RenderPropertyName(propertiesWithoutKey[i]));
-			}
-			return sb;
+			return RenderPropertyList(propertiesWithoutKey);
 		}
 
 		/// <summary>	Renders the parameter list described by type. </summary>

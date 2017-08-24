@@ -33,5 +33,17 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 		{
 			base.CanDeleteUser();
 		}
+
+		[TestMethod]
+		public override void CanAddAndFindByUserId()
+		{
+			base.CanAddAndFindByUserId();
+		}
+
+		[TestMethod]
+		public override void CanRemoveByNameAndKey()
+		{
+			base.CanRemoveByNameAndKey();
+		}
 	}
 }
