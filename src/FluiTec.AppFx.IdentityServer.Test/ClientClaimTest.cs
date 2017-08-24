@@ -117,6 +117,8 @@ namespace FluiTec.AppFx.IdentityServer.Test
 					ClaimType = "ClaimType",
 					ClaimValue = "MyValue"
 				};
+				uow.ClientClaimRepository.Add(clientClaim);
+
 				uow.ClientClaimRepository.Delete(clientClaim);
 
 				Assert.AreEqual(expected: null, actual: uow.ClientClaimRepository.Get(clientClaim.Id));
