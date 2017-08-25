@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The by user. </returns>
 		public virtual IEnumerable<IdentityClaimEntity> GetByUser(IdentityUserEntity user)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityClaimEntity), nameof(IdentityClaimEntity.UserId));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityClaimEntity.UserId));
 			return UnitOfWork.Connection.Query<IdentityClaimEntity>(command, new { UserId = user.Id },
 				UnitOfWork.Transaction);
 		}
@@ -36,7 +36,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// </returns>
 		public virtual IEnumerable<int> GetUserIdsForClaimType(string claimType)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityClaimEntity), nameof(IdentityClaimEntity.Type), new[] { nameof(IdentityClaimEntity.UserId)});
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityClaimEntity.Type), new[] { nameof(IdentityClaimEntity.UserId)});
 			return UnitOfWork.Connection.Query<int>(command, new { Type = claimType },
 				UnitOfWork.Transaction);
 		}
@@ -47,7 +47,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The by user and type. </returns>
 		public virtual IdentityClaimEntity GetByUserAndType(IdentityUserEntity user, string claimType)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityClaimEntity),
+			var command = SqlBuilder.SelectByFilter(EntityType,
 				new[] {nameof(IdentityClaimEntity.Type), nameof(IdentityClaimEntity.UserId)});
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityClaimEntity>(command,
 				new { Type = claimType, UserId = user.Id },

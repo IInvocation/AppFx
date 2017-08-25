@@ -23,6 +23,7 @@ namespace FluiTec.AppFx.Data.Dapper
 
 			SqlBuilder = UnitOfWork.Connection.GetBuilder();
 			TableName = GetTableName(typeof(TEntity));
+			EntityType = typeof(TEntity);
 		}
 
 		#endregion
@@ -51,6 +52,10 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// <summary>	Gets the SQL builder. </summary>
 		/// <value>	The SQL builder. </value>
 		protected SqlBuilder SqlBuilder { get; }
+
+		/// <summary>	Gets the type of the entity. </summary>
+		/// <value>	The type of the entity. </value>
+		protected Type EntityType { get; }
 
 		#endregion
 

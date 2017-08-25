@@ -22,7 +22,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The found user identifier and role identifier. </returns>
 		public virtual IdentityUserRoleEntity FindByUserIdAndRoleId(int userId, int roleId)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserRoleEntity),
+			var command = SqlBuilder.SelectByFilter(EntityType,
 				new[] {nameof(IdentityUserRoleEntity.UserId), nameof(IdentityUserRoleEntity.RoleId)});
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserRoleEntity>(command,
 				new { UserId = userId, RoleId = roleId },
@@ -36,7 +36,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// </returns>
 		public virtual IEnumerable<int> FindByUser(IdentityUserEntity user)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserRoleEntity), nameof(IdentityUserRoleEntity.UserId),
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserRoleEntity.UserId),
 				new[] {nameof(IdentityUserRoleEntity.RoleId)});
 			return UnitOfWork.Connection.Query<int>(command, new { UserId = user.Id },
 				UnitOfWork.Transaction);
@@ -49,7 +49,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// </returns>
 		public virtual IEnumerable<int> FindByRole(IdentityRoleEntity role)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserRoleEntity), nameof(IdentityUserRoleEntity.RoleId), new [] {nameof(IdentityUserRoleEntity.UserId)});
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserRoleEntity.RoleId), new [] {nameof(IdentityUserRoleEntity.UserId)});
 			return UnitOfWork.Connection.Query<int>(command, new { RoleId = role.Id },
 				UnitOfWork.Transaction);
 		}

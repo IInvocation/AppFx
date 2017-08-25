@@ -22,7 +22,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		/// <returns>	The by name. </returns>
 		public virtual ApiResourceEntity GetByName(string name)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(ApiResourceEntity), nameof(ApiResourceEntity.Name));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(ApiResourceEntity.Name));
 			return UnitOfWork.Connection.QuerySingleOrDefault<ApiResourceEntity>(command, new { Name = name },
 				UnitOfWork.Transaction);
 		}

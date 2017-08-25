@@ -22,7 +22,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	An IdentityRoleEntity. </returns>
 		public virtual IdentityRoleEntity Get(string identifier)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityRoleEntity), nameof(IdentityRoleEntity.Identifier));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityRoleEntity.Identifier));
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new { Identifier = Guid.Parse(identifier) },
 				UnitOfWork.Transaction);
 		}
@@ -32,7 +32,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The found lowered name. </returns>
 		public virtual IdentityRoleEntity FindByLoweredName(string loweredName)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityRoleEntity), nameof(IdentityRoleEntity.LoweredName));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityRoleEntity.LoweredName));
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityRoleEntity>(command, new { LoweredName = loweredName },
 				UnitOfWork.Transaction);
 		}

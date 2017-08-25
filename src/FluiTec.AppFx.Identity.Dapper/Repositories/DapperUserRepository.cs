@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	An IdentityUserEntity. </returns>
 		public virtual IdentityUserEntity Get(string identifier)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.Identifier));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserEntity.Identifier));
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { Identifier = identifier },
 				UnitOfWork.Transaction);
 		}
@@ -33,7 +33,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The found lowered name. </returns>
 		public virtual IdentityUserEntity FindByLoweredName(string loweredName)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.LoweredUserName));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserEntity.LoweredUserName));
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { LoweredUserName = loweredName },
 				UnitOfWork.Transaction);
 		}
@@ -43,7 +43,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// <returns>	The found normalized email. </returns>
 		public virtual IdentityUserEntity FindByNormalizedEmail(string normalizedEmail)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserEntity), nameof(IdentityUserEntity.NormalizedEmail));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserEntity.NormalizedEmail));
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command,
 				new { NormalizedEmail = normalizedEmail },
 				UnitOfWork.Transaction);

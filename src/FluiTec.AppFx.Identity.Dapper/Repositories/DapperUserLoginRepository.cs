@@ -30,7 +30,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 		/// </returns>
 		public virtual IEnumerable<IdentityUserLoginEntity> FindByUserId(Guid userId)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(IdentityUserLoginEntity), nameof(IdentityUserLoginEntity.UserId));
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserLoginEntity.UserId));
 			return UnitOfWork.Connection.Query<IdentityUserLoginEntity>(command, new { UserId = userId },
 				UnitOfWork.Transaction);
 		}

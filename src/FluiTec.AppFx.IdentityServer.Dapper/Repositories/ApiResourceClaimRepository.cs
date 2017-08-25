@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		/// </returns>
 		public virtual IEnumerable<ApiResourceClaimEntity> GetByApiId(int id)
 		{
-			var command = SqlBuilder.SelectByFilter(typeof(ApiResourceClaimEntity),
+			var command = SqlBuilder.SelectByFilter(EntityType,
 				nameof(ApiResourceClaimEntity.ApiResourceId));
 			return UnitOfWork.Connection.Query<ApiResourceClaimEntity>(command, new { ApiResourceId = id },
 				UnitOfWork.Transaction);
