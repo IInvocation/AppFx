@@ -121,9 +121,72 @@ namespace FluiTec.AppFx.IdentityServer.Test
 		    }
 	    }
 
-	    public virtual void CanGetAllCompount()
+	    public virtual void CanGetAllCompound()
 	    {
-		    
-	    }
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+				Assert.IsNotNull(uow.ApiResourceRepository.GetAllCompound().First());
+			}
+		}
+
+	    public virtual void CanGetGetByScopeNamesCompound()
+	    {
+		    using (var uow = DataService.StartUnitOfWork())
+		    {
+			    var resource = new ApiResourceEntity
+			    {
+				    Name = "openid",
+				    Description = "OpenId-Scope",
+				    DisplayName = "OpenId",
+				    Enabled = true
+			    };
+			    uow.ApiResourceRepository.Add(resource);
+
+			    var scope = new ScopeEntity
+			    {
+				    Name = "openid",
+				    Description = "OpenId-Scope",
+				    DisplayName = "OpenId",
+				    Emphasize = true,
+				    Required = true,
+				    ShowInDiscoveryDocument = true
+			    };
+			    uow.ScopeRepository.Add(scope);
+
+			    var resScope = new ApiResourceScopeEntity
+			    {
+				    ApiResourceId = resource.Id,
+				    ScopeId = scope.Id
+			    };
+				uow.ApiResourceScopeRepository.Add(resScope);
+
+
+				Assert.IsNotNull(uow.ApiResourceRepository.GetByScopeNamesCompound(new[] { scope.Name }).First());
+		    }
+		}
+
+	    public virtual void CanGetByNameCompountd()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+				Assert.IsNotNull(uow.ApiResourceRepository.GetByName(resource.Name));
+			}
+		}
 	}
 }

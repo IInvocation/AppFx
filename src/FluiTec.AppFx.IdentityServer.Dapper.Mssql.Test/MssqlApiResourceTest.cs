@@ -43,5 +43,23 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanAddAndGetByIds();
 		}
+
+		[TestMethod]
+		public override void CanGetAllCompound()
+		{
+			base.CanGetAllCompound();
+		}
+
+		[TestMethod]
+		public override void CanGetGetByScopeNamesCompound()
+		{
+			base.CanGetGetByScopeNamesCompound();
+		}
+
+		[TestMethod]
+		public override void CanGetByNameCompountd()
+		{
+			base.CanGetByNameCompountd();
+		}
 	}
 }
