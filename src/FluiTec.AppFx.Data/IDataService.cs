@@ -9,10 +9,6 @@ namespace FluiTec.AppFx.Data
 		/// <value>	The name. </value>
 		string Name { get; }
 
-		/// <summary>	Gets the name service. </summary>
-		/// <value>	The name service. </value>
-		IEntityNameService NameService { get; }
-
 		/// <summary>	Begins unit of work. </summary>
 		/// <returns>	An IUnitOfWork. </returns>
 		IUnitOfWork BeginUnitOfWork();

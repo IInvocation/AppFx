@@ -33,7 +33,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 
 		/// <summary>   Gets the name of the table. </summary>
 		/// <value> The name of the table. </value>
-		protected virtual string TableName { get; }
+		public virtual string TableName { get; }
 
 		/// <summary>   Gets the unit of work. </summary>
 		/// <value> The unit of work. </value>
@@ -51,7 +51,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <returns>	The table name. </returns>
 		protected string GetTableName(Type t)
 		{
-			return UnitOfWork.DataService.NameService.NameByType(t);
+			return UnitOfWork.LiteDbDataService.NameService.NameByType(t);
 		}
 
 		/// <summary>	Gets bson key. </summary>

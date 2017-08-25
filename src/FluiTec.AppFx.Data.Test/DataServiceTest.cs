@@ -25,11 +25,5 @@ namespace FluiTec.AppFx.Data.Test
 		{
 			Assert.IsTrue(DataService.BeginUnitOfWork() != null);
 		}
-
-		[TestMethod]
-		public void ProvidesNamingService()
-		{
-			Assert.IsTrue(DataService.NameService != null);
-		}
 	}
 }

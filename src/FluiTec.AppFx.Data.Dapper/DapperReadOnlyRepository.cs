@@ -43,7 +43,7 @@ namespace FluiTec.AppFx.Data.Dapper
 
 		/// <summary>   Gets the name of the table. </summary>
 		/// <value> The name of the table. </value>
-		protected virtual string TableName { get; }
+		public virtual string TableName { get; }
 
 		/// <summary>   Gets the unit of work. </summary>
 		/// <value> The unit of work. </value>

@@ -1,5 +1,4 @@
-﻿using global::System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FluiTec.AppFx.Data
 {
@@ -9,6 +8,10 @@ namespace FluiTec.AppFx.Data
 	public interface IReadOnlyDataRepository<out TEntity, in TKey> : IRepository
 		where TEntity : class, IEntity<TKey>, new()
 	{
+		/// <summary>	Gets the name of the table. </summary>
+		/// <value>	The name of the table. </value>
+		string TableName { get; }
+
 		/// <summary>	Gets an entity using the given identifier. </summary>
 		/// <param name="id">	The Identifier to use. </param>
 		/// <returns>	A TEntity. </returns>

@@ -22,6 +22,10 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <value>	The database. </value>
 		public LiteDatabase Database { get; private set; }
 
+		/// <summary>	Gets the name service. </summary>
+		/// <value>	The name service. </value>
+		public virtual IEntityNameService NameService { get; }
+
 		#endregion
 
 		#region IDataService
@@ -91,6 +95,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 			_useSingletonConnection = useSingletonConnection ?? false;
 
 			Database = _useSingletonConnection ? LiteDbDatabaseSingleton.GetDatabase(dbFilePath) : new LiteDatabase(dbFilePath);
+			NameService = new EntityNameAttributeNameService();
 		}
 
 		/// <summary>	Specialised constructor for use only by derived class. </summary>

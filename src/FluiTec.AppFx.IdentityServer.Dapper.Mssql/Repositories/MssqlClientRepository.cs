@@ -5,6 +5,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
+using FluiTec.AppFx.IdentityServer.Repositories;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 {
@@ -39,11 +40,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override CompoundClientEntity GetCompoundByClientId(string clientId)
 		{
 			var command = $"SELECT * FROM {TableName} AS client" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ClientScopeEntity))} AS cScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IClientScopeRepository>().TableName} AS cScope" +
 			              $" ON client.{nameof(ClientEntity.Id)} = cScope.{nameof(ClientScopeEntity.ClientId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON cScope.{nameof(ClientScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ClientClaimEntity))} AS cClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IClientClaimRepository>().TableName} AS cClaim" +
 			              $" ON client.{nameof(ClientEntity.Id)} = cClaim.{nameof(ClientClaimEntity.ClientId)}" +
 			              $" WHERE client.{nameof(ClientEntity.ClientId)} = @ClientId";
 			var lookup = new Dictionary<int, CompoundClientEntity>();

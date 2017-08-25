@@ -10,16 +10,9 @@ namespace FluiTec.AppFx.Data
 
 		/// <summary>	Specialised default constructor for use only by derived class. </summary>
 		/// <remarks>	Initializes the property <see cref="RepositoryProviders" />. </remarks>
-		protected DataService() : this(new EntityNameAttributeNameService())
-		{
-		}
-
-		/// <summary>	Specialised constructor for use only by derived class. </summary>
-		/// <param name="nameService">	The name service. </param>
-		protected DataService(IEntityNameService nameService)
+		protected DataService()
 		{
 			RepositoryProviders = new Dictionary<Type, Func<IUnitOfWork, IRepository>>();
-			NameService = nameService ?? new EntityNameAttributeNameService();
 		}
 
 		#endregion
@@ -29,10 +22,6 @@ namespace FluiTec.AppFx.Data
 		/// <summary>	Gets the name. </summary>
 		/// <value>	The name. </value>
 		public abstract string Name { get; }
-
-		/// <summary>	Gets the name service. </summary>
-		/// <value>	The name service. </value>
-		public virtual IEntityNameService NameService { get; }
 
 		/// <summary>	Gets the repository providers. </summary>
 		/// <value>	The repository providers. </value>

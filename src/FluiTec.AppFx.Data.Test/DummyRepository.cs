@@ -6,6 +6,8 @@ namespace FluiTec.AppFx.Data.Test
 {
 	public class DummyRepository : IDummyRepository
 	{
+		public string TableName => "Dummy";
+
 		public DummyEntity Get(int id)
 		{
 			throw new NotImplementedException();

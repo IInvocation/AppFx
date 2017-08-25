@@ -5,6 +5,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
+using FluiTec.AppFx.IdentityServer.Repositories;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 {
@@ -42,11 +43,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override IEnumerable<CompoundApiResource> GetAllCompound()
 		{
 			var command = $"SELECT * FROM {TableName} AS aRes" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceScopeEntity))} AS aScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceScopeRepository>().TableName} AS aScope" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aScope.{nameof(ApiResourceScopeEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceClaimEntity))} AS aClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceClaimRepository>().TableName} AS aClaim" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aClaim.{nameof(ApiResourceClaimEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON aScope.{nameof(ApiResourceScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}";
 			var lookup = new Dictionary<int, CompoundApiResource>();
 			UnitOfWork.Connection
@@ -89,11 +90,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override IEnumerable<CompoundApiResource> GetByScopeNamesCompound(IEnumerable<string> scopeNames)
 		{
 			var command = $"SELECT * FROM {TableName} AS aRes" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceScopeEntity))} AS aScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceScopeRepository>().TableName} AS aScope" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aScope.{nameof(ApiResourceScopeEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceClaimEntity))} AS aClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceClaimRepository>().TableName} AS aClaim" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aClaim.{nameof(ApiResourceClaimEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON aScope.{nameof(ApiResourceScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}" +
 			              $" WHERE scope.{nameof(ScopeEntity.Name)} IN @ScopeNames";
 			var lookup = new Dictionary<int, CompoundApiResource>();
@@ -140,11 +141,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override CompoundApiResource GetByNameCompount(string name)
 		{
 			var command = $"SELECT * FROM {TableName} AS aRes" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceScopeEntity))} AS aScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceScopeRepository>().TableName} AS aScope" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aScope.{nameof(ApiResourceScopeEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ApiResourceClaimEntity))} AS aClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceClaimRepository>().TableName} AS aClaim" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aClaim.{nameof(ApiResourceClaimEntity.ApiResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON aScope.{nameof(ApiResourceScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}" +
 			              $" WHERE aRes.{nameof(ApiResourceEntity.Name)} = @ResName";
 			var lookup = new Dictionary<int, CompoundApiResource>();

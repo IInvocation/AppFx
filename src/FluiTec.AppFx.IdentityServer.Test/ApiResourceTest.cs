@@ -120,5 +120,10 @@ namespace FluiTec.AppFx.IdentityServer.Test
 			    Assert.AreEqual(expected: null, actual: uow.ApiResourceRepository.Get(resource.Id));
 		    }
 	    }
+
+	    public virtual void CanGetAllCompount()
+	    {
+		    
+	    }
 	}
 }

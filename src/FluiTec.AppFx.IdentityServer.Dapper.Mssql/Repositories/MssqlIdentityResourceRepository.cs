@@ -4,6 +4,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
+using FluiTec.AppFx.IdentityServer.Repositories;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 {
@@ -29,11 +30,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override IEnumerable<CompoundIdentityResource> GetAllCompound()
 		{
 			var command = $"SELECT * FROM {TableName} AS iRes" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(IdentityResourceClaimEntity))} AS iClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IIdentityResourceClaimRepository>().TableName} AS iClaim" +
 			              $" ON iRes.{nameof(IdentityResourceEntity.Id)} = iClaim.{nameof(IdentityResourceClaimEntity.IdentityResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(IdentityResourceScopeEntity))} AS iScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IIdentityResourceScopeRepository>().TableName} AS iScope" +
 			              $" ON iRes.{nameof(IdentityResourceEntity.Id)} = iScope.{nameof(IdentityResourceScopeEntity.IdentityResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON iScope.{nameof(IdentityResourceScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}";
 			var lookup = new Dictionary<int, CompoundIdentityResource>();
 			UnitOfWork.Connection
@@ -81,11 +82,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 		public override IEnumerable<CompoundIdentityResource> GetByScopeNamesCompound(IEnumerable<string> scopeNames)
 		{
 			var command = $"SELECT * FROM {TableName} AS iRes" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(IdentityResourceClaimEntity))} AS iClaim" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IIdentityResourceClaimRepository>().TableName} AS iClaim" +
 			              $" ON iRes.{nameof(IdentityResourceEntity.Id)} = iClaim.{nameof(IdentityResourceClaimEntity.IdentityResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(IdentityResourceScopeEntity))} AS iScope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IIdentityResourceScopeRepository>().TableName} AS iScope" +
 			              $" ON iRes.{nameof(IdentityResourceEntity.Id)} = iScope.{nameof(IdentityResourceScopeEntity.IdentityResourceId)}" +
-			              $" LEFT JOIN {UnitOfWork.DapperDataService.NameService.NameByType(typeof(ScopeEntity))} AS scope" +
+			              $" LEFT JOIN {UnitOfWork.GetRepository<IScopeRepository>().TableName} AS scope" +
 			              $" ON iScope.{nameof(IdentityResourceScopeEntity.ScopeId)} = scope.{nameof(ScopeEntity.Id)}" +
 			              $" WHERE scope.{nameof(ScopeEntity.Name)} IN @ScopeNames";
 			var lookup = new Dictionary<int, CompoundIdentityResource>();
