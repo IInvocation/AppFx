@@ -139,5 +139,29 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.ApiResourceClaimRepository.Get(claim.Id));
 			}
 		}
+
+		public virtual void CanGetByApiIds()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+
+				var claim = new ApiResourceClaimEntity
+				{
+					ApiResourceId = resource.Id,
+					ClaimType = "ClaimType"
+				};
+				uow.ApiResourceClaimRepository.Add(claim);
+
+				Assert.IsNotNull(uow.ApiResourceClaimRepository.GetByApiId(resource.Id).Single());
+			}
+		}
 	}
 }

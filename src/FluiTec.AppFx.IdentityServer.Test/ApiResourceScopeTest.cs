@@ -180,5 +180,75 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.ApiResourceScopeRepository.Get(resourceScope.Id));
 			}
 		}
+
+		public virtual void CanGetByScopeIds()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+
+				var scope = new ScopeEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.ScopeRepository.Add(scope);
+
+				var resourceScope = new ApiResourceScopeEntity
+				{
+					ApiResourceId = resource.Id,
+					ScopeId = scope.Id
+				};
+				uow.ApiResourceScopeRepository.Add(resourceScope);
+
+				Assert.IsNotNull(uow.ApiResourceScopeRepository.GetByScopeIds(new[] { scope.Id }).Single());
+			}
+		}
+
+		public virtual void CanGetByApiIds()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new ApiResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Enabled = true
+				};
+				uow.ApiResourceRepository.Add(resource);
+
+				var scope = new ScopeEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.ScopeRepository.Add(scope);
+
+				var resourceScope = new ApiResourceScopeEntity
+				{
+					ApiResourceId = resource.Id,
+					ScopeId = scope.Id
+				};
+				uow.ApiResourceScopeRepository.Add(resourceScope);
+
+				Assert.IsNotNull(uow.ApiResourceScopeRepository.GetByApiIds(new[] { resource.Id }).Single());
+			}
+		}
 	}
 }
