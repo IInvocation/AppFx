@@ -147,8 +147,6 @@ ALTER TABLE ONLY "UserRole" ALTER COLUMN "Id" SET DEFAULT nextval('"IdentityUser
 
 SET search_path = public, pg_catalog;
 
-ALTER TABLE ONLY "Dummy" ALTER COLUMN "Id" SET DEFAULT nextval('"Dummy_Id_seq"'::regclass);
-
 SET search_path = "AppFxIdentity", pg_catalog;
 
 SELECT pg_catalog.setval('"IdentityRole_Id_seq"', 109, true);
@@ -163,8 +161,6 @@ SELECT pg_catalog.setval('"identityClaim_Id_seq"', 30, true);
 
 
 SET search_path = public, pg_catalog;
-
-SELECT pg_catalog.setval('"Dummy_Id_seq"', 77, true);
 
 SET search_path = "AppFxIdentity", pg_catalog;
 
