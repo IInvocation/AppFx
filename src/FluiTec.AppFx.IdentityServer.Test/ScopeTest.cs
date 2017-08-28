@@ -98,5 +98,41 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.ScopeRepository.Get(scope.Id));
 			}
 		}
+
+		public virtual void CanGetByIds()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var scope = new ScopeEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.ScopeRepository.Add(scope);
+				Assert.AreEqual(scope.Name, uow.ScopeRepository.GetByIds(new [] {scope.Id}).First().Name);
+			}
+		}
+
+		public virtual void CanGetByNames()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var scope = new ScopeEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.ScopeRepository.Add(scope);
+				Assert.AreEqual(scope.Name, uow.ScopeRepository.GetByNames(new[] { scope.Name }).First().Name);
+			}
+		}
 	}
 }

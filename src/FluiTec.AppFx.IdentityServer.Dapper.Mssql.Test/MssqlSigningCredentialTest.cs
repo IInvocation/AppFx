@@ -31,5 +31,17 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanDeleteSigningCredential();
 		}
+
+		[TestMethod]
+		public override void CanGetLatest()
+		{
+			base.CanGetLatest();
+		}
+
+		[TestMethod]
+		public override void CanGetValidationValid()
+		{
+			base.CanGetValidationValid();
+		}
 	}
 }

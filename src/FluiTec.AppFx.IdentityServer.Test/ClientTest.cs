@@ -92,5 +92,39 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.ClientRepository.Get(client.Id));
 			}
 		}
+
+		public virtual void CanGetByClientId()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var client = new ClientEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					Name = "TestClient",
+					Secret = "MySecret",
+					AllowOfflineAccess = false,
+					GrantTypes = "client_credentials"
+				};
+				uow.ClientRepository.Add(client);
+				Assert.AreEqual(client.Name, uow.ClientRepository.GetByClientId(client.ClientId).Name);
+			}
+		}
+
+		public virtual void CanGetCompoundByClientId()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var client = new ClientEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					Name = "TestClient",
+					Secret = "MySecret",
+					AllowOfflineAccess = false,
+					GrantTypes = "client_credentials"
+				};
+				uow.ClientRepository.Add(client);
+				Assert.AreEqual(client.Name, uow.ClientRepository.GetCompoundByClientId(client.ClientId).Client.Name);
+			}
+		}
 	}
 }

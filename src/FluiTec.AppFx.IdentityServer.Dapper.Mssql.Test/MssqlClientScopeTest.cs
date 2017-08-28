@@ -29,6 +29,13 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		[TestMethod]
 		public override void CanDeleteClient()
 		{
-			base.CanDeleteClient();}
+			base.CanDeleteClient();
+		}
+
+		[TestMethod]
+		public override void CanGetByClientId()
+		{
+			base.CanGetByClientId();
+		}
 	}
 }

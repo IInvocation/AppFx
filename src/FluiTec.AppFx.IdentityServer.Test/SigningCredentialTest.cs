@@ -79,5 +79,49 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.SigningCredentialRepository.Get(credential.Id));
 			}
 		}
+
+		public virtual void CanGetLatest()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var credentials = new[]
+				{
+					new SigningCredentialEntity
+					{
+						Issued = DateTime.Now.AddDays(1),
+						Contents = "MyKey"
+					},
+					new SigningCredentialEntity
+					{
+						Issued = DateTime.Now,
+						Contents = "MyKey2"
+					}
+				};
+				uow.SigningCredentialRepository.AddRange(credentials);
+				Assert.AreEqual(credentials[0].Contents, uow.SigningCredentialRepository.GetLatest().Contents);
+			}
+		}
+
+		public virtual void CanGetValidationValid()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var credentials = new[]
+				{
+					new SigningCredentialEntity
+					{
+						Issued = DateTime.Now.AddDays(1),
+						Contents = "MyKey"
+					},
+					new SigningCredentialEntity
+					{
+						Issued = DateTime.Now,
+						Contents = "MyKey2"
+					}
+				};
+				uow.SigningCredentialRepository.AddRange(credentials);
+				Assert.AreEqual(credentials[0].Contents, uow.SigningCredentialRepository.GetValidationValid(DateTime.Now.AddHours(1)).Single().Contents);
+			}
+		}
 	}
 }

@@ -33,5 +33,35 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanDeleteGrant();
 		}
+
+		[TestMethod]
+		public override void CanGetByGrantKey()
+		{
+			base.CanGetByGrantKey();
+		}
+
+		[TestMethod]
+		public override void CanFindBySubjectId()
+		{
+			base.CanFindBySubjectId();
+		}
+
+		[TestMethod]
+		public override void CanRemoveByGrantKey()
+		{
+			base.CanRemoveByGrantKey();
+		}
+
+		[TestMethod]
+		public override void CanRemoveBySubjectAndClient()
+		{
+			base.CanRemoveBySubjectAndClient();
+		}
+
+		[TestMethod]
+		public override void CanRemoveBySubjectClientType()
+		{
+			base.CanRemoveBySubjectClientType();
+		}
 	}
 }

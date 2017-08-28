@@ -99,5 +99,104 @@ namespace FluiTec.AppFx.IdentityServer.Test
 			    Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
 		    }
 	    }
+
+	    public virtual void CanGetByGrantKey()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var grant = new GrantEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					CreationTime = DateTime.Now,
+					Data = "Data",
+					GrantKey = "MyKey",
+					SubjectId = Guid.NewGuid().ToString(),
+					Type = "Type"
+				};
+				uow.GrantRepository.Add(grant);
+				Assert.AreEqual(grant.Data, uow.GrantRepository.GetByGrantKey(grant.GrantKey).Data);
+			}
+		}
+
+	    public virtual void CanFindBySubjectId()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var grant = new GrantEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					CreationTime = DateTime.Now,
+					Data = "Data",
+					GrantKey = "MyKey",
+					SubjectId = Guid.NewGuid().ToString(),
+					Type = "Type"
+				};
+				uow.GrantRepository.Add(grant);
+				Assert.AreEqual(grant.Data, uow.GrantRepository.FindBySubjectId(grant.SubjectId).First().Data);
+			}
+		}
+
+	    public virtual void CanRemoveByGrantKey()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var grant = new GrantEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					CreationTime = DateTime.Now,
+					Data = "Data",
+					GrantKey = "MyKey",
+					SubjectId = Guid.NewGuid().ToString(),
+					Type = "Type"
+				};
+				uow.GrantRepository.Add(grant);
+
+				uow.GrantRepository.RemoveByGrantKey(grant.GrantKey);
+
+				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+			}
+		}
+
+	    public virtual void CanRemoveBySubjectAndClient()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var grant = new GrantEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					CreationTime = DateTime.Now,
+					Data = "Data",
+					GrantKey = "MyKey",
+					SubjectId = Guid.NewGuid().ToString(),
+					Type = "Type"
+				};
+				uow.GrantRepository.Add(grant);
+
+				uow.GrantRepository.RemoveBySubjectAndClient(grant.SubjectId, grant.ClientId);
+
+				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+			}
+		}
+
+	    public virtual void CanRemoveBySubjectClientType()
+	    {
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var grant = new GrantEntity
+				{
+					ClientId = "fluitec.appfx.lkjsadlkjsalkjaslkjdasd",
+					CreationTime = DateTime.Now,
+					Data = "Data",
+					GrantKey = "MyKey",
+					SubjectId = Guid.NewGuid().ToString(),
+					Type = "Type"
+				};
+				uow.GrantRepository.Add(grant);
+
+				uow.GrantRepository.RemoveBySubjectClientType(grant.SubjectId, grant.ClientId, grant.Type);
+
+				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+			}
+		}
 	}
 }

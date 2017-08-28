@@ -21,29 +21,6 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 
 		#region GrantRepository
 
-		/// <summary>	Gets by grant key. </summary>
-		/// <param name="grantKey">	The grant key. </param>
-		/// <returns>	The by grant key. </returns>
-		public override GrantEntity GetByGrantKey(string grantKey)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(GrantEntity.GrantKey)} = @GrantKey";
-			return UnitOfWork.Connection.QuerySingleOrDefault<GrantEntity>(command, new {GrantKey = grantKey},
-				UnitOfWork.Transaction);
-		}
-
-		/// <summary>	Finds the subject identifiers in this collection. </summary>
-		/// <param name="subjectId">	Identifier for the subject. </param>
-		/// <returns>
-		///     An enumerator that allows foreach to be used to process the subject identifiers in this
-		///     collection.
-		/// </returns>
-		public override IEnumerable<GrantEntity> FindBySubjectId(string subjectId)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(GrantEntity.SubjectId)} = @SubjectId";
-			return UnitOfWork.Connection.Query<GrantEntity>(command, new {SubjectId = subjectId},
-				UnitOfWork.Transaction);
-		}
-
 		/// <summary>	Removes the by grant key described by grantKey. </summary>
 		/// <param name="grantKey">	The grant key. </param>
 		public override void RemoveByGrantKey(string grantKey)

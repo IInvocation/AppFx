@@ -31,5 +31,17 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 		{
 			base.CanDeleteResource();
 		}
+
+		[TestMethod]
+		public override void CanGetAllCompound()
+		{
+			base.CanGetAllCompound();
+		}
+
+		[TestMethod]
+		public override void CanGetByScopeNamesCompound()
+		{
+			base.CanGetByScopeNamesCompound();
+		}
 	}
 }

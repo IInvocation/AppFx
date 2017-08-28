@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.IdentityServer.Entities;
@@ -24,7 +25,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		/// <summary>	Gets by grant key. </summary>
 		/// <param name="grantKey">	The grant key. </param>
 		/// <returns>	The by grant key. </returns>
-		public abstract GrantEntity GetByGrantKey(string grantKey);
+		public virtual GrantEntity GetByGrantKey(string grantKey)
+		{
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(GrantEntity.GrantKey));
+			return UnitOfWork.Connection.QuerySingleOrDefault<GrantEntity>(command, new { GrantKey = grantKey },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Finds the subject identifiers in this collection. </summary>
 		/// <param name="subjectId">	Identifier for the subject. </param>
@@ -32,7 +38,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		///     An enumerator that allows foreach to be used to process the subject identifiers in this
 		///     collection.
 		/// </returns>
-		public abstract IEnumerable<GrantEntity> FindBySubjectId(string subjectId);
+		public virtual IEnumerable<GrantEntity> FindBySubjectId(string subjectId)
+		{
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(GrantEntity.SubjectId));
+			return UnitOfWork.Connection.Query<GrantEntity>(command, new { SubjectId = subjectId },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Removes the by grant key described by grantKey. </summary>
 		/// <param name="grantKey">	The grant key. </param>

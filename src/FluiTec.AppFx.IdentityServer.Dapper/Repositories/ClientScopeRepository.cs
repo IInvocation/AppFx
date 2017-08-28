@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.IdentityServer.Entities;
@@ -21,6 +22,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		///     An enumerator that allows foreach to be used to process the client identifiers in this
 		///     collection.
 		/// </returns>
-		public abstract IEnumerable<ClientScopeEntity> GetByClientId(int id);
+		public virtual IEnumerable<ClientScopeEntity> GetByClientId(int id)
+		{
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(ClientScopeEntity.ClientId));
+			return UnitOfWork.Connection.Query<ClientScopeEntity>(command, new { ClientId = id },
+				UnitOfWork.Transaction);
+		}
 	}
 }

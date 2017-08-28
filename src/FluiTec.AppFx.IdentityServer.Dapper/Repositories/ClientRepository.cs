@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.Data;
+﻿using Dapper;
+using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Entities;
@@ -18,7 +19,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 		/// <summary>	Gets by client identifier. </summary>
 		/// <param name="clientId">	Identifier for the client. </param>
 		/// <returns>	The by client identifier. </returns>
-		public abstract ClientEntity GetByClientId(string clientId);
+		public virtual ClientEntity GetByClientId(string clientId)
+		{
+			var command = SqlBuilder.SelectByFilter(EntityType, nameof(ClientEntity.ClientId));
+			return UnitOfWork.Connection.QuerySingleOrDefault<ClientEntity>(command, new { ClientId = clientId },
+				UnitOfWork.Transaction);
+		}
 
 		/// <summary>	Gets compound by client identifier. </summary>
 		/// <param name="clientId">	Identifier for the client. </param>

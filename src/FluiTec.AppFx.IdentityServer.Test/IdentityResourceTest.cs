@@ -98,5 +98,72 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				Assert.AreEqual(expected: null, actual: uow.IdentityResourceRepository.Get(resource.Id));
 			}
 		}
+
+		public virtual void CanGetAllCompound()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resources = new[]
+				{
+					new IdentityResourceEntity
+					{
+						Name = "openid",
+						Description = "OpenId-Scope",
+						DisplayName = "OpenId",
+						Emphasize = true,
+						Required = true,
+						ShowInDiscoveryDocument = true
+					},
+					new IdentityResourceEntity
+					{
+						Name = "profile",
+						Description = "Profile-Scope",
+						DisplayName = "Profile",
+						Emphasize = true,
+						Required = true,
+						ShowInDiscoveryDocument = true
+					}
+				};
+				uow.IdentityResourceRepository.AddRange(resources);
+				Assert.AreEqual(resources.Length, uow.IdentityResourceRepository.GetAllCompound().Count());
+			}
+		}
+
+		public virtual void CanGetByScopeNamesCompound()
+		{
+			using (var uow = DataService.StartUnitOfWork())
+			{
+				var resource = new IdentityResourceEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.IdentityResourceRepository.Add(resource);
+
+				var scope = new ScopeEntity
+				{
+					Name = "openid",
+					Description = "OpenId-Scope",
+					DisplayName = "OpenId",
+					Emphasize = true,
+					Required = true,
+					ShowInDiscoveryDocument = true
+				};
+				uow.ScopeRepository.Add(scope);
+
+				var resourceScope = new IdentityResourceScopeEntity
+				{
+					IdentityResourceId = resource.Id,
+					ScopeId = scope.Id
+				};
+				uow.IdentityResourceScopeRepository.Add(resourceScope);
+
+				Assert.AreEqual(resource.Name, uow.IdentityResourceRepository.GetByScopeNamesCompound(new[] { scope.Name }).First().IdentityResource.Name);
+			}
+		}
 	}
 }

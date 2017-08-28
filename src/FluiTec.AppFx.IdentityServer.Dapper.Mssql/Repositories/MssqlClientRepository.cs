@@ -24,16 +24,6 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 
 		#region ClientRepository
 
-		/// <summary>	Gets by client identifier. </summary>
-		/// <param name="clientId">	Identifier for the client. </param>
-		/// <returns>	The by client identifier. </returns>
-		public override ClientEntity GetByClientId(string clientId)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(ClientEntity.ClientId)} = @ClientId";
-			return UnitOfWork.Connection.QuerySingleOrDefault<ClientEntity>(command, new {ClientId = clientId},
-				UnitOfWork.Transaction);
-		}
-
 		/// <summary>	Gets compound by client identifier. </summary>
 		/// <param name="clientId">	Identifier for the client. </param>
 		/// <returns>	The compound by client identifier. </returns>
