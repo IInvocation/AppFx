@@ -140,6 +140,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test.csproj", "{6398C74D-CE17-41E9-974C-1B936A88DE34}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mysql", "Mysql", "{CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql", "FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj", "{28853455-6DD4-45CB-9D03-4E2924FEBF3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test.csproj", "{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -310,6 +316,14 @@ Global
 		{6398C74D-CE17-41E9-974C-1B936A88DE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6398C74D-CE17-41E9-974C-1B936A88DE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6398C74D-CE17-41E9-974C-1B936A88DE34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28853455-6DD4-45CB-9D03-4E2924FEBF3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28853455-6DD4-45CB-9D03-4E2924FEBF3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28853455-6DD4-45CB-9D03-4E2924FEBF3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28853455-6DD4-45CB-9D03-4E2924FEBF3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -373,6 +387,9 @@ Global
 		{471F777C-7291-4854-B6FD-4814C176A8EE} = {31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4}
 		{B72EA464-E30F-45A8-A388-6E5D7597AEE1} = {471F777C-7291-4854-B6FD-4814C176A8EE}
 		{6398C74D-CE17-41E9-974C-1B936A88DE34} = {471F777C-7291-4854-B6FD-4814C176A8EE}
+		{CD1EC128-FEAF-47AD-88FA-F216FD65FA7F} = {31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4}
+		{28853455-6DD4-45CB-9D03-4E2924FEBF3E} = {CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}
+		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5} = {CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
