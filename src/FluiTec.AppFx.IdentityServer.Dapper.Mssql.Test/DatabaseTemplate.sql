@@ -10,7 +10,7 @@ CREATE TABLE [AppFxIdentityServer.].[ApiResource](
 	[Name] [nvarchar](255) NOT NULL,
 	[DisplayName] [nvarchar](255) NOT NULL,
 	[Description] [nvarchar](max) NULL,
-	[Enabled] [bit] NULL,
+	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_ApiResource] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
