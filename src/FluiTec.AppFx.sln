@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{5C078D35-DFE0-4692-9DC7-37DE83FC7079}"
 EndProject
@@ -136,15 +136,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pgsql", "Pgsql", "{471F777C-7291-4854-B6FD-4814C176A8EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.csproj", "{B72EA464-E30F-45A8-A388-6E5D7597AEE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.csproj", "{B72EA464-E30F-45A8-A388-6E5D7597AEE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test.csproj", "{6398C74D-CE17-41E9-974C-1B936A88DE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test.csproj", "{6398C74D-CE17-41E9-974C-1B936A88DE34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mysql", "Mysql", "{CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql", "FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj", "{28853455-6DD4-45CB-9D03-4E2924FEBF3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql", "FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj", "{28853455-6DD4-45CB-9D03-4E2924FEBF3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test.csproj", "{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test.csproj", "{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTesting", "UnitTesting", "{DBEE429B-8379-453E-9919-756EB5000E91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.UnitTesting.Helper", "FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj", "{81262960-D79E-41E6-B311-974A62E998F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -324,6 +328,10 @@ Global
 		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81262960-D79E-41E6-B311-974A62E998F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81262960-D79E-41E6-B311-974A62E998F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81262960-D79E-41E6-B311-974A62E998F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81262960-D79E-41E6-B311-974A62E998F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -390,6 +398,7 @@ Global
 		{CD1EC128-FEAF-47AD-88FA-F216FD65FA7F} = {31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4}
 		{28853455-6DD4-45CB-9D03-4E2924FEBF3E} = {CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}
 		{E7CD93E4-96B7-42FE-A926-FE8DB45904A5} = {CD1EC128-FEAF-47AD-88FA-F216FD65FA7F}
+		{81262960-D79E-41E6-B311-974A62E998F9} = {DBEE429B-8379-453E-9919-756EB5000E91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}

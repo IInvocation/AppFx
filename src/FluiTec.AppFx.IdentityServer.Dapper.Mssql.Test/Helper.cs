@@ -14,7 +14,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 			{
 				ConnectionFactory = new MssqlConnectionFactory(),
 				ConnectionString =
-					"Data Source=.\\SQLEXPRESS;Initial Catalog=AppFx;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+					"Data Source=.\\SQLEXPRESS;Initial Catalog=AppFx2;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
 			};
 
 			return new MssqlDapperIdentityServerDataService(options);
