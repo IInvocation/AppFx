@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper.Mssql\FluiTec.AppFx.IdentityServer.Dapper.Mssql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Test\FluiTec.AppFx.IdentityServer.Test.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj" />
   </ItemGroup>
 
 </Project>

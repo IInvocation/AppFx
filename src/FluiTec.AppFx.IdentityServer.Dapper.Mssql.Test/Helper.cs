@@ -1,5 +1,6 @@
 ﻿using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mssql;
+using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 {
@@ -13,8 +14,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
 			var options = new DapperServiceOptions
 			{
 				ConnectionFactory = new MssqlConnectionFactory(),
-				ConnectionString =
-					"Data Source=.\\SQLEXPRESS;Initial Catalog=AppFx2;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+				ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")
 			};
 
 			return new MssqlDapperIdentityServerDataService(options);

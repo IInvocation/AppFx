@@ -1,0 +1,6 @@
+{
+	"ConnectionStrings": [{
+		"Name": "MSSQL",
+		"Value": "Data Source=VHOME;Initial Catalog=AppFx;Integrated Security=False;User ID=<YourUserId>;Password=<YourPassword>;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+	}]
+}
