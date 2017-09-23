@@ -1,6 +1,16 @@
 {
-	"ConnectionStrings": [{
-		"Name": "MSSQL",
-		"Value": "Data Source=VHOME;Initial Catalog=AppFx;Integrated Security=False;User ID=<YourUserId>;Password=<YourPassword>;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-	}]
+	"ConnectionStrings": [
+		{
+			"Name": "MSSQL",
+			"Value": "Data Source=<YourHost>;Initial Catalog=AppFx;Integrated Security=False;User ID=<YourUserName>;Password=<YourPassword>;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+		},
+		{
+			"Name": "PGSQL",
+			"Value": "User ID=<YourUserName>;Password=<YourPassword>;Host=<YourHost>;Port=5432;Database=AppFx;Pooling=true;"
+		},
+		{
+			"Name": "MYSQL",
+			"Value": "server=<YourHost>;user=<YourUserName>;database=AppFx;port=3306;password=<YourPassword>;SslMode=none;ConnectionReset=true"
+		}
+	]
 }
