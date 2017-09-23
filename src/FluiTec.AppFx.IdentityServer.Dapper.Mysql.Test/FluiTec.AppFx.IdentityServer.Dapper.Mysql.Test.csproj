@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Test\FluiTec.AppFx.IdentityServer.Test.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj" />
   </ItemGroup>
 
 </Project>

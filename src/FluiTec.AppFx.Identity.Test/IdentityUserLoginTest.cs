@@ -38,7 +38,7 @@ namespace FluiTec.AppFx.Identity.Test
 				{
 					UserId = user.Identifier,
 					ProviderName = "Google",
-					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderKey = "MyKey",
 					ProviderDisplayName = null
 				};
 				uow.LoginRepository.Add(login);
@@ -70,7 +70,7 @@ namespace FluiTec.AppFx.Identity.Test
 				{
 					UserId = user.Identifier,
 					ProviderName = "Google",
-					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderKey = "MyKey",
 					ProviderDisplayName = null
 				};
 				uow.LoginRepository.Add(login);
@@ -111,7 +111,7 @@ namespace FluiTec.AppFx.Identity.Test
 					{
 						UserId = user.Identifier,
 						ProviderName = "Google",
-						ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+						ProviderKey = "MyKey",
 						ProviderDisplayName = null
 					}
 				};
@@ -144,7 +144,7 @@ namespace FluiTec.AppFx.Identity.Test
 				{
 					UserId = user.Identifier,
 					ProviderName = "Google",
-					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderKey = "MyKey",
 					ProviderDisplayName = null
 				};
 				uow.LoginRepository.Add(login);
@@ -179,7 +179,7 @@ namespace FluiTec.AppFx.Identity.Test
 				{
 					UserId = user.Identifier,
 					ProviderName = "Google",
-					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderKey = "MyKey",
 					ProviderDisplayName = null
 				};
 				uow.LoginRepository.Add(login);
@@ -213,7 +213,7 @@ namespace FluiTec.AppFx.Identity.Test
 				{
 					UserId = user.Identifier,
 					ProviderName = "Google",
-					ProviderKey = "askljökadöäsadFKÖÄ'LASköasdlkASÖLaksdölkasd",
+					ProviderKey = "MyKey",
 					ProviderDisplayName = null
 				};
 				uow.LoginRepository.Add(login);

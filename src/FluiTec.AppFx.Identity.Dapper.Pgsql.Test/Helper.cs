@@ -1,5 +1,6 @@
 ﻿using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Pgsql;
+using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 {
@@ -13,8 +14,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Test
 			var options = new DapperServiceOptions
 			{
 				ConnectionFactory = new PgsqlConnectionFactory(),
-				ConnectionString = "User ID=appfx;Password=appfx;Host=localhost;Port=5432;Database=AppFx;Pooling=true;"
-			};
+				ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")
+            };
 
 			return new PgsqlDapperIdentityDataService(options);
 		}

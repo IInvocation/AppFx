@@ -1,5 +1,6 @@
 ﻿using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mysql;
+using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test
 {
@@ -13,9 +14,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test
 			var options = new DapperServiceOptions
 			{
 				ConnectionFactory = new MysqlConnectionFactory(),
-				ConnectionString =
-					"server=intranet2.wtschnell.local;user=appfx;database=AppFx;port=3306;password=appfx;SslMode=none;ConnectionReset=true"
-			};
+				ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MYSQL")
+            };
 
 			return new MysqlDapperIdentityServerDataService(options);
 		}
