@@ -2,6 +2,7 @@
 using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
@@ -31,7 +32,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Repositories
 		/// </returns>
 		public override IEnumerable<ApiResourceEntity> GetByIds(int[] ids)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(ApiResourceEntity.Id)} IN @Ids";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(ApiResourceEntity)).ToArray())} FROM {TableName} WHERE {nameof(ApiResourceEntity.Id)} IN @Ids";
 			return UnitOfWork.Connection.Query<ApiResourceEntity>(command, new {Ids = ids},
 				UnitOfWork.Transaction);
 		}
@@ -140,7 +141,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Repositories
 		/// </returns>
 		public override CompoundApiResource GetByNameCompount(string name)
 		{
-			var command = $"SELECT * FROM {TableName} AS aRes" +
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(ApiResourceEntity)).ToArray())} FROM {TableName} AS aRes" +
 			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceScopeRepository>().TableName} AS aScope" +
 			              $" ON aRes.{nameof(ApiResourceEntity.Id)} = aScope.{nameof(ApiResourceScopeEntity.ApiResourceId)}" +
 			              $" LEFT JOIN {UnitOfWork.GetRepository<IApiResourceClaimRepository>().TableName} AS aClaim" +

@@ -27,21 +27,21 @@ namespace FluiTec.AppFx.Data.Sql.Test
 		public void TestSelectAll()
 		{
 			var sql = _connection.GetBuilder().SelectAll(typeof(Dummy));
-			Assert.AreEqual($"SELECT * FROM [dbo].[{nameof(Dummy)}]", sql);
+			Assert.AreEqual($"SELECT Id, Name FROM [dbo].[{nameof(Dummy)}]", sql);
 		}
 
 		[TestMethod]
 		public void TestSelectByKey()
 		{
 			var sql = _connection.GetBuilder().SelectByKey(typeof(Dummy));
-			Assert.AreEqual($"SELECT * FROM [dbo].[{nameof(Dummy)}] WHERE Id = @Id", sql);
+			Assert.AreEqual($"SELECT Id, Name FROM [dbo].[{nameof(Dummy)}] WHERE Id = @Id", sql);
 		}
 
 		[TestMethod]
 		public void TestSelectCustom()
 		{
 			var sql = _connection.GetBuilder().SelectByFilter(typeof(Dummy), nameof(Dummy.Id));
-			Assert.AreEqual($"SELECT * FROM [dbo].[{nameof(Dummy)}] WHERE Id = @Id", sql);
+			Assert.AreEqual($"SELECT Id, Name FROM [dbo].[{nameof(Dummy)}] WHERE Id = @Id", sql);
 		}
 
 		[TestMethod]

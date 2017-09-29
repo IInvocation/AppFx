@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.Identity.Dapper.Repositories;
 using FluiTec.AppFx.Identity.Entities;
 
@@ -22,7 +24,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql.Repositories
 		/// </returns>
 		public override IEnumerable<IdentityRoleEntity> FindByIds(IEnumerable<int> roleIds)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(IdentityRoleEntity)).ToArray())} FROM {TableName} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
 			return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new {Ids = roleIds},
 				UnitOfWork.Transaction);
 		}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
 
@@ -21,7 +22,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Repositories
 		/// <returns>	The latest. </returns>
 		public override SigningCredentialEntity GetLatest()
 		{
-			var command = $"SELECT * FROM {TableName} ORDER BY {nameof(SigningCredentialEntity.Issued)} DESC LIMIT 1";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(SigningCredentialEntity)).ToArray())} FROM {TableName} ORDER BY {nameof(SigningCredentialEntity.Issued)} DESC LIMIT 1";
 			return UnitOfWork.Connection.QuerySingleOrDefault<SigningCredentialEntity>(command, param: null,
 				transaction: UnitOfWork.Transaction);
 		}
@@ -31,7 +32,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Repositories
 		/// <returns>	The validation valid. </returns>
 		public override IList<SigningCredentialEntity> GetValidationValid(DateTime validSince)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(SigningCredentialEntity.Issued)} > @validSince";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(SigningCredentialEntity)).ToArray())} FROM {TableName} WHERE {nameof(SigningCredentialEntity.Issued)} > @validSince";
 			return UnitOfWork.Connection.Query<SigningCredentialEntity>(command, new {ValidSince = validSince},
 				UnitOfWork.Transaction).ToList();
 		}

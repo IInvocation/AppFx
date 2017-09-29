@@ -2,6 +2,7 @@
 using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;

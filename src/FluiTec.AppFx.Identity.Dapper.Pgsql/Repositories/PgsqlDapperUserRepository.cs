@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.Identity.Dapper.Repositories;
 using FluiTec.AppFx.Identity.Entities;
 
@@ -21,7 +23,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		/// <returns>	An IdentityUserEntity. </returns>
 		public override IdentityUserEntity Get(string identifier)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Identifier)}\" = @Identifier";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(IdentityUserEntity)).ToArray())} FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Identifier)}\" = @Identifier";
 			return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command, new { Identifier = Guid.Parse(identifier) },
 				UnitOfWork.Transaction);
 		}
@@ -33,7 +35,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		/// </returns>
 		public override IEnumerable<IdentityUserEntity> FindByIds(IEnumerable<int> userIds)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" = ANY(@Ids)";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(IdentityUserEntity)).ToArray())} FROM {TableName} WHERE \"{nameof(IdentityUserEntity.Id)}\" = ANY(@Ids)";
 			return UnitOfWork.Connection.Query<IdentityUserEntity>(command, new { Ids = userIds },
 				UnitOfWork.Transaction);
 		}
@@ -45,7 +47,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
 		public override IdentityUserEntity FindByLogin(string providerName, string providerKey)
 		{
 			var otherTableName = GetTableName(typeof(IdentityUserLoginEntity));
-			var command = $"SELECT {TableName}.* FROM {TableName} " +
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(IdentityUserEntity)).ToArray())} FROM {TableName} " +
 			              $"INNER JOIN {otherTableName} ON " +
 			              $"{TableName}.\"{nameof(IdentityUserEntity.Identifier)}\" = {otherTableName}.\"{nameof(IdentityUserLoginEntity.UserId)}\" " +
 			              $"WHERE {otherTableName}.\"{nameof(IdentityUserLoginEntity.ProviderName)}\" = @ProviderName " +

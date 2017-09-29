@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 
 namespace FluiTec.AppFx.Data.Sql.Adapters
 {
@@ -40,6 +41,11 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <param name="type">	The type. </param>
 		/// <returns>	The delete statement. </returns>
 		string GetDeleteStatememt(Type type);
+
+		/// <summary>	Renders the property list described by properties. </summary>
+		/// <param name="properties">	The properties. </param>
+		/// <returns>	A StringBuilder. </returns>
+		StringBuilder RenderPropertyList(PropertyInfo[] properties);
 
 		/// <summary>	Renders the parameter property described by propertyInfo. </summary>
 		/// <param name="propertyInfo">	Information describing the property. </param>

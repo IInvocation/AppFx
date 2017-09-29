@@ -30,7 +30,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		/// <summary>	The select all statement. </summary>
 		public virtual string SelectAllStatement(Type type)
 		{
-			return  $"SELECT * FROM {RenderTableName(type)}";
+			return  $"SELECT {RenderPropertyList(SqlCache.TypePropertiesChache(type).ToArray())} FROM {RenderTableName(type)}";
 		}
 
 		/// <summary>	Gets by identifier statement. </summary>
@@ -39,7 +39,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		public virtual string GetByKeyStatement(Type type)
 		{
 			var key = SqlCache.TypeKeyPropertiesCache(type).Single();
-			return $"SELECT * FROM {RenderTableName(type)} WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
+			return $"SELECT {RenderPropertyList(SqlCache.TypePropertiesChache(type).ToArray())} FROM {RenderTableName(type)} WHERE {RenderPropertyName(key)} = {RenderParameterProperty(key)}";
 		}
 
 		/// <summary>	Gets by filter statement. </summary>
@@ -51,7 +51,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 		{
 			var fProp = SqlCache.TypePropertiesChache(type).Single(pi => pi.Name == filterProperty);
 			if (selectFields == null || selectFields.Length < 1)
-				return $"SELECT * FROM {RenderTableName(type)} WHERE {RenderPropertyName(fProp)} = {RenderParameterProperty(fProp)}";
+				return $"SELECT {RenderPropertyList(SqlCache.TypePropertiesChache(type).ToArray())} FROM {RenderTableName(type)} WHERE {RenderPropertyName(fProp)} = {RenderParameterProperty(fProp)}";
 
 			var sProps = SqlCache.TypePropertiesChache(type).Where(pi => selectFields.Contains(pi.Name)).ToArray();
 			return
@@ -76,7 +76,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			var filterSql = sb.ToString();
 
 			if (selectFields == null || selectFields.Length < 1)
-				return $"SELECT * FROM {RenderTableName(type)} WHERE {filterSql}";
+				return $"SELECT {RenderPropertyList(SqlCache.TypePropertiesChache(type).ToArray())} FROM {RenderTableName(type)} WHERE {filterSql}";
 
 			var sProps = SqlCache.TypePropertiesChache(type).Where(pi => selectFields.Contains(pi.Name)).ToArray();
 			return

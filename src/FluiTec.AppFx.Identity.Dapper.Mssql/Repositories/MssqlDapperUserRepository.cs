@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Repositories
 		/// </returns>
 		public override IEnumerable<IdentityUserEntity> FindByIds(IEnumerable<int> userIds)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
+			var command = $"{SqlBuilder.SelectAll(typeof(IdentityUserEntity))} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
 			return UnitOfWork.Connection.Query<IdentityUserEntity>(command, new {Ids = userIds},
 				UnitOfWork.Transaction);
 		}

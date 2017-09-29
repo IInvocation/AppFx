@@ -21,8 +21,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Repositories
 		///     An enumerator that allows foreach to be used to process the identifiers in this collection.
 		/// </returns>
 		public override IEnumerable<IdentityRoleEntity> FindByIds(IEnumerable<int> roleIds)
-		{
-			var command = $"SELECT * FROM {TableName} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
+		{ 
+			var command = $"{SqlBuilder.SelectAll(typeof(IdentityRoleEntity))} WHERE {nameof(IdentityUserEntity.Id)} IN @Ids";
 			return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new {Ids = roleIds},
 				UnitOfWork.Transaction);
 		}

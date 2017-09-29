@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
 
@@ -29,7 +31,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Repositories
 		/// </returns>
 		public override IEnumerable<ApiResourceScopeEntity> GetByScopeIds(int[] ids)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(ApiResourceScopeEntity.ScopeId)}\" = ANY(@Ids)";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(ApiResourceScopeEntity)).ToArray())} FROM {TableName} WHERE \"{nameof(ApiResourceScopeEntity.ScopeId)}\" = ANY(@Ids)";
 			return UnitOfWork.Connection.Query<ApiResourceScopeEntity>(command, new {Ids = ids},
 				UnitOfWork.Transaction);
 		}
@@ -42,7 +44,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Repositories
 		/// </returns>
 		public override IEnumerable<ApiResourceScopeEntity> GetByApiIds(int[] ids)
 		{
-			var command = $"SELECT * FROM {TableName} WHERE \"{nameof(ApiResourceScopeEntity.ApiResourceId)}\" = ANY(@Ids)";
+			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(ApiResourceScopeEntity)).ToArray())} FROM {TableName} WHERE \"{nameof(ApiResourceScopeEntity.ApiResourceId)}\" = ANY(@Ids)";
 			return UnitOfWork.Connection.Query<ApiResourceScopeEntity>(command, new {Ids = ids},
 				UnitOfWork.Transaction);
 		}
