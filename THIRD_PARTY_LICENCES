@@ -4,7 +4,7 @@ are used by this project.
 #################################################################################
 
 #################################################################################
-Applies to: IdentityServer4, Dapper, Dapper.Contrib, RazorLight
+Applies to: IdentityServer4, Dapper, Dapper.Contrib, RazorLight, FluentMigrator
 #################################################################################
  Apache License
                            Version 2.0, January 2004

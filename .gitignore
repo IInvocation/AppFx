@@ -36,6 +36,7 @@ netstandard1.6/
 # Local Settings
 *.local.xml
 *.local.json
+*.local.cmd
 
 # Certificates
 *.pfx
