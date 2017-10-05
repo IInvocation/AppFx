@@ -1,6 +1,6 @@
 ﻿using FluentMigrator.VersionTableInfo;
 
-namespace FluiTec.AppFx.Identity.Dapper.Migrations
+namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations
 {
 	/// <summary>	A version table. </summary>
 	[VersionTableMetaData]

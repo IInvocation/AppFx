@@ -154,6 +154,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dapper.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Identity.Dapper.Migrations", "FluiTec.AppFx.Identity.Dapper.Migrations\FluiTec.AppFx.Identity.Dapper.Migrations.csproj", "{3B52EE18-6E35-47A2-83BD-EC87CE7B3072}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Migrations", "FluiTec.AppFx.IdentityServer.Dapper.Migrations\FluiTec.AppFx.IdentityServer.Dapper.Migrations.csproj", "{CD2E6380-1A43-49B6-9C67-31FFB62F1396}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -344,6 +346,10 @@ Global
 		{3B52EE18-6E35-47A2-83BD-EC87CE7B3072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B52EE18-6E35-47A2-83BD-EC87CE7B3072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B52EE18-6E35-47A2-83BD-EC87CE7B3072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -413,6 +419,7 @@ Global
 		{81262960-D79E-41E6-B311-974A62E998F9} = {DBEE429B-8379-453E-9919-756EB5000E91}
 		{A4A493B0-19CB-465C-8E3E-0197F8DC84B9} = {B5CD1340-3032-49E1-9EB0-CE90B9D5664B}
 		{3B52EE18-6E35-47A2-83BD-EC87CE7B3072} = {FFAF67E6-1D08-43E7-B15B-002231358EE4}
+		{CD2E6380-1A43-49B6-9C67-31FFB62F1396} = {31B4F33D-F68A-458F-8BE9-E97CA8C2A1C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
