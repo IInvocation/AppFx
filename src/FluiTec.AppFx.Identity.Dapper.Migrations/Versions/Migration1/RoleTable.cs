@@ -19,6 +19,16 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.WithColumn("Name").AsString(256).NotNullable()
 				.WithColumn("LoweredName").AsString(256).NotNullable()
 				.WithColumn("Description").AsString(256).Nullable();
+
+			IfDatabase("mysql")
+				.Create
+				.Table($"{Globals.SCHEMA}_{Globals.ROLE_TABLE}")
+				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+				.WithColumn("Identifier").AsGuid().NotNullable()
+				.WithColumn("ApplicationId").AsInt32().NotNullable()
+				.WithColumn("Name").AsString(256).NotNullable()
+				.WithColumn("LoweredName").AsString(256).NotNullable()
+				.WithColumn("Description").AsString(256).Nullable();
 		}
 
 		/// <summary>	Updates the database down to this migration. </summary>
@@ -28,6 +38,10 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.Delete
 				.Table(Globals.ROLE_TABLE)
 				.InSchema(Globals.SCHEMA);
+
+			IfDatabase("mysql")
+				.Delete
+				.Table($"{Globals.SCHEMA}_{Globals.ROLE_TABLE}");
 		}
 	}
 }

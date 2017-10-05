@@ -26,6 +26,14 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.ToTable(Globals.USER_TABLE)
 				.InSchema(Globals.SCHEMA)
 				.PrimaryColumn("Id");
+
+			IfDatabase("mysql")
+				.Create
+				.Table($"{Globals.SCHEMA}_{Globals.CLAIM_TABLE}")
+				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
+				.WithColumn("UserId").AsInt32().NotNullable()
+				.WithColumn("Type").AsString(256).NotNullable()
+				.WithColumn("Value").AsString(256).Nullable();
 		}
 
 		/// <summary>	Updates the database down to this migration. </summary>
@@ -35,6 +43,10 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.Delete
 				.Table(Globals.CLAIM_TABLE)
 				.InSchema(Globals.SCHEMA);
+
+			IfDatabase("mysql")
+				.Delete
+				.Table($"{Globals.SCHEMA}_{Globals.CLAIM_TABLE}");
 		}
 	}
 }
