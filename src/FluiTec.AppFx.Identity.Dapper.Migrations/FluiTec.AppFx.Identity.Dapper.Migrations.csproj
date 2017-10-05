@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4A493B0-19CB-465C-8E3E-0197F8DC84B9}</ProjectGuid>
+    <ProjectGuid>{3B52EE18-6E35-47A2-83BD-EC87CE7B3072}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluiTec.AppFx.Data.Dapper.TestMigrations</RootNamespace>
-    <AssemblyName>FluiTec.AppFx.Data.Dapper.TestMigrations</AssemblyName>
+    <RootNamespace>FluiTec.AppFx.Identity.Dapper.Migrations</RootNamespace>
+    <AssemblyName>FluiTec.AppFx.Identity.Dapper.Migrations</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,14 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Globals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Versions\Migration1\DummyTable.cs" />
+    <Compile Include="Versions\Migration1\ClaimTable.cs" />
+    <Compile Include="Versions\Migration1\RoleTable.cs" />
+    <Compile Include="Versions\Migration1\UserLoginTable.cs" />
+    <Compile Include="Versions\Migration1\UserRoleTable.cs" />
+    <Compile Include="Versions\Migration1\UserTable.cs" />
     <Compile Include="VersionTable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Migrate.sample.cmd" />
     <None Include="Migrate.local.cmd" />
+    <None Include="Migrate.sample.cmd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
