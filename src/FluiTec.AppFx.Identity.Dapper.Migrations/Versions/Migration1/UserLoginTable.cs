@@ -43,7 +43,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.WithColumn("ProviderName").AsString(255).NotNullable()
 				.WithColumn("ProviderKey").AsString(45).NotNullable()
 				.WithColumn("ProviderDisplayName").AsString(255).Nullable()
-				.WithColumn("UserId").AsGuid().NotNullable();
+				.WithColumn("UserId").AsCustom("CHAR(36)").NotNullable();
 			IfDatabase("mysql")
 				.Create
 				.Index()

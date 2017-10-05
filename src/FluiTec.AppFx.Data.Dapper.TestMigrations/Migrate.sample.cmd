@@ -8,4 +8,4 @@ REM PgSQL-Server
 ..\packages\FluentMigrator.Tools.1.6.2\tools\AnyCPU\40\Migrate.exe --provider Postgres --assembly ".\Migration\FluiTec.AppFx.Data.Dapper.TestMigrations.dll"  --conn "User ID=<YourUserName>;Password=<YourPassword>;Host=<YourHost>;Port=5432;Database=AppFx;Pooling=true;"
 
 REM downgrade - append:
---task migrate:down --version <YourVersionNumber>
+REM --task migrate:down --version <YourVersionNumber>

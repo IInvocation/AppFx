@@ -16,7 +16,7 @@ namespace FluiTec.AppFx.Data.Dapper.TestMigrations
 		public string SchemaName => "";
 
 		/// <summary>	Name of the table. </summary>
-		public string TableName => "Version";
+		public string TableName => "Dummy_Version";
 
 		/// <summary>	Name of the unique index. </summary>
 		public string UniqueIndexName => "UC_Version";

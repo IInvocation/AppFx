@@ -16,7 +16,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations
 		public string SchemaName => Globals.SCHEMA;
 
 		/// <summary>	Name of the table. </summary>
-		public string TableName => "Version";
+		public string TableName => "AppFxIdentityServer_Version";
 
 		/// <summary>	Name of the unique index. </summary>
 		public string UniqueIndexName => "UC_Version";

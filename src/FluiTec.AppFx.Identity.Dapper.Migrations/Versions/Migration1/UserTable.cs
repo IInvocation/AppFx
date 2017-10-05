@@ -39,7 +39,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.InSchema(Globals.SCHEMA)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
-				.WithColumn("Identifier").AsGuid().NotNullable().Unique()
+				.WithColumn("Identifier").AsCustom("CHAR(36)").NotNullable().Unique()
 				.WithColumn("Name").AsString(256).NotNullable()
 				.WithColumn("LoweredUserName").AsString(256).NotNullable().Indexed()
 				.WithColumn("MobileAlias").AsString(16).Nullable()

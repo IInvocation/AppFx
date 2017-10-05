@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 				.Create
 				.Table($"{Globals.SCHEMA}_{Globals.ROLE_TABLE}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-				.WithColumn("Identifier").AsGuid().NotNullable()
+				.WithColumn("Identifier").AsCustom("CHAR(36)").NotNullable()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
 				.WithColumn("Name").AsString(256).NotNullable()
 				.WithColumn("LoweredName").AsString(256).NotNullable()
