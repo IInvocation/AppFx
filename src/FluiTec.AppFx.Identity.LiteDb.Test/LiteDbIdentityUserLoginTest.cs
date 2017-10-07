@@ -1,12 +1,12 @@
 ﻿using FluiTec.AppFx.Identity.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
+namespace FluiTec.AppFx.Identity.LiteDb.Test
 {
 	[TestClass]
-	public class MssqlIdentityUserLoginTest : IdentityUserLoginTest
+	public class LiteDbIdentityUserLoginTest : IdentityUserLoginTest
 	{
-		public MssqlIdentityUserLoginTest() : base(Helper.GetDataService())
+		public LiteDbIdentityUserLoginTest() : base(Helper.GetDataService())
 		{
 		}
 
@@ -23,12 +23,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
 		}
 
 	    [TestMethod]
-        public override void CanFindByNameAndKey()
+	    public override void CanFindByNameAndKey()
 	    {
 	        base.CanFindByNameAndKey();
 	    }
 
-	    [TestMethod]
+        [TestMethod]
 		public override void CanUpdateLogin()
 		{
 			base.CanUpdateLogin();

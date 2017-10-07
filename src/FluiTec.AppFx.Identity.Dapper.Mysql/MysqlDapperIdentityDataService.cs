@@ -31,7 +31,19 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql
 			return new DapperIdentityUnitOfWork(this);
 		}
 
-		#endregion
+        /// <summary>
+        /// Begins unit of work.
+        /// </summary>
+        ///
+        /// <returns>
+        /// An IUnitOfWork.
+        /// </returns>
+	    public override IUnitOfWork BeginUnitOfWork()
+	    {
+	        return new DapperIdentityUnitOfWork(this);
+	    }
+
+	    #endregion
 
 		#region Properties
 

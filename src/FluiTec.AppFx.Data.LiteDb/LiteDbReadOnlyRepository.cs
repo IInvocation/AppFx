@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 			if (UnitOfWork == null)
 				throw new ArgumentException($"{nameof(unitOfWork)} was either null or does not implement {nameof(LiteDbUnitOfWork)}!");
 
-			TableName = GetTableName(typeof(TEntity));
+			TableName = GetTableName(typeof(TEntity)).Replace('.', '_');
 			Collection = UnitOfWork.LiteDbDataService.Database.GetCollection<TEntity>(TableName);
 		}
 

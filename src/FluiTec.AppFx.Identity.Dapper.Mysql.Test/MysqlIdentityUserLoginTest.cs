@@ -22,7 +22,13 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql.Test
 			base.CanAddAndGetLogins();
 		}
 
-		[TestMethod]
+	    [TestMethod]
+	    public override void CanFindByNameAndKey()
+	    {
+	        base.CanFindByNameAndKey();
+	    }
+
+        [TestMethod]
 		public override void CanUpdateLogin()
 		{
 			base.CanUpdateLogin();

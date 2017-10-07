@@ -120,7 +120,51 @@ namespace FluiTec.AppFx.Identity.Test
 			}
 		}
 
-		public virtual void CanUpdateLogin()
+	    public virtual void CanFindByNameAndKey()
+	    {
+	        using (var uow = DataService.StartUnitOfWork())
+	        {
+	            var user = new IdentityUserEntity
+	            {
+	                Identifier = Guid.NewGuid(),
+	                Name = "Achim Schnell",
+	                LoweredUserName = "ACHIM SCHNELL",
+	                Email = "a.schnell@wtschnell.de",
+	                NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
+	                AccessFailedCount = 0,
+	                ApplicationId = 0,
+	                EmailConfirmed = true,
+	                IsAnonymous = false,
+	                LastActivityDate = DateTime.Now
+	            };
+
+	            uow.UserRepository.Add(user);
+
+	            var logins = new[]
+	            {
+	                new IdentityUserLoginEntity
+	                {
+	                    UserId = user.Identifier,
+	                    ProviderName = "Google",
+	                    ProviderKey = "askljökadöäsadFKÖÄ'sadasasd",
+	                    ProviderDisplayName = null
+	                },
+	                new IdentityUserLoginEntity
+	                {
+	                    UserId = user.Identifier,
+	                    ProviderName = "Google",
+	                    ProviderKey = "MyKey",
+	                    ProviderDisplayName = null
+	                }
+	            };
+	            uow.LoginRepository.AddRange(logins);
+
+	            var entity = uow.LoginRepository.FindByNameAndKey("Google", "MyKey");
+                Assert.IsNotNull(entity);
+	        }
+        }
+
+        public virtual void CanUpdateLogin()
 		{
 			using (var uow = DataService.StartUnitOfWork())
 			{

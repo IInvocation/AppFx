@@ -34,5 +34,23 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
 			return UnitOfWork.Connection.Query<IdentityUserLoginEntity>(command, new { UserId = userId },
 				UnitOfWork.Transaction);
 		}
+
+        /// <summary>
+        /// Searches for the first name and key.
+        /// </summary>
+        ///
+        /// <param name="providerName"> Name of the provider. </param>
+        /// <param name="providerKey">  The provider key. </param>
+        ///
+        /// <returns>
+        /// The found name and key.
+        /// </returns>
+	    public IdentityUserLoginEntity FindByNameAndKey(string providerName, string providerKey)
+	    {
+	        var command = SqlBuilder.SelectByFilter(EntityType,
+	            new[] {nameof(IdentityUserLoginEntity.ProviderName), nameof(IdentityUserLoginEntity.ProviderKey)});
+	        return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserLoginEntity>(command,
+	            new {ProviderName = providerName, ProviderKey = providerKey}, UnitOfWork.Transaction);
+	    }
 	}
 }

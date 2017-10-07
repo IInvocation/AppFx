@@ -20,5 +20,17 @@ namespace FluiTec.AppFx.Identity.Repositories
 		///     collection.
 		/// </returns>
 		IEnumerable<IdentityUserLoginEntity> FindByUserId(Guid userId);
+
+        /// <summary>
+        /// Searches for the first name and key.
+        /// </summary>
+        ///
+        /// <param name="providerName"> Name of the provider. </param>
+        /// <param name="providerKey">  The provider key. </param>
+        ///
+        /// <returns>
+        /// The found name and key.
+        /// </returns>
+	    IdentityUserLoginEntity FindByNameAndKey(string providerName, string providerKey);
 	}
 }
