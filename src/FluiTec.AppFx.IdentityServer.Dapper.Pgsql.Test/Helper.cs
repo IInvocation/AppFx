@@ -17,7 +17,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test
 				ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")
             };
 
-			return new MssqlDapperIdentityServerDataService(options);
+			return new PgsqlDapperIdentityServerDataService(options);
 		}
 	}
 }

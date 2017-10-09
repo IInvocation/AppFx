@@ -9,13 +9,13 @@ using FluiTec.AppFx.IdentityServer.Repositories;
 namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql
 {
 	/// <summary>	A mssql dapper identity server data service. </summary>
-	public class MssqlDapperIdentityServerDataService : PgsqlDapperDataService, IIdentityServerDataService
+	public class PgsqlDapperIdentityServerDataService : PgsqlDapperDataService, IIdentityServerDataService
 	{
 		#region Constructors
 
 		/// <summary>	Constructor. </summary>
 		/// <param name="options">	Options for controlling the operation. </param>
-		public MssqlDapperIdentityServerDataService(IDapperServiceOptions options) : base(options)
+		public PgsqlDapperIdentityServerDataService(IDapperServiceOptions options) : base(options)
 		{
 			RegisterIdentityRepositories();
 		}
