@@ -75,6 +75,15 @@ namespace FluiTec.AppFx.IdentityServer
 			});
 		}
 
+		/// <summary>	Gets all resources asynchronous. </summary>
+		///
+		/// <returns>	all resources asynchronous. </returns>
+
+		public Task<Resources> GetAllResourcesAsync()
+		{
+			return GetAllResources();
+		}
+
 		/// <summary>	Gets all resources. </summary>
 		/// <returns>	all resources. </returns>
 		public Task<Resources> GetAllResources()
