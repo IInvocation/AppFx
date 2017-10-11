@@ -10,12 +10,12 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.4</Version>
+	  <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="1.16.2" />
-    <PackageReference Include="RazorLight" Version="1.1.0" />
+    <PackageReference Include="MailKit" Version="1.18.1.1" />
+    <PackageReference Include="RazorLight" Version="2.0.0-alpha3" />
   </ItemGroup>
 
   <ItemGroup>

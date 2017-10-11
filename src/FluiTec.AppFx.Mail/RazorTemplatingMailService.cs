@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Mail
 		{
 			if (string.IsNullOrWhiteSpace(viewPath))
 				throw new ArgumentNullException(nameof(viewPath));
-			Engine = EngineFactory.CreatePhysical(viewPath);
+			Engine = new EngineFactory().ForFileSystem(viewPath);
 		}
 
 		/// <summary>	Sends an email asynchronous. </summary>
@@ -68,7 +68,7 @@ namespace FluiTec.AppFx.Mail
 		/// <returns>	A string. </returns>
 		public string Parse<TModel>(string viewName, TModel model)
 		{
-			return Engine.Parse(viewName, model);
+			return Engine.CompileRenderAsync(viewName, model).Result;
 		}
 	}
 }
