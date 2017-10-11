@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Http;
 
 namespace FluiTec.AppFx.Authentication.Amazon
@@ -9,8 +9,6 @@ namespace FluiTec.AppFx.Authentication.Amazon
 		/// <summary>	Default constructor. </summary>
 		public AmazonOptions()
 		{
-			AuthenticationScheme = AmazonDefaults.AuthenticationScheme;
-			DisplayName = AuthenticationScheme;
 			CallbackPath = new PathString(value: "/signin-amazon");
 			AuthorizationEndpoint = AmazonDefaults.AuthorizationEndpoint;
 			TokenEndpoint = AmazonDefaults.TokenEndpoint;
