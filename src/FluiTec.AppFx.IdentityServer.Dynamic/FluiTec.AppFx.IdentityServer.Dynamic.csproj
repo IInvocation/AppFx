@@ -10,17 +10,21 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.0</Version>
+	  <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Data.LiteDb\FluiTec.AppFx.Data.LiteDb.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper.Mssql\FluiTec.AppFx.IdentityServer.Dapper.Mssql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper.Pgsql\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.LiteDb\FluiTec.AppFx.IdentityServer.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
 		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
 		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
 	</Target>
-
+	
 </Project>
