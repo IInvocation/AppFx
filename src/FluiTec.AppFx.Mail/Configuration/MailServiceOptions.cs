@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Mail.Configuration
 {
 	/// <summary>	A web mail options. </summary>
-	[ConfigurationName(name: "Mail")]
+	[ConfigurationName(name: "MailOptions")]
 	public class MailServiceOptions
 	{
 		/// <summary>	Default constructor. </summary>
