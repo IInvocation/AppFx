@@ -1,6 +1,8 @@
 ﻿using System;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
+using FluiTec.AppFx.IdentityServer.LiteDb.Repositories;
+using FluiTec.AppFx.IdentityServer.Repositories;
 
 namespace FluiTec.AppFx.IdentityServer.LiteDb
 {
@@ -77,8 +79,27 @@ namespace FluiTec.AppFx.IdentityServer.LiteDb
         /// <summary>	Registers the identity repositories. </summary>
         protected virtual void RegisterIdentityRepositories()
         {
-            throw new NotImplementedException();
-        }
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IApiResourceClaimRepository>(work => new LiteDbApiResourceClaimRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IApiResourceRepository>(work => new LiteDbApiResourceRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IApiResourceScopeRepository>(work => new LiteDbApiResourceScopeRepository(work)));
+	        RegisterRepositoryProvider(new Func<IUnitOfWork, IClientRepository>(work => new LiteDbClientRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IClientScopeRepository>(work => new LiteDbClientScopeRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IIdentityResourceClaimRepository>(work => new LiteDbIdentityResourceClaimRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IIdentityResourceRepository>(work => new LiteDbIdentityResourceRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, IIdentityResourceScopeRepository>(work => new LiteDbIdentityResourceScopeRepository(work)));
+	        RegisterRepositoryProvider(new Func<IUnitOfWork, IScopeRepository>(work => new LiteDbScopeRepository(work)));
+	        RegisterRepositoryProvider(new Func<IUnitOfWork, IClientClaimRepository>(work => new LiteDbClientClaimRepository(work)));
+	        RegisterRepositoryProvider(
+		        new Func<IUnitOfWork, ISigningCredentialRepository>(work => new LiteDbSigningCredentialRepository(work)));
+	        RegisterRepositoryProvider(new Func<IUnitOfWork, IGrantRepository>(work => new LiteDbGrantRepository(work)));
+		}
 
         #endregion
     }

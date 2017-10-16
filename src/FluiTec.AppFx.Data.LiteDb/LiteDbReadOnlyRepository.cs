@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using LiteDB;
 
 namespace FluiTec.AppFx.Data.LiteDb
@@ -23,7 +24,14 @@ namespace FluiTec.AppFx.Data.LiteDb
 			if (UnitOfWork == null)
 				throw new ArgumentException($"{nameof(unitOfWork)} was either null or does not implement {nameof(LiteDbUnitOfWork)}!");
 
-			TableName = GetTableName(typeof(TEntity)).Replace('.', '_');
+			var replacedDot = GetTableName(typeof(TEntity)).Replace('.', '_');
+			var split = replacedDot.Split('_');
+			if (split.Length > 1)
+			{
+				split[0] = new string(split[0].Where(char.IsUpper).ToArray());
+				replacedDot = string.Concat(split);
+			}
+			TableName = replacedDot;
 			Collection = UnitOfWork.LiteDbDataService.Database.GetCollection<TEntity>(TableName);
 		}
 

@@ -9,7 +9,7 @@ namespace FluiTec.AppFx.IdentityServer.LiteDb.Test
 		/// <returns>	The data service. </returns>
 		public static IIdentityServerDataService GetDataService()
 		{
-		    throw new NotImplementedException();
+		    return new LiteDbIdentityServerDataService(true, "IdentityServer.db", "FluiTec/AppFx");
 		}
 	}
 }

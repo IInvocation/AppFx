@@ -85,21 +85,13 @@ namespace FluiTec.AppFx.IdentityServer.Dynamic
 
 	    private static class LiteDbHelper
 	    {
-		    private static readonly ILiteDbServiceOptions _options;
-
-		    static LiteDbHelper()
-		    {
-			    _options = new LiteDbServiceOptions
-			    {
-				    ApplicationFolder = "FluiTec/AppFx",
-				    DbFileName = "identityserver.db",
-				    UseSingletonConnection = true
-			    };
-		    }
+		    private static ILiteDbServiceOptions _options;
 
 		    internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
 		    {
-			    return new LiteDbIdentityServerDataService(_options);
+			    if (_options == null)
+				    _options = configuration.GetConfiguration<LiteDbServiceOptions>();
+				return new LiteDbIdentityServerDataService(_options);
 		    }
 	    }
     }

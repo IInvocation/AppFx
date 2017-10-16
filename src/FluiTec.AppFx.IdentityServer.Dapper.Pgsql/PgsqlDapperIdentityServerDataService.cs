@@ -60,7 +60,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql
 			RegisterRepositoryProvider(
 				new Func<IUnitOfWork, IIdentityResourceRepository>(work => new PgsqlIdentityResourceRepository(work)));
 			RegisterRepositoryProvider(
-				new Func<IUnitOfWork, IIdentityResourceScopeRepository>(work => new IdentityResourceScopeRepository(work)));
+				new Func<IUnitOfWork, IIdentityResourceScopeRepository>(work => new PgsqlIdentityResourceScopeRepository(work)));
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IScopeRepository>(work => new PgsqlScopeRepository(work)));
 			RegisterRepositoryProvider(new Func<IUnitOfWork, IClientClaimRepository>(work => new ClientClaimRepository(work)));
 			RegisterRepositoryProvider(
