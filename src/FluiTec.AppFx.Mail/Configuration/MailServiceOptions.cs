@@ -6,10 +6,13 @@ namespace FluiTec.AppFx.Mail.Configuration
 	[ConfigurationName(name: "MailOptions")]
 	public class MailServiceOptions
 	{
+		private string _templateRoot;
+
 		/// <summary>	Default constructor. </summary>
 		public MailServiceOptions()
 		{
 			Authenticate = true;
+			TemplateRoot = "MailViews";
 		}
 
 		/// <summary>	Gets or sets a value indicating whether the authenticate. </summary>
@@ -43,5 +46,20 @@ namespace FluiTec.AppFx.Mail.Configuration
 		/// <summary>	Gets or sets the name of from. </summary>
 		/// <value>	The name of from. </value>
 		public string FromName { get; set; }
+
+		/// <summary>	Gets or sets the template root. </summary>
+		/// <value>	The template root. </value>
+		/// <remarks>
+		/// Can not be null		 
+		/// </remarks>
+		public string TemplateRoot
+		{
+			get => _templateRoot;
+			set
+			{
+				if (value != null && !string.IsNullOrWhiteSpace(value))
+					_templateRoot = value;
+			}
+		}
 	}
 }
