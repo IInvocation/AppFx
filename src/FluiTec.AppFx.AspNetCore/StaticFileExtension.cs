@@ -23,19 +23,19 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <param name="configure">		The configure. </param>
 		/// <returns>	An IServiceCollection. </returns>
 		public static IServiceCollection ConfigureStaticFiles(this IServiceCollection services,
-			IConfigurationRoot configuration, Action<StaticFileOptions> configure, Action<AspNetCore.Builder.StaticFileOptions> configureFiles)
+			IConfigurationRoot configuration, Action<StaticFileOptions> configure = null, Action<AspNetCore.Builder.StaticFileOptions> configureFiles = null)
 		{
 			// parse options
 			_options = configuration.GetConfiguration<StaticFileOptions>();
 
 			// let user apply changes
-			configure(_options);
+			configure?.Invoke(_options);
 
 			// create file-options
 			_fileOptions = new AspNetCore.Builder.StaticFileOptions();
 
 			// let user apply changes
-			configureFiles(_fileOptions);
+			configureFiles?.Invoke(_fileOptions);
 
 			// register options
 			services.AddSingleton(_options);

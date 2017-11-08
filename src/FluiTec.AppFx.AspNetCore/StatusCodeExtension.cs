@@ -20,6 +20,9 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <summary>	Options for controlling the StatusCodeExtension. </summary>
 	    private static StatusCodeOptions _options;
 
+		/// <summary>	Options for controlling the API. </summary>
+		private static ApiOptions _apiOptions;
+
 		/// <summary>
 		/// An IServiceCollection extension method that handler, called when the configure status code.
 		/// </summary>
@@ -28,13 +31,14 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <param name="configure">		The configure. </param>
 		/// <returns>	An IServiceCollection. </returns>
 		public static IServiceCollection ConfigureStatusCodeHandler(this IServiceCollection services,
-			IConfigurationRoot configuration, Action<StatusCodeOptions> configure)
+			IConfigurationRoot configuration, Action<StatusCodeOptions> configure = null)
 		{
 			// parse options
 			_options = configuration.GetConfiguration<StatusCodeOptions>();
+			_apiOptions = configuration.GetConfiguration<ApiOptions>();
 
 			// let user apply chjanges
-			configure(_options);
+			configure?.Invoke(_options);
 
 			// register options
 			services.AddSingleton(_options);
@@ -61,7 +65,7 @@ namespace Microsoft.Extensions.DependencyInjection
 			return app.UseStatusCodePages(async context =>
 			{
 				// check if we dont have an API-request here and want to handle the statuscode
-				if (!context.HttpContext.Request.Path.StartsWithSegments(_options.ApiOnlyPath)
+				if (!context.HttpContext.Request.Path.StartsWithSegments(_apiOptions.ApiOnlyPath)
 					&& _options.SelfHandledCodes.Contains(context.HttpContext.Response.StatusCode))
 
 				// if so - let the statuscodehandler do its stuff

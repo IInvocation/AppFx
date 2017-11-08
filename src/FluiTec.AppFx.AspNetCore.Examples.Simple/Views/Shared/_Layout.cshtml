@@ -1,0 +1,18 @@
+﻿<!DOCTYPE HTML>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
+<head>
+	@Html.Partial("_Head")
+</head>
+</cache>
+<body>
+	@Html.Partial("_NavBar")
+	<div class="container">
+		<div class="content-container">
+			@RenderBody()
+		</div>
+	</div>
+	@Html.Partial("_Footer")
+	@Html.Partial("_Scripts")
+</body>
+</html>

@@ -25,13 +25,13 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <param name="configure">		The configure. </param>
 	    /// <returns>	An IServiceCollection. </returns>
 	    public static IServiceCollection ConfigureErrorHandling(this IServiceCollection services,
-		    IConfigurationRoot configuration, Action<ErrorOptions> configure)
+		    IConfigurationRoot configuration, Action<ErrorOptions> configure = null)
 	    {
 			// parse options from configuration
 		    _options = configuration.GetConfiguration<ErrorOptions>();
 
 			// let the user apply additional changes
-			configure(_options);
+			configure?.Invoke(_options);
 
 			// add options to the DI
 		    services.AddSingleton(configuration.GetConfiguration<ErrorOptions>());

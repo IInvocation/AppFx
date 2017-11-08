@@ -21,13 +21,13 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <param name="configure">		The configure. </param>
 	    /// <returns>	An IServiceCollection. </returns>
 	    public static IServiceCollection ConfigureMailService(this IServiceCollection services,
-		    IConfigurationRoot configuration, IHostingEnvironment environment, Action<MailServiceOptions> configure)
+		    IConfigurationRoot configuration, IHostingEnvironment environment, Action<MailServiceOptions> configure = null)
 	    {
 			// parse options
 		    _options = configuration.GetConfiguration<MailServiceOptions>();
 
 			// let user apply changes
-		    configure(_options);
+		    configure?.Invoke(_options);
 
 			// register
 		    services.AddSingleton(_options);

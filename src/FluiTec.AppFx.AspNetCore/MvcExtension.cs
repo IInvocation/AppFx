@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +49,55 @@ namespace Microsoft.Extensions.DependencyInjection
 			configureMvc?.Invoke(new MvcOptions(mvc));
 
 		    return services;
+	    }
+
+	    /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
+	    /// <param name="app">				The app to act on. </param>
+	    /// <param name="configuration">	The configuration. </param>
+	    /// <returns>	An IApplicationBuilder. </returns>
+	    public static IApplicationBuilder UseMvc(this IApplicationBuilder app, IConfigurationRoot configuration)
+	    {
+		    app.UseMvc(routes =>
+		    {
+			    routes.MapRoute(
+				    name: "default",
+				    template: "{controller=Home}/{action=Index}/{id?}");
+		    });
+		    return app;
+	    }
+
+	    /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
+	    /// <param name="app">				The app to act on. </param>
+	    /// <param name="configuration">	The configuration. </param>
+	    /// <returns>	An IApplicationBuilder. </returns>
+	    public static IApplicationBuilder UseMvcWithApi(this IApplicationBuilder app, IConfigurationRoot configuration)
+	    {
+		    app.UseMvc(routes =>
+		    {
+			    routes.MapRoute(
+				    name: "default",
+				    template: "{controller=Home}/{action=Index}/{id?}");
+
+			    routes.MapRoute(
+				    name: "api",
+				    template: "api/[controller]");
+		    });
+		    return app;
+	    }
+
+	    /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
+	    /// <param name="app">				The app to act on. </param>
+	    /// <param name="configuration">	The configuration. </param>
+	    /// <returns>	An IApplicationBuilder. </returns>
+	    public static IApplicationBuilder UseMvcApiOnly(this IApplicationBuilder app, IConfigurationRoot configuration)
+	    {
+		    app.UseMvc(routes =>
+		    {
+			    routes.MapRoute(
+				    name: "api",
+				    template: "api/[controller]");
+		    });
+		    return app;
 	    }
 	}
 }

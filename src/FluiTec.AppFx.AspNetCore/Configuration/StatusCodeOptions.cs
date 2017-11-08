@@ -10,13 +10,6 @@ namespace FluiTec.AppFx.AspNetCore.Configuration
 		/// <summary>	Full pathname of the status code handler file. </summary>
 		private string _statusCodeHandlerPath;
 
-		/// <summary>	Gets or sets the full pathname of the API only file. </summary>
-		/// <value>	The full pathname of the API only file. </value>
-		/// <remarks>
-		/// This property defines for which path the StatusCodeHandler won't be executed.		 
-		/// </remarks>
-		public string ApiOnlyPath { get; set; }
-
 		/// <summary>	Gets or sets the self handled codes. </summary>
 		/// <value>	The self handled codes. </value>
 		public List<int> SelfHandledCodes { get; set; }
