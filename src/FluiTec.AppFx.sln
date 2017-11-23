@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{5C078D35-DFE0-4692-9DC7-37DE83FC7079}"
 EndProject
@@ -174,11 +174,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Identity.Mvc", "FluiTec.AppFx.Identity.Mvc\FluiTec.AppFx.Identity.Mvc.csproj", "{F1649BEA-FB17-4277-BC8A-095EBE1AF07D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.AspNetCore", "FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj", "{B5A88D94-8DFF-4341-BE92-CD224BED4617}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore", "FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj", "{B5A88D94-8DFF-4341-BE92-CD224BED4617}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{128A885E-1E8A-49F6-821D-9B03E1C4AA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.AspNetCore.Examples.Simple", "FluiTec.AppFx.AspNetCore.Examples.Simple\FluiTec.AppFx.AspNetCore.Examples.Simple.csproj", "{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore.Examples.Simple", "FluiTec.AppFx.AspNetCore.Examples.Simple\FluiTec.AppFx.AspNetCore.Examples.Simple.csproj", "{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.LiteDb.Editor", "FluiTec.AppFx.Data.LiteDb.Editor\FluiTec.AppFx.Data.LiteDb.Editor.csproj", "{2C0765E3-142F-408E-BE68-8556F8FCFCCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -410,6 +412,10 @@ Global
 		{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C0765E3-142F-408E-BE68-8556F8FCFCCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0765E3-142F-408E-BE68-8556F8FCFCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0765E3-142F-408E-BE68-8556F8FCFCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0765E3-142F-408E-BE68-8556F8FCFCCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -492,6 +498,7 @@ Global
 		{B5A88D94-8DFF-4341-BE92-CD224BED4617} = {8E4A73CA-B6D6-454D-A160-EF4395DE4A28}
 		{128A885E-1E8A-49F6-821D-9B03E1C4AA8A} = {8E4A73CA-B6D6-454D-A160-EF4395DE4A28}
 		{9FE5A9EF-3038-4BD6-90D6-F0AED9DA43C4} = {128A885E-1E8A-49F6-821D-9B03E1C4AA8A}
+		{2C0765E3-142F-408E-BE68-8556F8FCFCCE} = {08DE624C-45BF-479F-91D1-68340D166EA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
