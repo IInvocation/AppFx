@@ -29,6 +29,7 @@ namespace FluiTec.AppFx.Data.Sql
 			BuilderDictionary.TryAdd(key: "System.Data.SqlClient.SqlConnection", value: new SqlBuilder(new MicrosoftSqlAdapter()));
 			BuilderDictionary.TryAdd(key: "Npgsql.NpgsqlConnection", value: new SqlBuilder(new PostgreSqlAdapter()));
 			BuilderDictionary.TryAdd(key: "MySql.Data.MySqlClient.MySqlConnection", value: new SqlBuilder(new MySqlAdapter()));
+            BuilderDictionary.TryAdd(key: "Microsoft.Data.Sqlite.SqliteConnection", value: new SqlBuilder(new SqLiteAdapter()));
 		}
 
 		/// <summary>	An IDbConnection extension method that gets a builder. </summary>

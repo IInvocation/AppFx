@@ -16,9 +16,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
         public MainViewModel()
         {
 #if DEBUG
-            if (!System.IO.File.Exists("test.db"))
+            if (!System.IO.File.Exists("test.ldb"))
             {
-                using (var db = new LiteDatabase("test.db"))
+                using (var db = new LiteDatabase("test.ldb"))
                 {
                     var collection1 = db.GetCollection<Test>();
                     collection1.Insert(new Test

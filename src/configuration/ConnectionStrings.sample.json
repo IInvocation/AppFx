@@ -11,6 +11,10 @@
 		{
 			"Name": "MYSQL",
 			"Value": "server=<YourHost>;user=<YourUserName>;database=AppFx;port=3306;password=<YourPassword>;SslMode=none;ConnectionReset=true"
+		},
+		{
+			"Name": "SqLite",
+			"Value": "Data Source=appfx.sdb;"
 		}
 	]
 }

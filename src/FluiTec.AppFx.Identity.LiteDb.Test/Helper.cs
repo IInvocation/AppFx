@@ -14,7 +14,7 @@
         /// </returns>
         public static IIdentityDataService GetDataService()
         {
-            return new LiteDbIdentityDataService(true, "Identity.db", "FluiTec/AppFx");
+            return new LiteDbIdentityDataService(true, "Identity.ldb", "FluiTec/AppFx");
         }
     }
 }

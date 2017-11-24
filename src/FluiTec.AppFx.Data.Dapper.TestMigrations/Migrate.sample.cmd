@@ -7,5 +7,8 @@ REM MySQL-Server
 REM PgSQL-Server
 ..\packages\FluentMigrator.Tools.1.6.2\tools\AnyCPU\40\Migrate.exe --provider Postgres --assembly ".\Migration\FluiTec.AppFx.Data.Dapper.TestMigrations.dll"  --conn "User ID=<YourUserName>;Password=<YourPassword>;Host=<YourHost>;Port=5432;Database=AppFx;Pooling=true;"
 
+REM SqLite-Server
+..\packages\FluentMigrator.Tools.1.6.2\tools\x86\40\Migrate.exe --provider SQLite --assembly ".\Migration\FluiTec.AppFx.Data.Dapper.TestMigrations.dll"  --conn "Data Source=..\db\appfx.sdb;"
+
 REM downgrade - append:
 REM --task migrate:down --version <YourVersionNumber>
