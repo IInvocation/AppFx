@@ -1,6 +1,7 @@
 ﻿using System;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Net.Http.Headers;
 using StaticFileOptions = FluiTec.AppFx.AspNetCore.Configuration.StaticFileOptions;
@@ -43,11 +44,12 @@ namespace Microsoft.Extensions.DependencyInjection
 			return services;
 		}
 
-		/// <summary>	An IApplicationBuilder extension method that use static files. </summary>
-		/// <param name="app">				The app to act on. </param>
-		/// <param name="configuration">	The configuration. </param>
-		/// <returns>	An IApplicationBuilder. </returns>
-		public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, IConfigurationRoot configuration)
+        /// <summary>   An IApplicationBuilder extension method that use static files. </summary>
+        /// <param name="app">              The app to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <param name="environment">      The environment. </param>
+        /// <returns>   An IApplicationBuilder. </returns>
+		public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, IConfigurationRoot configuration, IHostingEnvironment environment)
 		{
 			app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
 			{
