@@ -50,7 +50,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="environment">      The environment. </param>
         /// <returns>   An IApplicationBuilder. </returns>
 		public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, IConfigurationRoot configuration, IHostingEnvironment environment)
-		{
+        {
 			app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
 			{
 				OnPrepareResponse = ctx =>

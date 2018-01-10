@@ -23,8 +23,11 @@ namespace FluiTec.AppFx.AspNetCore
         public static IServiceCollection ConfigureIdentity(this IServiceCollection services,
             IConfigurationRoot configuration)
         {
-            var options = configuration.GetConfiguration<ApiOptions>();
-            services.AddSingleton(options);
+            var apiOptions = configuration.GetConfiguration<ApiOptions>();
+            services.AddSingleton(apiOptions);
+
+            var adminOptions = configuration.GetConfiguration<AdminOptions>();
+            services.AddSingleton(adminOptions);
 
             // configure aspnet-identity
             services.AddIdentity<IdentityUserEntity, IdentityRoleEntity>(config =>
@@ -46,7 +49,7 @@ namespace FluiTec.AppFx.AspNetCore
                     // disable redirect to login for api-users
                     OnRedirectToLogin = context =>
                     {
-                        if (context.Request.Path.StartsWithSegments(options.ApiOnlyPath) &&
+                        if (context.Request.Path.StartsWithSegments(apiOptions.ApiOnlyPath) &&
                             context.Response.StatusCode == (int)HttpStatusCode.OK)
                             context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         else
