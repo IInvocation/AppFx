@@ -11,7 +11,6 @@ namespace FluiTec.AppFx.Identity.Mvc.Models
 		/// <param name="validationUrl">	URL of the validation. </param>
 		public RecoverPasswordModel(string validationUrl)
 		{
-			throw new NotImplementedException();
 			//Subject = Resources.MailModels.RecoverPasswordModel.Subject;
 			//Header = Resources.MailModels.RecoverPasswordModel.Header;
 
@@ -25,7 +24,8 @@ namespace FluiTec.AppFx.Identity.Mvc.Models
 			//ThankYouText = Resources.MailModels.RecoverPasswordModel.ThankYouText;
 
 			ValidationUrl = validationUrl;
-		}
+            throw new NotImplementedException();
+        }
 
 		/// <summary>	Gets or sets URL of the validation. </summary>
 		/// <value>	The validation URL. </value>

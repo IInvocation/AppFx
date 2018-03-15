@@ -10,7 +10,6 @@ namespace FluiTec.AppFx.Identity.Mvc.Models
 		/// <param name="validationUrl">	URL of the validation. </param>
 		public ConfirmMailModel(string validationUrl)
 		{
-			throw new NotImplementedException();
 			//ApplicationName = Global.ApplicationName;
 			//ApplicationUrl = Global.ApplicationUrl;
 			//ApplicationUrlDisplay = Global.ApplicationUrlDisplay;
@@ -24,7 +23,8 @@ namespace FluiTec.AppFx.Identity.Mvc.Models
 			//ThankYouText = Resources.MailModels.ConfirmMailModel.ThankYouText;
 
 			ValidationUrl = validationUrl;
-		}
+            throw new NotImplementedException();
+        }
 
 		/// <summary>	Gets or sets URL of the validation. </summary>
 		/// <value>	The validation URL. </value>
