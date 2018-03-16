@@ -8,7 +8,11 @@ namespace FluiTec.AppFx.Identity.Entities
 	{
 		/// <summary>	Gets or sets the identifier of the user. </summary>
 		/// <value>	The identifier of the user. </value>
-		public int UserId { get; set; }
+		public int? UserId { get; set; }
+
+	    /// <summary>	Gets or sets the identifier of the role. </summary>
+	    /// <value>	The identifier of the role. </value>
+        public int? RoleId { get; set; }
 
 		/// <summary>	Gets or sets the type. </summary>
 		/// <value>	The type. </value>
