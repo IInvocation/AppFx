@@ -4,6 +4,7 @@ using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
 using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Localization.Repositories;
+using LiteDB;
 
 namespace FluiTec.AppFx.Localization.LiteDb.Repositories
 {
@@ -29,7 +30,8 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         public IEnumerable<TranslationEntity> ByResources(IEnumerable<ResourceEntity> resources)
         {
             var resourceIds = resources.Select(r => r.Id);
-            return Collection.Find(e => resourceIds.Contains(e.Id));
+            return Collection.Find(
+                Query.In(nameof(TranslationEntity.ResourceId), resourceIds.Select(r => new BsonValue(r))));
         }
 
         /// <summary>Enumerates by resources in this collection.</summary>
@@ -40,7 +42,9 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         public IEnumerable<TranslationEntity> ByResources(IEnumerable<ResourceEntity> resources, string language)
         {
             var resourceIds = resources.Select(r => r.Id);
-            return Collection.Find(e => resourceIds.Contains(e.Id) && e.Language == language);
+            return Collection.Find(Query.And(
+                    Query.In(nameof(TranslationEntity.ResourceId), resourceIds.Select(r => new BsonValue(r))), 
+                    Query.EQ(nameof(TranslationEntity.Language), language)));
         }
 
         #endregion

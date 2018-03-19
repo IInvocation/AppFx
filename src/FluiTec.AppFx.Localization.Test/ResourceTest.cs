@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace FluiTec.AppFx.Localization.Test
 {
     /// <summary>A resource test.</summary>
-    public class ResourceTest : LocalizationTest
+    public class ResourceTest : DataServiceTest
     {
         /// <summary>Constructor.</summary>
         /// <param name="dataService">  The data service. </param>

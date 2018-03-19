@@ -1,19 +1,26 @@
-﻿namespace FluiTec.AppFx.Localization.Test
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace FluiTec.AppFx.Localization.Test
 {
-    /// <summary>A localization test.</summary>
-    public class LocalizationTest
+    public class LocalizationFactoryTest : DataServiceTest
     {
-        /// <summary>	The default identifier. </summary>
-        protected const int DefaultId = 0;
-
-        /// <summary>	The data service. </summary>
-        protected readonly ILocalizationDataService DataService;
-
-        /// <summary>	Specialised constructor for use only by derived class. </summary>
-        /// <param name="dataService">	The data service. </param>
-        protected LocalizationTest(ILocalizationDataService dataService)
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">  The data service. </param>
+        public LocalizationFactoryTest(ILocalizationDataService dataService) : base(dataService)
         {
-            DataService = dataService;
+        }
+
+        public virtual void CanCreateFactory()
+        {
+            var factory = new RepositoryStringLocalizerFactory(DataService);
+            Assert.IsNotNull(factory);
+        }
+
+        public virtual void CanProvideLocalizer()
+        {
+            var factory = new RepositoryStringLocalizerFactory(DataService);
+            var localizer = factory.Create(typeof(TestResource));
+            Assert.IsNotNull(localizer);
         }
     }
 }
