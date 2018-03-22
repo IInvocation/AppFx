@@ -22,8 +22,7 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Name = resourceType.FullName,
-                    Key = nameof(TestResource.Name)
+                    Key = resourceType.FullName + nameof(TestResource.Name)
                 };
 
                 uow.ResourceRepository.Add(resource);
@@ -41,13 +40,11 @@ namespace FluiTec.AppFx.Localization.Test
                 var resources = new[] {
                     new ResourceEntity
                     {
-                        Name = resourceType.FullName,
-                        Key = nameof(TestResource.Name)
+                        Key = resourceType.FullName + nameof(TestResource.Name)
                     },
                     new ResourceEntity
                     {
-                        Name = resourceType.FullName,
-                        Key = nameof(TestResource.Value)
+                        Key = resourceType.FullName + nameof(TestResource.Value)
                     }
                 };
                 uow.ResourceRepository.AddRange(resources);
@@ -65,8 +62,7 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Name = resourceType.FullName,
-                    Key = nameof(TestResource.Name)
+                    Key = resourceType.FullName + nameof(TestResource.Name)
                 };
                 uow.ResourceRepository.Add(resource);
 
@@ -87,8 +83,7 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Name = resourceType.FullName,
-                    Key = nameof(TestResource.Name)
+                    Key = resourceType.FullName + nameof(TestResource.Name)
                 };
                 uow.ResourceRepository.Add(resource);
 

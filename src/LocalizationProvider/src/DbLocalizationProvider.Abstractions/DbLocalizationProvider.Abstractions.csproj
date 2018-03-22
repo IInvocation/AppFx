@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Version>4.2.0</Version>
+    <Description>Abstractions for Database driven localization provider.</Description>
+    <Company>Valdis Iljuconoks, https://tech-fellow.net</Company>
+    <Product>DbLocalizationProvider</Product>
+    <Authors>Valdis Iljuconoks, https://tech-fellow.net</Authors>
+    <Copyright>Tech Fellow Consulting, Copyright © 2018</Copyright>
+    <PackageProjectUrl>https://projects-epi-localization.tech-fellow.net/</PackageProjectUrl>
+    <PackageTags>Localization Provider DbLocalization DbLocalizationProvider LocalizationProvider Database Driven</PackageTags>
+    <PackageLicenseUrl>https://github.com/valdisiljuconoks/LocalizationProvider/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageId>LocalizationProvider.Abstractions</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <RepositoryUrl>https://github.com/valdisiljuconoks/LocalizationProvider/</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+  </PropertyGroup>
+
+</Project>

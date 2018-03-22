@@ -2,9 +2,9 @@
 using System.Linq;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
+using FluiTec.AppFx.Localization.Compound;
 using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Localization.Repositories;
-using LiteDB;
 
 namespace FluiTec.AppFx.Localization.LiteDb.Repositories
 {
@@ -23,28 +23,34 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
 
         #region ITranslationRepository
 
-        /// <summary>Enumerates by resources in this collection.</summary>
-        /// <param name="resources">    The resources. </param>
-        /// <returns>An enumerator that allows foreach to be used to process by resources in this
-        /// collection.</returns>
-        public IEnumerable<TranslationEntity> ByResources(IEnumerable<ResourceEntity> resources)
+        /// <summary>   Enumerates by resource in this collection. </summary>
+        /// <param name="resource"> The resource. </param>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process by resource in this collection.
+        /// </returns>
+        public IEnumerable<TranslationEntity> ByResource(ResourceEntity resource)
         {
-            var resourceIds = resources.Select(r => r.Id);
-            return Collection.Find(
-                Query.In(nameof(TranslationEntity.ResourceId), resourceIds.Select(r => new BsonValue(r))));
+            return Collection.Find(entity => entity.ResourceId == resource.Id);
         }
 
-        /// <summary>Enumerates by resources in this collection.</summary>
-        /// <param name="resources">    The resources. </param>
-        /// <param name="language">     The language. </param>
-        /// <returns>An enumerator that allows foreach to be used to process by resources in this
-        /// collection.</returns>
-        public IEnumerable<TranslationEntity> ByResources(IEnumerable<ResourceEntity> resources, string language)
+        /// <summary>   Gets all compounds in this collection. </summary>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process all compounds in this collection.
+        /// </returns>
+        public IEnumerable<CompoundTranslationEntity> GetAllCompound()
         {
-            var resourceIds = resources.Select(r => r.Id);
-            return Collection.Find(Query.And(
-                    Query.In(nameof(TranslationEntity.ResourceId), resourceIds.Select(r => new BsonValue(r))), 
-                    Query.EQ(nameof(TranslationEntity.Language), language)));
+            var resources = UnitOfWork.GetRepository<IResourceRepository>().GetAll().ToList();
+            var translations = UnitOfWork.GetRepository<ITranslationRepository>().GetAll().GroupBy(t => t.ResourceId);
+
+            foreach (var group in translations)
+            {
+                var resource = resources.Single(r => r.Id == group.Key);
+                yield return new CompoundTranslationEntity()
+                {
+                    Resource = resource,
+                    Translations = group.ToList()
+                };
+            }
         }
 
         #endregion

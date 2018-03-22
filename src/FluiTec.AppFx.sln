@@ -188,15 +188,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Data.Dapper.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Localization", "Localization", "{BFF345C4-674A-4871-B50C-A5A79DAEE0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization", "FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj", "{9EDDC76F-042D-4C1C-80E1-EBBA681ED577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization", "FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj", "{9EDDC76F-042D-4C1C-80E1-EBBA681ED577}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LiteDb", "LiteDb", "{EB762F9C-F388-4CFC-BAEC-2180AEDCC508}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization.LiteDb", "FluiTec.AppFx.Localization.LiteDb\FluiTec.AppFx.Localization.LiteDb.csproj", "{D8F95676-234E-406A-86FE-969C81369BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb", "FluiTec.AppFx.Localization.LiteDb\FluiTec.AppFx.Localization.LiteDb.csproj", "{D8F95676-234E-406A-86FE-969C81369BEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization.LiteDb.Test", "FluiTec.AppFx.Localization.LiteDb.Test\FluiTec.AppFx.Localization.LiteDb.Test.csproj", "{C036F20A-F3F9-4777-9AA9-F6D34D992987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb.Test", "FluiTec.AppFx.Localization.LiteDb.Test\FluiTec.AppFx.Localization.LiteDb.Test.csproj", "{C036F20A-F3F9-4777-9AA9-F6D34D992987}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization.Test", "FluiTec.AppFx.Localization.Test\FluiTec.AppFx.Localization.Test.csproj", "{B164C804-8A58-469D-B8BB-3B06137D5BA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Test", "FluiTec.AppFx.Localization.Test\FluiTec.AppFx.Localization.Test.csproj", "{B164C804-8A58-469D-B8BB-3B06137D5BA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Reflection.Test", "FluiTec.AppFx.Reflection.Test\FluiTec.AppFx.Reflection.Test.csproj", "{FCA05354-6F98-4678-9E27-848259E2959C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Reflection.Test.TestAsm", "FluiTec.AppFx.Reflection.Test.TestAsm\FluiTec.AppFx.Reflection.Test.TestAsm.csproj", "{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider.Abstractions", "LocalizationProvider\src\DbLocalizationProvider.Abstractions\DbLocalizationProvider.Abstractions.csproj", "{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider", "LocalizationProvider\src\DbLocalizationProvider\DbLocalizationProvider.csproj", "{D9EF5C43-2505-4873-B947-23EF2453BAA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -452,6 +460,22 @@ Global
 		{B164C804-8A58-469D-B8BB-3B06137D5BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B164C804-8A58-469D-B8BB-3B06137D5BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B164C804-8A58-469D-B8BB-3B06137D5BA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCA05354-6F98-4678-9E27-848259E2959C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCA05354-6F98-4678-9E27-848259E2959C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCA05354-6F98-4678-9E27-848259E2959C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCA05354-6F98-4678-9E27-848259E2959C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -542,6 +566,10 @@ Global
 		{D8F95676-234E-406A-86FE-969C81369BEA} = {EB762F9C-F388-4CFC-BAEC-2180AEDCC508}
 		{C036F20A-F3F9-4777-9AA9-F6D34D992987} = {EB762F9C-F388-4CFC-BAEC-2180AEDCC508}
 		{B164C804-8A58-469D-B8BB-3B06137D5BA7} = {BFF345C4-674A-4871-B50C-A5A79DAEE0D1}
+		{FCA05354-6F98-4678-9E27-848259E2959C} = {9A52B173-CB92-4F04-B882-40D293BCABA8}
+		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E} = {9A52B173-CB92-4F04-B882-40D293BCABA8}
+		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2} = {BFF345C4-674A-4871-B50C-A5A79DAEE0D1}
+		{D9EF5C43-2505-4873-B947-23EF2453BAA1} = {BFF345C4-674A-4871-B50C-A5A79DAEE0D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}

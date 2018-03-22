@@ -18,6 +18,7 @@ namespace FluiTec.AppFx.Reflection
             if (attributeType == null) throw new ArgumentNullException(nameof(attributeType));
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
             foreach (var assembly in assemblies)
                 foreach (var type in GetAttributedTypes(assembly, attributeType))
                     yield return type;

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
 using FluiTec.AppFx.Localization.Entities;
@@ -21,12 +23,19 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
 
         #region IResourceRepository
 
-        /// <summary>Gets the names in this collection.</summary>
-        /// <param name="name"> The name. </param>
-        /// <returns>An enumerator that allows foreach to be used to process the names in this collection.</returns>
-        public IEnumerable<ResourceEntity> GetByName(string name)
+        /// <summary>   Gets by key. </summary>
+        /// <param name="key">  The key. </param>
+        /// <returns>   The by key. </returns>
+        public ResourceEntity GetByKey(string key)
         {
-            return Collection.Find(e => e.Name == name);
+            return Collection.Find(e => e.Key == key).SingleOrDefault();
+        }
+
+        /// <summary>   Resets the synchronise status. </summary>
+        public void ResetSyncStatus()
+        {
+            foreach (var entity in Collection.FindAll())
+                entity.FromCode = false;
         }
 
         #endregion
