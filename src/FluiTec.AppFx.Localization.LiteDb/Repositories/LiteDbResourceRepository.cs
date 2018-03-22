@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
 using FluiTec.AppFx.Localization.Entities;
@@ -36,6 +34,21 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         {
             foreach (var entity in Collection.FindAll())
                 entity.FromCode = false;
+        }
+
+        /// <summary>Refactor key.</summary>
+        /// <param name="oldKey">   The old key. </param>
+        /// <param name="newKey">   The new key. </param>
+        /// <returns>True if it succeeds, false if it fails.</returns>
+        public bool RefactorKey(string oldKey, string newKey)
+        {
+            var entity = GetByKey(oldKey);
+            if (entity == null) return false;
+
+            entity.Key = newKey;
+            entity.FromCode = true;
+            Update(entity);
+            return true;
         }
 
         #endregion

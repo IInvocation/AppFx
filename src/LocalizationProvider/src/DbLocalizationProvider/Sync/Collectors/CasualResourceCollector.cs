@@ -37,7 +37,7 @@ namespace DbLocalizationProvider.Sync.Collectors
             var isResourceHidden = isHidden || mi.GetCustomAttribute<HiddenAttribute>() != null;
             var translations = DiscoveredTranslation.FromSingle(translation);
 
-            var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>();
+            var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>().ToArray();
 
             if(additionalTranslationsAttributes != null && additionalTranslationsAttributes.Any())
                 translations.AddRange(additionalTranslationsAttributes.Select(a => new DiscoveredTranslation(a.Translation, a.Culture)));

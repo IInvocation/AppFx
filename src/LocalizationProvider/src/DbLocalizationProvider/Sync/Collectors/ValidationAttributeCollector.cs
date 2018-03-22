@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.Internal;
 using DbLocalizationProvider.Refactoring;
 
@@ -44,11 +45,27 @@ namespace DbLocalizationProvider.Sync.Collectors
 
                 var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
 
+                var translations = new List<DiscoveredTranslation>();
+                translations.AddRange(DiscoveredTranslation.FromSingle(string.IsNullOrEmpty(validationAttribute.ErrorMessage)
+                    ? propertyName
+                    : validationAttribute.ErrorMessage));
+
+                var validationTranslations = mi.GetCustomAttributes<ValidationTranslationForCultureAttribute>();
+                foreach(var validationTranslationAttribute in validationTranslations)
+                {
+                    var validationAttributeName = validationAttribute.GetType().Name;
+                    if(validationAttributeName.EndsWith("Attribute"))
+                        validationAttributeName =
+                            validationAttributeName.Substring(0, validationAttributeName.LastIndexOf("Attribute", StringComparison.Ordinal));
+                    if(validationTranslationAttribute.Validation == validationAttributeName)
+                    {
+                        translations.Add(new DiscoveredTranslation(validationTranslationAttribute.Translation, validationTranslationAttribute.Culture));
+                    }
+                }
+
                 yield return new DiscoveredResource(mi,
                                                     validationResourceKey,
-                                                    DiscoveredTranslation.FromSingle(string.IsNullOrEmpty(validationAttribute.ErrorMessage)
-                                                                                         ? propertyName
-                                                                                         : validationAttribute.ErrorMessage),
+                                                    translations,
                                                     propertyName,
                                                     declaringType,
                                                     returnType,

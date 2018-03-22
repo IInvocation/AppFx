@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using DbLocalizationProvider;
 using DbLocalizationProvider.Cache;
 using DbLocalizationProvider.Internal;
 using DbLocalizationProvider.Queries;
 using DbLocalizationProvider.Sync;
+using FluiTec.AppFx.Localization.Entities;
 
 namespace FluiTec.AppFx.Localization.Sync
 {
@@ -42,10 +42,10 @@ namespace FluiTec.AppFx.Localization.Sync
             }
 
             ResetSyncStatus();
-            var allResources = new GetAllResources.Query().Execute();
+            var allResources = new GetAllResources.Query().Execute().ToList();
 
-            Parallel.Invoke(() => RegisterDiscoveredResources(discoveredResources, allResources),
-                () => RegisterDiscoveredResources(discoveredModels, allResources));
+            RegisterDiscoveredResources(discoveredResources, allResources);
+            RegisterDiscoveredResources(discoveredModels, allResources);
 
             if (ConfigurationContext.Current.PopulateCacheOnStartup)
                 PopulateCache();
@@ -74,18 +74,98 @@ namespace FluiTec.AppFx.Localization.Sync
             }
         }
 
-        private void RegisterDiscoveredResources(IEnumerable<Type> types, IEnumerable<LocalizationResource> allResources)
+        /// <summary>Registers the discovered resources.</summary>
+        /// <param name="types">        The types. </param>
+        /// <param name="allResources"> all resources. </param>
+        private void RegisterDiscoveredResources(IList<Type> types, IList<LocalizationResource> allResources)
         {
             var helper = new TypeDiscoveryHelper();
-            var properties = types.SelectMany(type => helper.ScanResources(type)).DistinctBy(r => r.Key);
+            var props = types.SelectMany(type => helper.ScanResources(type)).DistinctBy(r => r.Key);
 
             // split work queue by 400 resources each
-            var groupedProperties = properties.SplitByCount(400);
+            var groupedProperties = props.SplitByCount(400);
 
-            Parallel.ForEach(groupedProperties, group =>
+            // loop through all groups
+            foreach (var group in groupedProperties)
+            {
+                using (var uow = _dataService.StartUnitOfWork())
                 {
-                    var refactoredResources = group.Where(r => !string.IsNullOrEmpty(r.OldResourceKey));
-                });
+                    var resourceRepository = uow.ResourceRepository;
+                    var translationRepository = uow.TranslationRepository;
+
+                    // enumerate beforehand
+                    var properties = group.ToList();
+
+                    // loop through all refactored properties and change their key
+                    foreach (var refactoredResource in properties.Where(r => !string.IsNullOrEmpty(r.OldResourceKey)))
+                    {
+                        if (resourceRepository.RefactorKey(refactoredResource.OldResourceKey, refactoredResource.Key))
+                        {
+                            allResources.Single(r => r.ResourceKey == refactoredResource.OldResourceKey).ResourceKey = refactoredResource.Key;
+                        }
+                    }
+
+                    // loop through all properties
+                    foreach (var property in properties)
+                    {
+                        var existingResource = allResources.FirstOrDefault(r => r.ResourceKey == property.Key);
+                        if (existingResource == null)
+                        {
+                            // add the new resource
+                            var newResource = resourceRepository.Add(new ResourceEntity
+                            {
+                                Author = "Code",
+                                FromCode = true,
+                                IsHidden = property.IsHidden,
+                                IsModified = false,
+                                Key = property.Key,
+                                ModificationDate = DateTime.Now
+                            });
+
+                            //we don't have to respect existing translations - just insert them all
+                            translationRepository.AddRange(property.Translations.Select(t => new TranslationEntity
+                            {
+                                ResourceId = newResource.Id,
+                                Language = t.Culture,
+                                Value = t.Translation
+                            }));
+                        }
+                        else
+                        {
+                            // update the existing resource
+                            var resourceEntity = resourceRepository.GetByKey(existingResource.ResourceKey);
+                            resourceEntity.FromCode = true;
+                            resourceEntity.IsHidden = property.IsHidden;
+                            resourceRepository.Update(resourceEntity);
+
+                            // add/update languages
+                            var byResource = translationRepository.ByResource(resourceEntity);
+                            var existingTranslations = byResource.ToDictionary(t => t.Language ?? string.Empty);
+                            foreach (var translation in property.Translations)
+                            {
+                                // if it exists - update it if it was modified or the invariant translations
+                                if (existingTranslations.ContainsKey(translation.Culture))
+                                {
+                                    // skip if modified - or culture isnt invariant
+                                    if (translation.Culture != string.Empty &&
+                                        (!existingResource.IsModified.HasValue || existingResource.IsModified.Value))
+                                        continue;
+
+                                    var entity = existingTranslations[translation.Culture];
+                                    entity.Value = translation.Translation;
+                                    translationRepository.Update(entity);
+                                }
+                                // if it doesnt - add it
+                                else
+                                {
+                                    translationRepository.Add(new TranslationEntity {Language = translation.Culture, ResourceId = existingResource.Id, Value = translation.Translation});
+                                }
+                            }
+                        }
+                    }
+                    uow.Commit();
+                }
+            }
         }
     }
 }

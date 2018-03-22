@@ -13,5 +13,11 @@ namespace FluiTec.AppFx.Localization.Repositories
 
         /// <summary>   Resets the synchronise status. </summary>
         void ResetSyncStatus();
+
+        /// <summary>Refactor key.</summary>
+        /// <param name="oldKey">   The old key. </param>
+        /// <param name="newKey">   The new key. </param>
+        /// <returns>True if it succeeds, false if it fails.</returns>
+        bool RefactorKey(string oldKey, string newKey);
     }
 }

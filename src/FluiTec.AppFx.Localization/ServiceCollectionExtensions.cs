@@ -23,8 +23,11 @@ namespace FluiTec.AppFx.Localization
         /// <returns>   An IServiceCollection. </returns>
         public static IServiceCollection AddDbLocalizationProvider(this IServiceCollection services, Action<ConfigurationContext> setup = null)
         {
-            ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler<GetTranslationHandler>();
-            ConfigurationContext.Current.TypeFactory.ForQuery<GetAllResources.Query>().SetHandler<GetAllResourcesHandler>();
+            // check if there's a registered cache - if not - add one
+            var serviceProvider = services.BuildServiceProvider();
+
+            ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler(() => new GetTranslationHandler(serviceProvider.GetService<ILocalizationDataService>()));
+            ConfigurationContext.Current.TypeFactory.ForQuery<GetAllResources.Query>().SetHandler(() => new GetAllResourcesHandler(serviceProvider.GetService<ILocalizationDataService>()));
             ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>().SetHandler<DetermineDefaultCulture.Handler>();
 
             //ConfigurationContext.Current.TypeFactory.ForQuery<AvailableLanguages.Query>().SetHandler<AvailableLanguages.Handler>();
@@ -35,9 +38,8 @@ namespace FluiTec.AppFx.Localization
 
             ConfigurationContext.Current.TypeFactory.ForCommand<ClearCache.Command>().SetHandler<ClearCacheHandler>();
 
-            // check if there's a registered cache - if not - add one
-            var provider = services.BuildServiceProvider();
-            var cache = provider.GetService<IMemoryCache>();
+            
+            var cache = serviceProvider.GetService<IMemoryCache>();
             if (cache != null)
                 ConfigurationContext.Current.CacheManager = new InMemoryCacheManager(cache);
 

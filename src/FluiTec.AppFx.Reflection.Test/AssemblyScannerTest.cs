@@ -15,7 +15,7 @@ namespace FluiTec.AppFx.Reflection.Test
             var foundTypes = AssemblyScanner.GetAttributedTypes(assembly, typeof(TestAttribute));
             Assert.IsNotNull(foundTypes);
             var enumerable = foundTypes as Type[] ?? foundTypes.ToArray();
-            Assert.AreEqual(1, enumerable.Count());
+            Assert.AreEqual(2, enumerable.Length);
             Assert.AreEqual(typeof(TestClassWithAttribute), enumerable.First());
         }
 

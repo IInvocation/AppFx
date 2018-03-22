@@ -25,28 +25,41 @@ using System.Reflection;
 
 namespace DbLocalizationProvider.Internal
 {
-    internal class ExpressionHelper
+    /// <summary>An expression helper.</summary>
+    public class ExpressionHelper
     {
-        internal static string GetMemberName(Expression memberSelector)
+        /// <summary>Gets member name.</summary>
+        /// <param name="memberSelector">   The member selector. </param>
+        /// <returns>The member name.</returns>
+        public static string GetMemberName(Expression memberSelector)
         {
             var memberStack = WalkExpression((LambdaExpression) memberSelector);
 
             return memberStack.Item2.Pop();
         }
 
-        internal static string GetMemberName(Expression<Func<object>> memberSelector)
+        /// <summary>Gets member name.</summary>
+        /// <param name="memberSelector">   The member selector. </param>
+        /// <returns>The member name.</returns>
+        public static string GetMemberName(Expression<Func<object>> memberSelector)
         {
             var memberStack = WalkExpression(memberSelector);
 
             return memberStack.Item2.Pop();
         }
 
-        internal static string GetFullMemberName(Expression<Func<object>> memberSelector)
+        /// <summary>Gets full member name.</summary>
+        /// <param name="memberSelector">   The member selector. </param>
+        /// <returns>The full member name.</returns>
+        public static string GetFullMemberName(Expression<Func<object>> memberSelector)
         {
             return GetFullMemberName((LambdaExpression) memberSelector);
         }
 
-        internal static string GetFullMemberName(LambdaExpression memberSelector)
+        /// <summary>Gets full member name.</summary>
+        /// <param name="memberSelector">   The member selector. </param>
+        /// <returns>The full member name.</returns>
+        public static string GetFullMemberName(LambdaExpression memberSelector)
         {
             var memberStack = WalkExpression(memberSelector);
             memberStack.Item2.Pop();
@@ -54,7 +67,12 @@ namespace DbLocalizationProvider.Internal
             return ResourceKeyBuilder.BuildResourceKey(memberStack.Item1, memberStack.Item2);
         }
 
-        internal static Tuple<Type, Stack<string>> WalkExpression(LambdaExpression expression)
+        /// <summary>Walk expression.</summary>
+        /// <exception cref="NotSupportedException">    Thrown when the requested operation is not
+        ///                                             supported. </exception>
+        /// <param name="expression">   The expression. </param>
+        /// <returns>A Tuple&lt;Type,Stack&lt;string&gt;&gt;</returns>
+        public static Tuple<Type, Stack<string>> WalkExpression(LambdaExpression expression)
         {
             // TODO: more I look at this, more it turns into nasty code that becomes hard to reason about
             // need to find a way to refactor to cleaner code
