@@ -39,7 +39,13 @@ namespace DbLocalizationProvider
 
         public static LocalizationResourceTranslation FindByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language)
         {
-            return translations.FirstOrDefault(t => t.Language == language);
+            var translation = translations.FirstOrDefault(t => t.Language == language);
+            if(translation != null)
+                return translation;
+            if(language.Length == 5)
+                translation = translations.FirstOrDefault(t => t.Language == language.Substring(0, 2));
+            return translation;
+            //return translations.FirstOrDefault(t => t.Language == language);
         }
 
         public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language, bool invariantCultureFallback)

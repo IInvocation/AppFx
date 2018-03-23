@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.Refactoring;
 
 namespace DbLocalizationProvider.Sync.Collectors
@@ -28,9 +29,22 @@ namespace DbLocalizationProvider.Sync.Collectors
             if(displayAttribute?.Description == null) yield break;
             var propertyName = $"{mi.Name}-Description";
             var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
+
+            var translations = new List<DiscoveredTranslation>();
+            translations.AddRange(DiscoveredTranslation.FromSingle(displayAttribute.Description));
+            var validationTranslations = mi.GetCustomAttributes<DisplayTranslationForCultureAttribute>();
+            foreach(var validationTranslationAttribute in validationTranslations)
+            {
+                var validationAttributeName = displayAttribute.GetType().Name;
+                if(validationAttributeName.EndsWith("Attribute"))
+                    validationAttributeName =
+                        validationAttributeName.Substring(0, validationAttributeName.LastIndexOf("Attribute", StringComparison.Ordinal));
+                translations.Add(new DiscoveredTranslation(validationTranslationAttribute.Translation, validationTranslationAttribute.Culture));
+            }
+
             yield return new DiscoveredResource(mi,
-                $"{resourceKey}-Description",
-                DiscoveredTranslation.FromSingle(displayAttribute.Description),
+                $"{resourceKey}",
+                translations,
                 propertyName,
                 declaringType,
                 returnType,

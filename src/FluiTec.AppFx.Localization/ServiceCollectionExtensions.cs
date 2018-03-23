@@ -38,7 +38,6 @@ namespace FluiTec.AppFx.Localization
 
             ConfigurationContext.Current.TypeFactory.ForCommand<ClearCache.Command>().SetHandler<ClearCacheHandler>();
 
-            
             var cache = serviceProvider.GetService<IMemoryCache>();
             if (cache != null)
                 ConfigurationContext.Current.CacheManager = new InMemoryCacheManager(cache);

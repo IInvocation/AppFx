@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.LiteDb;
 using FluiTec.AppFx.Localization.Entities;
@@ -18,6 +20,54 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         }
 
         #endregion
+
+        /// <summary>   Adds entity. </summary>
+        /// <param name="entity">   The entity to add. </param>
+        /// <returns>   A TEntity. </returns>
+        /// <remarks>
+        ///  Makes sure the key is distinct        
+        /// </remarks>
+        public override ResourceEntity Add(ResourceEntity entity)
+        {
+            return GetByKey(entity?.Key) ?? base.Add(entity);
+        }
+
+        /// <summary>   Adds a range. </summary>
+        /// <param name="entities"> An IEnumerable&lt;TEntity&gt; of items to append to this. </param>
+        /// <remarks>
+        /// Make sure the keys are distinct         
+        /// </remarks>
+        public override void AddRange(IEnumerable<ResourceEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                if (GetByKey(entity?.Key) == null)
+                    Collection.Insert(entity);
+            }
+        }
+
+        /// <summary>   Updates the given entity. </summary>
+        /// <exception cref="InvalidOperationException">    Thrown when the requested operation is
+        ///                                                 invalid. </exception>
+        /// <param name="entity">   The entity. </param>
+        /// <returns>   A TEntity. </returns>
+        ///  <remarks>
+        ///  Makes sure the key is distinct
+        /// </remarks>
+        public override ResourceEntity Update(ResourceEntity entity)
+        {
+            var original = Get(entity.Id);
+
+            // if key wasnt changed - continue as usual
+            if (original.Key == entity.Key)
+                return base.Update(entity);
+
+            // if key was changed - make sure a corresponding one doesnt exist
+            if (GetByKey(entity.Key) == null)
+                return base.Update(entity);
+
+            throw new InvalidOperationException("Duplicate key cannot be created");
+        }
 
         #region IResourceRepository
 

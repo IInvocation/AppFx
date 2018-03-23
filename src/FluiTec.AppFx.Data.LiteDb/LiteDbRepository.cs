@@ -31,7 +31,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <summary>	Adds entity. </summary>
 		/// <param name="entity">	The entity to add. </param>
 		/// <returns>	A TEntity. </returns>
-		public TEntity Add(TEntity entity)
+		public virtual TEntity Add(TEntity entity)
 		{
 			entity.Id = GetKey(Collection.Insert(entity));
 			return entity;
@@ -39,7 +39,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 
 		/// <summary>	Adds a range. </summary>
 		/// <param name="entities">	An IEnumerable&lt;TEntity&gt; of items to append to this. </param>
-		public void AddRange(IEnumerable<TEntity> entities)
+		public virtual void AddRange(IEnumerable<TEntity> entities)
 		{
 			foreach (var entity in entities)
 				Collection.Insert(entity);
@@ -51,7 +51,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <summary>	Updates the given entity. </summary>
 		/// <param name="entity">	The entity. </param>
 		/// <returns>	A TEntity. </returns>
-		public TEntity Update(TEntity entity)
+		public virtual TEntity Update(TEntity entity)
 		{
 			Collection.Update(GetBsonKey(entity.Id), entity);
 			return entity;
@@ -59,14 +59,14 @@ namespace FluiTec.AppFx.Data.LiteDb
 
 		/// <summary>	Deletes the given ID. </summary>
 		/// <param name="id">	The Identifier to delete. </param>
-		public void Delete(TKey id)
+		public virtual void Delete(TKey id)
 		{
 			Collection.Delete(GetBsonKey(id));
 		}
 
 		/// <summary>	Deletes the given entity. </summary>
 		/// <param name="entity">	The entity to delete. </param>
-		public void Delete(TEntity entity)
+		public virtual void Delete(TEntity entity)
 		{
 			Collection.Delete(GetBsonKey(entity.Id));
 		}

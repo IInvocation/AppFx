@@ -75,7 +75,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <summary>	Gets a t entity using the given identifier. </summary>
 		/// <param name="id">	The Identifier to get. </param>
 		/// <returns>	A TEntity. </returns>
-		public TEntity Get(TKey id)
+		public virtual TEntity Get(TKey id)
 		{
 			return Collection.FindById(GetBsonKey(id));
 		}
@@ -84,7 +84,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// <returns>
 		/// An enumerator that allows foreach to be used to process all items in this collection.
 		/// </returns>
-		public IEnumerable<TEntity> GetAll()
+		public virtual IEnumerable<TEntity> GetAll()
 		{
 			return Collection.FindAll();
 		}

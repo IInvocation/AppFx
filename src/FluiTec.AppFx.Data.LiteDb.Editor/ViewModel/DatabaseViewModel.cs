@@ -46,21 +46,24 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                     _bson = collection.FindAll().ToList();
 
                     var first = _bson.First();
-                    var keys = first.Keys;
+                    var keys = _bson.ElementAt(1).Keys;
 
 
                     var table = new DataTable(_activeCollection);
                     for (var i = 0; i < keys.Count; i++)
                     {
-                        table.Columns.Add(keys.ElementAt(i), GetType(first.Values.ElementAt(i).Type));
+                        table.Columns.Add(keys.ElementAt(i), GetType(_bson.ElementAt(1).Values.ElementAt(i).Type));
                     }
 
                     foreach (var entry in _bson)
                     {
-                        var netValues = new object[keys.Count];
-                        for (var i = 0; i < entry.Values.Count; i++)
+                        var elem = _bson.ElementAt(1);
+                        var netValues = new object[elem.Keys.Count];
+                        
+                        for (var i = 0; i < elem.Keys.Count; i++)
                         {
-                            netValues[i] = GetValue(entry.Values.ElementAt(i));
+                            var x = entry[elem.Keys.ElementAt(i)];
+                            netValues[i] = GetValue(entry[elem.Keys.ElementAt(i)]);
                         }
                         table.Rows.Add(netValues);
                     }
@@ -185,7 +188,8 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                 return value.AsBoolean;
             if (value.IsDateTime)
                 return value.AsDateTime;
-            throw new NotImplementedException();
+
+            return null;
         }
 
         public void Close()

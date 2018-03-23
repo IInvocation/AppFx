@@ -29,12 +29,13 @@ namespace FluiTec.AppFx.Localization.Handlers
         /// </returns>
         public IEnumerable<LocalizationResource> Execute(GetAllResources.Query query)
         {
+            var all = new List<LocalizationResource>();
             using (var uow = _dataService.StartUnitOfWork())
             {
                 var compound = uow.TranslationRepository.GetAllCompound();
-                var all = new List<LocalizationResource>();
+                
                 // ReSharper disable once IteratorMethodResultIsIgnored
-                compound.ForEach(entity =>
+                foreach (var entity in compound)
                 {
                     var resource = new LocalizationResource(entity.Resource.Key)
                     {
@@ -55,9 +56,10 @@ namespace FluiTec.AppFx.Localization.Handlers
                             Value = t.Value
                         }));
                     all.Add(resource);
-                });
-                return all;
+                }
             }
+
+            return all;
         }
     }
 }
