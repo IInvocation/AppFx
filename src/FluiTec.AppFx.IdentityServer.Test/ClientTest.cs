@@ -89,7 +89,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 				uow.ClientRepository.Add(client);
 				uow.ClientRepository.Delete(client);
 
-				Assert.AreEqual(expected: null, actual: uow.ClientRepository.Get(client.Id));
+				Assert.AreEqual(null, uow.ClientRepository.Get(client.Id));
 			}
 		}
 

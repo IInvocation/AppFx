@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 {
 	/// <summary>	A migration for the user-table. </summary>
-	[Migration(version: 1)]
+	[Migration(1)]
 	public class UserTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.USER_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.UserTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
 				.WithColumn("Identifier").AsGuid().NotNullable().Unique()
@@ -35,8 +35,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.USER_TABLE}")
-				.InSchema(Globals.SCHEMA)
+				.Table($"{Globals.Schema}_{Globals.UserTable}")
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
 				.WithColumn("Identifier").AsCustom("CHAR(36)").NotNullable().Unique()
@@ -63,12 +63,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.USER_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.UserTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.USER_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.UserTable}");
 		}
 	}
 }

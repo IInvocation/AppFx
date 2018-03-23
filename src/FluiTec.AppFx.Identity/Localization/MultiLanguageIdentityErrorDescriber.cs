@@ -9,7 +9,7 @@ namespace FluiTec.AppFx.Identity.Localization
 		/// <param name="errorName">	Name of the error. </param>
 		/// <param name="args">			A variable-length parameters list containing arguments. </param>
 		/// <returns>	An IdentityError. </returns>
-		private IdentityError FromResource(string errorName, params object[] args)
+		private static IdentityError FromResource(string errorName, params object[] args)
 		{
 			var resString = Resources.Identity.ResourceManager.GetString(errorName);
 			return new IdentityError

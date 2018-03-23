@@ -2,7 +2,7 @@
 
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
-	[EntityName(name: "AppFxIdentityServer.Client")]
+	[EntityName("AppFxIdentityServer.Client")]
 	public class ClientEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the identifier of the client. </summary>

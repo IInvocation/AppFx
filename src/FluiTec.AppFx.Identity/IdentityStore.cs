@@ -172,7 +172,7 @@ namespace FluiTec.AppFx.Identity
 		/// </summary>
 		public void Dispose()
 		{
-			Dispose(disposing: true);
+			Dispose(true);
 		}
 
 		/// <summary>

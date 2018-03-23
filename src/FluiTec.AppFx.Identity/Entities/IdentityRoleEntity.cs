@@ -4,7 +4,7 @@ using FluiTec.AppFx.Data;
 namespace FluiTec.AppFx.Identity.Entities
 {
 	/// <summary>	An identity role entity. </summary>
-	[EntityName(name: "AppFxIdentity.Role")]
+	[EntityName("AppFxIdentity.Role")]
 	public class IdentityRoleEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the identifier of the application. </summary>

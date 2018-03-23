@@ -4,7 +4,7 @@
     public class DummyLiteDbDataService : LiteDbDataService
     {
 	    /// <summary>	Default constructor. </summary>
-	    public DummyLiteDbDataService() : base(useSingletonConnection: true, dbFilePath: "dummy.ldb", applicationFolder: "FluiTec/AppFx")
+	    public DummyLiteDbDataService() : base(true, "dummy.ldb", "FluiTec/AppFx")
 	    {
 	    }
 

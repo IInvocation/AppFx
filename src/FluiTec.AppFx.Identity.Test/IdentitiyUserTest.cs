@@ -193,7 +193,7 @@ namespace FluiTec.AppFx.Identity.Test
 				);
 
 				uow.UserRepository.Delete(user.Id);
-				Assert.AreEqual(expected: null, actual: uow.UserRepository.Get(user.Id));
+				Assert.AreEqual(null, uow.UserRepository.Get(user.Id));
 			}
 		}
 	}

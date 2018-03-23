@@ -3,7 +3,6 @@ using System.Linq;
 using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Sql;
-using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.IdentityServer.Compound;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;
@@ -80,7 +79,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Repositories
 							tempElem.Scopes.Add(scope);
 
 						return tempElem;
-					}, param: null, transaction: UnitOfWork.Transaction);
+					}, null, UnitOfWork.Transaction);
 			return lookup.Values;
 		}
 

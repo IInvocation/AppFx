@@ -9,7 +9,7 @@ namespace FluiTec.AppFx.Cryptography.Test
 	    public void Test_Generate_Default()
 		{
 			// ciphers + separators
-			Assert.AreEqual(expected: 64 + 3, actual: IdGenerator.GetIdString().Length);
+			Assert.AreEqual(64 + 3, IdGenerator.GetIdString().Length);
 		}
     }
 }

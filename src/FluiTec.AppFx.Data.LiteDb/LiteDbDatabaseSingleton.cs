@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 	internal sealed class LiteDbDatabaseSingleton
 	{
 		/// <summary>	The lazy initilizer. </summary>
-		private static readonly Lazy<LiteDbDatabaseSingleton> lazy =
+		private static readonly Lazy<LiteDbDatabaseSingleton> Lazy =
 			new Lazy<LiteDbDatabaseSingleton>(() => new LiteDbDatabaseSingleton());
 
 		/// <summary>	Dictionary of databases. </summary>
@@ -28,7 +28,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		}
 
 		/// <summary>	The instance. </summary>
-		public static LiteDbDatabaseSingleton Instance => lazy.Value;
+		public static LiteDbDatabaseSingleton Instance => Lazy.Value;
 
 		/// <summary>	Gets a database. </summary>
 		/// <exception cref="InvalidOperationException"> Thrown when the requested operation is invalid. </exception>

@@ -38,7 +38,7 @@ namespace DbLocalizationProvider.Sync
         {
             var modelAttribute = target.GetCustomAttribute<LocalizedModelAttribute>();
 
-            return !string.IsNullOrEmpty(modelAttribute?.KeyPrefix) ? modelAttribute.KeyPrefix : target.FullName;
+            return !string.IsNullOrEmpty(modelAttribute?.KeyPrefix) ? modelAttribute?.KeyPrefix : target.FullName;
         }
 
         public ICollection<DiscoveredResource> GetResources(Type target, string resourceKeyPrefix)
@@ -58,7 +58,7 @@ namespace DbLocalizationProvider.Sync
                                                     refactoringInfo?.OldNamespace);
         }
 
-        private ICollection<MemberInfo> GetResourceSources(Type target)
+        private static ICollection<MemberInfo> GetResourceSources(Type target)
         {
             var modelAttribute = target.GetCustomAttribute<LocalizedModelAttribute>();
             if(modelAttribute == null)

@@ -9,11 +9,11 @@ namespace FluiTec.AppFx.Authentication.Amazon
 		/// <summary>	Default constructor. </summary>
 		public AmazonOptions()
 		{
-			CallbackPath = new PathString(value: "/signin-amazon");
+			CallbackPath = new PathString("/signin-amazon");
 			AuthorizationEndpoint = AmazonDefaults.AuthorizationEndpoint;
 			TokenEndpoint = AmazonDefaults.TokenEndpoint;
 			UserInformationEndpoint = AmazonDefaults.UserInformationEndpoint;
-			Scope.Add(item: "profile");
+			Scope.Add("profile");
 		}
 
 		/// <summary>

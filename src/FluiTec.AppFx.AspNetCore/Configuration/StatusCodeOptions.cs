@@ -4,7 +4,7 @@ using FluiTec.AppFx.Options;
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
 	/// <summary>	The status code options. </summary>
-	[ConfigurationName(name: "StatusCode")]
+	[ConfigurationName("StatusCode")]
 	public class StatusCodeOptions
 	{
 		/// <summary>	Full pathname of the status code handler file. </summary>

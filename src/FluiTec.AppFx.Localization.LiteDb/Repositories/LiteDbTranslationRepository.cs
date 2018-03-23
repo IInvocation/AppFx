@@ -45,7 +45,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
             foreach (var group in translations)
             {
                 var resource = resources.Single(r => r.Id == group.Key);
-                yield return new CompoundTranslationEntity()
+                yield return new CompoundTranslationEntity
                 {
                     Resource = resource,
                     Translations = group.ToList()

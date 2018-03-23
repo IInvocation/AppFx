@@ -18,11 +18,12 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <summary>	Options for controlling the file. </summary>
 		private static AspNetCore.Builder.StaticFileOptions _fileOptions;
 
-		/// <summary>	An IServiceCollection extension method that configure static files. </summary>
-		/// <param name="services">			The services to act on. </param>
-		/// <param name="configuration">	The configuration. </param>
-		/// <param name="configure">		The configure. </param>
-		/// <returns>	An IServiceCollection. </returns>
+        /// <summary>   An IServiceCollection extension method that configure static files. </summary>
+        /// <param name="services">         The services to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <param name="configure">        (Optional) The configure. </param>
+        /// <param name="configureFiles">   (Optional) The configure files. </param>
+        /// <returns>   An IServiceCollection. </returns>
 		public static IServiceCollection ConfigureStaticFiles(this IServiceCollection services,
 			IConfigurationRoot configuration, Action<StaticFileOptions> configure = null, Action<AspNetCore.Builder.StaticFileOptions> configureFiles = null)
 		{

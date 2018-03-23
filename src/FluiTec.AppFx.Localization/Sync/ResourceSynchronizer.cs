@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DbLocalizationProvider;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.Cache;
 using DbLocalizationProvider.Internal;
 using DbLocalizationProvider.Queries;
@@ -62,6 +63,7 @@ namespace FluiTec.AppFx.Localization.Sync
         }
 
         /// <summary>   Populate cache. </summary>
+        // ReSharper disable once MemberCanBeMadeStatic.Local
         private void PopulateCache()
         {
             new ClearCache.Command().Execute();
@@ -77,7 +79,7 @@ namespace FluiTec.AppFx.Localization.Sync
         /// <summary>Registers the discovered resources.</summary>
         /// <param name="types">        The types. </param>
         /// <param name="allResources"> all resources. </param>
-        private void RegisterDiscoveredResources(IList<Type> types, IList<LocalizationResource> allResources)
+        private void RegisterDiscoveredResources(IEnumerable<Type> types, IList<LocalizationResource> allResources)
         {
             var helper = new TypeDiscoveryHelper();
             var props = types.SelectMany(type => helper.ScanResources(type)).DistinctBy(r => r.Key);

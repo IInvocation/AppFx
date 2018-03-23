@@ -117,7 +117,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.ApiResourceRepository.Delete(resource);
 
-			    Assert.AreEqual(expected: null, actual: uow.ApiResourceRepository.Get(resource.Id));
+			    Assert.AreEqual(null, uow.ApiResourceRepository.Get(resource.Id));
 		    }
 	    }
 

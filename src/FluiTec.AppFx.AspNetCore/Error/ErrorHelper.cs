@@ -28,21 +28,19 @@ namespace FluiTec.AppFx.AspNetCore.Error
 			var message = new ErrorMessage { Exception = exception, Route = route };
 
 			// only execute if there was a real exception
-			if (exception != null)
-			{
-				logger.LogError(0, exception, "Unhandled exception");
+		    if (exception == null) return message;
+		    logger.LogError(0, exception, "Unhandled exception");
 
-				try
-				{
-					handlingAction.Invoke(message);
-				}
-				catch (Exception e)
-				{
-					logger.LogError(0, e, "Unhandled exception in error-handling api");
-				}
-			}
+		    try
+		    {
+		        handlingAction.Invoke(message);
+		    }
+		    catch (Exception e)
+		    {
+		        logger.LogError(0, e, "Unhandled exception in error-handling api");
+		    }
 
-			return message;
+		    return message;
 		}
 	}
 }

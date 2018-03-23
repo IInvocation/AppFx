@@ -76,7 +76,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.SigningCredentialRepository.Delete(credential);
 
-				Assert.AreEqual(expected: null, actual: uow.SigningCredentialRepository.Get(credential.Id));
+				Assert.AreEqual(null, uow.SigningCredentialRepository.Get(credential.Id));
 			}
 		}
 

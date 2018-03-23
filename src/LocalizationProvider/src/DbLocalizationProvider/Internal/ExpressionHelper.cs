@@ -82,11 +82,13 @@ namespace DbLocalizationProvider.Internal
             var e = expression.Body;
             while (e != null)
             {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (e.NodeType)
                 {
                     case ExpressionType.MemberAccess:
                         var memberExpr = (MemberExpression) e;
 
+                        // ReSharper disable once SwitchStatementMissingSomeCases
                         switch (memberExpr.Member.MemberType)
                         {
                             case MemberTypes.Field:

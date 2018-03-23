@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using FluiTec.AppFx.Data.Dapper.Mssql.Test.Fixtures;
 using FluiTec.AppFx.Data.Sql;
 using FluiTec.AppFx.Data.Sql.Adapters;

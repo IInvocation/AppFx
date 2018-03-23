@@ -51,7 +51,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		{
 			if (Transaction == null)
 				throw new InvalidOperationException(
-					message: "UnitOfWork can't be committed since it's already finished. (Missing transaction)");
+					"UnitOfWork can't be committed since it's already finished. (Missing transaction)");
 			Transaction.Commit();
 			Transaction.Dispose();
 			Transaction = null;
@@ -65,7 +65,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		{
 			if (Transaction == null)
 				throw new InvalidOperationException(
-					message: "UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
+					"UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
 			Transaction.Rollback();
 			Transaction.Dispose();
 			Transaction = null;
@@ -83,7 +83,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// </summary>
 		public override void Dispose()
 		{
-			Dispose(disposing: true);
+			Dispose(true);
 		}
 
 		/// <summary>

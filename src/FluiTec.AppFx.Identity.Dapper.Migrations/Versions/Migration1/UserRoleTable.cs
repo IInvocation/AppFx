@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 {
 	/// <summary>	A migration for the userrole-table. </summary>
-	[Migration(version: 4)]
+	[Migration(4)]
 	public class UserRoleTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,42 +11,42 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.USERROLE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.UserroleTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("UserId").AsInt32().NotNullable()
 				.WithColumn("RoleId").AsInt32().NotNullable();
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.USERROLE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.UserroleTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("UserId")
-				.ToTable(Globals.USER_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.UserTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.USERROLE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.UserroleTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("RoleId")
-				.ToTable(Globals.ROLE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.RoleTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.USERROLE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.UserroleTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("UserId").AsInt32().NotNullable()
 				.WithColumn("RoleId").AsInt32().NotNullable();
 			IfDatabase("mysql")
 				.Create
 				.ForeignKey()
-				.FromTable($"{Globals.SCHEMA}_{Globals.USERROLE_TABLE}")
+				.FromTable($"{Globals.Schema}_{Globals.UserroleTable}")
 				.ForeignColumn("UserId")
-				.ToTable($"{Globals.SCHEMA}_{Globals.USER_TABLE}")
+				.ToTable($"{Globals.Schema}_{Globals.UserTable}")
 				.PrimaryColumn("Id");
 		}
 
@@ -55,12 +55,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.USERROLE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.UserroleTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.USERROLE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.UserroleTable}");
 		}
 	}
 }

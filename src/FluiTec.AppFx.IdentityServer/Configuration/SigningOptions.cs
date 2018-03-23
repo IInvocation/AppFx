@@ -2,7 +2,7 @@
 
 namespace FluiTec.AppFx.IdentityServer.Configuration
 {
-	[ConfigurationName(name: "Signing")]
+	[ConfigurationName("Signing")]
 	public class SigningOptions
 	{
 		/// <summary>	Gets or sets the rollover days. </summary>

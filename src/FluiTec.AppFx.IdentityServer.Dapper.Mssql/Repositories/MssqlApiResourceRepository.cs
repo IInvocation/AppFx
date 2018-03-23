@@ -79,7 +79,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Repositories
 							tempElem.Scopes.Add(scope);
 
 						return tempElem;
-					}, param: null, transaction: UnitOfWork.Transaction);
+					}, null, UnitOfWork.Transaction);
 			return lookup.Values;
 		}
 

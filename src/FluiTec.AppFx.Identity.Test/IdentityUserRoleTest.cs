@@ -327,7 +327,7 @@ namespace FluiTec.AppFx.Identity.Test
 				uow.UserRoleRepository.Add(userRole);
 
 				uow.UserRoleRepository.Delete(userRole.Id);
-				Assert.AreEqual(expected: null, actual: uow.UserRoleRepository.Get(userRole.Id));
+				Assert.AreEqual(null, uow.UserRoleRepository.Get(userRole.Id));
 			}
 		}
 	}

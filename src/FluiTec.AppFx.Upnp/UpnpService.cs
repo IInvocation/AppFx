@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -163,9 +161,9 @@ namespace FluiTec.AppFx.Upnp
 		/// <returns>	The IP addres. </returns>
 		private static IPAddress GetLocalIpAddress()
 		{
-			using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, protocolType: 0))
+			using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
 			{
-				socket.Connect(host: "8.8.8.8", port: 65530);
+				socket.Connect("8.8.8.8", 65530);
 				var endPoint = socket.LocalEndPoint as IPEndPoint;
 				return endPoint?.Address;
 			}

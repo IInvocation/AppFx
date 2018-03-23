@@ -23,8 +23,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Repositories
 		public override SigningCredentialEntity GetLatest()
 		{
 			var command = $"SELECT {SqlBuilder.Adapter.RenderPropertyList(SqlCache.TypePropertiesChache(typeof(SigningCredentialEntity)).ToArray())} FROM {TableName} ORDER BY {nameof(SigningCredentialEntity.Issued)} DESC LIMIT 1";
-			return UnitOfWork.Connection.QuerySingleOrDefault<SigningCredentialEntity>(command, param: null,
-				transaction: UnitOfWork.Transaction);
+			return UnitOfWork.Connection.QuerySingleOrDefault<SigningCredentialEntity>(command, null,
+				UnitOfWork.Transaction);
 		}
 
 		/// <summary>	Gets validation valid. </summary>

@@ -4,7 +4,7 @@ using FluiTec.AppFx.Options;
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
 	/// <summary>	A culture options. </summary>
-	[ConfigurationName(name: "Localization")]
+	[ConfigurationName("Localization")]
 	public class CultureOptions
 	{
 		private string _resourcesPath;

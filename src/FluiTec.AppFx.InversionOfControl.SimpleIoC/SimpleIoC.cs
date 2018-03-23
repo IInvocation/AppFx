@@ -76,7 +76,7 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		/// <returns>True if at least on instance of the class is already created, false otherwise.</returns>
 		public bool ContainsCreated<TClass>()
 		{
-			return ContainsCreated<TClass>(key: null);
+			return ContainsCreated<TClass>(null);
 		}
 
 		/// <summary>
@@ -139,14 +139,14 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		/// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
 		/// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Register<TInterface, TClass>()
 			where TClass : class
 			where TInterface : class
 		{
-			Register<TInterface, TClass>(createInstanceImmediately: false);
+			Register<TInterface, TClass>(false);
 		}
 
 		/// <summary>
@@ -160,8 +160,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		///     instance of the provided class.
 		/// </param>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Register<TInterface, TClass>(bool createInstanceImmediately)
 			where TClass : class
@@ -177,8 +177,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 					if (_interfaceToClassMap[interfaceType] != classType)
 						throw new InvalidOperationException(
 							string.Format(
-								format: "There is already a class registered for {0}.",
-								arg0: interfaceType.FullName));
+								"There is already a class registered for {0}.",
+								interfaceType.FullName));
 				}
 				else
 				{
@@ -199,13 +199,13 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		/// </summary>
 		/// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Register<TClass>()
 			where TClass : class
 		{
-			Register<TClass>(createInstanceImmediately: false);
+			Register<TClass>(false);
 		}
 
 		/// <summary>
@@ -218,8 +218,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		///     instance of the provided class.
 		/// </param>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Register<TClass>(bool createInstanceImmediately)
 			where TClass : class
@@ -227,7 +227,7 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 			var classType = typeof(TClass);
 
 			if (classType.GetTypeInfo().IsInterface)
-				throw new ArgumentException(message: "An interface cannot be registered alone.");
+				throw new ArgumentException("An interface cannot be registered alone.");
 
 			lock (_syncLock)
 			{
@@ -236,13 +236,13 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 				{
 					if (!_constructorInfos.ContainsKey(classType))
 						throw new InvalidOperationException(
-							string.Format(format: "Class {0} is already registered.", arg0: classType));
+							string.Format("Class {0} is already registered.", classType));
 
 					return;
 				}
 
 				if (!_interfaceToClassMap.ContainsKey(classType))
-					_interfaceToClassMap.Add(classType, value: null);
+					_interfaceToClassMap.Add(classType, null);
 
 				_constructorInfos.Add(classType, GetConstructorInfo(classType));
 				Func<TClass> factory = MakeInstance<TClass>;
@@ -264,7 +264,7 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		public void Register<TClass>(Func<TClass> factory)
 			where TClass : class
 		{
-			Register(factory, createInstanceImmediately: false);
+			Register(factory, false);
 		}
 
 		/// <summary>
@@ -293,10 +293,10 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 				if (_factories.ContainsKey(classType)
 				    && _factories[classType].ContainsKey(_defaultKey))
 					throw new InvalidOperationException(
-						string.Format(format: "There is already a factory registered for {0}.", arg0: classType.FullName));
+						string.Format("There is already a factory registered for {0}.", classType.FullName));
 
 				if (!_interfaceToClassMap.ContainsKey(classType))
-					_interfaceToClassMap.Add(classType, value: null);
+					_interfaceToClassMap.Add(classType, null);
 
 				DoRegister(classType, factory, _defaultKey);
 
@@ -317,7 +317,7 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		public void Register<TClass>(Func<TClass> factory, string key)
 			where TClass : class
 		{
-			Register(factory, key, createInstanceImmediately: false);
+			Register(factory, key, false);
 		}
 
 		/// <summary>
@@ -348,12 +348,12 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 				    && _factories[classType].ContainsKey(key))
 					throw new InvalidOperationException(
 						string.Format(
-							format: "There is already a factory registered for {0} with key {1}.",
-							arg0: classType.FullName,
-							arg1: key));
+							"There is already a factory registered for {0} with key {1}.",
+							classType.FullName,
+							key));
 
 				if (!_interfaceToClassMap.ContainsKey(classType))
-					_interfaceToClassMap.Add(classType, value: null);
+					_interfaceToClassMap.Add(classType, null);
 
 				DoRegister(classType, factory, key);
 
@@ -383,8 +383,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		/// </summary>
 		/// <typeparam name="TClass">The class that must be removed.</typeparam>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Unregister<TClass>()
 			where TClass : class
@@ -450,8 +450,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 		/// <typeparam name="TClass">The type of the instance to be removed.</typeparam>
 		/// <param name="key">The key corresponding to the instance that must be removed.</param>
 		[SuppressMessage(
-			category: "Microsoft.Design",
-			checkId: "CA1004",
+			"Microsoft.Design",
+			"CA1004",
 			Justification = "This syntax is better than the alternatives.")]
 		public void Unregister<TClass>(string key)
 			where TClass : class
@@ -489,8 +489,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 					if (!_interfaceToClassMap.ContainsKey(serviceType))
 						throw new ActivationException(
 							string.Format(
-								format: "Type not found in cache: {0}.",
-								arg0: serviceType.FullName));
+								"Type not found in cache: {0}.",
+								serviceType.FullName));
 
 					instances = new Dictionary<string, object>();
 					_instancesRegistry.Add(serviceType, instances);
@@ -508,17 +508,17 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 				if (_factories.ContainsKey(serviceType))
 					if (_factories[serviceType].ContainsKey(key))
 					{
-						instance = _factories[serviceType][key].DynamicInvoke(args: null);
+						instance = _factories[serviceType][key].DynamicInvoke(null);
 					}
 					else
 					{
 						if (_factories[serviceType].ContainsKey(_defaultKey))
-							instance = _factories[serviceType][_defaultKey].DynamicInvoke(args: null);
+							instance = _factories[serviceType][_defaultKey].DynamicInvoke(null);
 						else
 							throw new ActivationException(
 								string.Format(
-									format: "Type not found in cache without a key: {0}",
-									arg0: serviceType.FullName));
+									"Type not found in cache without a key: {0}",
+									serviceType.FullName));
 					}
 
 				instances.Add(key, instance);
@@ -573,7 +573,7 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 				if (first == null
 				    || !first.IsPublic)
 					throw new ActivationException(
-						string.Format(format: "Cannot register: No public constructor found in {0}.", arg0: resolveTo.Name));
+						string.Format("Cannot register: No public constructor found in {0}.", resolveTo.Name));
 
 				return first;
 			}
@@ -582,12 +582,12 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 			    || constructorInfos.Length == 1
 			    && !constructorInfos[0].IsPublic)
 				throw new ActivationException(
-					string.Format(format: "Cannot register: No public constructor found in {0}.", arg0: resolveTo.Name));
+					string.Format("Cannot register: No public constructor found in {0}.", resolveTo.Name));
 
 			return constructorInfos[0];
 		}
 
-		private ConstructorInfo GetPreferredConstructorInfo(IEnumerable<ConstructorInfo> constructorInfos, Type resolveTo)
+		private static ConstructorInfo GetPreferredConstructorInfo(IEnumerable<ConstructorInfo> constructorInfos, Type resolveTo)
 		{
 			var preferredConstructorInfo
 				= (from t in constructorInfos
@@ -598,8 +598,8 @@ namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 			if (preferredConstructorInfo == null)
 				throw new ActivationException(
 					string.Format(
-						format: "Cannot register: Multiple constructors found in {0} but none marked with PreferredConstructor.",
-						arg0: resolveTo.Name));
+						"Cannot register: Multiple constructors found in {0} but none marked with PreferredConstructor.",
+						resolveTo.Name));
 
 			return preferredConstructorInfo;
 		}

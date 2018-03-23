@@ -27,6 +27,7 @@ namespace DbLocalizationProvider.Internal
     {
         public static Type GetUnderlyingType(this MemberInfo member)
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (member.MemberType)
             {
                 case MemberTypes.TypeInfo:

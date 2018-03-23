@@ -15,9 +15,9 @@ namespace FluiTec.AppFx.IdentityServer.Validators
 		/// </remarks>
 		public override Task<bool> IsRedirectUriValidAsync(string requestedUri, Client client)
 		{
-			if (client.RedirectUris.Contains(item: "@localhost") && (requestedUri.StartsWith(value: "http://localhost") ||
-			                                                         requestedUri.StartsWith(value: "https://localhost")))
-				return Task.FromResult(result: true);
+			if (client.RedirectUris.Contains("@localhost") && (requestedUri.StartsWith("http://localhost") ||
+			                                                         requestedUri.StartsWith("https://localhost")))
+				return Task.FromResult(true);
 			return base.IsRedirectUriValidAsync(requestedUri, client);
 		}
 
@@ -27,10 +27,10 @@ namespace FluiTec.AppFx.IdentityServer.Validators
 		/// <returns>	A Task&lt;bool&gt; </returns>
 		public override Task<bool> IsPostLogoutRedirectUriValidAsync(string requestedUri, Client client)
 		{
-			if (client.PostLogoutRedirectUris.Contains(item: "@localhost") &&
-			    (requestedUri.StartsWith(value: "http://localhost") ||
-			     requestedUri.StartsWith(value: "https://localhost")))
-				return Task.FromResult(result: true);
+			if (client.PostLogoutRedirectUris.Contains("@localhost") &&
+			    (requestedUri.StartsWith("http://localhost") ||
+			     requestedUri.StartsWith("https://localhost")))
+				return Task.FromResult(true);
 			return base.IsRedirectUriValidAsync(requestedUri, client);
 		}
 	}

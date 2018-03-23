@@ -4,42 +4,42 @@
 	internal class Globals
 	{
 		/// <summary>	The schema. </summary>
-		public const string SCHEMA = "AppFxIdentityServer";
+		public const string Schema = "AppFxIdentityServer";
 
 		/// <summary>	The apiresource table. </summary>
-		public const string APIRESOURCE_TABLE = "ApiResource";
+		public const string ApiresourceTable = "ApiResource";
 
 		/// <summary>	The apiresourceclaim table. </summary>
-		public const string APIRESOURCECLAIM_TABLE = "ApiResourceClaim";
+		public const string ApiresourceclaimTable = "ApiResourceClaim";
 
 		/// <summary>	The apiresourcescope table. </summary>
-		public const string APIRESOURCESCOPE_TABLE = "ApiResourceScope";
+		public const string ApiresourcescopeTable = "ApiResourceScope";
 
 		/// <summary>	The client table. </summary>
-		public const string CLIENT_TABLE = "Client";
+		public const string ClientTable = "Client";
 
 		/// <summary>	The clientclaim table. </summary>
-		public const string CLIENTCLAIM_TABLE = "ClientClaim";
+		public const string ClientclaimTable = "ClientClaim";
 
 		/// <summary>	The clientscope table. </summary>
-		public const string CLIENTSCOPE_TABLE = "ClientScope";
+		public const string ClientscopeTable = "ClientScope";
 
 		/// <summary>	The grant table. </summary>
-		public const string GRANT_TABLE = "Grant";
+		public const string GrantTable = "Grant";
 
 		/// <summary>	The identityresource table. </summary>
-		public const string IDENTITYRESOURCE_TABLE = "IdentityResource";
+		public const string IdentityresourceTable = "IdentityResource";
 
 		/// <summary>	The identityresourceclaim table. </summary>
-		public const string IDENTITYRESOURCECLAIM_TABLE = "IdentityResourceClaim";
+		public const string IdentityresourceclaimTable = "IdentityResourceClaim";
 
 		/// <summary>	The identityresourcescope table. </summary>
-		public const string IDENTITYRESOURCESCOPE_TABLE = "IdentityResourceScope";
+		public const string IdentityresourcescopeTable = "IdentityResourceScope";
 
 		/// <summary>	The scope table. </summary>
-		public const string SCOPE_TABLE = "Scope";
+		public const string ScopeTable = "Scope";
 
 		/// <summary>	The signingcredential table. </summary>
-		public const string SIGNINGCREDENTIAL_TABLE = "SigningCredential";
+		public const string SigningcredentialTable = "SigningCredential";
 	}
 }

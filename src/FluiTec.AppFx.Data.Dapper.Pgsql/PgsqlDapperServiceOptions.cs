@@ -2,12 +2,13 @@
 
 namespace FluiTec.AppFx.Data.Dapper.Pgsql
 {
-	[ConfigurationName(name: "Dapper")]
+	[ConfigurationName("Dapper")]
 	public class PgsqlDapperServiceOptions : DapperServiceOptions
 	{
 		/// <summary>	Default constructor. </summary>
 		public PgsqlDapperServiceOptions()
 		{
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			ConnectionFactory = new PgsqlConnectionFactory();
 		}
 

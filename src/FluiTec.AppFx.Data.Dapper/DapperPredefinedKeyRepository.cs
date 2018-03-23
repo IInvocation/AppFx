@@ -40,7 +40,7 @@ namespace FluiTec.AppFx.Data.Dapper
 			var builder = UnitOfWork.Connection.GetBuilder();
 			var sql = builder.InsertAutoMultiple(type);
 
-			var num = UnitOfWork.Connection.Execute(sql, entity, UnitOfWork.Transaction);
+			UnitOfWork.Connection.Execute(sql, entity, UnitOfWork.Transaction);
 
 			return entity;
 		}

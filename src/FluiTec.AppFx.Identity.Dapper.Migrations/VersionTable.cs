@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations
 		public bool OwnsSchema => true;
 
 		/// <summary>	Name of the schema. </summary>
-		public string SchemaName => Globals.SCHEMA;
+		public string SchemaName => Globals.Schema;
 
 		/// <summary>	Name of the table. </summary>
 		public string TableName => "AppFxIdentity_Version";

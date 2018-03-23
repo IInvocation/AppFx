@@ -15,11 +15,10 @@ namespace FluiTec.AppFx.Data.Sql.Mappers
 			if (SqlCache.EntityNameCache.TryGetValue(type.TypeHandle, out string name))
 				return name;
 
-			var attribute = type
-				.GetTypeInfo()
-				.GetCustomAttributes(typeof(EntityNameAttribute))
-				.SingleOrDefault() as EntityNameAttribute;
-			var entityName = attribute != null ? attribute.Name : base.GetName(type);
+		    var entityName = type
+		        .GetTypeInfo()
+		        .GetCustomAttributes(typeof(EntityNameAttribute))
+		        .SingleOrDefault() is EntityNameAttribute attribute ? attribute.Name : base.GetName(type);
 			SqlCache.EntityNameCache.TryAdd(type.TypeHandle, entityName);
 			return entityName;
 		}

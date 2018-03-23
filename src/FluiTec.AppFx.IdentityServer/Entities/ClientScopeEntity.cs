@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Entities
 {
 	/// <summary>	A client scope entity. </summary>
-	[EntityName(name: "AppFxIdentityServer.ClientScope")]
+	[EntityName("AppFxIdentityServer.ClientScope")]
 	public class ClientScopeEntity : IEntity<int>
 	{
 		/// <summary>	Gets or sets the identifier of the client. </summary>

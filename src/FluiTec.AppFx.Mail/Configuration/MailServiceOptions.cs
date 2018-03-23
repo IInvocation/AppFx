@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Mail.Configuration
 {
 	/// <summary>	A web mail options. </summary>
-	[ConfigurationName(name: "MailOptions")]
+	[ConfigurationName("MailOptions")]
 	public class MailServiceOptions
 	{
 		private string _templateRoot;

@@ -23,7 +23,7 @@ using DbLocalizationProvider.Abstractions;
 
 namespace DbLocalizationProvider
 {
-    public static class IQueryExtensions
+    public static class QueryExtensions
     {
         public static TResult Execute<TResult>(this IQuery<TResult> query)
         {

@@ -8,6 +8,7 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite
         /// <summary>	Default constructor. </summary>
         public SqLiteDapperServiceOptions()
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             ConnectionFactory = new SqLiteConnectionFactory();
         }
 

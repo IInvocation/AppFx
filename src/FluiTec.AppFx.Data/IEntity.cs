@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FluiTec.AppFx.Data
+﻿namespace FluiTec.AppFx.Data
 {
 	/// <summary>	Interface for an entity. </summary>
 	/// <typeparam name="TKey">	Type of the key. </typeparam>

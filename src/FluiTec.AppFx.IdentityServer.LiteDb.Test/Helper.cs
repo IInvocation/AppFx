@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FluiTec.AppFx.IdentityServer.LiteDb.Test
+﻿namespace FluiTec.AppFx.IdentityServer.LiteDb.Test
 {
 	/// <summary>	A helper. </summary>
 	public static class Helper

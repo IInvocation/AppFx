@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the identityresource-table. </summary>
-	[Migration(version: 9)]
+	[Migration(9)]
 	public class IdentityResourceTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.IDENTITYRESOURCE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.IdentityresourceTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.IDENTITYRESOURCE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.IdentityresourceTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -41,12 +41,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.IDENTITYRESOURCE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.IdentityresourceTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.IDENTITYRESOURCE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.IdentityresourceTable}");
 		}
 	}
 }

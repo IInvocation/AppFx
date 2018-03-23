@@ -113,6 +113,7 @@ namespace FluiTec.AppFx.IdentityServer
 			using (var rsa = RSA.Create())
 			{
 				rsa.KeySize = 2048;
+			    // ReSharper disable once RedundantArgumentDefaultValue
 				var key = new RsaSecurityKey(rsa) {KeyId = CryptoRandom.CreateUniqueId(RsaKeyLength)};
 				return key;
 			}
@@ -138,7 +139,7 @@ namespace FluiTec.AppFx.IdentityServer
 		{
 			var key = CreateRsaSecurityKey();
 
-			var parameters = key.Rsa?.ExportParameters(includePrivateParameters: true) ?? key.Parameters;
+			var parameters = key.Rsa?.ExportParameters(true) ?? key.Parameters;
 
 			var rsaKey = new TemporaryRsaKey
 			{

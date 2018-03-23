@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the scope-table. </summary>
-	[Migration(version: 1)]
+	[Migration(1)]
 	public class ScopeTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.SCOPE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.ScopeTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.SCOPE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.ScopeTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -38,12 +38,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.SCOPE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.ScopeTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.SCOPE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.ScopeTable}");
 		}
 	}
 }

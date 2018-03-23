@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dynamic.Configuration
 {
 	/// <summary>	An identityserver options. </summary>
-	[ConfigurationName(name: "IdentityOptions")]
+	[ConfigurationName("IdentityOptions")]
 	public class IdentityServerOptions
     {
 	    /// <summary>	Gets or sets the provider. </summary>

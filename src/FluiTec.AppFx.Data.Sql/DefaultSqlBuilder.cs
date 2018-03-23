@@ -26,10 +26,10 @@ namespace FluiTec.AppFx.Data.Sql
 		static DefaultSqlBuilder()
 		{
 			BuilderDictionary = new ConcurrentDictionary<string, SqlBuilder>();
-			BuilderDictionary.TryAdd(key: "System.Data.SqlClient.SqlConnection", value: new SqlBuilder(new MicrosoftSqlAdapter()));
-			BuilderDictionary.TryAdd(key: "Npgsql.NpgsqlConnection", value: new SqlBuilder(new PostgreSqlAdapter()));
-			BuilderDictionary.TryAdd(key: "MySql.Data.MySqlClient.MySqlConnection", value: new SqlBuilder(new MySqlAdapter()));
-            BuilderDictionary.TryAdd(key: "Microsoft.Data.Sqlite.SqliteConnection", value: new SqlBuilder(new SqLiteAdapter()));
+			BuilderDictionary.TryAdd("System.Data.SqlClient.SqlConnection", new SqlBuilder(new MicrosoftSqlAdapter()));
+			BuilderDictionary.TryAdd("Npgsql.NpgsqlConnection", new SqlBuilder(new PostgreSqlAdapter()));
+			BuilderDictionary.TryAdd("MySql.Data.MySqlClient.MySqlConnection", new SqlBuilder(new MySqlAdapter()));
+            BuilderDictionary.TryAdd("Microsoft.Data.Sqlite.SqliteConnection", new SqlBuilder(new SqLiteAdapter()));
 		}
 
 		/// <summary>	An IDbConnection extension method that gets a builder. </summary>
@@ -44,7 +44,7 @@ namespace FluiTec.AppFx.Data.Sql
 					return GetSqlBuilder(connection);
 				}
 				var connectionTypeName = connection.GetType().FullName;
-				if (BuilderDictionary.TryGetValue(connectionTypeName, out SqlBuilder builder))
+				if (BuilderDictionary.TryGetValue(connectionTypeName, out var builder))
 					return builder;
 				throw new NotImplementedException($"No default builder for connection for {connectionTypeName} registered!");
 			}

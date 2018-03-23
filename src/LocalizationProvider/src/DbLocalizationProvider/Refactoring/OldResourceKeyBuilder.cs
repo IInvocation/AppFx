@@ -61,14 +61,13 @@ namespace DbLocalizationProvider.Refactoring
                     oldResourceKey = ResourceKeyBuilder.BuildResourceKey(target.FullName.Replace(target.Namespace, typeOldNamespace), propertyName);
             }
 
-            if(!string.IsNullOrEmpty(typeOldName) && !string.IsNullOrEmpty(typeOldNamespace))
-            {
-                oldResourceKey = ResourceKeyBuilder.BuildResourceKey(ResourceKeyBuilder.BuildResourceKey(typeOldNamespace, typeOldName), propertyName);
-                // special treatment for the nested resources
-                if(target.IsNested)
-                    oldResourceKey = ResourceKeyBuilder.BuildResourceKey(target.FullName.Replace(target.Namespace, typeOldNamespace).Replace(target.Name, typeOldName),
-                                                                         propertyName);
-            }
+            if(string.IsNullOrEmpty(typeOldName) || string.IsNullOrEmpty(typeOldNamespace))
+                return new Tuple<string, string>(oldResourceKey, finalOldTypeName);
+            oldResourceKey = ResourceKeyBuilder.BuildResourceKey(ResourceKeyBuilder.BuildResourceKey(typeOldNamespace, typeOldName), propertyName);
+            // special treatment for the nested resources
+            if(target.IsNested)
+                oldResourceKey = ResourceKeyBuilder.BuildResourceKey(target.FullName.Replace(target.Namespace, typeOldNamespace).Replace(target.Name, typeOldName),
+                    propertyName);
 
             return new Tuple<string, string>(oldResourceKey, finalOldTypeName);
         }

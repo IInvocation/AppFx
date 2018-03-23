@@ -25,25 +25,23 @@ namespace DbLocalizationProvider.Sync.Collectors
         {
             // try to fetch also [Display()] attribute to generate new "...-Description" resource => usually used for help text labels
             var displayAttribute = mi.GetCustomAttribute<DisplayAttribute>();
-            if(displayAttribute?.Description != null)
+            if(displayAttribute?.Description == null) yield break;
+            var propertyName = $"{mi.Name}-Description";
+            var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
+            yield return new DiscoveredResource(mi,
+                $"{resourceKey}-Description",
+                DiscoveredTranslation.FromSingle(displayAttribute.Description),
+                propertyName,
+                declaringType,
+                returnType,
+                isSimpleType)
             {
-                var propertyName = $"{mi.Name}-Description";
-                var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
-                yield return new DiscoveredResource(mi,
-                                                    $"{resourceKey}-Description",
-                                                    DiscoveredTranslation.FromSingle(displayAttribute.Description),
-                                                    propertyName,
-                                                    declaringType,
-                                                    returnType,
-                                                    isSimpleType)
-                             {
-                                 TypeName = target.Name,
-                                 TypeNamespace = target.Namespace,
-                                 TypeOldName = oldResourceKeys.Item2,
-                                 TypeOldNamespace = typeOldNamespace,
-                                 OldResourceKey = oldResourceKeys.Item1
-                             };
-            }
+                TypeName = target.Name,
+                TypeNamespace = target.Namespace,
+                TypeOldName = oldResourceKeys.Item2,
+                TypeOldNamespace = typeOldNamespace,
+                OldResourceKey = oldResourceKeys.Item1
+            };
         }
     }
 }

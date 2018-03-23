@@ -40,7 +40,7 @@ namespace DbLocalizationProvider.Sync
             var resourceAttribute = target.GetCustomAttribute<LocalizedResourceAttribute>();
 
             return !string.IsNullOrEmpty(resourceAttribute?.KeyPrefix)
-                       ? resourceAttribute.KeyPrefix
+                       ? resourceAttribute?.KeyPrefix
                        : (string.IsNullOrEmpty(keyPrefix) ? target.FullName : keyPrefix);
         }
 
@@ -70,7 +70,7 @@ namespace DbLocalizationProvider.Sync
                              var isResourceHidden = isHidden || mi.GetCustomAttribute<HiddenAttribute>() != null;
 
                              var translations = DiscoveredTranslation.FromSingle(GetEnumTranslation(mi));
-                             var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>();
+                             var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>().ToList();
                              if(additionalTranslationsAttributes.Any())
                                  translations.AddRange(additionalTranslationsAttributes.Select(_ => new DiscoveredTranslation(_.Translation, _.Culture)));
 

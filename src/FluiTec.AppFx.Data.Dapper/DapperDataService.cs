@@ -48,7 +48,7 @@ namespace FluiTec.AppFx.Data.Dapper
 		/// </summary>
 		public override void Dispose()
 		{
-			Dispose(disposing: true);
+			Dispose(true);
 		}
 
 		/// <summary>

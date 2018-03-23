@@ -60,8 +60,8 @@ namespace Microsoft.Extensions.DependencyInjection
 		    app.UseMvc(routes =>
 		    {
 			    routes.MapRoute(
-				    name: "default",
-				    template: "{controller=Home}/{action=Index}/{id?}");
+				    "default",
+				    "{controller=Home}/{action=Index}/{id?}");
 		    });
 		    return app;
 	    }
@@ -75,12 +75,12 @@ namespace Microsoft.Extensions.DependencyInjection
 		    app.UseMvc(routes =>
 		    {
 			    routes.MapRoute(
-				    name: "default",
-				    template: "{controller=Home}/{action=Index}/{id?}");
+				    "default",
+				    "{controller=Home}/{action=Index}/{id?}");
 
 			    routes.MapRoute(
-				    name: "api",
-				    template: "api/[controller]");
+				    "api",
+				    "api/[controller]");
 		    });
 		    return app;
 	    }
@@ -94,8 +94,8 @@ namespace Microsoft.Extensions.DependencyInjection
 		    app.UseMvc(routes =>
 		    {
 			    routes.MapRoute(
-				    name: "api",
-				    template: "api/[controller]");
+				    "api",
+				    "api/[controller]");
 		    });
 		    return app;
 	    }

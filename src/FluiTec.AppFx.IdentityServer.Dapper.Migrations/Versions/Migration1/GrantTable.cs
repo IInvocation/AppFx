@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the grant-table. </summary>
-	[Migration(version: 8)]
+	[Migration(8)]
 	public class GrantTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.GRANT_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.GrantTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("GrantKey").AsString(255).NotNullable().Unique()
 				.WithColumn("Type").AsString(255).NotNullable()
@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.GRANT_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.GrantTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("GrantKey").AsString(255).NotNullable()
 				.WithColumn("Type").AsString(255).NotNullable()
@@ -41,12 +41,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.GRANT_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.GrantTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.GRANT_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.GrantTable}");
 		}
 	}
 }

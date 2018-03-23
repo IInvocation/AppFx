@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
 	/// <summary>	An error options. </summary>
-	[ConfigurationName(name: "Error")]
+	[ConfigurationName("Error")]
 	public class ErrorOptions
 	{
 		private string _errorHandlingPath;

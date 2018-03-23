@@ -170,7 +170,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.ClientScopeRepository.Delete(clientScope);
 
-			    Assert.AreEqual(expected: null, actual: uow.ClientScopeRepository.Get(clientScope.Id));
+			    Assert.AreEqual(null, uow.ClientScopeRepository.Get(clientScope.Id));
 		    }
 	    }
 

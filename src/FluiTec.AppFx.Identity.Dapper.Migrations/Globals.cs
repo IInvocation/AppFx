@@ -4,21 +4,21 @@
 	internal class Globals
 	{
 		/// <summary>	The schema. </summary>
-		public const string SCHEMA = "AppFxIdentity";
+		public const string Schema = "AppFxIdentity";
 
 		/// <summary>	The user table. </summary>
-		public const string USER_TABLE = "User";
+		public const string UserTable = "User";
 
 		/// <summary>	The userlogin table. </summary>
-		public const string USERLOGIN_TABLE = "UserLogin";
+		public const string UserloginTable = "UserLogin";
 
 		/// <summary>	The role table. </summary>
-		public const string ROLE_TABLE = "Role";
+		public const string RoleTable = "Role";
 
 		/// <summary>	The userrole table. </summary>
-		public const string USERROLE_TABLE = "UserRole";
+		public const string UserroleTable = "UserRole";
 
 		/// <summary>	The claim table. </summary>
-		public const string CLAIM_TABLE = "Claim";
+		public const string ClaimTable = "Claim";
 	}
 }

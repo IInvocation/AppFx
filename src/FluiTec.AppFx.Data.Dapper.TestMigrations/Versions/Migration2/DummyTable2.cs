@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Data.Dapper.TestMigrations.Migration2
 {
 	/// <summary>	A migration that manages the DummyTable. </summary>
-	[Migration(version: 2)]
+	[Migration(2)]
 	public class DummyTable2 : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>

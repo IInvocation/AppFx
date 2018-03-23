@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FluiTec.AppFx.IdentityServer.Test
+﻿namespace FluiTec.AppFx.IdentityServer.Test
 {
     public abstract class IdentityServerTest
     {

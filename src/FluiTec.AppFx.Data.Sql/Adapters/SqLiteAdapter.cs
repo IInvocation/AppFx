@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
         {
             return string.IsNullOrWhiteSpace(tableName)
                 ? base.RenderTableName(tableName)
-                : tableName.Replace(oldChar: '.', newChar: '_');
+                : tableName.Replace('.', '_');
         }
 
         /// <summary>	Gets automatic key statement. </summary>

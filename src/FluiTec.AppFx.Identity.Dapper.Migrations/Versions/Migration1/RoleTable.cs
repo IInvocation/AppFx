@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 {
 	/// <summary>	A migration for the role-table. </summary>
-	[Migration(version: 3)]
+	[Migration(3)]
 	public class RoleTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.ROLE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.RoleTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Identifier").AsGuid().NotNullable()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
@@ -22,7 +22,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.ROLE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.RoleTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Identifier").AsCustom("CHAR(36)").NotNullable()
 				.WithColumn("ApplicationId").AsInt32().NotNullable()
@@ -36,12 +36,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.ROLE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.RoleTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.ROLE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.RoleTable}");
 		}
 	}
 }

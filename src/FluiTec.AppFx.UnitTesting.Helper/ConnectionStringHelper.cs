@@ -33,14 +33,15 @@ namespace FluiTec.AppFx.UnitTesting.Helper
             // build filename for the connectionstrings-configuration-file
             var current= Directory.GetCurrentDirectory();
             var currentDirectory = new DirectoryInfo(current);
+		    if (currentDirectory.Parent?.Parent?.Parent == null) return;
 		    var sourceDirectory = currentDirectory.Parent.Parent.Parent.Parent;
-		    var configDirectory = Path.Combine(sourceDirectory.FullName, RootDir);
+		    var configDirectory = Path.Combine(sourceDirectory?.FullName, RootDir);
 		    var connectionStringFileName = Path.Combine(configDirectory, FileName);
 
-            // parse the configuration-file
-            var root = JsonConvert.DeserializeObject<Root>(File.ReadAllText(connectionStringFileName));
+		    // parse the configuration-file
+		    var root = JsonConvert.DeserializeObject<Root>(File.ReadAllText(connectionStringFileName));
 
-            // fill internal list of connectionstrings
+		    // fill internal list of connectionstrings
 		    ConnectionStrings = root.ConnectionStrings.ToList();
 		}
 

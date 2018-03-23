@@ -118,7 +118,7 @@ namespace FluiTec.AppFx.Identity.Test
 				};
 				uow.ClaimRepository.AddRange(claims);
 
-				Assert.AreEqual(claims.Single(c => c.Type == "Sex").UserId, uow.ClaimRepository.GetUserIdsForClaimType(claimType: "Sex").Single());
+				Assert.AreEqual(claims.Single(c => c.Type == "Sex").UserId, uow.ClaimRepository.GetUserIdsForClaimType("Sex").Single());
 			}
 		}
 
@@ -158,7 +158,7 @@ namespace FluiTec.AppFx.Identity.Test
 				};
 				uow.ClaimRepository.AddRange(claims);
 
-				Assert.AreEqual(claims.Single(c => c.Type == "Sex").UserId, uow.ClaimRepository.GetByUserAndType(user, claimType: "Sex").UserId);
+				Assert.AreEqual(claims.Single(c => c.Type == "Sex").UserId, uow.ClaimRepository.GetByUserAndType(user, "Sex").UserId);
 			}
 		}
 
@@ -268,7 +268,7 @@ namespace FluiTec.AppFx.Identity.Test
 
 				uow.ClaimRepository.Delete(claim);
 				
-				Assert.AreEqual(expected: null, actual: uow.ClaimRepository.Get(claim.Id));
+				Assert.AreEqual(null, uow.ClaimRepository.Get(claim.Id));
 			}
 		}
 	}

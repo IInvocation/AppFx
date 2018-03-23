@@ -23,7 +23,7 @@ using DbLocalizationProvider.Abstractions;
 
 namespace DbLocalizationProvider
 {
-    public static class ICommandExtensions
+    public static class CommandExtensions
     {
         public static void Execute(this ICommand command)
         {

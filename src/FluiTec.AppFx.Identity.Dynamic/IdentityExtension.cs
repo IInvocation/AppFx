@@ -3,7 +3,6 @@ using System.Net;
 using System.Threading.Tasks;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Dynamic;
-using FluiTec.AppFx.Identity.Dynamic.Configuration;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Localization;
 using FluiTec.AppFx.Options;
@@ -49,7 +48,7 @@ namespace Microsoft.Extensions.DependencyInjection
 				    config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ öäüÖÄÜ ß 12345678";
 				    config.SignIn.RequireConfirmedEmail = true;
 				    config.Lockout.AllowedForNewUsers = true;
-				    config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(value: 5);
+				    config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 			    })
 			    .AddErrorDescriber<MultiLanguageIdentityErrorDescriber>()
 			    .AddDefaultTokenProviders();

@@ -139,7 +139,7 @@ namespace FluiTec.AppFx.Data.Dapper.Mysql.Test
 				using (var uow = dataService.BeginUnitOfWork())
 			    {
 				    var repo = uow.GetRepository<IDummyRepository>();
-				    var entity = repo.Add(new DummyEntity());
+				    repo.Add(new DummyEntity());
 					uow.Commit();
 			    }
 			    using (var uow = dataService.BeginUnitOfWork())

@@ -23,7 +23,7 @@ using System.Linq;
 
 namespace DbLocalizationProvider.Import
 {
-    public static class ICollectionOfIResourceImporterExtensions
+    public static class CollectionOfIResourceImporterExtensions
     {
         public static IResourceFormatParser FindByExtension(this ICollection<IResourceFormatParser> providers, string extension)
         {

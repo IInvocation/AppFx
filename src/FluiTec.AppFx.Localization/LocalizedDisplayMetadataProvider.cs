@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using DbLocalizationProvider;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
@@ -37,6 +37,7 @@ namespace FluiTec.AppFx.Localization
 
             var displayAttribute = theAttributes.OfType<DisplayAttribute>().FirstOrDefault();
             if (displayAttribute?.Description != null)
+                // ReSharper disable once ImplicitlyCapturedClosure
                 modelMetadata.Description = () =>
                     ModelMetadataLocalizationHelper.GetTranslation(containerType, $"{propertyName}-Description");
         }

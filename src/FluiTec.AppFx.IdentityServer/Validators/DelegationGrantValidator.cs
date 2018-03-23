@@ -31,7 +31,7 @@ namespace FluiTec.AppFx.IdentityServer.Validators
 		/// <returns>	A Task. </returns>
 		public async Task ValidateAsync(ExtensionGrantValidationContext context)
 		{
-			var userToken = context.Request.Raw.Get(name: "token");
+			var userToken = context.Request.Raw.Get("token");
 
 			if (string.IsNullOrEmpty(userToken))
 			{
@@ -64,7 +64,7 @@ namespace FluiTec.AppFx.IdentityServer.Validators
 				$"Issuing DelegationGrant for {result.Claims.FirstOrDefault(c => c.Type == "email")?.Value}.");
 
 			// grant
-			context.Result = new GrantValidationResult(sub, authenticationMethod: "delegation", claims: result.Claims);
+			context.Result = new GrantValidationResult(sub, "delegation", result.Claims);
 		}
 	}
 }

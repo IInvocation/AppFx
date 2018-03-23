@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Data.LiteDb
 {
 	/// <summary>	A lite database options. </summary>
-	[ConfigurationName(name: "LiteDb")]
+	[ConfigurationName("LiteDb")]
 	public class LiteDbServiceOptions : ILiteDbServiceOptions
 	{
 		/// <summary>	Gets or sets the filename of the database file. </summary>

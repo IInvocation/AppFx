@@ -77,7 +77,7 @@ namespace FluiTec.AppFx.Ssl
 
 			var seq = (Asn1Sequence) info.ParsePrivateKey();
 			if (seq.Count != 9)
-				throw new PemException(message: "malformed sequence in RSA private key");
+				throw new PemException("malformed sequence in RSA private key");
 
 			var rsa = RsaPrivateKeyStructure.GetInstance(seq);
 			var rsaparams = new RsaPrivateCrtKeyParameters(

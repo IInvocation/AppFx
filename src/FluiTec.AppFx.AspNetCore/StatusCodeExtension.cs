@@ -77,11 +77,11 @@ namespace Microsoft.Extensions.DependencyInjection
 					var originalQueryString = context.HttpContext.Request.QueryString;
 
 					// Store the original paths so the app can check it.
-					context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(new StatusCodeReExecuteFeature()
+					context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(new StatusCodeReExecuteFeature
 					{
 						OriginalPathBase = context.HttpContext.Request.PathBase.Value,
 						OriginalPath = originalPath.Value,
-						OriginalQueryString = originalQueryString.HasValue ? originalQueryString.Value : null,
+						OriginalQueryString = originalQueryString.HasValue ? originalQueryString.Value : null
 					});
 
 					context.HttpContext.Request.Path = newPath;
@@ -94,7 +94,7 @@ namespace Microsoft.Extensions.DependencyInjection
 					{
 						context.HttpContext.Request.QueryString = originalQueryString;
 						context.HttpContext.Request.Path = originalPath;
-						context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(instance: null);
+						context.HttpContext.Features.Set<IStatusCodeReExecuteFeature>(null);
 					}
 				}
 			});

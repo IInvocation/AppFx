@@ -33,6 +33,7 @@ namespace FluiTec.AppFx.Localization.Handlers
             {
                 var compound = uow.TranslationRepository.GetAllCompound();
                 var all = new List<LocalizationResource>();
+                // ReSharper disable once IteratorMethodResultIsIgnored
                 compound.ForEach(entity =>
                 {
                     var resource = new LocalizationResource(entity.Resource.Key)

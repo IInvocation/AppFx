@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -247,7 +246,7 @@ namespace FluiTec.AppFx.Data.Sql
 		public List<KeyValuePair<PropertyInfo, string>> ParameterList(Type type)
 		{
 			// try to find parameters in cache and return them
-			if (_parameterList.TryGetValue(type.TypeHandle, out List<KeyValuePair<PropertyInfo, string>> paramList))
+			if (_parameterList.TryGetValue(type.TypeHandle, out var paramList))
 				return paramList;
 
 			// generate paramList
@@ -276,7 +275,7 @@ namespace FluiTec.AppFx.Data.Sql
 		/// <param name="filterProperty">	The filter property. </param>
 		/// <param name="selectFields">  	(Optional) The select fields. </param>
 		/// <returns>	The SQL key. </returns>
-		private static string GenerateSqlKey(string filterProperty, string[] selectFields)
+		private static string GenerateSqlKey(string filterProperty, IReadOnlyList<string> selectFields)
 		{
 			return $"{filterProperty.ToLower()}{GenerateSqlKey(selectFields)}";
 		}
@@ -292,7 +291,7 @@ namespace FluiTec.AppFx.Data.Sql
 			for (var i = 0; i < selectFields.Count; i++)
 			{
 				if (i > 0)
-					sb.Append(value: ';');
+					sb.Append(';');
 				sb.Append(selectFields[i].ToLower());
 			}
 			return sb.ToString();

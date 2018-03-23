@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
 	/// <summary>	Static file options. </summary>
-	[ConfigurationName(name: "StaticFiles")]
+	[ConfigurationName("StaticFiles")]
 	public class StaticFileOptions
 	{
 		/// <summary>	Default constructor. </summary>

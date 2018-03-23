@@ -54,7 +54,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 			// Clear the existing external cookie to ensure a clean login process
 			await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-			ViewData[index: "ReturnUrl"] = returnUrl;
+			ViewData["ReturnUrl"] = returnUrl;
 			return View();
 		}
 
@@ -64,38 +64,35 @@ namespace FluiTec.AppFx.Identity.Mvc
 		[ValidateAntiForgeryToken]
 		public virtual async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
 		{
-			ViewData[index: "ReturnUrl"] = returnUrl;
-			if (ModelState.IsValid)
-			{
-				// This doesn't count login failures towards account lockout
-				// To enable password failures to trigger account lockout, set lockoutOnFailure: true
-				var tUser = await _userManager.FindByEmailAsync(model.Email);
-				var result =
-					await _signInManager.PasswordSignInAsync(tUser, model.Password, model.RememberMe, lockoutOnFailure: true);
-				if (result.Succeeded)
-				{
-					_logger.LogInformation(eventId: 1, message: "User logged in.");
-					return RedirectToLocal(returnUrl);
-				}
-				if (result.RequiresTwoFactor)
-					return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl, model.RememberMe});
-				if (result.IsLockedOut)
-				{
-					_logger.LogWarning(eventId: 2, message: "User account locked out.");
-					return View(viewName: "Lockout");
-				}
+			ViewData["ReturnUrl"] = returnUrl;
+		    if (!ModelState.IsValid) return View(model);
+		    // This doesn't count login failures towards account lockout
+		    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+		    var tUser = await _userManager.FindByEmailAsync(model.Email);
+		    var result =
+		        await _signInManager.PasswordSignInAsync(tUser, model.Password, model.RememberMe, true);
+		    if (result.Succeeded)
+		    {
+		        _logger.LogInformation(1, "User logged in.");
+		        return RedirectToLocal(returnUrl);
+		    }
+		    if (result.RequiresTwoFactor)
+		        return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl, model.RememberMe});
+		    if (result.IsLockedOut)
+		    {
+		        _logger.LogWarning(2, "User account locked out.");
+		        return View("Lockout");
+		    }
 
-				var user = await _userManager.FindByEmailAsync(model.Email);
-				if (user != null && !user.EmailConfirmed)
-					ModelState.AddModelError(string.Empty, Resources.AccountController.EmailNotConfirmed);
-				else
-					ModelState.AddModelError(string.Empty, Resources.AccountController.InvalidLoginAttempt);
+		    var user = await _userManager.FindByEmailAsync(model.Email);
+		    if (user != null && !user.EmailConfirmed)
+		        ModelState.AddModelError(string.Empty, Resources.AccountController.EmailNotConfirmed);
+		    else
+		        ModelState.AddModelError(string.Empty, Resources.AccountController.InvalidLoginAttempt);
 
-				return View(model);
-			}
+		    return View(model);
 
-			// If we got this far, something failed, redisplay form
-			return View(model);
+		    // If we got this far, something failed, redisplay form
 		}
 
 		// GET: /Account/Register
@@ -103,7 +100,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 		[AllowAnonymous]
 		public IActionResult Register(string returnUrl = null)
 		{
-			ViewData[index: "ReturnUrl"] = returnUrl;
+			ViewData["ReturnUrl"] = returnUrl;
 			return View();
 		}
 
@@ -113,30 +110,28 @@ namespace FluiTec.AppFx.Identity.Mvc
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
 		{
-			ViewData[index: "ReturnUrl"] = returnUrl;
-			if (ModelState.IsValid)
-			{
-				var user = new IdentityUserEntity {Name = model.Name, Email = model.Email};
-				var result = await _userManager.CreateAsync(user, model.Password);
-				if (result.Succeeded)
-				{
-					// Send an email with this link
-					var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-					var callbackUrl = Url.Action(nameof(ConfirmEmail), AccountController, new {userId = user.Identifier, code},
-						HttpContext.Request.Scheme);
-					var mailModel = new ConfirmMailModel(callbackUrl) {Email = model.Email};
-					await _mailService.SendEmailAsync(model.Email, mailModel);
+			ViewData["ReturnUrl"] = returnUrl;
+		    if (!ModelState.IsValid) return View(model);
+		    var user = new IdentityUserEntity {Name = model.Name, Email = model.Email};
+		    var result = await _userManager.CreateAsync(user, model.Password);
+		    if (result.Succeeded)
+		    {
+		        // Send an email with this link
+		        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+		        var callbackUrl = Url.Action(nameof(ConfirmEmail), AccountController, new {userId = user.Identifier, code},
+		            HttpContext.Request.Scheme);
+		        var mailModel = new ConfirmMailModel(callbackUrl) {Email = model.Email};
+		        await _mailService.SendEmailAsync(model.Email, mailModel);
 
-					// sign the user in
-					// disabled to force the the user to confirm his mail address
-					//await _signInManager.SignInAsync(user, isPersistent: false);
-					_logger.LogInformation(eventId: 3, message: "User created a new account with password.");
-					return RedirectToLocal(returnUrl);
-				}
-				AddErrors(result);
-			}
+		        // sign the user in
+		        // disabled to force the the user to confirm his mail address
+		        //await _signInManager.SignInAsync(user, isPersistent: false);
+		        _logger.LogInformation(3, "User created a new account with password.");
+		        return RedirectToLocal(returnUrl);
+		    }
+		    AddErrors(result);
 
-			// If we got this far, something failed, redisplay form
+		    // If we got this far, something failed, redisplay form
 			return View(model);
 		}
 
@@ -144,7 +139,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 		public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
-			_logger.LogInformation(eventId: 4, message: "User logged out.");
+			_logger.LogInformation(4, "User logged out.");
 			return RedirectToAction(DefaultAction, DefaultController);
 		}
 
@@ -175,7 +170,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 
 			// Sign in the user with this external login provider if the user already has a login.
 			var result =
-				await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+				await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
 			if (result.Succeeded)
 			{
 				_logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
@@ -184,13 +179,13 @@ namespace FluiTec.AppFx.Identity.Mvc
 			if (result.RequiresTwoFactor)
 				return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl});
 			if (result.IsLockedOut)
-				return View(viewName: "Lockout");
+				return View("Lockout");
 
 			// If the user does not have an account, then ask the user to create an account.
-			ViewData[index: "ReturnUrl"] = returnUrl;
-			ViewData[index: "LoginProvider"] = info.LoginProvider;
+			ViewData["ReturnUrl"] = returnUrl;
+			ViewData["LoginProvider"] = info.LoginProvider;
 			var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-			return View(viewName: "ExternalLoginConfirmation", model: new ExternalLoginConfirmationViewModel {Email = email});
+			return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {Email = email});
 		}
 
 		// POST: /Account/ExternalLoginConfirmation
@@ -204,7 +199,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 				// Get the information about the user from the external login provider
 				var info = await _signInManager.GetExternalLoginInfoAsync();
 				if (info == null)
-					return View(viewName: "ExternalLoginFailure");
+					return View("ExternalLoginFailure");
 
 				var user = new IdentityUserEntity {Name = model.Name, Email = model.Email};
 				var result = await _userManager.CreateAsync(user);
@@ -228,7 +223,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 				AddErrors(result);
 			}
 
-			ViewData[index: "ReturnUrl"] = returnUrl;
+			ViewData["ReturnUrl"] = returnUrl;
 			return View(model);
 		}
 
@@ -238,10 +233,10 @@ namespace FluiTec.AppFx.Identity.Mvc
 		public async Task<IActionResult> ConfirmEmail(string userId, string code)
 		{
 			if (userId == null || code == null)
-				return View(viewName: "Error");
+				return View("Error");
 			var user = await _userManager.FindByIdAsync(userId);
 			if (user == null)
-				return View(viewName: "Error");
+				return View("Error");
 			var result = await _userManager.ConfirmEmailAsync(user, code);
 			return View(result.Succeeded ? "ConfirmEmail" : "Error");
 		}
@@ -263,14 +258,14 @@ namespace FluiTec.AppFx.Identity.Mvc
 
 			var user = await _userManager.FindByEmailAsync(model.Email);
 			if (user == null || await _userManager.IsEmailConfirmedAsync(user))
-				return View(viewName: "ConfirmEmailAgainConfirmation");
+				return View("ConfirmEmailAgainConfirmation");
 
 			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 			var callbackUrl = Url.Action(nameof(ConfirmEmail), AccountController, new {userId = user.Identifier, code},
 				HttpContext.Request.Scheme);
 			var mailModel = new ConfirmMailModel(callbackUrl) {Email = model.Email};
 			await _mailService.SendEmailAsync(model.Email, mailModel);
-			return View(viewName: "ConfirmEmailAgainConfirmation");
+			return View("ConfirmEmailAgainConfirmation");
 		}
 
 		// GET: /Account/ForgotPassword
@@ -292,14 +287,14 @@ namespace FluiTec.AppFx.Identity.Mvc
 
 			var user = await _userManager.FindByEmailAsync(model.Email);
 			if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
-				return View(viewName: "ForgotPasswordConfirmation");
+				return View("ForgotPasswordConfirmation");
 
 			var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 			var callbackUrl = Url.Action(nameof(ResetPassword), AccountController, new {userId = user.Identifier, code},
 				HttpContext.Request.Scheme);
 			var mailModel = new RecoverPasswordModel(callbackUrl);
 			await _mailService.SendEmailAsync(model.Email, mailModel);
-			return View(viewName: "ForgotPasswordConfirmation");
+			return View("ForgotPasswordConfirmation");
 
 			// If we got this far, something failed, redisplay form
 		}
@@ -317,7 +312,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 		[AllowAnonymous]
 		public IActionResult ResetPassword(string code = null)
 		{
-			return code == null ? View(viewName: "Error") : View();
+			return code == null ? View("Error") : View();
 		}
 
 		// POST: /Account/ResetPassword
@@ -353,7 +348,7 @@ namespace FluiTec.AppFx.Identity.Mvc
 		{
 			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
 			if (user == null)
-				return View(viewName: "Error");
+				return View("Error");
 			var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
 			var factorOptions = userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
 			return View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe});
@@ -370,12 +365,12 @@ namespace FluiTec.AppFx.Identity.Mvc
 
 			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
 			if (user == null)
-				return View(viewName: "Error");
+				return View("Error");
 
 			// Generate the token and send it
 			var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
 			if (string.IsNullOrWhiteSpace(code))
-				return View(viewName: "Error");
+				return View("Error");
 
 			switch (model.SelectedProvider)
 			{
@@ -400,8 +395,9 @@ namespace FluiTec.AppFx.Identity.Mvc
 		{
 			// Require that the user has already logged in via username/password or external login
 			var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+		    // ReSharper disable once ConvertIfStatementToReturnStatement
 			if (user == null)
-				return View(viewName: "Error");
+				return View("Error");
 			return View(new VerifyCodeViewModel {Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe});
 		}
 
@@ -423,8 +419,8 @@ namespace FluiTec.AppFx.Identity.Mvc
 				return RedirectToLocal(model.ReturnUrl);
 			if (result.IsLockedOut)
 			{
-				_logger.LogWarning(eventId: 7, message: "User account locked out.");
-				return View(viewName: "Lockout");
+				_logger.LogWarning(7, "User account locked out.");
+				return View("Lockout");
 			}
 			ModelState.AddModelError(string.Empty, Resources.AccountController.InvalidCode);
 			return View(model);

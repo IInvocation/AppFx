@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
     /// <summary>   A ViewModel for the database. </summary>
     public class DatabaseViewModel : ViewModelBase, IDisposable
     {
-        private LiteDatabase _db;
+        private readonly LiteDatabase _db;
         private List<BsonDocument> _bson;
 
         public DatabaseViewModel() : this(null)
@@ -88,36 +88,38 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
 
         private void Data_RowChanged(object sender, DataRowChangeEventArgs e)
         {
-            if (e.Action == DataRowAction.Add)
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (e.Action)
             {
-                var collection = _db.GetCollection(ActiveCollection);
-                var entry = new Dictionary<string, BsonValue>();
-                foreach (var key in collection.FindAll().First().Keys)
+                case DataRowAction.Add:
                 {
-                    entry.Add(key, new BsonValue(e.Row[key]));
+                    var collection = _db.GetCollection(ActiveCollection);
+                    var entry = collection.FindAll().First().Keys.ToDictionary(key => key, key => new BsonValue(e.Row[key]));
+                    collection.Insert(new BsonDocument(entry));
+                    break;
                 }
-                collection.Insert(new BsonDocument(entry));
-            }
-            else if (e.Action == DataRowAction.Change)
-            {
-                var key = e.Row.ItemArray[0];
-                var collection = _db.GetCollection(ActiveCollection);
-                var entry = collection.FindById(new BsonValue(key));
-                foreach (var eKey in entry.Keys)
+                case DataRowAction.Change:
                 {
-                    if (eKey != "_id")
+                    var key = e.Row.ItemArray[0];
+                    var collection = _db.GetCollection(ActiveCollection);
+                    var entry = collection.FindById(new BsonValue(key));
+                    foreach (var eKey in entry.Keys)
                     {
-                        entry.Set(eKey, new BsonValue(e.Row[eKey]));
+                        if (eKey != "_id")
+                        {
+                            entry.Set(eKey, new BsonValue(e.Row[eKey]));
+                        }
                     }
+                    collection.Update(entry);
+                    break;
                 }
-                collection.Update(entry);
-            }
-            else if (e.Action == DataRowAction.Delete)
-            {
-                var key = e.Row.ItemArray[0];
-                var collection = _db.GetCollection(ActiveCollection);
-                var entry = collection.FindById(new BsonValue(key));
-                var res = collection.Delete(new BsonValue(key));
+                case DataRowAction.Delete:
+                {
+                    var key = e.Row.ItemArray[0];
+                    var collection = _db.GetCollection(ActiveCollection);
+                    collection.Delete(new BsonValue(key));
+                    break;
+                }
             }
         }
 
@@ -131,8 +133,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
             private set => Set(ref _data, value);
         }
 
-        private Type GetType(BsonType type)
+        private static Type GetType(BsonType type)
         {
+            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (type)
             {
                 case BsonType.Int32:
@@ -160,7 +163,7 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
             }
         }
 
-        private object GetValue(BsonValue value)
+        private static object GetValue(BsonValue value)
         {
             if (value.IsInt32)
                 return value.AsInt32;

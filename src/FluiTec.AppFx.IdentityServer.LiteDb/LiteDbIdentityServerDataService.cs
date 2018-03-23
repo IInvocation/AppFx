@@ -32,6 +32,7 @@ namespace FluiTec.AppFx.IdentityServer.LiteDb
         /// <param name="options">  Options for controlling the operation. </param>
         public LiteDbIdentityServerDataService(ILiteDbServiceOptions options) : base(options)
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             RegisterIdentityRepositories();
         }
 

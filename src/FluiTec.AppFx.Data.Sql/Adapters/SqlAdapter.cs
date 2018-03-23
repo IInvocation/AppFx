@@ -70,7 +70,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			for (var i = 0; i < filterProperties.Length; i++)
 			{
 				if (i > 0)
-					sb.Append(value: " AND ");
+					sb.Append(" AND ");
 				sb.Append($"{RenderPropertyName(fProps[i])} = {RenderParameterProperty(fProps[i])}");
 			}
 			var filterSql = sb.ToString();
@@ -159,7 +159,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			for (var i = 0; i < properties.Length; i++)
 			{
 				if (i > 0)
-					sb.Append(value: ", ");
+					sb.Append(", ");
 				sb.Append(RenderPropertyName(properties[i]));
 			}
 			return sb;
@@ -213,7 +213,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			for (var i = 0; i < propertiesWithoutKey.Length; i++)
 			{
 				if (i > 0)
-					sb.Append(value: ", ");
+					sb.Append(", ");
 				sb.Append(RenderParameterProperty(propertiesWithoutKey[i]));
 			}
 			return sb;
@@ -229,7 +229,7 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
 			for (var i = 0; i < propertiesExceptKey.Length; i++)
 			{
 				if (i > 0)
-					sb.Append(value: ", ");
+					sb.Append(", ");
 				sb.Append($"{RenderPropertyName(propertiesExceptKey[i])} = {RenderParameterProperty(propertiesExceptKey[i])}");
 			}
 			return sb;

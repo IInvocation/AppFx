@@ -41,7 +41,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// </summary>
 		public override void Dispose()
 		{
-			Dispose(disposing: true);
+			Dispose(true);
 		}
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		{
 			if (Transaction == null)
 				throw new InvalidOperationException(
-					message: "UnitOfWork can't be committed since it's already finished. (Missing transaction)");
+					"UnitOfWork can't be committed since it's already finished. (Missing transaction)");
 			Transaction.Commit();
 			Transaction.Dispose();
 			Transaction = null;
@@ -86,7 +86,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		{
 			if (Transaction == null)
 				throw new InvalidOperationException(
-					message: "UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
+					"UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
 			Transaction.Rollback();
 			Transaction.Dispose();
 			Transaction = null;

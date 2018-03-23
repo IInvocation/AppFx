@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the apiresource-table. </summary>
-	[Migration(version: 2)]
+	[Migration(2)]
 	public class ApiResourceTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.APIRESOURCE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.ApiresourceTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -21,7 +21,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.APIRESOURCE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.ApiresourceTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("Name").AsString(255).NotNullable()
 				.WithColumn("DisplayName").AsString(255).NotNullable()
@@ -34,12 +34,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.APIRESOURCE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.ApiresourceTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.APIRESOURCE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.ApiresourceTable}");
 		}
 	}
 }

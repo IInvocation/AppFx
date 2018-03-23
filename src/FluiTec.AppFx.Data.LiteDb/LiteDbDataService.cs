@@ -53,20 +53,20 @@ namespace FluiTec.AppFx.Data.LiteDb
 		{
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
 			{
-				var appData = Environment.GetEnvironmentVariable(variable: "LocalAppData");
+				var appData = Environment.GetEnvironmentVariable("LocalAppData");
 				return Path.Combine(appData, applicationFolder, fileName);
 			}
 			// reason: leave open for os x
 			// ReSharper disable once InvertIf
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
 			{
-				var appData = Environment.GetEnvironmentVariable(variable: "user.home");
+				var appData = Environment.GetEnvironmentVariable("user.home");
 				return Path.Combine(appData, applicationFolder, fileName);
 			}
 
 			// TODO: Implement method for os x
 
-			throw new NotSupportedException(message: "Operating-System is not supported.");
+			throw new NotSupportedException("Operating-System is not supported.");
 		}
 
 		#endregion
@@ -88,7 +88,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		{
 			if (string.IsNullOrWhiteSpace(dbFilePath)) throw new ArgumentNullException(nameof(dbFilePath));
 
-			if (!Path.IsPathRooted(dbFilePath) && !dbFilePath.StartsWith(value: "."))
+			if (!Path.IsPathRooted(dbFilePath) && !dbFilePath.StartsWith("."))
 				if (string.IsNullOrWhiteSpace(applicationFolder))
 					throw new ArgumentException(
 						$"Giving non-rooted {nameof(dbFilePath)} requires giving an {nameof(applicationFolder)}.");
@@ -116,7 +116,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 		public override void Dispose()
 		{
 			if (!_useSingletonConnection)
-				Dispose(disposing: true);
+				Dispose(true);
 		}
 
 		/// <summary>
@@ -129,11 +129,9 @@ namespace FluiTec.AppFx.Data.LiteDb
 		/// </param>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (!_useSingletonConnection)
-			{
-				Database?.Dispose();
-				Database = null;
-			}
+		    if (_useSingletonConnection) return;
+		    Database?.Dispose();
+		    Database = null;
 		}
 
 		#endregion

@@ -26,7 +26,7 @@ namespace DbLocalizationProvider.Internal
     // http://stackoverflow.com/questions/2442534/how-to-test-if-type-is-primitive
     internal static class PrimitiveTypes
     {
-        private static readonly Type[] _list;
+        private static readonly Type[] List;
 
         static PrimitiveTypes()
         {
@@ -57,12 +57,12 @@ namespace DbLocalizationProvider.Internal
                                 where t.IsValueType
                                 select typeof(Nullable<>).MakeGenericType(t);
 
-            _list = types.Concat(nullableTypes).ToArray();
+            List = types.Concat(nullableTypes).ToArray();
         }
 
         public static bool IsSimpleType(this Type type)
         {
-            if(_list.Any(x => x.IsAssignableFrom(type)))
+            if(List.Any(x => x.IsAssignableFrom(type)))
             {
                 return true;
             }

@@ -39,7 +39,7 @@ namespace DbLocalizationProvider.Sync
             var resourceAttribute = target.GetCustomAttribute<LocalizedResourceAttribute>();
 
             return !string.IsNullOrEmpty(resourceAttribute?.KeyPrefix)
-                       ? resourceAttribute.KeyPrefix
+                       ? resourceAttribute?.KeyPrefix
                        : (string.IsNullOrEmpty(keyPrefix) ? target.FullName : keyPrefix);
         }
 
@@ -60,7 +60,7 @@ namespace DbLocalizationProvider.Sync
                                                     refactoringInfo?.OldNamespace);
         }
 
-        private ICollection<MemberInfo> GetResourceSources(Type target)
+        private static ICollection<MemberInfo> GetResourceSources(Type target)
         {
             var attr = target.GetCustomAttribute<LocalizedResourceAttribute>();
             if(attr == null)

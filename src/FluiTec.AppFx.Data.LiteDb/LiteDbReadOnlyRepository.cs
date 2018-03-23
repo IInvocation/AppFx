@@ -32,6 +32,7 @@ namespace FluiTec.AppFx.Data.LiteDb
 				replacedDot = string.Concat(split);
 			}
 			TableName = replacedDot;
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			Collection = UnitOfWork.LiteDbDataService.Database.GetCollection<TEntity>(TableName);
 		}
 

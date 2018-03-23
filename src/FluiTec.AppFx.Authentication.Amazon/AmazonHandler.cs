@@ -40,15 +40,15 @@ namespace FluiTec.AppFx.Authentication.Amazon
 				{"redirect_uri", redirectUri}
 			};
 
-			AddQueryString(queryStrings, properties, name: "scope", defaultValue: FormatScope());
-			AddQueryString(queryStrings, properties, name: "access_type", defaultValue: Options.AccessType);
-			AddQueryString(queryStrings, properties, name: "approval_prompt");
-			AddQueryString(queryStrings, properties, name: "prompt");
-			AddQueryString(queryStrings, properties, name: "login_hint");
-			AddQueryString(queryStrings, properties, name: "include_granted_scopes");
+			AddQueryString(queryStrings, properties, "scope", FormatScope());
+			AddQueryString(queryStrings, properties, "access_type", Options.AccessType);
+			AddQueryString(queryStrings, properties, "approval_prompt");
+			AddQueryString(queryStrings, properties, "prompt");
+			AddQueryString(queryStrings, properties, "login_hint");
+			AddQueryString(queryStrings, properties, "include_granted_scopes");
 
 			var state = Options.StateDataFormat.Protect(properties);
-			queryStrings.Add(key: "state", value: state);
+			queryStrings.Add("state", state);
 
 			var authorizationEndpoint = QueryHelpers.AddQueryString(Options.AuthorizationEndpoint, queryStrings);
 			return authorizationEndpoint;
@@ -85,7 +85,7 @@ namespace FluiTec.AppFx.Authentication.Amazon
 		protected override async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity, AuthenticationProperties properties, OAuthTokenResponse tokens)
 		{
 			// construct endpoint-address
-			var endpoint = QueryHelpers.AddQueryString(Options.UserInformationEndpoint, name: "access_token", value: tokens.AccessToken);
+			var endpoint = QueryHelpers.AddQueryString(Options.UserInformationEndpoint, "access_token", tokens.AccessToken);
 
 			// query endpoint
 			var response = await Backchannel.GetAsync(endpoint, Context.RequestAborted);

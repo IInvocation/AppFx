@@ -20,7 +20,7 @@ namespace FluiTec.AppFx.Data.Sql
 	    /// <returns>	A list of. </returns>
 	    public static IList<PropertyInfo> TypePropertiesChache(Type type)
 	    {
-		    if (TypeProperties.TryGetValue(type.TypeHandle, out IList<PropertyInfo> propertyInfos))
+		    if (TypeProperties.TryGetValue(type.TypeHandle, out var propertyInfos))
 				return propertyInfos;
 
 		    var properties = type.GetProperties();
@@ -33,7 +33,7 @@ namespace FluiTec.AppFx.Data.Sql
 		/// <returns>	A list of. </returns>
 		public static IList<PropertyInfo> TypeKeyPropertiesCache(Type type)
 		{
-			if (TypeKeyProperties.TryGetValue(type.TypeHandle, out IList<PropertyInfo> propertyInfos))
+			if (TypeKeyProperties.TryGetValue(type.TypeHandle, out var propertyInfos))
 				return propertyInfos;
 
 			var allProperties = TypePropertiesChache(type);

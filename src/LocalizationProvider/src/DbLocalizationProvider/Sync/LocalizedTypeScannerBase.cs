@@ -25,7 +25,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using DbLocalizationProvider.Abstractions;
-using DbLocalizationProvider.Abstractions.Refactoring;
 using DbLocalizationProvider.Internal;
 using DbLocalizationProvider.Sync.Collectors;
 
@@ -53,7 +52,7 @@ namespace DbLocalizationProvider.Sync
             foreach(var resourceKeyAttribute in resourceAttributesOnModelClass)
             {
                 result.Add(new DiscoveredResource(null,
-                                                  ResourceKeyBuilder.BuildResourceKey(resourceKeyPrefix, resourceKeyAttribute.Key, separator: string.Empty),
+                                                  ResourceKeyBuilder.BuildResourceKey(resourceKeyPrefix, resourceKeyAttribute.Key, string.Empty),
                                                   DiscoveredTranslation.FromSingle(resourceKeyAttribute.Value),
                                                   resourceKeyAttribute.Value,
                                                   target,
@@ -79,7 +78,10 @@ namespace DbLocalizationProvider.Sync
             {
                 typeInstance = Activator.CreateInstance(target);
             }
-            catch(Exception) { }
+            catch(Exception)
+            {
+                // ignored
+            }
 
             return members.SelectMany(mi => DiscoverResourcesFromMember(target,
                                                                         typeInstance,
@@ -91,7 +93,7 @@ namespace DbLocalizationProvider.Sync
                                                                         typeOldNamespace)).ToList();
         }
 
-        private ICollection<DiscoveredResource> DiscoverResourcesFromMember(
+        private IEnumerable<DiscoveredResource> DiscoverResourcesFromMember(
             Type target,
             object instance,
             MemberInfo mi,
@@ -188,11 +190,11 @@ namespace DbLocalizationProvider.Sync
             var displayAttribute = attributes.OfType<DisplayAttribute>().FirstOrDefault();
 
             if(!string.IsNullOrEmpty(displayAttribute?.GetName()))
-                result = displayAttribute.GetName();
+                result = displayAttribute?.GetName();
 
             var displayNameAttribute = attributes.OfType<DisplayNameAttribute>().FirstOrDefault();
             if(!string.IsNullOrEmpty(displayNameAttribute?.DisplayName))
-                result = displayNameAttribute.DisplayName;
+                result = displayNameAttribute?.DisplayName;
 
             return result;
         }

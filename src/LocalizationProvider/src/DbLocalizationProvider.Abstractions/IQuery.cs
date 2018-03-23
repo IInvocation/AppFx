@@ -24,5 +24,6 @@ namespace DbLocalizationProvider.Abstractions
     /// Interface for queries. Loclaization provider internally is built using something similar to CQS pattern.
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
+    // ReSharper disable once UnusedTypeParameter
     public interface IQuery<out TResult> { }
 }

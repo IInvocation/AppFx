@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 {
 	/// <summary>	A migration for the claim-table. </summary>
-	[Migration(version: 5)]
+	[Migration(5)]
 	public class ClaimTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.CLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.ClaimTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("UserId").AsInt32().NotNullable()
 				.WithColumn("Type").AsString(256).NotNullable()
@@ -20,16 +20,16 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.CLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.ClaimTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("UserId")
-				.ToTable(Globals.USER_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.UserTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.CLAIM_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.ClaimTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("UserId").AsInt32().NotNullable()
 				.WithColumn("Type").AsString(256).NotNullable()
@@ -41,12 +41,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.CLAIM_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.ClaimTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.CLAIM_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.ClaimTable}");
 		}
 	}
 }

@@ -139,7 +139,7 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 				using (var uow = dataService.BeginUnitOfWork())
 			    {
 				    var repo = uow.GetRepository<IDummyRepository>();
-				    var entity = repo.Add(new DummyEntity {Name = "Test X"});
+				    repo.Add(new DummyEntity {Name = "Test X"});
 					uow.Commit();
 			    }
 			    using (var uow = dataService.BeginUnitOfWork())

@@ -1,4 +1,5 @@
-﻿namespace FluiTec.AppFx.Identity.Dynamic.Configuration
+﻿// ReSharper disable InconsistentNaming
+namespace FluiTec.AppFx.Identity.Dynamic.Configuration
 {
 	/// <summary>	Values that represent data providers. </summary>
 	public enum DataProvider

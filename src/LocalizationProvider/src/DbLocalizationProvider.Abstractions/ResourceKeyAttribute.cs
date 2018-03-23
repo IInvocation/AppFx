@@ -20,7 +20,7 @@
 
 using System;
 
-namespace DbLocalizationProvider
+namespace DbLocalizationProvider.Abstractions
 {
     /// <summary>
     /// Use this attribute if you want to register multiple resources for the same field or property with different resource keys

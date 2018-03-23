@@ -17,6 +17,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql
 		/// <param name="options">	Options for controlling the operation. </param>
 		public MysqlDapperIdentityDataService(IDapperServiceOptions options) : base(options)
 		{
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			RegisterIdentityRepositories();
 		}
 

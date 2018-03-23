@@ -3,12 +3,13 @@
 namespace FluiTec.AppFx.Data.Dapper.Mysql
 {
 	/// <summary>	A mysql dapper service options. </summary>
-	[ConfigurationName(name: "Dapper")]
+	[ConfigurationName("Dapper")]
 	public class MysqlDapperServiceOptions : DapperServiceOptions
 	{
 		/// <summary>	Default constructor. </summary>
 		public MysqlDapperServiceOptions()
 		{
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			ConnectionFactory = new MysqlConnectionFactory();
 		}
 

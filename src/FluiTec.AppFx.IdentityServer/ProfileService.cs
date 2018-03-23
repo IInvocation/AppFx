@@ -37,14 +37,14 @@ namespace FluiTec.AppFx.IdentityServer
 
 			var user = await _userManager.FindByIdAsync(subjectId);
 			if (user == null)
-				throw new ArgumentException(message: "Invalid subject identifier");
+				throw new ArgumentException("Invalid subject identifier");
 
 			var claims = await GetClaimsFromUser(user);
 
 			var requestedClaimTypes = context.RequestedClaimTypes;
 			claims = requestedClaimTypes != null
 				? claims.Where(c => requestedClaimTypes.Contains(c.Type))
-				: claims.Take(count: 0);
+				: claims.Take(0);
 
 			context.IssuedClaims = claims.ToList();
 		}

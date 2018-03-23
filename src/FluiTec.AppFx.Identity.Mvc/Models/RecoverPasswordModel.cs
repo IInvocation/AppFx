@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FluiTec.AppFx.Mail;
 
 namespace FluiTec.AppFx.Identity.Mvc.Models

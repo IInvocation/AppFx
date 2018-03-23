@@ -26,7 +26,7 @@ namespace FluiTec.AppFx.Mail
 			message.To.Add(new MailboxAddress(email, email));
 			message.Subject = model.Subject;
 
-			message.Body = new TextPart(subtype: "html")
+			message.Body = new TextPart("html")
 			{
 				Text = content
 			};
@@ -40,7 +40,7 @@ namespace FluiTec.AppFx.Mail
 
 				// Note: since we don't have an OAuth2 token, disable
 				// the XOAUTH2 authentication mechanism.
-				client.AuthenticationMechanisms.Remove(item: "XOAUTH2");
+				client.AuthenticationMechanisms.Remove("XOAUTH2");
 
 				if (Options.Authenticate)
 				{
@@ -48,7 +48,7 @@ namespace FluiTec.AppFx.Mail
 				}
 
 				client.Send(message);
-				client.Disconnect(quit: true);
+				client.Disconnect(true);
 			}
 		}
 

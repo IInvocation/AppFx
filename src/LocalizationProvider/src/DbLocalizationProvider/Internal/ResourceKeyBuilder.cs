@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.Sync;
 
 namespace DbLocalizationProvider.Internal
@@ -124,11 +125,11 @@ namespace DbLocalizationProvider.Internal
             var prefix = string.Empty;
 
             if (!string.IsNullOrEmpty(modelAttribute?.KeyPrefix))
-                prefix = modelAttribute.KeyPrefix;
+                prefix = modelAttribute?.KeyPrefix;
 
             var resourceAttributeOnClass = containerType.GetCustomAttribute<LocalizedResourceAttribute>();
             if (!string.IsNullOrEmpty(resourceAttributeOnClass?.KeyPrefix))
-                prefix = resourceAttributeOnClass.KeyPrefix;
+                prefix = resourceAttributeOnClass?.KeyPrefix;
 
             if(mi != null)
             {

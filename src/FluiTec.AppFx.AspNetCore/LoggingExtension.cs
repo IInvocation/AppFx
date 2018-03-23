@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
 		{
 			if (environment.IsDevelopment())
 			{
-				loggerFactory.AddConsole(configuration.GetSection(key: "Logging"));
+				loggerFactory.AddConsole(configuration.GetSection("Logging"));
 				loggerFactory.AddDebug();
 			}
 			else

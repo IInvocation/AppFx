@@ -136,7 +136,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.ApiResourceClaimRepository.Delete(claim);
 
-				Assert.AreEqual(expected: null, actual: uow.ApiResourceClaimRepository.Get(claim.Id));
+				Assert.AreEqual(null, uow.ApiResourceClaimRepository.Get(claim.Id));
 			}
 		}
 

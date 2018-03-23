@@ -30,6 +30,7 @@ namespace FluiTec.AppFx.Localization.LiteDb
         /// <param name="options">  Options for controlling the operation. </param>
         public LiteDbLocalizationDataService(ILiteDbServiceOptions options) : base(options)
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             RegisterRepositoryProviders();
         }
 

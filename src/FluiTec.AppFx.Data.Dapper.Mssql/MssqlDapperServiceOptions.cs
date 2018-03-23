@@ -3,12 +3,13 @@
 namespace FluiTec.AppFx.Data.Dapper.Mssql
 {
 	/// <summary>	A mssql dapper service options. </summary>
-	[ConfigurationName(name: "Dapper")]
+	[ConfigurationName("Dapper")]
 	public class MssqlDapperServiceOptions : DapperServiceOptions
 	{
 		/// <summary>	Default constructor. </summary>
 		public MssqlDapperServiceOptions()
 		{
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			ConnectionFactory = new MssqlConnectionFactory();
 		}
 

@@ -82,7 +82,7 @@ namespace FluiTec.AppFx.Identity.Test
 				};
 
 				uow.RoleRepository.Add(role);
-				Assert.AreEqual(expected: 1, actual: uow.RoleRepository.FindByIds(new [] {role.Id}).Count());
+				Assert.AreEqual(1, uow.RoleRepository.FindByIds(new [] {role.Id}).Count());
 			}
 		}
 
@@ -152,7 +152,7 @@ namespace FluiTec.AppFx.Identity.Test
 				);
 
 				uow.RoleRepository.Delete(role.Id);
-				Assert.AreEqual(expected: null, actual: uow.RoleRepository.Get(role.Id));
+				Assert.AreEqual(null, uow.RoleRepository.Get(role.Id));
 			}
 		}
 	}

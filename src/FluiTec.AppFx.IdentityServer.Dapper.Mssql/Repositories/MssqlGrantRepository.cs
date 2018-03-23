@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Dapper;
+﻿using Dapper;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Entities;

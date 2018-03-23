@@ -229,7 +229,7 @@ namespace FluiTec.AppFx.Identity.Test
 				uow.LoginRepository.Add(login);
 
 				uow.LoginRepository.Delete(login.Id);
-				Assert.AreEqual(expected: null, actual: uow.LoginRepository.Get(login.Id));
+				Assert.AreEqual(null, uow.LoginRepository.Get(login.Id));
 			}
 		}
 
@@ -263,7 +263,7 @@ namespace FluiTec.AppFx.Identity.Test
 				uow.LoginRepository.Add(login);
 
 				uow.LoginRepository.RemoveByNameAndKey(login.ProviderName, login.ProviderKey);
-				Assert.AreEqual(expected: null, actual: uow.LoginRepository.Get(login.Id));
+				Assert.AreEqual(null, uow.LoginRepository.Get(login.Id));
 			}
 		}
 	}

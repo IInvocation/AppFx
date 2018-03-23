@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the identityresourceclaim-table. </summary>
-	[Migration(version: 10)]
+	[Migration(10)]
 	public class IdentityResourceClaimTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,24 +11,24 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.IDENTITYRESOURCECLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.IdentityresourceclaimTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("IdentityResourceId").AsInt32().NotNullable()
 				.WithColumn("ClaimType").AsString(255).NotNullable();
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.IDENTITYRESOURCECLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.IdentityresourceclaimTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("IdentityResourceId")
-				.ToTable(Globals.IDENTITYRESOURCE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.IdentityresourceTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.IDENTITYRESOURCECLAIM_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.IdentityresourceclaimTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("IdentityResourceId").AsInt32().NotNullable()
 				.WithColumn("ClaimType").AsString(255).NotNullable();
@@ -39,12 +39,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.IDENTITYRESOURCECLAIM_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.IdentityresourceclaimTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.IDENTITYRESOURCECLAIM_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.IdentityresourceclaimTable}");
 		}
 	}
 }

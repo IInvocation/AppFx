@@ -24,14 +24,15 @@ using System.Linq;
 
 namespace DbLocalizationProvider.Internal
 {
-    public static class IEnumerableOfTExtensions
+    public static class EnumerableOfTExtensions
     {
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            foreach (var item in source)
+            foreach(var item in source)
+            {
                 action(item);
-
-            return source;
+                yield return item;
+            }
         }
 
         public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)

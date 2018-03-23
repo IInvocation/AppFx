@@ -40,11 +40,9 @@ namespace FluiTec.AppFx.Localization.MetadataProviders
 
                 // Inserts validators based on whether or not they are 'required'. We want to run
                 // 'required' validators first so that we get the best possible error message.
-                if (attribute is RequiredAttribute)
-                {
-                    context.Results.Remove(validatorItem);
-                    context.Results.Insert(0, validatorItem);
-                }
+                if (!(attribute is RequiredAttribute)) continue;
+                context.Results.Remove(validatorItem);
+                context.Results.Insert(0, validatorItem);
             }
 
             // Produce a validator if the type supports IValidatableObject

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 using Dapper;
 
 namespace FluiTec.AppFx.Data.Sql
@@ -26,7 +25,7 @@ namespace FluiTec.AppFx.Data.Sql
 		{
 			var sql = connection.GetBuilder().SelectAll(typeof(TEntity));
 			OnSqlGenerated(sql);
-			return connection.Query<TEntity>(sql, param: null, transaction: transaction, commandTimeout: commandTimeout);
+			return connection.Query<TEntity>(sql, null, transaction, commandTimeout: commandTimeout);
 		}
 
 		/// <summary>	An IDbConnection extension method that gets. </summary>
@@ -150,7 +149,7 @@ namespace FluiTec.AppFx.Data.Sql
 		/// <param name="sql">	The SQL. </param>
 		private static void OnSqlGenerated(string sql)
 		{
-			SqlGenerated?.Invoke(sender: null, e: new SqlEventArgs(sql));
+			SqlGenerated?.Invoke(null, new SqlEventArgs(sql));
 		}
 	}
 }

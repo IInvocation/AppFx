@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using DbLocalizationProvider.Abstractions;
 using DbLocalizationProvider.Internal;
 
 namespace DbLocalizationProvider
@@ -42,7 +43,7 @@ namespace DbLocalizationProvider
         public Type ResourceType { get; }
     }
 
-    public static class ICollectionOfForeignResourceDescriptorExtensions
+    public static class CollectionOfForeignResourceDescriptorExtensions
     {
         public static ICollection<ForeignResourceDescriptor> Add(this ICollection<ForeignResourceDescriptor> collection, Type target)
         {
@@ -58,6 +59,7 @@ namespace DbLocalizationProvider
 
         public static void AddRange(this ICollection<ForeignResourceDescriptor> collection, IEnumerable<Type> targets)
         {
+            // ReSharper disable once IteratorMethodResultIsIgnored
             targets.ForEach(t => collection.Add(new ForeignResourceDescriptor(t)));
         }
     }

@@ -15,7 +15,7 @@ namespace FluiTec.AppFx.Cli
 			var startInfo = new ProcessStartInfo(exeName)
 			{
 				Verb = "runas",
-				Arguments = string.Join(separator: " ", value: args)
+				Arguments = string.Join(" ", args)
 			};
 			Process.Start(startInfo);
 			shutDownAction?.Invoke();

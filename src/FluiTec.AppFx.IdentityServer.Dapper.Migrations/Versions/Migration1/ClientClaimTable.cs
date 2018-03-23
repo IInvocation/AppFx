@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the clientclaim-table. </summary>
-	[Migration(version: 6)]
+	[Migration(6)]
 	public class ClientClaimTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.CLIENTCLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.ClientclaimTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ClientId").AsInt32().NotNullable()
 				.WithColumn("ClaimType").AsString(255).NotNullable()
@@ -20,16 +20,16 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.CLIENTCLAIM_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.ClientclaimTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("ClientId")
-				.ToTable(Globals.CLIENT_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.ClientTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.CLIENTCLAIM_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.ClientclaimTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ClientId").AsInt32().NotNullable()
 				.WithColumn("ClaimType").AsString(255).NotNullable()
@@ -41,12 +41,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.CLIENTCLAIM_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.ClientclaimTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.CLIENTCLAIM_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.ClientclaimTable}");
 		}
 	}
 }

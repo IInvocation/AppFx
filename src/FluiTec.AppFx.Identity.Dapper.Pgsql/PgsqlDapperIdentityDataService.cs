@@ -17,6 +17,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql
 		/// <param name="options">	Options for controlling the operation. </param>
 		public PgsqlDapperIdentityDataService(IDapperServiceOptions options) : base(options)
 		{
+		    // ReSharper disable once VirtualMemberCallInConstructor
 			RegisterIdentityRepositories();
 		}
 

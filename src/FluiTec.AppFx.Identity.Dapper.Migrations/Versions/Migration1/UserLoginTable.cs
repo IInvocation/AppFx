@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 {
 	/// <summary>	A migration for the user-table. </summary>
-	[Migration(version: 2)]
+	[Migration(2)]
 	public class UserLoginTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,8 +11,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.USERLOGIN_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.UserloginTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ProviderName").AsString(255).NotNullable()
 				.WithColumn("ProviderKey").AsString(45).NotNullable()
@@ -21,24 +21,24 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.Index()
-				.OnTable(Globals.USERLOGIN_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.OnTable(Globals.UserloginTable)
+				.InSchema(Globals.Schema)
 				.OnColumn("ProviderName").Ascending()
 				.OnColumn("ProviderKey").Ascending()
 				.WithOptions().Unique();
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.USERLOGIN_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.UserloginTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("UserId")
-				.ToTable(Globals.USER_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.UserTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Identifier");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.USERLOGIN_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.UserloginTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ProviderName").AsString(255).NotNullable()
 				.WithColumn("ProviderKey").AsString(45).NotNullable()
@@ -47,7 +47,7 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 			IfDatabase("mysql")
 				.Create
 				.Index()
-				.OnTable($"{Globals.SCHEMA}_{Globals.USERLOGIN_TABLE}")
+				.OnTable($"{Globals.Schema}_{Globals.UserloginTable}")
 				.OnColumn("ProviderName").Ascending()
 				.OnColumn("ProviderKey").Ascending()
 				.WithOptions().Unique();
@@ -58,12 +58,12 @@ namespace FluiTec.AppFx.Identity.Dapper.Migrations.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.USERLOGIN_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.UserloginTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.USERLOGIN_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.UserloginTable}");
 		}
 	}
 }

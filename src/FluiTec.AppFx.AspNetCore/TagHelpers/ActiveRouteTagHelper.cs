@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -77,7 +76,7 @@ namespace FluiTec.AppFx.AspNetCore.TagHelpers
             return RouteValues.All(routeValue => ViewContext.RouteData.Values.ContainsKey(routeValue.Key) && ViewContext.RouteData.Values[routeValue.Key].ToString() == routeValue.Value);
         }
 
-        private void MakeActive(TagHelperOutput output)
+        private static void MakeActive(TagHelperOutput output)
         {
             var classAttr = output.Attributes.FirstOrDefault(a => a.Name == "class");
             if (classAttr == null)

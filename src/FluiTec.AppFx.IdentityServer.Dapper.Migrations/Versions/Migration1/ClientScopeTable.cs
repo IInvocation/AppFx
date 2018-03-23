@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 {
 	/// <summary>	A migration for the clientscope-table. </summary>
-	[Migration(version: 7)]
+	[Migration(7)]
 	public class ClientScopeTable : Migration
 	{
 		/// <summary>	Updates the database up to this migration. </summary>
@@ -11,33 +11,33 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Create
-				.Table(Globals.CLIENTSCOPE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.Table(Globals.ClientscopeTable)
+				.InSchema(Globals.Schema)
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ClientId").AsInt32().NotNullable()
 				.WithColumn("ScopeId").AsInt32().NotNullable();
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.CLIENTSCOPE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.ClientscopeTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("ClientId")
-				.ToTable(Globals.CLIENT_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.ClientTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 			IfDatabase("sqlserver", "postgres")
 				.Create
 				.ForeignKey()
-				.FromTable(Globals.CLIENTSCOPE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.FromTable(Globals.ClientscopeTable)
+				.InSchema(Globals.Schema)
 				.ForeignColumn("ScopeId")
-				.ToTable(Globals.SCOPE_TABLE)
-				.InSchema(Globals.SCHEMA)
+				.ToTable(Globals.ScopeTable)
+				.InSchema(Globals.Schema)
 				.PrimaryColumn("Id");
 
 			IfDatabase("mysql")
 				.Create
-				.Table($"{Globals.SCHEMA}_{Globals.CLIENTSCOPE_TABLE}")
+				.Table($"{Globals.Schema}_{Globals.ClientscopeTable}")
 				.WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
 				.WithColumn("ClientId").AsInt32().NotNullable()
 				.WithColumn("ScopeId").AsInt32().NotNullable();
@@ -48,12 +48,12 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Migrations.Versions.Migration1
 		{
 			IfDatabase("sqlserver", "postgres")
 				.Delete
-				.Table(Globals.CLIENTSCOPE_TABLE)
-				.InSchema(Globals.SCHEMA);
+				.Table(Globals.ClientscopeTable)
+				.InSchema(Globals.Schema);
 
 			IfDatabase("mysql")
 				.Delete
-				.Table($"{Globals.SCHEMA}_{Globals.CLIENTSCOPE_TABLE}");
+				.Table($"{Globals.Schema}_{Globals.ClientscopeTable}");
 		}
 	}
 }

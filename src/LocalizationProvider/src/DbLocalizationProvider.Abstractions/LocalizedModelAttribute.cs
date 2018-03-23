@@ -19,9 +19,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using DbLocalizationProvider.Abstractions;
 
-namespace DbLocalizationProvider
+namespace DbLocalizationProvider.Abstractions
 {
     /// <summary>
     /// One of the main attributes of the library. Indicates that decorated class is kinda localized model.

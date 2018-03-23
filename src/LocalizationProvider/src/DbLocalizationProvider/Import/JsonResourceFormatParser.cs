@@ -28,11 +28,11 @@ namespace DbLocalizationProvider.Import
 {
     public class JsonResourceFormatParser : IResourceFormatParser
     {
-        private static readonly string[] _extensions = { ".json" };
+        private static readonly string[] Extensions = { ".json" };
 
         public string FormatName => "JSON";
 
-        public string[] SupportedFileExtensions => _extensions;
+        public string[] SupportedFileExtensions => Extensions;
 
         public string ProviderId => "json";
 

@@ -89,7 +89,7 @@ namespace FluiTec.AppFx.Localization.Test
 
                 uow.ResourceRepository.Delete(resource);
 
-                Assert.AreEqual(expected: null, actual: uow.ResourceRepository.Get(resource.Id));
+                Assert.AreEqual(null, uow.ResourceRepository.Get(resource.Id));
             }
         }
     }

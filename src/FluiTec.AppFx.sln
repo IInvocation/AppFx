@@ -206,8 +206,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider.Abst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider", "LocalizationProvider\src\DbLocalizationProvider\DbLocalizationProvider.csproj", "{D9EF5C43-2505-4873-B947-23EF2453BAA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -478,10 +476,6 @@ Global
 		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9EF5C43-2505-4873-B947-23EF2453BAA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -576,7 +570,6 @@ Global
 		{6A0FA387-AE08-41FF-9E9E-AA30806EDE1E} = {9A52B173-CB92-4F04-B882-40D293BCABA8}
 		{06C4B627-6BF7-4E6A-AACC-9DEF060E1CC2} = {BFF345C4-674A-4871-B50C-A5A79DAEE0D1}
 		{D9EF5C43-2505-4873-B947-23EF2453BAA1} = {BFF345C4-674A-4871-B50C-A5A79DAEE0D1}
-		{281BFAAA-8E20-4392-9F0D-9FEEBB8C9738} = {128A885E-1E8A-49F6-821D-9B03E1C4AA8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}

@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Authentication.Amazon
 		/// </summary>
 		/// <param name="app">	The app to act on. </param>
 		/// <returns>	An IApplicationBuilder. </returns>
-		[Obsolete("UseAmazonAuthentication is obsolete. Configure Amazon authentication with AddAuthentication().AddAmazon in ConfigureServices. See https://go.microsoft.com/fwlink/?linkid=845470 for more details.", error: true)]
+		[Obsolete("UseAmazonAuthentication is obsolete. Configure Amazon authentication with AddAuthentication().AddAmazon in ConfigureServices. See https://go.microsoft.com/fwlink/?linkid=845470 for more details.", true)]
 		public static IApplicationBuilder UseAmazonAuthentication(this IApplicationBuilder app)
 		{
 			throw new NotSupportedException("This method is no longer supported, see https://go.microsoft.com/fwlink/?linkid=845470");
@@ -27,7 +27,7 @@ namespace FluiTec.AppFx.Authentication.Amazon
 		/// <param name="app">	  	The app to act on. </param>
 		/// <param name="options">	Options for controlling the operation. </param>
 		/// <returns>	An IApplicationBuilder. </returns>
-		[Obsolete("UseAmazonAuthentication is obsolete. Configure Amazon authentication with AddAuthentication().AddAmazon in ConfigureServices. See https://go.microsoft.com/fwlink/?linkid=845470 for more details.", error: true)]
+		[Obsolete("UseAmazonAuthentication is obsolete. Configure Amazon authentication with AddAuthentication().AddAmazon in ConfigureServices. See https://go.microsoft.com/fwlink/?linkid=845470 for more details.", true)]
 		public static IApplicationBuilder UseAmazonAuthentication(this IApplicationBuilder app, AmazonOptions options)
 		{
 			if (app == null)

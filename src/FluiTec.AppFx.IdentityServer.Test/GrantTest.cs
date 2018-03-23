@@ -96,7 +96,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.GrantRepository.Delete(grant);
 
-			    Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+			    Assert.AreEqual(null, uow.GrantRepository.Get(grant.Id));
 		    }
 	    }
 
@@ -153,7 +153,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.GrantRepository.RemoveByGrantKey(grant.GrantKey);
 
-				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+				Assert.AreEqual(null, uow.GrantRepository.Get(grant.Id));
 			}
 		}
 
@@ -174,7 +174,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.GrantRepository.RemoveBySubjectAndClient(grant.SubjectId, grant.ClientId);
 
-				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+				Assert.AreEqual(null, uow.GrantRepository.Get(grant.Id));
 			}
 		}
 
@@ -195,7 +195,7 @@ namespace FluiTec.AppFx.IdentityServer.Test
 
 				uow.GrantRepository.RemoveBySubjectClientType(grant.SubjectId, grant.ClientId, grant.Type);
 
-				Assert.AreEqual(expected: null, actual: uow.GrantRepository.Get(grant.Id));
+				Assert.AreEqual(null, uow.GrantRepository.Get(grant.Id));
 			}
 		}
 	}
