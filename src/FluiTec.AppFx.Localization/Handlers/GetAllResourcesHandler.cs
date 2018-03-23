@@ -37,7 +37,7 @@ namespace FluiTec.AppFx.Localization.Handlers
                 // ReSharper disable once IteratorMethodResultIsIgnored
                 foreach (var entity in compound)
                 {
-                    var resource = new LocalizationResource(entity.Resource.Key)
+                    var resource = new LocalizationResource(entity.Resource.ResourceKey)
                     {
                         Id = entity.Resource.Id,
                         Author = entity.Resource.Author,

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+    <NeutralLanguage>de</NeutralLanguage>
+    <PostBuildEvent></PostBuildEvent>
+    <PreBuildEvent></PreBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluiTec.AppFx.Localization.LiteDb\FluiTec.AppFx.Localization.LiteDb.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Localization.Mssql\FluiTec.AppFx.Localization.Mssql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Localization.Mysql\FluiTec.AppFx.Localization.Mysql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Localization.Pgsql\FluiTec.AppFx.Localization.Pgsql.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\..\..\Users\aschn\.nuget\packages\microsoft.extensions.configuration.abstractions\2.0.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
+
+</Project>

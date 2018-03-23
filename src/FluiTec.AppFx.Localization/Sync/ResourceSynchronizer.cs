@@ -120,7 +120,7 @@ namespace FluiTec.AppFx.Localization.Sync
                                 FromCode = true,
                                 IsHidden = property.IsHidden,
                                 IsModified = false,
-                                Key = property.Key,
+                                ResourceKey = property.Key,
                                 ModificationDate = DateTime.Now
                             });
 

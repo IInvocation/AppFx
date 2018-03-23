@@ -29,7 +29,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         /// </remarks>
         public override ResourceEntity Add(ResourceEntity entity)
         {
-            return GetByKey(entity?.Key) ?? base.Add(entity);
+            return GetByKey(entity?.ResourceKey) ?? base.Add(entity);
         }
 
         /// <summary>   Adds a range. </summary>
@@ -41,7 +41,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         {
             foreach (var entity in entities)
             {
-                if (GetByKey(entity?.Key) == null)
+                if (GetByKey(entity?.ResourceKey) == null)
                     Collection.Insert(entity);
             }
         }
@@ -59,11 +59,11 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
             var original = Get(entity.Id);
 
             // if key wasnt changed - continue as usual
-            if (original.Key == entity.Key)
+            if (original.ResourceKey == entity.ResourceKey)
                 return base.Update(entity);
 
             // if key was changed - make sure a corresponding one doesnt exist
-            if (GetByKey(entity.Key) == null)
+            if (GetByKey(entity.ResourceKey) == null)
                 return base.Update(entity);
 
             throw new InvalidOperationException("Duplicate key cannot be created");
@@ -76,7 +76,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         /// <returns>   The by key. </returns>
         public ResourceEntity GetByKey(string key)
         {
-            return Collection.Find(e => e.Key == key).SingleOrDefault();
+            return Collection.Find(e => e.ResourceKey == key).SingleOrDefault();
         }
 
         /// <summary>   Resets the synchronise status. </summary>
@@ -95,7 +95,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
             var entity = GetByKey(oldKey);
             if (entity == null) return false;
 
-            entity.Key = newKey;
+            entity.ResourceKey = newKey;
             entity.FromCode = true;
             Update(entity);
             return true;

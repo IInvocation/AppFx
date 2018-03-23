@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using FluiTec.AppFx.Localization.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,11 +23,14 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Key = resourceType.FullName + nameof(TestResource.Name)
+                    ResourceKey = resourceType.FullName + nameof(TestResource.Name),
+                    Author = "Code",
+                    ModificationDate = DateTime.Now,
+                    IsHidden = false
                 };
 
                 uow.ResourceRepository.Add(resource);
-                Assert.AreEqual(resource.Key, uow.ResourceRepository.Get(resource.Id).Key);
+                Assert.AreEqual(resource.ResourceKey, uow.ResourceRepository.Get(resource.Id).ResourceKey);
             }
         }
 
@@ -40,11 +44,17 @@ namespace FluiTec.AppFx.Localization.Test
                 var resources = new[] {
                     new ResourceEntity
                     {
-                        Key = resourceType.FullName + nameof(TestResource.Name)
+                        ResourceKey = resourceType.FullName + nameof(TestResource.Name),
+                        Author = "Code",
+                        ModificationDate = DateTime.Now,
+                        IsHidden = false
                     },
                     new ResourceEntity
                     {
-                        Key = resourceType.FullName + nameof(TestResource.Value)
+                        ResourceKey = resourceType.FullName + nameof(TestResource.Value),
+                        Author = "Code",
+                        ModificationDate = DateTime.Now,
+                        IsHidden = false
                     }
                 };
                 uow.ResourceRepository.AddRange(resources);
@@ -62,15 +72,18 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Key = resourceType.FullName + nameof(TestResource.Name)
+                    ResourceKey = resourceType.FullName + nameof(TestResource.Name),
+                    Author = "Code",
+                    ModificationDate = DateTime.Now,
+                    IsHidden = false
                 };
                 uow.ResourceRepository.Add(resource);
 
 
-                resource.Key = "meykey";
+                resource.ResourceKey = "meykey";
                 uow.ResourceRepository.Update(resource);
 
-                Assert.AreEqual(resource.Key, uow.ResourceRepository.Get(resource.Id).Key);
+                Assert.AreEqual(resource.ResourceKey, uow.ResourceRepository.Get(resource.Id).ResourceKey);
             }
         }
 
@@ -83,7 +96,10 @@ namespace FluiTec.AppFx.Localization.Test
 
                 var resource = new ResourceEntity
                 {
-                    Key = resourceType.FullName + nameof(TestResource.Name)
+                    ResourceKey = resourceType.FullName + nameof(TestResource.Name),
+                    Author = "Code",
+                    ModificationDate = DateTime.Now,
+                    IsHidden = false
                 };
                 uow.ResourceRepository.Add(resource);
 
