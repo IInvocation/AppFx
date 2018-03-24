@@ -48,6 +48,7 @@
     <Compile Include="Versions\Migration1\ResourceTable.cs" />
     <Compile Include="Versions\Migration1\TranslationTable.cs" />
     <Compile Include="Versions\Migration2\ResourceTable.cs" />
+    <Compile Include="Versions\Migration3\TranslationTable.cs" />
     <Compile Include="VersionTable.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,5 +56,6 @@
     <None Include="Migrate.sample.cmd" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

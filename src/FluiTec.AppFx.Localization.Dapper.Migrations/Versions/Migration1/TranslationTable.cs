@@ -31,12 +31,9 @@ namespace FluiTec.AppFx.Localization.Dapper.Migrations.Versions.Migration1
                 .Create
                 .Table($"{Globals.Schema}_{Globals.TranslationTable}")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Key").AsString().NotNullable().Unique()
-                .WithColumn("Author").AsString().NotNullable()
-                .WithColumn("FromCode").AsBoolean().NotNullable()
-                .WithColumn("IsModified").AsBoolean().Nullable()
-                .WithColumn("ModificationDate").AsDateTime().Nullable()
-                .WithColumn("IsHidden").AsBoolean().NotNullable();
+                .WithColumn("ResourceId").AsInt32().NotNullable()
+                .WithColumn("Value").AsString().Nullable()
+                .WithColumn("Language").AsString().Nullable();
         }
 
         /// <summary>Downs this object.</summary>

@@ -2,48 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <NeutralLanguage>en</NeutralLanguage>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+    <NeutralLanguage>de</NeutralLanguage>
+    <PostBuildEvent></PostBuildEvent>
+    <PreBuildEvent></PreBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <ProjectReference Include="..\LocalizationProvider\src\DbLocalizationProvider.Abstractions\DbLocalizationProvider.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Identity\FluiTec.AppFx.Identity.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources\AccountController.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AccountController.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\ViewModel.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ViewModel.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\AccountController.de-DE.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\AccountController.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AccountController.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ViewModel.de-DE.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ViewModel.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ViewModel.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\system.componentmodel.annotations\4.4.0\ref\netstandard2.0\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
