@@ -9,9 +9,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IStringLocalizer<Resource> _localizer;
+        private readonly IStringLocalizer<ChildResource> _localizer;
 
-        public HomeController(IStringLocalizer<Resource> localizer)
+        public HomeController(IStringLocalizer<ChildResource> localizer)
         {
             _localizer = localizer;
         }
