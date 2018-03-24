@@ -45,25 +45,21 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                     var collection = _db.GetCollection(_activeCollection);
                     _bson = collection.FindAll().ToList();
 
-                    var first = _bson.First();
-                    var keys = _bson.ElementAt(1).Keys;
-
+                    var tableKeys = GetKeys(_bson);
 
                     var table = new DataTable(_activeCollection);
-                    for (var i = 0; i < keys.Count; i++)
+                    for (var i = 0; i < tableKeys.Count; i++)
                     {
-                        table.Columns.Add(keys.ElementAt(i), GetType(_bson.ElementAt(1).Values.ElementAt(i).Type));
+                        table.Columns.Add(tableKeys.ElementAt(i).Key, tableKeys.ElementAt(i).Value);
                     }
 
                     foreach (var entry in _bson)
                     {
-                        var elem = _bson.ElementAt(1);
-                        var netValues = new object[elem.Keys.Count];
+                        var netValues = new object[tableKeys.Count];
                         
-                        for (var i = 0; i < elem.Keys.Count; i++)
+                        for (var i = 0; i < tableKeys.Count; i++)
                         {
-                            var x = entry[elem.Keys.ElementAt(i)];
-                            netValues[i] = GetValue(entry[elem.Keys.ElementAt(i)]);
+                            netValues[i] = GetValue(entry[tableKeys.ElementAt(i).Key]);
                         }
                         table.Rows.Add(netValues);
                     }
@@ -81,6 +77,22 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                     Data = null;
                 }
             }
+        }
+
+        private Dictionary<string, Type> GetKeys(List<BsonDocument> data)
+        {
+            var dictionary = new Dictionary<string, Type>();
+            foreach (var entity in data)
+            {
+                foreach (var key in entity.Keys)
+                {
+                    if (!dictionary.ContainsKey(key))
+                    {
+                        dictionary.Add(key, GetType(entity[key].Type));
+                    }
+                }
+            }
+            return dictionary;
         }
 
         private void Data_RowDeleted(object sender, DataRowChangeEventArgs e)
