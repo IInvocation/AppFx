@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using FluiTec.AppFx.AspNetCore.Configuration;
+﻿using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Localization;
@@ -10,6 +7,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace FluiTec.AppFx.AspNetCore
 {

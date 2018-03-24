@@ -1,14 +1,14 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using FluiTec.AppFx.Identity;
+﻿using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Dynamic;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Localization;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
