@@ -4,7 +4,7 @@
     internal class Globals
     {
         /// <summary>The schema.</summary>
-        public const string Schema = "AppFxLocalization";
+        public const string Schema = "AppFxAuthorization";
 
         /// <summary>The activitiy table.</summary>
         public const string ActivityTable = "Activity";

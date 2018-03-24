@@ -19,7 +19,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Migrations
 		public string TableName => "AppFxAuthorization_Version";
 
 		/// <summary>	Name of the unique index. </summary>
-		public string UniqueIndexName => "AU_Version";
+		public string UniqueIndexName => "UC_Version";
 
 		/// <summary>	Name of the applied on column. </summary>
 		public virtual string AppliedOnColumnName => "AppliedOn";
