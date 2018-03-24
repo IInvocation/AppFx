@@ -14,13 +14,15 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.Versions.Migrat
                 .Table(Globals.ActivityTable)
                 .InSchema(Globals.Schema)
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Name").AsString().NotNullable();
+                .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("ResourceName").AsString().NotNullable();
 
             IfDatabase("mysql")
                 .Create
                 .Table($"{Globals.Schema}_{Globals.ActivityTable}")
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("Name").AsString().NotNullable();
+                .WithColumn("Name").AsString().NotNullable()
+                .WithColumn("ResourceName").AsString().NotNullable();
         }
 
         /// <summary>Downs this object.</summary>

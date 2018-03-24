@@ -23,8 +23,6 @@ namespace FluiTec.AppFx.IdentityServer.LiteDb
         public LiteDbIdentityServerDataService(bool useSingletonConnection, string dbFilePath, string applicationFolder = null) 
             : this(new LiteDbServiceOptions { UseSingletonConnection = useSingletonConnection, ApplicationFolder = applicationFolder, DbFileName = dbFilePath})
         {
-            // ReSharper disable once VirtualMemberCallInConstructor
-            RegisterIdentityRepositories();
         }
 
         /// <summary>

@@ -18,7 +18,8 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
             {
                 var activity = new ActivityEntity
                 {
-                    Name = "MyActivity"
+                    Name = "MyActivity",
+                    ResourceName = "MyResource"
                 };
 
                 uow.ActivityRepository.Add(activity);
@@ -33,11 +34,13 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
             {
                 new ActivityEntity
                 {
-                    Name = "MyActivity1"
+                    Name = "MyActivity1",
+                    ResourceName = "MyResource"
                 },
                 new ActivityEntity
                 {
-                    Name = "MyActivity2"
+                    Name = "MyActivity2",
+                    ResourceName = "MyResource"
                 }
             };
             using (var uow = DataService.StartUnitOfWork())
@@ -54,8 +57,9 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
             {
                 var activity = uow.ActivityRepository.Add(new ActivityEntity
                     {
-                        Name = "Dummy"
-                    }
+                        Name = "Dummy",
+                        ResourceName = "MyResource"
+                }
                 );
 
                 activity.Name = "Changed";
@@ -72,7 +76,8 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 var role = uow.ActivityRepository.Add(new ActivityEntity
                     {
                         Name = "Dummy",
-                    }
+                        ResourceName = "MyResource"
+                }
                 );
 
                 uow.ActivityRepository.Delete(role.Id);

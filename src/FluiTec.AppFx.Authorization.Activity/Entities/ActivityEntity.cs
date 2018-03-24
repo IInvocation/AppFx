@@ -10,6 +10,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Entities
         /// <value>The name.</value>
         public string Name { get; set; }
 
+        /// <summary>Gets or sets the name of the resource.</summary>
+        /// <value>The name of the resource.</value>
+        public string ResourceName { get; set; }
+
         /// <summary>Gets or sets the identifier.</summary>
         /// <value>The identifier.</value>
         public int Id { get; set; }
