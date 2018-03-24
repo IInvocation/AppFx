@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+    <NeutralLanguage>de</NeutralLanguage>
+    <PostBuildEvent></PostBuildEvent>
+    <PreBuildEvent></PreBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Data.LiteDb\FluiTec.AppFx.Data.LiteDb.csproj" />
+  </ItemGroup>
+
+</Project>
