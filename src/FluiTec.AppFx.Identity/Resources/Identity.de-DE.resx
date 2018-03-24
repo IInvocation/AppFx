@@ -136,7 +136,7 @@
     <value>Email '{0}' is ungültig.</value>
   </data>
   <data name="InvalidRoleName" xml:space="preserve">
-    <value>Die Rollle '{0}' ist ungültig.</value>
+    <value>Die Rolle '{0}' ist ungültig.</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Ungültiger Schlüssel.</value>

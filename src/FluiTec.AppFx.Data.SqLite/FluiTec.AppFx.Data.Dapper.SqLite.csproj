@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>0.0.1</Version>
+    <Version>1.0.3</Version>
     <AssemblyName>FluiTec.AppFx.Data.Dapper.SqLite</AssemblyName>
     <RootNamespace>FluiTec.AppFx.Data.Dapper.SqLite</RootNamespace>
   </PropertyGroup>
@@ -22,12 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper\FluiTec.AppFx.Data.Dapper.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.Data.Sqlite">
-      <HintPath>..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.data.sqlite.core\2.0.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

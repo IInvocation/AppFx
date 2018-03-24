@@ -1,171 +1,191 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluiTec.AppFx.Identity.Resources;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
 namespace FluiTec.AppFx.Identity.Localization
 {
-	/// <summary>	A multilanguage identity error describer. </summary>
-	public class MultiLanguageIdentityErrorDescriber : IdentityErrorDescriber
-	{
-		/// <summary>	From resource. </summary>
-		/// <param name="errorName">	Name of the error. </param>
-		/// <param name="args">			A variable-length parameters list containing arguments. </param>
-		/// <returns>	An IdentityError. </returns>
-		private static IdentityError FromResource(string errorName, params object[] args)
-		{
-			var resString = Resources.Identity.ResourceManager.GetString(errorName);
-			return new IdentityError
-			{
-				Code = errorName,
-				Description = string.Format(resString, args)
-			};
-		}
+    /// <summary>A multi language identity error describer.</summary>
+    public class MultiLanguageIdentityErrorDescriber : IdentityErrorDescriber
+    {
+        /// <summary>Name of the type.</summary>
+        private readonly string _typeName;
 
-		/// <summary>	Duplicate email. </summary>
-		/// <param name="email">	The email. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError DuplicateEmail(string email)
-		{
-			return FromResource(nameof(DuplicateEmail), email);
-		}
+        /// <summary>The localizer.</summary>
+        private readonly IStringLocalizer<IdentityResource> _localizer;
 
-		/// <summary>	Duplicate user name. </summary>
-		/// <param name="userName">	Name of the user. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError DuplicateUserName(string userName)
-		{
-			return FromResource(nameof(DuplicateUserName), userName);
-		}
+        /// <summary>Constructor.</summary>
+        /// <param name="localizer">    The localizer. </param>
+        public MultiLanguageIdentityErrorDescriber(IStringLocalizer<IdentityResource> localizer)
+        {
+            _typeName = typeof(IdentityResource).FullName;
+            _localizer = localizer;
+        }
 
-		/// <summary>	Invalid email. </summary>
-		/// <param name="email">	The email. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError InvalidEmail(string email)
-		{
-			return FromResource(nameof(InvalidEmail), email);
-		}
+        /// <summary>From resource.</summary>
+        /// <param name="errorName">    Name of the error. </param>
+        /// <param name="args">         A variable-length parameters list containing arguments. </param>
+        /// <returns>An IdentityError.</returns>
+        private IdentityError FromStringLocalizer(string errorName, params object[] args)
+        {
+            var resString = _localizer.GetString($"{_typeName}.{errorName}", args);
+            return new IdentityError
+            {
+                Code = errorName,
+                Description = resString
+            };
+        }
 
-		/// <summary>	Default error. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError DefaultError()
-		{
-			return FromResource(nameof(DefaultError));
-		}
+        #region IdentityErrorDescriber
 
-		/// <summary>	Duplicate role name. </summary>
-		/// <param name="role">	The role. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError DuplicateRoleName(string role)
-		{
-			return FromResource(nameof(DuplicateRoleName), role);
-		}
+        /// <summary>	Duplicate email. </summary>
+        /// <param name="email">	The email. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError DuplicateEmail(string email)
+        {
+            return FromStringLocalizer(nameof(DuplicateEmail), email);
+        }
 
-		/// <summary>	Invalid role name. </summary>
-		/// <param name="role">	The role. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError InvalidRoleName(string role)
-		{
-			return FromResource(nameof(InvalidRoleName), role);
-		}
+        /// <summary>	Duplicate user name. </summary>
+        /// <param name="userName">	Name of the user. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError DuplicateUserName(string userName)
+        {
+            return FromStringLocalizer(nameof(DuplicateUserName), userName);
+        }
 
-		/// <summary>	Invalid token. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError InvalidToken()
-		{
-			return FromResource(nameof(InvalidToken));
-		}
+        /// <summary>	Invalid email. </summary>
+        /// <param name="email">	The email. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError InvalidEmail(string email)
+        {
+            return FromStringLocalizer(nameof(InvalidEmail), email);
+        }
 
-		/// <summary>	Invalid user name. </summary>
-		/// <param name="userName">	Name of the user. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError InvalidUserName(string userName)
-		{
-			return FromResource(nameof(InvalidUserName), userName);
-		}
+        /// <summary>	Default error. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError DefaultError()
+        {
+            return FromStringLocalizer(nameof(DefaultError));
+        }
 
-		/// <summary>	Concurrency failure. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError ConcurrencyFailure()
-		{
-			return FromResource(nameof(ConcurrencyFailure));
-		}
+        /// <summary>	Duplicate role name. </summary>
+        /// <param name="role">	The role. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError DuplicateRoleName(string role)
+        {
+            return FromStringLocalizer(nameof(DuplicateRoleName), role);
+        }
 
-		/// <summary>	Login already associated. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError LoginAlreadyAssociated()
-		{
-			return FromResource(nameof(LoginAlreadyAssociated));
-		}
+        /// <summary>	Invalid role name. </summary>
+        /// <param name="role">	The role. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError InvalidRoleName(string role)
+        {
+            return FromStringLocalizer(nameof(InvalidRoleName), role);
+        }
 
-		/// <summary>	Password mismatch. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordMismatch()
-		{
-			return FromResource(nameof(PasswordMismatch));
-		}
+        /// <summary>	Invalid token. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError InvalidToken()
+        {
+            return FromStringLocalizer(nameof(InvalidToken));
+        }
 
-		/// <summary>	Password requires digit. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordRequiresDigit()
-		{
-			return FromResource(nameof(PasswordRequiresDigit));
-		}
+        /// <summary>	Invalid user name. </summary>
+        /// <param name="userName">	Name of the user. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError InvalidUserName(string userName)
+        {
+            return FromStringLocalizer(nameof(InvalidUserName), userName);
+        }
 
-		/// <summary>	Password requires lower. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordRequiresLower()
-		{
-			return FromResource(nameof(PasswordRequiresLower));
-		}
+        /// <summary>	Concurrency failure. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError ConcurrencyFailure()
+        {
+            return FromStringLocalizer(nameof(ConcurrencyFailure));
+        }
 
-		/// <summary>	Password requires non alphanumeric. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordRequiresNonAlphanumeric()
-		{
-			return FromResource(nameof(PasswordRequiresNonAlphanumeric));
-		}
+        /// <summary>	Login already associated. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError LoginAlreadyAssociated()
+        {
+            return FromStringLocalizer(nameof(LoginAlreadyAssociated));
+        }
 
-		/// <summary>	Password requires upper. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordRequiresUpper()
-		{
-			return FromResource(nameof(PasswordRequiresUpper));
-		}
+        /// <summary>	Password mismatch. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordMismatch()
+        {
+            return FromStringLocalizer(nameof(PasswordMismatch));
+        }
 
-		/// <summary>	Password too short. </summary>
-		/// <param name="length">	The length. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError PasswordTooShort(int length)
-		{
-			return FromResource(nameof(PasswordTooShort), length);
-		}
+        /// <summary>	Password requires digit. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordRequiresDigit()
+        {
+            return FromStringLocalizer(nameof(PasswordRequiresDigit));
+        }
 
-		/// <summary>	User already has password. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError UserAlreadyHasPassword()
-		{
-			return FromResource(nameof(UserAlreadyHasPassword));
-		}
+        /// <summary>	Password requires lower. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordRequiresLower()
+        {
+            return FromStringLocalizer(nameof(PasswordRequiresLower));
+        }
 
-		/// <summary>	User already in role. </summary>
-		/// <param name="role">	The role. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError UserAlreadyInRole(string role)
-		{
-			return FromResource(nameof(UserAlreadyInRole), role);
-		}
+        /// <summary>	Password requires non alphanumeric. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordRequiresNonAlphanumeric()
+        {
+            return FromStringLocalizer(nameof(PasswordRequiresNonAlphanumeric));
+        }
 
-		/// <summary>	User lockout not enabled. </summary>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError UserLockoutNotEnabled()
-		{
-			return FromResource(nameof(UserLockoutNotEnabled));
-		}
+        /// <summary>	Password requires upper. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordRequiresUpper()
+        {
+            return FromStringLocalizer(nameof(PasswordRequiresUpper));
+        }
 
-		/// <summary>	User not in role. </summary>
-		/// <param name="role">	The role. </param>
-		/// <returns>	An IdentityError. </returns>
-		public override IdentityError UserNotInRole(string role)
-		{
-			return FromResource(nameof(UserNotInRole), role);
-		}
-	}
+        /// <summary>	Password too short. </summary>
+        /// <param name="length">	The length. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError PasswordTooShort(int length)
+        {
+            return FromStringLocalizer(nameof(PasswordTooShort), length);
+        }
+
+        /// <summary>	User already has password. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError UserAlreadyHasPassword()
+        {
+            return FromStringLocalizer(nameof(UserAlreadyHasPassword));
+        }
+
+        /// <summary>	User already in role. </summary>
+        /// <param name="role">	The role. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError UserAlreadyInRole(string role)
+        {
+            return FromStringLocalizer(nameof(UserAlreadyInRole), role);
+        }
+
+        /// <summary>	User lockout not enabled. </summary>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError UserLockoutNotEnabled()
+        {
+            return FromStringLocalizer(nameof(UserLockoutNotEnabled));
+        }
+
+        /// <summary>	User not in role. </summary>
+        /// <param name="role">	The role. </param>
+        /// <returns>	An IdentityError. </returns>
+        public override IdentityError UserNotInRole(string role)
+        {
+            return FromStringLocalizer(nameof(UserNotInRole), role);
+        }
+
+        #endregion
+    }
 }
