@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Localization
         /// <returns>   An IServiceCollection. </returns>
         public static IServiceCollection AddDbLocalizationProvider(this IServiceCollection services, Action<ConfigurationContext> setup = null)
         {
-            // check if there's a registered cache - if not - add one
+            // build serviceProvider to initialize localization
             var serviceProvider = services.BuildServiceProvider();
 
             ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler(() => new GetTranslationHandler(serviceProvider.GetService<ILocalizationDataService>()));
@@ -38,6 +38,7 @@ namespace FluiTec.AppFx.Localization
 
             ConfigurationContext.Current.TypeFactory.ForCommand<ClearCache.Command>().SetHandler<ClearCacheHandler>();
 
+            // check if there's a registered cache - if not - add one
             var cache = serviceProvider.GetService<IMemoryCache>();
             if (cache != null)
                 ConfigurationContext.Current.CacheManager = new InMemoryCacheManager(cache);

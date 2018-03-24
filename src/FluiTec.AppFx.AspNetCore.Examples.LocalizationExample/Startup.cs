@@ -1,5 +1,4 @@
 ﻿using FluiTec.AppFx.Localization;
-using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Localization.LiteDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,8 +15,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile(path: "appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -31,14 +30,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample
             services.AddSingleton<ILocalizationDataService>(provider => new LiteDbLocalizationDataService(true, "loc.db", "FluiTec/Appfx"));
 
             // make aspnetcore handle localization
-            services.AddLocalization();
             services.ConfigureLocalization(Configuration);
 
             // configure MVC for localization
-            services.AddMvc()
-                .AddViewLocalization() // make MVC handle ViewLocalization
-                .AddDataAnnotationsLocalization() // make MVC handle DataAnnotationsLocalization
-                ;
+            // make MVC handle ViewLocalization
+            // make MVC handle DataAnnotationsLocalization
+            services.ConfigureMvc(Configuration); 
 
             // register database-driven LocalizationHandler
             services.AddDbLocalizationProvider();
@@ -47,11 +44,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //using (var uow = app.ApplicationServices.GetService<ILocalizationDataService>().StartUnitOfWork())
-            //{
-            //    uow.TranslationRepository.Add(new TranslationEntity { Language = "de-DE", ResourceId = 8, Value = "Deutsch"});
-            //    uow.Commit();
-            //}
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -65,7 +57,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample
             app.UseStaticFiles();
 
             // use the LocalizationProvider
-            app.UseDbLocalizationProvider();
             app.UseLocalization(Configuration);
             app.UseMvc(routes =>
             {

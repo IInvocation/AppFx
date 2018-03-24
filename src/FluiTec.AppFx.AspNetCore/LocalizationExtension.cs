@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
@@ -25,6 +26,9 @@ namespace Microsoft.Extensions.DependencyInjection
 		public static IServiceCollection ConfigureLocalization(this IServiceCollection services,
 			IConfigurationRoot configuration, Action<CultureOptions> configure = null)
 		{
+            // add localization
+		    services.AddLocalization();
+
 			// parse options
 			_options = configuration.GetConfiguration<CultureOptions>();
 
@@ -43,8 +47,6 @@ namespace Microsoft.Extensions.DependencyInjection
 				options.SupportedUICultures = supportedCultures;
 			});
 
-			services.AddLocalization(options => options.ResourcesPath = _options.ResourcesPath);
-
 			return services;
 		}
 
@@ -56,6 +58,8 @@ namespace Microsoft.Extensions.DependencyInjection
 		{
 			var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
 			app.UseRequestLocalization(options.Value);
+
+		    app.UseDbLocalizationProvider();
 
 			return app;
 		}

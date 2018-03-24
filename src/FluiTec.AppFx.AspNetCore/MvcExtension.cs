@@ -31,20 +31,20 @@ namespace Microsoft.Extensions.DependencyInjection
 			Action<MvcDataAnnotationsLocalizationOptions> configureDataLocalization = null,
 			Action<MvcOptions> configureMvc = null)
 	    {
-		    var mvc = services.AddMvc()
-			    .AddJsonOptions(options =>
+		    var mvc = services.AddMvc();
+            mvc.AddJsonOptions(options =>
 			    {
 				    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
 				    configureJson?.Invoke(options);
-			    })
-			    .AddViewLocalization(options =>
-			    {
-				    configureLocalization?.Invoke(options);
-			    })
-			    .AddDataAnnotationsLocalization(options =>
-			    {
-				    configureDataLocalization?.Invoke(options);
 			    });
+	        if (configureLocalization == null)
+	            mvc.AddViewLocalization();
+	        else
+	            mvc.AddViewLocalization(configureLocalization.Invoke);
+	        if (configureDataLocalization == null)
+	            mvc.AddDataAnnotationsLocalization();
+	        else
+	            mvc.AddDataAnnotationsLocalization(configureDataLocalization.Invoke);
 
 			configureMvc?.Invoke(new MvcOptions(mvc));
 
