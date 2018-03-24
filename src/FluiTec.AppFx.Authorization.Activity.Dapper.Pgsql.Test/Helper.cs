@@ -1,5 +1,7 @@
 ﻿using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Pgsql;
+using FluiTec.AppFx.Identity;
+using FluiTec.AppFx.Identity.Dapper.Pgsql;
 using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test
@@ -19,5 +21,16 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test
 
 			return new PgsqlDapperAuthorizationDataService(options);
 		}
-	}
+
+	    public static IIdentityDataService GetIdentityDataService()
+	    {
+	        var options = new DapperServiceOptions
+	        {
+	            ConnectionFactory = new PgsqlConnectionFactory(),
+	            ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")
+	        };
+
+	        return new PgsqlDapperIdentityDataService(options);
+	    }
+    }
 }

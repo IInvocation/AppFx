@@ -8,5 +8,8 @@
 
         /// <summary>The activitiy table.</summary>
         public const string ActivityTable = "Activity";
+
+        /// <summary>The activity role table.</summary>
+        public const string ActivityRoleTable = "ActivityRole";
     }
 }

@@ -52,6 +52,7 @@ namespace FluiTec.AppFx.Authorization.Activity.LiteDb
         protected virtual void RegisterIdentityRepositories()
         {
             RegisterRepositoryProvider(new Func<IUnitOfWork, IActivityRepository>(work => new LiteDbActivityRepository(work)));
+            RegisterRepositoryProvider(new Func<IUnitOfWork, IActivityRoleRepository>(work => new LiteDbActivityRoleRepository(work)));
         }
 
         #endregion

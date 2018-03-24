@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.LiteDb\FluiTec.AppFx.Authorization.Activity.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Test\FluiTec.AppFx.Authorization.Activity.Test.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Identity.LiteDb\FluiTec.AppFx.Identity.LiteDb.csproj" />
   </ItemGroup>
 
 </Project>

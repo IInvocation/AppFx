@@ -43,6 +43,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql
         protected virtual void RegisterIdentityRepositories()
         {
             RegisterRepositoryProvider(new Func<IUnitOfWork, IActivityRepository>(work => new DapperActivityRepository(work)));
+            RegisterRepositoryProvider(new Func<IUnitOfWork, IActivityRoleRepository>(work => new DapperActivityRoleRepository(work)));
         }
 
         #endregion
