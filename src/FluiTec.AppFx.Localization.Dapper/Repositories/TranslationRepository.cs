@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Localization.Dapper.Repositories
         public virtual IEnumerable<TranslationEntity> ByResource(ResourceEntity resource)
         {
             var command = SqlBuilder.SelectByFilter(EntityType, nameof(TranslationEntity.ResourceId));
-            return UnitOfWork.Connection.Query<TranslationEntity>(command, new { UserId = resource.Id }, UnitOfWork.Transaction);
+            return UnitOfWork.Connection.Query<TranslationEntity>(command, new { ResourceId = resource.Id }, UnitOfWork.Transaction);
         }
 
         /// <summary>Gets all compounds in this collection.</summary>

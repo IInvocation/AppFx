@@ -21,7 +21,7 @@ namespace FluiTec.AppFx.Localization.Dapper.Repositories
         public virtual ResourceEntity GetByKey(string key)
         {
             var command = SqlBuilder.SelectByFilter(EntityType, nameof(ResourceEntity.ResourceKey));
-            return UnitOfWork.Connection.QuerySingleOrDefault<ResourceEntity>(command, new { Key = key },
+            return UnitOfWork.Connection.QuerySingleOrDefault<ResourceEntity>(command, new { ResourceKey = key },
                 UnitOfWork.Transaction);
         }
 

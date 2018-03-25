@@ -36,6 +36,7 @@
     <ProjectReference Include="..\FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Identity.Dynamic\FluiTec.AppFx.Identity.Dynamic.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Localization.Dynamic\FluiTec.AppFx.Localization.Dynamic.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
@@ -45,5 +46,7 @@
 		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
 		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
 	</Target>
+
+	<ProjectExtensions><VisualStudio><UserProperties configsamples_4appsettings_1json__JSONSchema="" configsamples_4appsettings_1Production_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

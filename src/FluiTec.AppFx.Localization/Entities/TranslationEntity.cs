@@ -5,7 +5,7 @@ namespace FluiTec.AppFx.Localization.Entities
     /// <summary>
     ///     A translation.
     /// </summary>
-    [EntityName("AppFxLocalizer.Translation")]
+    [EntityName("AppFxLocalization.Translation")]
     public class TranslationEntity : IEntity<int>
     {
         /// <summary>Gets or sets the language.</summary>

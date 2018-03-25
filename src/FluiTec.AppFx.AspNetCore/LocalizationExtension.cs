@@ -47,7 +47,10 @@ namespace Microsoft.Extensions.DependencyInjection
 				options.SupportedUICultures = supportedCultures;
 			});
 
-			return services;
+		    services.ConfigureAppFxLocalization(configuration);
+		    services.AddDbLocalizationProvider();
+
+            return services;
 		}
 
 		/// <summary>	An IApplicationBuilder extension method that use localization. </summary>

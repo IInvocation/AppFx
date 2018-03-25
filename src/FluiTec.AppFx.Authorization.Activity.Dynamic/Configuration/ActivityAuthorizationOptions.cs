@@ -1,10 +1,10 @@
 ﻿using FluiTec.AppFx.Options;
 
-namespace FluiTec.AppFx.IdentityServer.Dynamic.Configuration
+namespace FluiTec.AppFx.Authorization.Activity.Dynamic.Configuration
 {
 	/// <summary>	An identityserver options. </summary>
-	[ConfigurationName("IdentityServerOptions")]
-	public class IdentityServerOptions
+	[ConfigurationName("ActivityAuthorizationOptions")]
+	public class ActivityAuthorizationOptions
     {
 	    /// <summary>	Gets or sets the provider. </summary>
 	    /// <value>	The provider. </value>

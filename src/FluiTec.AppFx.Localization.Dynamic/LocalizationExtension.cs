@@ -13,11 +13,11 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <param name="services">			The services to act on. </param>
 	    /// <param name="configuration">	The configuration. </param>
 	    /// <returns>	An IServiceCollection. </returns>
-	    public static IServiceCollection ConfigureAppFxIdentityServer(this IServiceCollection services,
+	    public static IServiceCollection ConfigureAppFxLocalization(this IServiceCollection services,
 		    IConfigurationRoot configuration)
 	    {
 			var provider = new LocalizationDataProvider(configuration.GetConfiguration<LocalizationOptions>());
-		    services.AddScoped(p => provider.GetDataService(configuration));
+		    services.AddSingleton(p => provider.GetDataService(configuration));
 		    return services;
 	    }
     }
