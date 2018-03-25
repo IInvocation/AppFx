@@ -1,0 +1,18 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Contact
+@inject IHtmlLocalizer<TermsOfUseResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => TermsOfUseResource.TermsOfUseHeader)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => TermsOfUseResource.EntitledUsersHeader)</h3>
+            <p>@Localizer.GetString(() => TermsOfUseResource.UsersText1)</p>
+            <p>@Localizer.GetString(() => TermsOfUseResource.UsersText2)</p>
+            <h3>@Localizer.GetString(() => TermsOfUseResource.UsersText3)</h3>
+            <p>@Localizer.GetString(() => TermsOfUseResource.UsersText4)</p>
+        </section>
+    </div>
+</section>

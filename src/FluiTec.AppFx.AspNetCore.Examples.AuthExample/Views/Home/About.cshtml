@@ -1,0 +1,28 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Home
+@inject IHtmlLocalizer<AboutResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => AboutResource.Header)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => AboutResource.FuncionalityHeader)</h3>
+            <p>@Localizer.GetString(() => AboutResource.FuncionalityDescription)</p>
+            <h3>@Localizer.GetString(() => AboutResource.FeatureHeader)</h3>
+            <p>@Localizer.GetString(() => AboutResource.FeatureDescription)</p>
+            <ul>
+                <li>@Localizer.GetString(() => AboutResource.HybridMode)</li>
+                <li>@Localizer.GetString(() => AboutResource.ClientCredentialsMode)</li>
+                <li>@Localizer.GetString(() => AboutResource.UserCredentialsMode)</li>
+            </ul>
+            <h3>@Localizer.GetString(() => AboutResource.ExternalServicesHeader)</h3>
+            <p>@Localizer.GetString(() => AboutResource.ExternalServicesDescription)</p>
+            <ul>
+                <li>@Localizer.GetString(() => AboutResource.GoogleService)</li>
+                <li>@Localizer.GetString(() => AboutResource.AmazonService)</li>
+            </ul>
+        </section>
+    </div>
+</section>

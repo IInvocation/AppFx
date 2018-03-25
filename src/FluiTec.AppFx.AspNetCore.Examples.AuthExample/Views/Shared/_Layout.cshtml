@@ -1,0 +1,13 @@
+﻿<!DOCTYPE HTML>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+    <head>
+        @Html.Partial("_Head")
+    </head>
+    <body>
+        @Html.Partial("_Navbar")
+        @RenderBody()
+        @Html.Partial("_Footer")
+        @Html.Partial("_Scripts")
+        @RenderSection("Scripts", false)
+    </body>
+</html>

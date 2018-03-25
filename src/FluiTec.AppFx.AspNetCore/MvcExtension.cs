@@ -37,11 +37,11 @@ namespace Microsoft.Extensions.DependencyInjection
 				    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
 				    configureJson?.Invoke(options);
 			    });
-	        if (configureLocalization == null)
-	            mvc.AddViewLocalization();
-	        else
-	            mvc.AddViewLocalization(configureLocalization.Invoke);
-	        if (configureDataLocalization == null)
+            if (configureLocalization == null)
+                mvc.AddViewLocalization();
+            else
+                mvc.AddViewLocalization(configureLocalization.Invoke);
+            if (configureDataLocalization == null)
 	            mvc.AddDataAnnotationsLocalization();
 	        else
 	            mvc.AddDataAnnotationsLocalization(configureDataLocalization.Invoke);

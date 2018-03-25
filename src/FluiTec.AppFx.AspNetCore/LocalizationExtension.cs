@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
 				options.SupportedUICultures = supportedCultures;
 			});
 
-		    services.ConfigureAppFxLocalization(configuration);
+		    services.ConfigureLocalizationDataService(configuration);
 		    services.AddDbLocalizationProvider();
 
             return services;

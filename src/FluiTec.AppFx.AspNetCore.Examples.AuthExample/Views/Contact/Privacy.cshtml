@@ -1,0 +1,49 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Contact
+@inject IHtmlLocalizer<PrivacyResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => PrivacyResource.PrivacyHeader)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => PrivacyResource.DataHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.DataDescription)</p>
+            <ul>
+                <li>@Localizer.GetString(() => PrivacyResource.Name)</li>
+                <li>@Localizer.GetString(() => PrivacyResource.MailData)</li>
+                <li>@Localizer.GetString(() => PrivacyResource.Phone)</li>
+            </ul>
+            <h3>@Localizer.GetString(() => PrivacyResource.UsageHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.UsageText1)</p>
+            <p>@Localizer.GetString(() => PrivacyResource.UsageText2)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.RightToInformationHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.RightToInformationText)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.SafetyHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.SafetyText)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.CookiesHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.CookiesText1)</p>
+            <p>@Localizer.GetString(() => PrivacyResource.CookiesText2)</p>
+            <p>@Localizer.GetString(() => PrivacyResource.CookiesText3)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.LimitationOfLiability)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.LiabilityText1)</p>
+            <p>@Localizer.GetString(() => PrivacyResource.LiabilityText2)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.ExternalLinksHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.ExternalLinksText)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.CopyRightHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.CopyRightText)</p>
+            <h3>@Localizer.GetString(() => PrivacyResource.SecurityAdministratorHeader)</h3>
+            <p>@Localizer.GetString(() => PrivacyResource.SecurityAdministratorText)</p>
+            <p>
+                @Localizer.GetString(() => PrivacyResource.AddressLine1) <br />
+                @Localizer.GetString(() => PrivacyResource.AddressLine2) <br />
+                @Localizer.GetString(() => PrivacyResource.AddressLine3) <br />
+                @Localizer.GetString(() => PrivacyResource.AddressLine4)
+            </p>
+            <p>
+                <b>@Localizer.GetString(() => PrivacyResource.MailLabel)</b> <a href="@Localizer.GetString(() => PrivacyResource.Mailto)">@Localizer.GetString(() => PrivacyResource.Mail)</a><br />
+            </p>
+        </section>
+    </div>
+</section>

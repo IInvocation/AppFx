@@ -21,6 +21,8 @@ namespace FluiTec.AppFx.AspNetCore
         public static IServiceCollection ConfigureIdentityServer(this IServiceCollection services,
             IConfigurationRoot configuration)
         {
+            services.ConfigureIdentityServerDataService(configuration);
+
             services.AddSingleton(configuration.GetConfiguration<SigningOptions>());
 
             var idSrv = services.AddIdentityServer(options =>

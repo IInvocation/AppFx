@@ -5,6 +5,7 @@ using DbLocalizationProvider.Queries;
 using FluiTec.AppFx.Localization.Cache;
 using FluiTec.AppFx.Localization.Handlers;
 using FluiTec.AppFx.Localization.MetadataProviders;
+using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -29,13 +30,6 @@ namespace FluiTec.AppFx.Localization
             ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler(() => new GetTranslationHandler(serviceProvider.GetService<ILocalizationDataService>()));
             ConfigurationContext.Current.TypeFactory.ForQuery<GetAllResources.Query>().SetHandler(() => new GetAllResourcesHandler(serviceProvider.GetService<ILocalizationDataService>()));
             ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>().SetHandler<DetermineDefaultCulture.Handler>();
-
-            //ConfigurationContext.Current.TypeFactory.ForQuery<AvailableLanguages.Query>().SetHandler<AvailableLanguages.Handler>();
-            //ConfigurationContext.Current.TypeFactory.ForQuery<GetAllTranslations.Query>().SetHandler<GetAllTranslations.Handler>();
-            //ConfigurationContext.Current.TypeFactory.ForCommand<CreateNewResource.Command>().SetHandler<CreateNewResource.Handler>();
-            //ConfigurationContext.Current.TypeFactory.ForCommand<DeleteResource.Command>().SetHandler<DeleteResource.Handler>();
-            //ConfigurationContext.Current.TypeFactory.ForCommand<CreateOrUpdateTranslation.Command>().SetHandler<CreateOrUpdateTranslation.Handler>();
-
             ConfigurationContext.Current.TypeFactory.ForCommand<ClearCache.Command>().SetHandler<ClearCacheHandler>();
 
             // check if there's a registered cache - if not - add one
@@ -55,6 +49,8 @@ namespace FluiTec.AppFx.Localization
                 });
 
             services.AddSingleton<IStringLocalizerFactory, DbStringLocalizerFactory>();
+            //services.AddTransient<IHtmlLocalizerFactory, DbHtmlLocalizerFactory>();
+            //services.AddTransient<IViewLocalizer, DbHtmlLocalizer>();
             services.AddSingleton(_ => LocalizationProvider.Current);
 
             return services;

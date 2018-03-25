@@ -1,5 +1,4 @@
 ﻿using FluiTec.AppFx.Localization;
-using FluiTec.AppFx.Localization.LiteDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,20 +24,13 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // wire up a dataService for the localization
-            // (Singleton required - don't try Scoped/Transient, since by the time creating this service - there is no scope)
-            services.AddSingleton<ILocalizationDataService>(provider => new LiteDbLocalizationDataService(true, "loc.db", "FluiTec/Appfx"));
-
-            // make aspnetcore handle localization
-            services.ConfigureLocalization(Configuration);
-
             // configure MVC for localization
             // make MVC handle ViewLocalization
             // make MVC handle DataAnnotationsLocalization
-            services.ConfigureMvc(Configuration); 
+            services.ConfigureMvc(Configuration);
 
-            // register database-driven LocalizationHandler
-            services.AddDbLocalizationProvider();
+            // make aspnetcore handle localization
+            services.ConfigureLocalization(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

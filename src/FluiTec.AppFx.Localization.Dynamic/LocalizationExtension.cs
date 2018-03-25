@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <param name="services">			The services to act on. </param>
 	    /// <param name="configuration">	The configuration. </param>
 	    /// <returns>	An IServiceCollection. </returns>
-	    public static IServiceCollection ConfigureAppFxLocalization(this IServiceCollection services,
+	    public static IServiceCollection ConfigureLocalizationDataService(this IServiceCollection services,
 		    IConfigurationRoot configuration)
 	    {
 			var provider = new LocalizationDataProvider(configuration.GetConfiguration<LocalizationOptions>());

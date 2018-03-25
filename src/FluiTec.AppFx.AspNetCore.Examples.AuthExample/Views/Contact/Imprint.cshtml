@@ -1,0 +1,62 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Contact
+@inject IHtmlLocalizer<ImprintResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => ImprintResource.Header)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => ImprintResource.AddressHeader)</h3>
+            <p>
+                @Localizer.GetString(() => ImprintResource.AddressLine1)<br />
+                @Localizer.GetString(() => ImprintResource.AddressLine2)<br />
+                @Localizer.GetString(() => ImprintResource.AddressLine3)<br />
+                @Localizer.GetString(() => ImprintResource.AddressLine4)
+            </p>
+            <h3>@Localizer.GetString(() => ImprintResource.ContactHeader)</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.PhoneLabel)</th>
+                    <td>@Localizer.GetString(() => ImprintResource.Phone)</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.FaxLabel)</th>
+                    <td>@Localizer.GetString(() => ImprintResource.Fax)</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.MailLabel)</th>
+                    <td><a href="@Localizer.GetString(() => ImprintResource.MailtoMail)">@Localizer.GetString(() => ImprintResource.Mail)</a></td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.WebLabel)</th>
+                    <td><a href="@Localizer.GetString(() => ImprintResource.WebHref)">@Localizer.GetString(() => ImprintResource.Web)</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <br />
+            <h3>@Localizer.GetString(() => ImprintResource.RepresentativesHeader)</h3>
+            <p>@Localizer.GetString(() => ImprintResource.RepresentativesText)</p>
+            
+            <h3>@Localizer.GetString(() => ImprintResource.LegalHeader)</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.CommercialRegisterHeader)</th>
+                    <td>@Localizer.GetString(() => ImprintResource.CommercialRegisterText)</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.TaxIdentificationNumberHeader)</th>
+                    <td>@Localizer.GetString(() => ImprintResource.TaxIdentificationNumber)</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.TaxNumberHeader)</th>
+                    <td>@Localizer.GetString(() => ImprintResource.TaxNumberText)</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</section>

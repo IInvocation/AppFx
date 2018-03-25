@@ -1,0 +1,54 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Shared
+@using FluiTec.AppFx.Identity
+@using FluiTec.AppFx.Identity.Entities
+@using Microsoft.AspNetCore.Identity
+@inject IHtmlLocalizer<NavbarResource> Localizer
+@inject SignInManager<IdentityUserEntity> SignInManager
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+            <img src="/icons/favicon_32.png" width="30" height="30" class="d-inline-block align-top" alt="favicon">
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" is-active-route asp-controller="Home" asp-action="Index">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link">@Localizer.GetString(() => NavbarResource.Home)</a>
+                </li>
+                <li class="nav-item" is-active-route asp-controller="Home" asp-action="About">
+                    <a asp-controller="Home" asp-action="About" class="nav-link">@Localizer.GetString(() => NavbarResource.About)</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+            @if (SignInManager.IsSignedIn(User))
+            {
+            <li class="nav-item" is-active-route asp-controller="Manage" asp-action="Index">
+                <a class="nav-link" asp-controller="Manage" asp-action="Index"><img src="/images/profile.png" alt="profile" />@Localizer.GetString(() => NavbarResource.Profile)</a>
+            </li>
+            <li class="nav-item" is-active-route asp-controller="Account" asp-action="Logout">
+                <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout" />@Localizer.GetString(() => NavbarResource.Logout)</a>
+            </li>
+            }
+            else
+            {
+            <li class="nav-item" is-active-route asp-controller="Account" asp-action="Login">
+                <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="/images/login.png" alt="login or register" />@Localizer.GetString(() => NavbarResource.Login)</a>
+            </li>
+            }
+            @if (User.HasClaim(IdentityClaims.HasAdministrativeRights, "true"))
+            {
+            <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
+                <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile" />@Localizer.GetString(() => NavbarResource.Admin)</a>
+            </li>
+            }
+            </ul>
+            <form hidden class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="@Localizer.GetString(() => NavbarResource.Search)">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">@Localizer.GetString(() => NavbarResource.Search)</button>
+            </form>
+        </div>
+    </div>
+</nav>

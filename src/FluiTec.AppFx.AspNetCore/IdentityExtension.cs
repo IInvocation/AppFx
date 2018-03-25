@@ -23,6 +23,8 @@ namespace FluiTec.AppFx.AspNetCore
         public static IServiceCollection ConfigureIdentity(this IServiceCollection services,
             IConfigurationRoot configuration)
         {
+            services.ConfigureIdentityDataService(configuration);
+
             var apiOptions = configuration.GetConfiguration<ApiOptions>();
             services.AddSingleton(apiOptions);
 
@@ -59,19 +61,6 @@ namespace FluiTec.AppFx.AspNetCore
                     }
                 };
             });
-
-            // configure aspnet-authentication
-            services.AddAuthentication()
-                .AddGoogle(gOptions =>
-                {
-                    gOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                    gOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-                })
-                .AddAmazon(aOptions =>
-                {
-                    aOptions.ClientId = configuration["Authentication:Amazon:ClientId"];
-                    aOptions.ClientSecret = configuration["Authentication:Amazon:ClientSecret"];
-                });
 
             return services;
         }

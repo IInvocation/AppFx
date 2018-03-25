@@ -1,0 +1,10 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Home
+@inject IHtmlLocalizer<IndexResource> Localizer
+
+<header>
+    <div id="landing-header">
+        <img src="/icons/mstile-144x144.png" alt="background"/>
+        <h2>@Localizer.GetString(() => IndexResource.Header)</h2>
+        <p>@Localizer.GetString(() => IndexResource.Description)</p>
+    </div>
+</header>

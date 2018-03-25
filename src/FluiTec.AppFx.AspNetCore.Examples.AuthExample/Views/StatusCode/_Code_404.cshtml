@@ -1,0 +1,8 @@
+﻿@using FluiTec.AppFx.AspNetCore.Resources
+@inject IHtmlLocalizer<StatusCode404Resource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+    <h3 class="text-danger">@Localizer.GetString(() => StatusCode404Resource.NotFoundHeader)</h3>
+    <p>@Localizer.GetString(() => StatusCode404Resource.NotFoundText)</p>
+    <p>@Localizer.GetString(() => StatusCode404Resource.NotFoundHelp)</p>
+</cache>

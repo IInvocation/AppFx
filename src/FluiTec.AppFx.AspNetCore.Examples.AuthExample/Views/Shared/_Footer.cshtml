@@ -1,0 +1,21 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Shared
+@inject IHtmlLocalizer<FooterResource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@System.TimeSpan.FromHours(value: 12)">
+    <footer class="footer bg-light">
+        <div class="container">
+            <ul class="footer-link-list">
+                <li is-active-route asp-controller="Contact" asp-action="Imprint">
+                    <a asp-controller="Contact" asp-action="Imprint">@Localizer.GetString(() => FooterResource.Imprint)</a>
+                </li>
+                <li is-active-route asp-controller="Contact" asp-action="Privacy">
+                    <a asp-controller="Contact" asp-action="Privacy">@Localizer.GetString(() => FooterResource.Privacy)</a>
+                </li>
+                <li is-active-route asp-controller="Contact" asp-action="TermsOfUse">
+                    <a asp-controller="Contact" asp-action="TermsOfUse">@Localizer.GetString(() => FooterResource.TermsOfUse)</a>
+                </li>
+            </ul>
+            <p class="m-0 text-center">Copyright &copy; 2018 | Achim Schnell</p>
+        </div>
+    </footer>
+</cache>

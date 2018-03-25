@@ -52,17 +52,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>   An IApplicationBuilder. </returns>
 		public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, IConfigurationRoot configuration, IHostingEnvironment environment)
         {
-			app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
-			{
-				OnPrepareResponse = ctx =>
-				{
-					if (_options.EnableClientCaching)
-					{
-						ctx.Context.Response.Headers[HeaderNames.CacheControl] =
-							"public,max-age=" + _options.CacheDuration;
-					}
-				}
-			});
+            if (environment.IsDevelopment())
+                app.UseStaticFiles();
+            else
+            {
+                app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
+                {
+                    OnPrepareResponse = ctx =>
+                    {
+                        if (_options.EnableClientCaching)
+                        {
+                            ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                                "public,max-age=" + _options.CacheDuration;
+                        }
+                    }
+                });
+            }   
 
 			return app;
 		}

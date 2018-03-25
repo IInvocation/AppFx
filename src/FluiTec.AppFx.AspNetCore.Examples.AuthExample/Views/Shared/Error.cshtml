@@ -1,0 +1,21 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Shared
+@inject IHtmlLocalizer<ErrorResource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+    <section id="maincontent" class="wrapper content-wrapper">
+        <header>
+            <h2>@Localizer.GetString(() => ErrorResource.UnknownErrorHeader)</h2>
+        </header>
+        <div class="container">
+            <section>
+                <h3 class="text-danger">@Localizer.GetString(() => ErrorResource.UnknownErrorHeader2)</h3>
+                <div class="row uniform text-danger">
+                    <p>@Localizer.GetString(() => ErrorResource.UnknownErrorText)</p>
+                </div>
+                <div class="row uniform text-danger">
+                    <p>@Localizer.GetString(() => ErrorResource.UnknownErrorHelpText)</p>
+                </div>
+            </section>
+        </div>
+    </section>
+</cache>
