@@ -12,30 +12,26 @@ namespace FluiTec.AppFx.Identity.Models.ManageViewModels
 
         /// <summary>Gets or sets the old password.</summary>
         /// <value>The old password.</value>
-        [Display(Name = FullModelName + "OldPassword", Description = "Old Password:")]
-        [DisplayTranslationForCulture("OldPassword", "Altes Passwort:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Old Password must not be empty")]
-        [ValidationTranslationForCulture("Required", "Altes Passwort darf nicht leer sein", "de")]
+        [Display(Name = FullModelName + "OldPassword", Description = "Old Password")]
+        [DisplayTranslationForCulture("OldPassword", "Altes Passwort", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 
         /// <summary>Gets or sets the new password.</summary>
         /// <value>The new password.</value>
-        [Display(Name = FullModelName + "NewPassword", Description = "New Password:")]
-        [DisplayTranslationForCulture("NewPassword", "Neues Passwort:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "New Password must not be empty")]
-        [ValidationTranslationForCulture("Required", "Neues Passwort darf nicht leer sein", "de")]
+        [Display(Name = FullModelName + "NewPassword", Description = "New Password")]
+        [DisplayTranslationForCulture("NewPassword", "Neues Passwort", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
         /// <summary>Gets or sets the confirm password.</summary>
         /// <value>The confirm password.</value>
-        [Display(Name = FullModelName + "ConfirmPassword", Description = "Password confirmation:")]
-        [DisplayTranslationForCulture("ConfirmPassword", "Passwort-Bestätigung:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Password-confirmation must not be empty")]
-        [ValidationTranslationForCulture("Required", "Passwort-Bestätigung darf nicht leer sein", "de")]
-        [Compare("Password", ErrorMessage = "Password must equal Password-confirmation")]
-        [ValidationTranslationForCulture("Compare", "Passwort muss mit Passwort-Bestätigung übereinstimmen", "de")]
+        [Display(Name = FullModelName + "ConfirmPassword", Description = "Password confirmation")]
+        [DisplayTranslationForCulture("ConfirmPassword", "Passwort-Bestätigung", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
+        [Compare("Password", ErrorMessage = "CompareMessage")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }

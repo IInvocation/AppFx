@@ -1,6 +1,12 @@
-﻿<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
+﻿@using IdentityServer4.Validation
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
     <environment names="Development">
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        @{ var file = "/lib/jquery-validation/src/localization/messages_" + System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + ".js";}
+        @if(System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en")
+        {
+            <script src="@file"></script>
+        }
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     </environment>
     <environment names="Staging,Production">

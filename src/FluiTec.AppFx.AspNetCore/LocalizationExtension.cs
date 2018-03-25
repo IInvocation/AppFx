@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using DbLocalizationProvider;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Localization;
+using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -49,6 +54,41 @@ namespace Microsoft.Extensions.DependencyInjection
 
 		    services.ConfigureLocalizationDataService(configuration);
 		    services.AddDbLocalizationProvider();
+
+            // import json-defined localizations
+		    if (!System.IO.File.Exists("localization.import.json")) return services;
+		    var content = System.IO.File.ReadAllText("localization.import.json", Encoding.UTF8);
+		    var resources = JsonConvert.DeserializeObject<IEnumerable<LocalizationResource>>(content);
+		    using (var uow = services.BuildServiceProvider().GetService<ILocalizationDataService>().StartUnitOfWork())
+		    {
+		        foreach (var resource in resources)
+		        {
+		            var r = uow.ResourceRepository.GetByKey(resource.ResourceKey) ?? uow.ResourceRepository.Add(new ResourceEntity
+		            {
+		                Author = resource.Author,
+		                FromCode = resource.FromCode,
+		                IsHidden = resource.IsHidden,
+		                IsModified = resource.IsModified,
+		                ModificationDate =  resource.ModificationDate,
+		                ResourceKey = resource.ResourceKey
+		            });
+
+		            var existingTranslations = uow.TranslationRepository.ByResource(r).ToList();
+		            foreach (var translation in resource.Translations)
+		            {
+		                if (!existingTranslations.Any(e => e.ResourceId == r.Id && e.Language == translation.Language))
+		                {
+		                    uow.TranslationRepository.Add(new TranslationEntity
+		                    {
+		                        Language = translation.Language,
+		                        ResourceId = r.Id,
+		                        Value = translation.Value
+		                    });
+		                }
+		            }
+		        }
+		        uow.Commit();
+		    }
 
             return services;
 		}

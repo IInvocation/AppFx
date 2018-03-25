@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using CliHelpers;
 using DbLocalizationProvider;
 using Microsoft.Extensions.CommandLineUtils;
@@ -74,7 +75,7 @@ namespace FluiTec.AppFx.Localization.Exporter
                 if (!Directory.Exists(directoryName))
                     Directory.CreateDirectory(directoryName);
 
-                File.WriteAllText(fileName, json);
+                File.WriteAllText(fileName, json, Encoding.UTF8);
 
                 return 0;
             });

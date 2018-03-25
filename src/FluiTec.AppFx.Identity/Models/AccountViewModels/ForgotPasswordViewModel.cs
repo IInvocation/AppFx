@@ -12,12 +12,10 @@ namespace FluiTec.AppFx.Identity.Models.AccountViewModels
 
         /// <summary>Gets or sets the email.</summary>
         /// <value>The email.</value>
-        [Display(Name = FullModelName + "Email", Description = "Email:")]
-        [DisplayTranslationForCulture("Email", "Email:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email must not be empty")]
-        [ValidationTranslationForCulture("Required", "Email darf nicht leer sein", "de")]
-        [EmailAddress(ErrorMessage = "Invalid Email-Address")]
-        [ValidationTranslationForCulture("EmailAddress", "Ungültige Email-Adresse", "de")]
+        [Display(Name = FullModelName + "Email", Description = "Email")]
+        [DisplayTranslationForCulture("Email", "Email", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
+        [EmailAddress(ErrorMessage = "EmailMessage")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }

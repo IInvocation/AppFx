@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Linq;
+using FluiTec.AppFx.AspNetCore.MetadataProviders;
+using FluiTec.AppFx.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using MvcOptions = FluiTec.AppFx.AspNetCore.Configuration.MvcOptions;
 
 // ReSharper disable once CheckNamespace
@@ -31,7 +36,14 @@ namespace Microsoft.Extensions.DependencyInjection
 			Action<MvcDataAnnotationsLocalizationOptions> configureDataLocalization = null,
 			Action<MvcOptions> configureMvc = null)
 	    {
-		    var mvc = services.AddMvc();
+	        var mvc = services.AddMvc();
+            //var mvc = services.AddMvc(options =>
+            //{
+            //    var providers = options.ModelMetadataDetailsProviders;
+            //    providers.Remove(providers.Single(p => p.GetType() == typeof(DataAnnotationsMetadataProvider)));
+            //          providers.Add(new DbDataAnnotationsMetadataProvider(new OptionsWrapper<MvcDataAnnotationsLocalizationOptions>(new MvcDataAnnotationsLocalizationOptions()), new DbStringLocalizerFactory()));
+            //      });
+
             mvc.AddJsonOptions(options =>
 			    {
 				    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();

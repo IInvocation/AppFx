@@ -12,20 +12,17 @@ namespace FluiTec.AppFx.Identity.Models.ManageViewModels
 
         /// <summary>Gets or sets the code.</summary>
         /// <value>The code.</value>
-        [Display(Name = FullModelName + "Code", Description = "Code:")]
-        [DisplayTranslationForCulture("Code", "Code:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Code is required")]
-        [ValidationTranslationForCulture("Required", "Code ist erforderlich", "de")]
+        [Display(Name = FullModelName + "Code", Description = "Code")]
+        [DisplayTranslationForCulture("Code", "Code", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
         public string Code { get; set; }
 
         /// <summary>Gets or sets the phone.</summary>
         /// <value>The phone.</value>
-        [Display(Name = FullModelName + "Phone", Description = "Phone:")]
-        [DisplayTranslationForCulture("Phone", "Telefon:", "de")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty")]
-        [ValidationTranslationForCulture("Required", "Telefon darf nicht leer sein", "de")]
-        [Phone(ErrorMessage = "Invalid Phone-Number")]
-        [ValidationTranslationForCulture("Phone", "Ungültige Telefonnummer", "de")]
+        [Display(Name = FullModelName + "Phone", Description = "Phone")]
+        [DisplayTranslationForCulture("Phone", "Telefon", "de")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
+        [Phone(ErrorMessage = "PhoneMessage")]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
     }
