@@ -9,6 +9,8 @@
     <Content Remove="appsettings.json" />
     <Content Remove="appsettings.Production.json" />
     <Content Remove="appsettings.secret.json" />
+    <Content Remove="MailViews\AdminConfirmMailModel.cshtml" />
+    <Content Remove="MailViews\UserConfirmMailModel.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +18,8 @@
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
     <None Include="appsettings.secret.json" />
+    <None Include="MailViews\AdminConfirmMailModel.cshtml" />
+    <None Include="MailViews\UserConfirmMailModel.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_ExternalLogin.cshtml" />
     <None Include="Views\Shared\_Footer.cshtml" />
@@ -158,10 +162,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MailViews\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>

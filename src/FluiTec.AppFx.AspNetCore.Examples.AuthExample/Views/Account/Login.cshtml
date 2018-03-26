@@ -42,7 +42,23 @@
                     </ul>
                 </div>
             </div>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <ul class="actions">
+                        <li>
+                            <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">@Localizer.GetString(() => LoginResource.RegisterLink)</a>
+                        </li>
+                        <li>
+                            <a asp-action="ForgotPassword">@Localizer.GetString(() => LoginResource.ForgotPasswordLink)</a>
+                        </li>
+                        <li>
+                            <a asp-action="ConfirmEmailAgain">@Localizer.GetString(() => LoginResource.ConfirmEmailAgainLink)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </form>
+        @Html.Partial("_ExternalLogin")
     </div>
 </section>
 

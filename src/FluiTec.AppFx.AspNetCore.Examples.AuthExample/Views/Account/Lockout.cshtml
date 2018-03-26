@@ -1,1 +1,19 @@
-﻿
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@model DateTimeOffset
+@inject IHtmlLocalizer<LockoutResource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+    <section id="maincontent" class="wrapper content-wrapper">
+        <header>
+            <h2>@Localizer.GetString(() => LockoutResource.LockoutHeader)</h2>
+        </header>
+        <div class="container">
+            <section>
+                <div class="row uniform">
+                    <p>@Localizer.GetString(() => LockoutResource.LockoutMessage1)</p>
+                    <p>@Localizer.GetString(() => LockoutResource.LockoutMessage2) @Model.DateTime.ToLocalTime() . </p>
+                </div>
+            </section>
+        </div>
+    </section>
+</cache>

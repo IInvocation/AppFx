@@ -44,5 +44,20 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
         /// <value> The reset button. </value>
         [TranslationForCulture("Zurücksetzen", "de")]
         public static string ResetButton => "Reset";
+
+        /// <summary>   Gets the register link. </summary>
+        /// <value> The register link. </value>
+        [TranslationForCulture("Registrieren", "de")]
+        public static string RegisterLink => "Register";
+
+        /// <summary>   Gets the forgot password link. </summary>
+        /// <value> The forgot password link. </value>
+        [TranslationForCulture("Passwort vergessen", "de")]
+        public static string ForgotPasswordLink => "Forgot password";
+
+        /// <summary>   Gets the confirm email again link. </summary>
+        /// <value> The confirm email again link. </value>
+        [TranslationForCulture("E-Mail erneut bestätigen", "de")]
+        public static string ConfirmEmailAgainLink => "Confirm mail again";
     }
 }

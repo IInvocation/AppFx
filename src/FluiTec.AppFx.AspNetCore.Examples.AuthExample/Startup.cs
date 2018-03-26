@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -56,6 +54,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureErrorHandling(Configuration);
             services.ConfigureMailService(Configuration, Environment);
             services.ConfigureIdentity(Configuration);
+            services.ConfigureAuthentication(Configuration);
             services.ConfigureIdentityServer(Configuration);
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
@@ -77,7 +76,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             app.UseErrorHandling(Environment);
             app.UseDevelopmentExtension(Environment);
             app.UseStaticFiles(Configuration, Environment);
-            app.UseAuthentication();
             app.UseIdentityServer(Configuration);
             app.UseLocalization(Configuration);
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());

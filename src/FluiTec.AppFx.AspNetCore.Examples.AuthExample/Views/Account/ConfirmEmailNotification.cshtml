@@ -1,0 +1,30 @@
+﻿@using FluiTec.AppFx.AspNetCore.Configuration
+@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@model AdminOptions
+@inject IHtmlLocalizer<ConfirmEmailNotificationResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => ConfirmEmailNotificationResource.ConfirmHeader)</h2>
+    </header>
+    @if (Model.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin)
+    {
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => ConfirmEmailNotificationResource.ConfirmHeader)</h3>
+            <p>@Localizer.GetString(() => ConfirmEmailNotificationResource.AdminMustConfirmText)</p>
+            <p>@Localizer.GetString(() => ConfirmEmailNotificationResource.ThankYouText)</p>
+        </section>
+    </div>
+    }
+    else
+    {
+    <div class="container">
+        <section>
+            <h3>@Localizer.GetString(() => ConfirmEmailNotificationResource.ConfirmHeader)</h3>
+            <p>@Localizer.GetString(() => ConfirmEmailNotificationResource.UserMustConfirmText)</p>
+            <p>@Localizer.GetString(() => ConfirmEmailNotificationResource.ThankYouText)</p>
+        </section>
+    </div>
+    }
+</section>

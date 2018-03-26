@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Identity.Resources
 
         /// <summary>Gets or sets the name of the duplicate user.</summary>
         /// <value>The name of the duplicate user.</value>
-        [TranslationForCulture("Email '{0}' wird bereits verwendet.", "de")]
+        [TranslationForCulture("Name '{0}' wird bereits verwendet.", "de")]
         public string DuplicateUserName => "Email '{0}' is already taken.";
 
         /// <summary>Gets or sets the invalid email.</summary>

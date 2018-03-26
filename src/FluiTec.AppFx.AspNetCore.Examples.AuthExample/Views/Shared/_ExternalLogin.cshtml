@@ -18,7 +18,8 @@
                             @foreach (var provider in loginProviders)
                             {
                             <li>
-                                <input type="submit" style="padding-left:40px" class="btn btn-default @provider.Name-btn" name="provider" value="@provider.Name" title="@Localizer["ExternalLoginProviderDescription", provider.DisplayName]" />
+                                
+                                <input type="submit" style="padding-left:40px" class="btn btn-default @provider.Name-btn" name="provider" value="@provider.Name" title="@Localizer.GetString(() => ExternalLoginResource.ExternalLoginProviderDescription, provider.DisplayName)" />
                             </li>                                                                                                                                                                                             
                             }
                         </ul>

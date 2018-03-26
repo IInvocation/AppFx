@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Models.AccountViewModels;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using FluiTec.AppFx.Localization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 {
@@ -42,6 +42,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   The localizer. </summary>
         private readonly IStringLocalizer<AccountResource> _localizer;
 
+        /// <summary>   The localizer factory. </summary>
+        private readonly IStringLocalizerFactory _localizerFactory;
+
         #endregion
 
         #region Constructors
@@ -54,6 +57,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="dataService">      The data service. </param>
         /// <param name="adminOptions">     Options for controlling the admin. </param>
         /// <param name="localizer">        The localizer. </param>
+        /// <param name="localizerFactory"> The localizer factory. </param>
         public AccountController(
             UserManager<IdentityUserEntity> userManager,
             SignInManager<IdentityUserEntity> signInManager,
@@ -61,7 +65,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             ILoggerFactory loggerFactory,
             IIdentityDataService dataService,
             AdminOptions adminOptions,
-            IStringLocalizer<AccountResource> localizer)
+            IStringLocalizer<AccountResource> localizer,
+            IStringLocalizerFactory localizerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -69,6 +74,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _adminOptions = adminOptions;
             _localizer = localizer;
+            _localizerFactory = localizerFactory;
         }
 
         #endregion
@@ -134,6 +140,85 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        #endregion
+
+        #region Register
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUserEntity { Name = model.Name, Email = model.Email, Phone = model.Phone };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    // Send an email with this link
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+
+                    if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
+                        await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin 
+                            ? _adminOptions.AdminConfirmationRecipient : model.Email, 
+                            new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
+                    else
+                        await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin 
+                            ? _adminOptions.AdminConfirmationRecipient : model.Email, 
+                            new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+                    
+                    // sign the user in
+                    // disabled to force the the user to confirm his mail address
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    _logger.LogInformation(3, "User created a new account with password.");
+                    return RedirectToAction(nameof(ConfirmEmailNotification));
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        #endregion
+
+        #region ConfirmEmail
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ConfirmEmailNotification()
+        {
+            return View(_adminOptions);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         #endregion
