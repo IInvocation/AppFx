@@ -1,0 +1,17 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@inject IHtmlLocalizer<ConfirmEmailResource> Localizer
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => ConfirmEmailResource.ConfirmedHeader)</h2>
+    </header>
+    <div class="container">
+        <section>
+            <div class="row uniform">
+                <p>@Localizer.GetString(() => ConfirmEmailResource.ConfirmedHeader)</p><br />
+            </div>
+            <div class="row uniform">
+                <p><a asp-controller="Account" asp-action="Login">@Localizer.GetString(() => ConfirmEmailResource.LoginText)</a></p>
+            </div>
+        </section>
+    </div>
+</section>

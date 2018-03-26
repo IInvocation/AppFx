@@ -1,0 +1,39 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@using FluiTec.AppFx.Identity.Models.AccountViewModels
+@model ConfirmEmailAgainViewModel
+@inject IHtmlLocalizer<ConfirmEmailAgainResource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+    <section id="maincontent" class="wrapper content-wrapper">
+        <header>
+            <h2>@Localizer.GetString(() => ConfirmEmailAgainResource.ConfirmHeader)</h2>
+        </header>
+        <div class="container">
+            <section>
+                <form asp-controller="Account" asp-action="ConfirmEmailAgain" method="post">
+                    <h4>@Localizer.GetString(() => ConfirmEmailAgainResource.ConfirmHeader)</h4>
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row uniform">
+                        <div class="col-lg-6">
+                            <input asp-for="Email" placeholder="@Localizer.GetString(() => ConfirmEmailAgainResource.EmailPlaceHolder)" data-rule-required="true" data-msg-required="@Localizer.GetString(() => ConfirmEmailAgainResource.EmailRequired)" />
+                        </div>
+                    </div>
+                    <div class="row uniform">
+                        <div class="col-lg-6">
+                            <ul class="actions">
+                                <li>
+                                    <input type="submit" value="@Localizer.GetString(() => ConfirmEmailAgainResource.SubmitButton)" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </section>
+</cache>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

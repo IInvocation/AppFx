@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers;
-using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Models.AccountViewModels;
@@ -144,6 +144,103 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
+        #region ExternalLogin
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        {
+            // Request a redirect to the external login provider.
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"{_localizer.GetString(r => r.ExternalProviderError)} {remoteError}");
+                return View(nameof(Login));
+            }
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            // Sign in the user with this external login provider if the user already has a login.
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+                return RedirectToLocal(returnUrl);
+            }
+            if (result.RequiresTwoFactor)
+            {
+                throw new NotImplementedException("TwoFactor-Authentication not implemented!");
+            }
+            if (result.IsLockedOut)
+            {
+                return View("Lockout");
+            }
+
+            // If the user does not have an account, then ask the user to create an account.
+            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["LoginProvider"] = info.LoginProvider;
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            return View(viewName: "ExternalLoginConfirmation", model: new ExternalLoginConfirmationViewModel { Email = email });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
+        {
+            if (ModelState.IsValid)
+            {
+                // Get the information about the user from the external login provider
+                var info = await _signInManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    return View("ExternalLoginFailure");
+                }
+
+                var user = new IdentityUserEntity { Name = model.Name, Email = model.Email };
+                var result = await _userManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    result = await _userManager.AddLoginAsync(user, info);
+                    if (result.Succeeded)
+                    {
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+
+                        if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
+                            await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                                    ? _adminOptions.AdminConfirmationRecipient : model.Email,
+                                new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
+                        else
+                            await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                                    ? _adminOptions.AdminConfirmationRecipient : model.Email,
+                                new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+
+                        // disabled to force the the user to confirm his mail address
+                        // await _signInManager.SignInAsync(user, isPersistent: false);
+                        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
+                        return RedirectToAction(nameof(ConfirmEmailNotification));
+                    }
+                }
+                AddErrors(result);
+            }
+
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(model);
+        }
+
+        #endregion
+
         #region Register
 
         [HttpGet]
@@ -219,6 +316,134 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ConfirmEmailAgain()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmailAgain(ConfirmEmailAgainViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null || await _userManager.IsEmailConfirmedAsync(user))
+            {
+                // Don't reveal that the user does not exist or is confirmed
+                return View("ConfirmEmailAgainConfirmation");
+            }
+
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+
+            if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
+                await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                        ? _adminOptions.AdminConfirmationRecipient : model.Email,
+                    new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
+            else
+                await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                        ? _adminOptions.AdminConfirmationRecipient : model.Email,
+                    new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+            _logger.LogInformation($"Send emai-confirmation (again) for users {user.Email}.");
+
+            return View("ConfirmEmailAgainConfirmation");
+        }
+
+        #endregion
+
+        #region Logout
+
+        /// <summary>   Logout. </summary>
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        #endregion
+
+        #region ForgotPassword
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
+            {
+                // Don't reveal that the user does not exist or is already confirmed
+                return View("ForgotPasswordConfirmation");
+            }
+
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+            var mailModel = new RecoverPasswordMailModel(_localizerFactory, callbackUrl);
+            await _emailSender.SendEmailAsync(model.Email, mailModel);
+            _logger.LogInformation($"Send password-recovery mail for user {user.Email}.");
+            return View("ForgotPasswordConfirmation");
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string code = null)
+        {
+            return code == null ? View("Error") : View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
+            }
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
         }
 
         #endregion

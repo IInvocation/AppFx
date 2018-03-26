@@ -1,0 +1,17 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@inject IHtmlLocalizer<ConfirmEmailAgainConfirmationResource> Localizer
+
+<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+    <section id="maincontent" class="wrapper content-wrapper">
+        <header>
+            <h2>@Localizer.GetString(() => ConfirmEmailAgainConfirmationResource.ConfirmationHeader)</h2>
+        </header>
+        <div class="container">
+            <section>
+                <div class="row uniform">
+                    <p>@Localizer.GetString(() => ConfirmEmailAgainConfirmationResource.ConfirmationText)</p>
+                </div>
+            </section>
+        </div>
+    </section>
+</cache>

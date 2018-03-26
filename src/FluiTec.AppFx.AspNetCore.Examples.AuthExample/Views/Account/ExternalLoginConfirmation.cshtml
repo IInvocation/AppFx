@@ -1,0 +1,54 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
+@using FluiTec.AppFx.Identity.Entities
+@using FluiTec.AppFx.Identity.Models.AccountViewModels
+@using Microsoft.AspNetCore.Identity
+@model ExternalLoginConfirmationViewModel
+@inject SignInManager<IdentityUserEntity> SignInManager
+@inject IHtmlLocalizer<ExternalLoginConfirmationResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => ExternalLoginConfirmationResource.ExternalRegistrationHeader)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h4>@Localizer.GetString(() => ExternalLoginConfirmationResource.LocalInformationHeader)</h4>
+            <hr />
+            <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData[" ReturnUrl"]" method="post">
+                <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Email" placeholder="@Localizer.GetString(() => ExternalLoginConfirmationResource.EmailPlaceHolder)" data-rule-required="true" data-msg-required="@Localizer.GetString(() => ExternalLoginConfirmationResource.EmailRequired)" />
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Name" placeholder="@Localizer.GetString(() => ExternalLoginConfirmationResource.NamePlaceHolder)" data-rule-required="true" data-msg-required="@Localizer.GetString(() => ExternalLoginConfirmationResource.NameRequired)" />
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Phone" placeholder="@Localizer.GetString(() => ExternalLoginConfirmationResource.PhonePlaceHolder)" data-rule-required="true" data-msg-required="@Localizer.GetString(() => ExternalLoginConfirmationResource.PhoneRequired)" />
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <ul class="actions">
+                            <li>
+                                <input type="submit" value="@Localizer.GetString(() => ExternalLoginConfirmationResource.RegisterButton)" />
+                            </li>
+                            <li>
+                                <input type="reset" value="@Localizer.GetString(() => ExternalLoginConfirmationResource.ResetButton)" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
