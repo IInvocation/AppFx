@@ -26,7 +26,7 @@
             @if (SignInManager.IsSignedIn(User))
             {
             <li class="nav-item" is-active-route asp-controller="Manage" asp-action="Index">
-                <a class="nav-link" asp-controller="Manage" asp-action="Index"><img src="/images/profile.png" alt="profile" />@Localizer.GetString(() => NavbarResource.Profile)</a>
+                <a class="nav-link" asp-controller="Profile" asp-action="Index"><img src="/images/profile.png" alt="profile" />@Localizer.GetString(() => NavbarResource.Profile)</a>
             </li>
             <li class="nav-item" is-active-route asp-controller="Account" asp-action="Logout">
                 <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout" />@Localizer.GetString(() => NavbarResource.Logout)</a>

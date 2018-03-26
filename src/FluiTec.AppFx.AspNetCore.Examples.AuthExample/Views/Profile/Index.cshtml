@@ -1,0 +1,86 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Profile
+@using FluiTec.AppFx.Identity.Models.ManageViewModels
+@model IndexViewModel
+@inject IHtmlLocalizer<IndexResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => IndexResource.ProfileHeader)</h2>
+    </header>
+    <div class="container">
+        <section>
+            <h4>@Localizer.GetString(() => IndexResource.ChangeSettingsHeader)</h4>
+            <hr />
+            @if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+            {
+            <h5>@Localizer.GetString(() => IndexResource.StatusHeader)</h5>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <p>@Model.StatusMessage</p>
+                </div>
+            </div>
+            }
+            <h5>@Localizer.GetString(() => IndexResource.AccountHeader)</h5>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Profile" asp-action="DeleteAccount">@Localizer.GetString(() => IndexResource.DeleteAccountLink)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h5>@Localizer.GetString(() => IndexResource.PasswordHeader)</h5>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    @if (Model.HasPassword)
+                {
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Profile" asp-action="ChangePassword">@Localizer.GetString(() => IndexResource.ChangePasswordLink)</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Profile" asp-action="SetPassword">@Localizer.GetString(() => IndexResource.ChangeSettingsHeader)</a>
+                        </li>
+                    </ul>
+                }
+                </div>
+            </div>
+            <h5>@Localizer.GetString(() => IndexResource.ExternalLoginsHeader)</h5>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <p>@(Model.Logins.Count > 0 ? Localizer.GetString(() => IndexResource.LinkedAccountsCounterText, Model.Logins.Count)
+                             : Localizer.GetString(() => IndexResource.NoLinkedAccountsText))</p>
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Profile" asp-action="ManageLogins">@Localizer.GetString(() => IndexResource.ManageExternalLoginsText)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h5>@Localizer.GetString(() => IndexResource.PhoneHeader)</h5>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
+                    {
+                    <p>@Model.PhoneNumber</p>
+                    }
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Profile" asp-action="AddPhone">@Localizer.GetString(() => IndexResource.ChangePhoneLink)</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

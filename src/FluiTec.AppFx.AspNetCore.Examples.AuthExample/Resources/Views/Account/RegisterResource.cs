@@ -71,7 +71,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
 
         /// <summary>   Gets the reset button. </summary>
         /// <value> The reset button. </value>
-        [TranslationForCulture("Registrieren", "de")]
+        [TranslationForCulture("Zurücksetzen", "de")]
         public static string ResetButton => "Reset";
     }
 }

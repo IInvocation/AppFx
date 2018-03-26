@@ -2,6 +2,7 @@
 
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
+    /// <summary>An authentication options.</summary>
     [ConfigurationName("Authentication")]
     public class AuthenticationOptions
     {

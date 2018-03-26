@@ -31,7 +31,7 @@ namespace FluiTec.AppFx.Identity.Models.ManageViewModels
         [Display(Name = FullModelName + "ConfirmPassword", Description = "Password confirmation")]
         [DisplayTranslationForCulture("ConfirmPassword", "Passwort-Bestätigung", "de")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
-        [Compare("Password", ErrorMessage = "CompareMessage")]
+        [Compare("NewPassword", ErrorMessage = "CompareMessage")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }

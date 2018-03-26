@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Identity;
 namespace FluiTec.AppFx.Identity.Models.ManageViewModels
 {
     /// <summary>A ViewModel for the manage.</summary>
-    public class ManageViewModel
+    public class IndexViewModel
     {
+        /// <summary>Gets or sets a message describing the status.</summary>
+        /// <value>A message describing the status.</value>
+        public string StatusMessage { get; set; }
+
         /// <summary>   Gets or sets a value indicating whether this object has password. </summary>
         /// <value> True if this object has password, false if not. </value>
         public bool HasPassword { get; set; }

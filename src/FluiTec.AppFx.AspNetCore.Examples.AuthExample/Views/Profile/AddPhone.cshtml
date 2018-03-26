@@ -1,0 +1,39 @@
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Profile
+@using FluiTec.AppFx.Identity.Models.ManageViewModels
+@model AddPhoneViewModel
+@inject IHtmlLocalizer<AddPhoneResource> Localizer
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>@Localizer.GetString(() => AddPhoneResource.PhoneHeader)</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h4>@Localizer.GetString(() => AddPhoneResource.ChangePhoneHeader)</h4>
+            <hr />
+            <form asp-controller="Profile" asp-action="AddPhone" method="post">
+                <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Phone" placeholder="@Localizer.GetString(() => AddPhoneResource.PhonePlaceHolder)" data-rule-required="true" data-msg-required="@Localizer.GetString(() => AddPhoneResource.PhoneRequired)" />
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <ul class="actions">
+                            <li>
+                                <input type="submit" value="@Localizer.GetString(() => AddPhoneResource.SubmitButton)" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
