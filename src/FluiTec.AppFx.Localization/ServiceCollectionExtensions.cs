@@ -45,7 +45,7 @@ namespace FluiTec.AppFx.Localization
                 services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(_ =>
                 {
                     _.ModelMetadataDetailsProviders.Add(new LocalizedDisplayMetadataProvider());
-                    _.ModelValidatorProviders.Add(new LocalizedValidationMetadataProvider());
+                    //_.ModelValidatorProviders.Add(new LocalizedValidationMetadataProvider());
                 });
 
             services.AddSingleton<IStringLocalizerFactory, DbStringLocalizerFactory>();

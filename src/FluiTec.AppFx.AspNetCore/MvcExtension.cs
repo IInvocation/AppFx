@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Linq;
-using FluiTec.AppFx.AspNetCore.MetadataProviders;
-using FluiTec.AppFx.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Options;
 using MvcOptions = FluiTec.AppFx.AspNetCore.Configuration.MvcOptions;
 
 // ReSharper disable once CheckNamespace
@@ -37,12 +32,6 @@ namespace Microsoft.Extensions.DependencyInjection
 			Action<MvcOptions> configureMvc = null)
 	    {
 	        var mvc = services.AddMvc();
-            //var mvc = services.AddMvc(options =>
-            //{
-            //    var providers = options.ModelMetadataDetailsProviders;
-            //    providers.Remove(providers.Single(p => p.GetType() == typeof(DataAnnotationsMetadataProvider)));
-            //          providers.Add(new DbDataAnnotationsMetadataProvider(new OptionsWrapper<MvcDataAnnotationsLocalizationOptions>(new MvcDataAnnotationsLocalizationOptions()), new DbStringLocalizerFactory()));
-            //      });
 
             mvc.AddJsonOptions(options =>
 			    {
@@ -53,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 mvc.AddViewLocalization();
             else
                 mvc.AddViewLocalization(configureLocalization.Invoke);
-            if (configureDataLocalization == null)
+	        if (configureDataLocalization == null)
 	            mvc.AddDataAnnotationsLocalization();
 	        else
 	            mvc.AddDataAnnotationsLocalization(configureDataLocalization.Invoke);
@@ -63,7 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
 		    return services;
 	    }
 
-	    /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
+        /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
 	    /// <param name="app">				The app to act on. </param>
 	    /// <param name="configuration">	The configuration. </param>
 	    /// <returns>	An IApplicationBuilder. </returns>

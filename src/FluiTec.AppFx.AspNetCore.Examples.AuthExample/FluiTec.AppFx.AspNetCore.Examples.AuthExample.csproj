@@ -160,6 +160,10 @@
     <ProjectReference Include="..\FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MailViews\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

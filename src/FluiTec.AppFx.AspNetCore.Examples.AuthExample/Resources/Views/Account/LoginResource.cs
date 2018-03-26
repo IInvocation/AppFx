@@ -34,5 +34,15 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
         /// <value>The password required.</value>
         [TranslationForCulture("Passwort ist ein Pflichtfeld", "de")]
         public static string PasswordRequired => "Password is required";
+
+        /// <summary>   Gets the login button. </summary>
+        /// <value> The login button. </value>
+        [TranslationForCulture("Login", "de")]
+        public static string LoginButton => "Login";
+
+        /// <summary>   Gets the reset button. </summary>
+        /// <value> The reset button. </value>
+        [TranslationForCulture("Zurücksetzen", "de")]
+        public static string ResetButton => "Reset";
     }
 }

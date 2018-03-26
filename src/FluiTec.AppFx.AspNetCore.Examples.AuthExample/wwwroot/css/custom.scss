@@ -1,5 +1,6 @@
 ﻿/* Color-Definitions */
 $brandColor: #DF545A;
+$footerLinkColor: #545454;
 
 /* OpenId-Buttons */
 .Amazon-btn {
@@ -66,7 +67,7 @@ $brandColor: #DF545A;
 
 .footer-link-list a {
     display: block;
-    color: #545454;
+    color: $footerLinkColor;
     text-decoration: none;
 }
 
