@@ -24,7 +24,8 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.Versions.Migrat
                 .Create
                 .UniqueConstraint(ConstraintName)
                 .OnTable(Globals.ActivityTable)
-                .WithSchema(Globals.Schema);
+                .WithSchema(Globals.Schema)
+                .Columns("Name", "ResourceName");
 
             IfDatabase("mysql")
                 .Create
@@ -36,7 +37,8 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.Versions.Migrat
             IfDatabase("mysql")
                 .Create
                 .UniqueConstraint(ConstraintName)
-                .OnTable($"{Globals.Schema}_{Globals.ActivityTable}");
+                .OnTable($"{Globals.Schema}_{Globals.ActivityTable}")
+                .Columns("Name", "ResourceName");
         }
 
         /// <summary>Downs this object.</summary>
