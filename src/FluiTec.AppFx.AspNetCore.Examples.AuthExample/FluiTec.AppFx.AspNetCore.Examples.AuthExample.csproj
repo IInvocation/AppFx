@@ -21,19 +21,19 @@
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
     <None Include="appsettings.secret.json" />
-    <None Include="MailViews\AccountConfirmedModel.cshtml">
+    <None Include="MailViews\de\AccountConfirmedModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MailViews\ErrorModel.cshtml">
+    <None Include="MailViews\de\ErrorModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MailViews\AdminConfirmMailModel.cshtml">
+    <None Include="MailViews\de\AdminConfirmMailModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MailViews\RecoverPasswordMailModel.cshtml">
+    <None Include="MailViews\de\RecoverPasswordMailModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MailViews\UserConfirmMailModel.cshtml">
+    <None Include="MailViews\de\UserConfirmMailModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Views\Shared\de\Error.cshtml" />

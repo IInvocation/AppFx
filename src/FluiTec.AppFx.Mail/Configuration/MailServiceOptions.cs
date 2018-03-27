@@ -2,17 +2,25 @@
 
 namespace FluiTec.AppFx.Mail.Configuration
 {
-	/// <summary>	A web mail options. </summary>
+	/// <summary>	Web mail options. </summary>
 	[ConfigurationName("MailOptions")]
 	public class MailServiceOptions
 	{
+        /// <summary>The default extension.</summary>
+	    private const string DefaultExtension = ".cshtml";
+
+        /// <summary>The template root.</summary>
 		private string _templateRoot;
 
-		/// <summary>	Default constructor. </summary>
+        /// <summary>The extension.</summary>
+	    private string _extension;
+
+	    /// <summary>	Default constructor. </summary>
 		public MailServiceOptions()
 		{
 			Authenticate = true;
 			TemplateRoot = "MailViews";
+		    Extension = DefaultExtension;
 		}
 
 		/// <summary>	Gets or sets a value indicating whether the authenticate. </summary>
@@ -61,5 +69,17 @@ namespace FluiTec.AppFx.Mail.Configuration
 					_templateRoot = value;
 			}
 		}
+
+        /// <summary>Gets or sets the extension.</summary>
+        /// <value>The extension.</value>
+	    public string Extension
+	    {
+	        get => _extension;
+	        set
+	        {
+	            if (value != null && !string.IsNullOrWhiteSpace(value))
+	                _extension = value;
+	        }
+        }
 	}
 }

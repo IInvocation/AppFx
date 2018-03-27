@@ -60,7 +60,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
             services.ConfigureCaptcha(Configuration);
-            services.ConfigureMailService(Configuration, Environment);
+            services.ConfigureMailServiceLocalized(Configuration, Environment, (info, s) => $"{info.TwoLetterISOLanguageName}/{s}");
             services.ConfigureStatusCodeHandler(Configuration);
             services.ConfigureStaticFiles(Configuration);
         }
