@@ -35,8 +35,6 @@ namespace Microsoft.Extensions.DependencyInjection
 	        services.AddRazorLightSelf(environment, _options.TemplateRoot);
 		    services.AddScoped<ITemplatingMailService, MailKitRazorLightTemplatingMailService>();
 
-	        //services.AddScoped<ITemplatingMailService, MailKitRazorTemplatingMailService>();
-
             return services;
 	    }
 
