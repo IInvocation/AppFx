@@ -2,6 +2,7 @@
 using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
 using FluiTec.AppFx.Localization;
+// ReSharper disable VirtualMemberCallInConstructor
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
 {
@@ -18,6 +19,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
             ApplicationName = MailGlobals.ApplicationName;
             ApplicationUrl = MailGlobals.ApplicationUrl;
             ApplicationUrlDisplay = MailGlobals.ApplicationUrlDisplay;
+
+            Subject = localizer.GetString(() => AccountConfirmedResource.Subject);
+            Header = localizer.GetString(() => AccountConfirmedResource.Header);
 
             ConfirmationText = localizer.GetString(() => AccountConfirmedResource.ConfirmedText);
             LoginText = localizer.GetString(() => AccountConfirmedResource.LoginText, loginLink, MailGlobals.ApplicationName);

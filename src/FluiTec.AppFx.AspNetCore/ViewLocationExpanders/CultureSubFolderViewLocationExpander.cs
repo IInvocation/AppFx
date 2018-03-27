@@ -38,10 +38,14 @@ namespace FluiTec.AppFx.AspNetCore.ViewLocationExpanders
 
             return new[]
             {
-                "Views/{1}/{0}.cshtml",
+                
                 "Views/{1}/" + shortName + "/{0}.cshtml",
-                "Views/Shared/{0}.cshtml",
-                "Views/Shared/" + shortName + "/{0}.cshtml"
+                "Views/{1}/" + name + "/{0}.cshtml",
+                "Views/{1}/{0}.cshtml",
+                
+                "Views/Shared/" + shortName + "/{0}.cshtml",
+                "Views/Shared/" + name + "/{0}.cshtml",
+                "Views/Shared/{0}.cshtml"
             };
         }
     }

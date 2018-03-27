@@ -1,4 +1,5 @@
 ﻿using System;
+using FluiTec.AppFx.Mail.Configuration;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,6 +58,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureIdentityServer(Configuration);
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
+            services.ConfigureCaptcha(Configuration);
             services.ConfigureMailService(Configuration, Environment);
             services.ConfigureStatusCodeHandler(Configuration);
             services.ConfigureStaticFiles(Configuration);

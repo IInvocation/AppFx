@@ -21,11 +21,21 @@
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
     <None Include="appsettings.secret.json" />
-    <None Include="MailViews\AccountConfirmedModel.cshtml" />
-    <None Include="MailViews\ErrorModel.cshtml" />
-    <None Include="MailViews\AdminConfirmMailModel.cshtml" />
-    <None Include="MailViews\RecoverPasswordMailModel.cshtml" />
-    <None Include="MailViews\UserConfirmMailModel.cshtml" />
+    <None Include="MailViews\AccountConfirmedModel.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailViews\ErrorModel.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailViews\AdminConfirmMailModel.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailViews\RecoverPasswordMailModel.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="MailViews\UserConfirmMailModel.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Views\Shared\de\Error.cshtml" />
     <None Include="Views\Shared\de\_ExternalLogin.cshtml" />
     <None Include="Views\Shared\de\_Footer.cshtml" />
@@ -164,6 +174,7 @@
     <PackageReference Include="Localization.AspNetCore.TagHelpers" Version="0.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>

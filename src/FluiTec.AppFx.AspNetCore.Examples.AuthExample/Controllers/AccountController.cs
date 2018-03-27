@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using FluiTec.AppFx.Localization;
+using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 {
@@ -121,7 +122,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     if (result.IsLockedOut)
                     {
                         _logger.LogWarning(2, "User account locked out.");
-                        return View("Lockout", tUser.LockedOutTill);
+                        // ReSharper disable once PossibleInvalidOperationException
+                        return View("Lockout", tUser.LockedOutTill.Value);
                     }
                 }
 
@@ -263,18 +265,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // Send an email with this link
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
-
-                    if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
-                        await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin 
-                            ? _adminOptions.AdminConfirmationRecipient : model.Email, 
-                            new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
-                    else
-                        await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin 
-                            ? _adminOptions.AdminConfirmationRecipient : model.Email, 
-                            new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+                    await SendConfirmationMail(user);
                     
                     // sign the user in
                     // disabled to force the the user to confirm his mail address
@@ -316,16 +307,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
-            if (result.Succeeded)
-            {
-                // if admin is the one to confirm an account - notify the user about the confirmation
-                if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin)
-                {
-                    var mailModel = new AccountConfirmedModel(_localizerFactory, "");
-                    await _emailSender.SendEmailAsync(user.Email, mailModel);
-                }
-            }
+            if (!result.Succeeded || _adminOptions.ConfirmationRecipient != MailAddressConfirmationRecipient.Admin) return View(result.Succeeded ? "ConfirmEmail" : "Error");
 
+            var mailModel = new AccountConfirmedModel(_localizerFactory, "");
+            await _emailSender.SendEmailAsync(user.Email, mailModel);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -338,6 +323,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateRecaptcha]
         public async Task<IActionResult> ConfirmEmailAgain(ConfirmEmailAgainViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -349,17 +335,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 return View("ConfirmEmailAgainConfirmation");
             }
 
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+            await SendConfirmationMail(user);
 
-            if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
-                await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
-                        ? _adminOptions.AdminConfirmationRecipient : model.Email,
-                    new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
-            else
-                await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
-                        ? _adminOptions.AdminConfirmationRecipient : model.Email,
-                    new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
             _logger.LogInformation($"Send emai-confirmation (again) for users {user.Email}.");
 
             return View("ConfirmEmailAgainConfirmation");
@@ -460,6 +437,21 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         #endregion
 
         #region Helpers
+
+        /// <summary>Sends a confirmation mail.</summary>
+        /// <param name="user"> The user. </param>
+        private async Task SendConfirmationMail(IdentityUserEntity user)
+        {
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+
+            if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
+                await _emailSender.SendEmailAsync(user.Email,
+                    new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = user.Email });
+            else
+                await _emailSender.SendEmailAsync(_adminOptions.AdminConfirmationRecipient,
+                    new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+        }
 
         /// <summary>   Adds the errors. </summary>
         /// <param name="result">   The result. </param>
