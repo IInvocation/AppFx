@@ -1,4 +1,7 @@
-﻿<section id="maincontent" class="wrapper content-wrapper">
+﻿@using FluiTec.AppFx.AspNetCore.Configuration
+@inject OperatorOptions Operator
+
+<section id="maincontent" class="wrapper content-wrapper">
     <header>
         <h2>Datenschutzerklärung</h2>
     </header>
@@ -7,9 +10,15 @@
         <section>
             <h3>Datenschutz</h3>
             <p>Die Nutzung unserer Seite ist ohne  eine Angabe von personenbezogenen Daten möglich. Für die Nutzung einzelner  Services unserer Seite können sich hierfür abweichende Regelungen ergeben, die in  diesem Falle nachstehend gesondert erläutert werden. Ihre personenbezogenen  Daten (z.B. Name, Anschrift, E-Mail, Telefonnummer, u.ä.) werden von uns nur  gemäß den Bestimmungen des deutschen Datenschutzrechts verarbeitet. Daten sind dann  personenbezogen, wenn sie eindeutig einer bestimmten natürlichen Person  zugeordnet werden können. Die rechtlichen Grundlagen des Datenschutzes finden  Sie im Bundesdatenschutzgesetz (BDSG) und dem Telemediengesetz (TMG). Nachstehende  Regelungen informieren Sie insoweit über die Art, den Umfang und Zweck der  Erhebung, die Nutzung und die Verarbeitung von personenbezogenen Daten durch  den Anbieter</p>
-            <p><strong>[Name und Anschrift des Betreibers]</strong></p>
-            <p><strong>[Telefonnummer des Betreibers]</strong></p>
-            <p><strong>[E-Mail des Betreibers]</strong></p>
+            <p>
+                <strong>
+                    @Operator.Enterprise <br/>
+                    @Operator.Street <br/>
+                    @Operator.ZipCode @Operator.City <br/>
+                    Telefon: @Operator.Phone <br/>
+                    E-Mail: <a href="@Operator.PrivacyMailAddress">@Operator.PrivacyMailAddressDisplay</a>
+                </strong>
+            </p>
             <p>Wir weisen darauf hin, dass die  internetbasierte Datenübertragung Sicherheitslücken aufweist, ein lückenloser  Schutz vor Zugriffen durch Dritte somit unmöglich ist.</p>
 
             <h3>Cookies</h3>
@@ -35,7 +44,12 @@
 
             <h3>Registrierungsfunktion</h3>
             <p>Wir bieten Ihnen auf unserer Seite die Möglichkeit, sich dort  zu registrieren. Die im Zuge dieser Registrierung eingegebenen Daten, die aus  der Eingabemaske des Registrierungsformular ersichtlich sind </p>
-            <p><strong>[BITTE ERGÄNZEN:  NAME, E-MAILADRESSE USW]</strong></p>
+            <ul>
+                <li>E-Mail Adresse</li>
+                <li>Name</li>
+                <li>Telefonnummer</li>
+                <li>Passwort</li>
+            </ul>
             <p>werden ausschließlich für die Verwendung unseres  Angebots erhoben und gespeichert. Mit Ihrer Registrierung auf unserer Seite  werden wir zudem Ihre IP-Adresse und das Datum sowie die Uhrzeit Ihrer  Registrierung speichern. Dies dient in dem Fall, dass ein Dritter Ihre Daten  missbraucht und sich mit diesen Daten ohne Ihr Wissen auf unserer Seite  registriert, als Absicherung unsererseits.&nbsp;  Eine Weitergabe an Dritte erfolgt nicht. Ein Abgleich der so erhobenen  Daten mit Daten, die möglicherweise durch andere Komponenten unserer Seite  erhoben werden, erfolgt ebenfalls nicht.</p>
 
             <h3>Einsatz von reCAPTCHA</h3>

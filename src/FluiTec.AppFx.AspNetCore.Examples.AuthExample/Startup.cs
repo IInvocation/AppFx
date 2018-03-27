@@ -52,6 +52,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
         /// <param name="services">     The services. </param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureOperator(Configuration);
             services.ConfigureErrorHandling(Configuration);
             services.ConfigureIdentity(Configuration);
             services.ConfigureAuthentication(Configuration);
