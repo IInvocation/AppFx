@@ -10,6 +10,7 @@
     <Content Remove="appsettings.Production.json" />
     <Content Remove="appsettings.secret.json" />
     <Content Remove="MailViews\AdminConfirmMailModel.cshtml" />
+    <Content Remove="MailViews\ErrorModel.cshtml" />
     <Content Remove="MailViews\RecoverPasswordMailModel.cshtml" />
     <Content Remove="MailViews\UserConfirmMailModel.cshtml" />
   </ItemGroup>
@@ -19,19 +20,20 @@
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
     <None Include="appsettings.secret.json" />
+    <None Include="MailViews\ErrorModel.cshtml" />
     <None Include="MailViews\AdminConfirmMailModel.cshtml" />
     <None Include="MailViews\RecoverPasswordMailModel.cshtml" />
     <None Include="MailViews\UserConfirmMailModel.cshtml" />
-    <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_ExternalLogin.cshtml" />
-    <None Include="Views\Shared\_Footer.cshtml" />
-    <None Include="Views\Shared\_Head.cshtml" />
+    <None Include="Views\Shared\de\Error.cshtml" />
+    <None Include="Views\Shared\de\_ExternalLogin.cshtml" />
+    <None Include="Views\Shared\de\_Footer.cshtml" />
+    <None Include="Views\Shared\de\_Head.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_Navbar.cshtml" />
+    <None Include="Views\Shared\de\_Navbar.cshtml" />
     <None Include="Views\Shared\_Scripts.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\StatusCode\Index.cshtml" />
-    <None Include="Views\StatusCode\_Code_404.cshtml" />
+    <None Include="Views\StatusCode\de\Index.cshtml" />
+    <None Include="Views\StatusCode\de\_Code_404.cshtml" />
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\cookieconsent.min.js" />
     <None Include="wwwroot\js\jquery.min.js" />

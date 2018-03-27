@@ -1,59 +1,56 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Contact
-@inject IHtmlLocalizer<ImprintResource> Localizer
-
-<section id="maincontent" class="wrapper content-wrapper">
+﻿<section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>@Localizer.GetString(() => ImprintResource.Header)</h2>
+        <h2>Imprint</h2>
     </header>
     <!--Content-->
     <div class="container">
         <section>
-            <h3>@Localizer.GetString(() => ImprintResource.AddressHeader)</h3>
+            <h3>Address</h3>
             <p>
-                @Localizer.GetString(() => ImprintResource.AddressLine1)<br />
-                @Localizer.GetString(() => ImprintResource.AddressLine2)<br />
-                @Localizer.GetString(() => ImprintResource.AddressLine3)<br />
-                @Localizer.GetString(() => ImprintResource.AddressLine4)
+                Name of the Enterprise<br />
+                Street<br />
+                Street<br />
+                ZipCode, City
             </p>
-            <h3>@Localizer.GetString(() => ImprintResource.ContactHeader)</h3>
+            <h3>Contact</h3>
             <table>
                 <tbody>
                 <tr>
-                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.PhoneLabel)</th>
-                    <td>@Localizer.GetString(() => ImprintResource.Phone)</td>
+                    <th scope="row" style="width: 70px;">Phone:</th>
+                    <td>+00 (0000) 00000 - 0</td>
                 </tr>
                 <tr>
-                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.FaxLabel)</th>
-                    <td>@Localizer.GetString(() => ImprintResource.Fax)</td>
+                    <th scope="row" style="width: 70px;">Fax:</th>
+                    <td>+00 (0000) 00000 - 0</td>
                 </tr>
                 <tr>
-                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.MailLabel)</th>
-                    <td><a href="@Localizer.GetString(() => ImprintResource.MailtoMail)">@Localizer.GetString(() => ImprintResource.Mail)</a></td>
+                    <th scope="row" style="width: 70px;">Mail:</th>
+                    <td><a href="mailto:test@testdomain.test">test@testdomain.test</a></td>
                 </tr>
                 <tr>
-                    <th scope="row" style="width: 70px;">@Localizer.GetString(() => ImprintResource.WebLabel)</th>
-                    <td><a href="@Localizer.GetString(() => ImprintResource.WebHref)">@Localizer.GetString(() => ImprintResource.Web)</a></td>
+                    <th scope="row" style="width: 70px;">Web:</th>
+                    <td><a href="http://test@testdomain.test">test@testdomain.test</a></td>
                 </tr>
                 </tbody>
             </table>
             <br />
-            <h3>@Localizer.GetString(() => ImprintResource.RepresentativesHeader)</h3>
-            <p>@Localizer.GetString(() => ImprintResource.RepresentativesText)</p>
+            <h3>Representatives</h3>
+            <p>Name 1, Name 2</p>
             
-            <h3>@Localizer.GetString(() => ImprintResource.LegalHeader)</h3>
+            <h3>Legal</h3>
             <table>
                 <tbody>
                 <tr>
-                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.CommercialRegisterHeader)</th>
-                    <td>@Localizer.GetString(() => ImprintResource.CommercialRegisterText)</td>
+                    <th scope="row" style="width: 100px;">Commercial register:</th>
+                    <td>HR Stadt HRA 00000</td>
                 </tr>
                 <tr>
-                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.TaxIdentificationNumberHeader)</th>
-                    <td>@Localizer.GetString(() => ImprintResource.TaxIdentificationNumber)</td>
+                    <th scope="row" style="width: 100px;">Tax ID num.:</th>
+                    <td>DE00000000000</td>
                 </tr>
                 <tr>
-                    <th scope="row" style="width: 100px;">@Localizer.GetString(() => ImprintResource.TaxNumberHeader)</th>
-                    <td>@Localizer.GetString(() => ImprintResource.TaxNumberText)</td>
+                    <th scope="row" style="width: 100px;">Tax num.:</th>
+                    <td>00/000/0000</td>
                 </tr>
                 </tbody>
             </table>

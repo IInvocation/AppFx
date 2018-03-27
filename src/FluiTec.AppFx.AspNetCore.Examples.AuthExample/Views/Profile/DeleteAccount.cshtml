@@ -1,23 +1,20 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Profile
-@inject IHtmlLocalizer<DeleteAccountResource> Localizer
-
-<section id="maincontent" class="wrapper content-wrapper">
+﻿<section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>@Localizer.GetString(() => DeleteAccountResource.AccountHeader)</h2>
+        <h2>Account</h2>
     </header>
     <!--Content-->
     <div class="container">
         <section>
-            <h4>@Localizer.GetString(() => DeleteAccountResource.DeleteAccountHeader)</h4>
+            <h4>Delete account</h4>
             <p>
-                @Localizer.GetString(() => DeleteAccountResource.AreYouSureText)
+                Are you sure you want to delete your account?
             </p>
             <form asp-controller="Profile" asp-action="DeleteAccountNow" method="post">
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="@Localizer.GetString(() => DeleteAccountResource.ConfirmButton)" />
+                                <input type="submit" value="Yes, i am" />
                             </li>
                         </ul>
                     </div>

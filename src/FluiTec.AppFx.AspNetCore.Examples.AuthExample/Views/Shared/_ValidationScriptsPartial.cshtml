@@ -1,5 +1,4 @@
-﻿@using IdentityServer4.Validation
-<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
+﻿<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
     <environment names="Development">
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
         @{ var file = "/lib/jquery-validation/src/localization/messages_" + System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + ".js";}

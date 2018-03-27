@@ -1,27 +1,24 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Home
-@inject IHtmlLocalizer<AboutResource> Localizer
-
-<section id="maincontent" class="wrapper content-wrapper">
+﻿<section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>@Localizer.GetString(() => AboutResource.Header)</h2>
+        <h2>About</h2>
     </header>
     <!--Content-->
     <div class="container">
         <section>
-            <h3>@Localizer.GetString(() => AboutResource.FuncionalityHeader)</h3>
-            <p>@Localizer.GetString(() => AboutResource.FuncionalityDescription)</p>
-            <h3>@Localizer.GetString(() => AboutResource.FeatureHeader)</h3>
-            <p>@Localizer.GetString(() => AboutResource.FeatureDescription)</p>
+            <h3>About</h3>
+            <p>This homepage servers the purpose of identifying users of different web-applications.</p>
+            <h3>Features</h3>
+            <p>We offer OpenIdConnect for external applications covering the following modes (including Refresh-Token):</p>
             <ul>
-                <li>@Localizer.GetString(() => AboutResource.HybridMode)</li>
-                <li>@Localizer.GetString(() => AboutResource.ClientCredentialsMode)</li>
-                <li>@Localizer.GetString(() => AboutResource.UserCredentialsMode)</li>
+                <li>Hybrid</li>
+                <li>Client credentials</li>
+                <li>User credentials</li>
             </ul>
-            <h3>@Localizer.GetString(() => AboutResource.ExternalServicesHeader)</h3>
-            <p>@Localizer.GetString(() => AboutResource.ExternalServicesDescription)</p>
+            <h3>External services</h3>
+            <p>You can use the following, external services in order to not give us your password:</p>
             <ul>
-                <li>@Localizer.GetString(() => AboutResource.GoogleService)</li>
-                <li>@Localizer.GetString(() => AboutResource.AmazonService)</li>
+                <li>Google</li>
+                <li>Amazon</li>
             </ul>
         </section>
     </div>

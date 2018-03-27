@@ -1,11 +1,8 @@
 ﻿@model int
-@using FluiTec.AppFx.AspNetCore.Resources
-@inject IHtmlLocalizer<StatusCodeResource> Localizer
-
 @{
     <section id="maincontent" class="wrapper content-wrapper">
         <header>
-            <h2>@Localizer.GetString(() => StatusCodeResource.Error) - HTTP @Model</h2>
+            <h2>Error - HTTP @Model</h2>
         </header>
         <div class="container">
             <section id="content">

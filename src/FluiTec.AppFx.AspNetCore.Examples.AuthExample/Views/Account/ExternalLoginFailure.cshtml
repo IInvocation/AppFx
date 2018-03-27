@@ -1,15 +1,12 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Views.Account
-@inject IHtmlLocalizer<ExternalLoginFailureResource> Localizer
-
-<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+﻿<cache expires-after="@TimeSpan.FromHours(12)">
     <section id="maincontent" class="wrapper content-wrapper">
         <header>
-            <h2>@Localizer.GetString(() => ExternalLoginFailureResource.ErrorHeader)</h2>
+            <h2>Login error</h2>
         </header>
         <div class="container">
             <section>
                 <div class="row uniform">
-                    <p>@Localizer.GetString(() => ExternalLoginFailureResource.ErrorText)</p>
+                    <p>Sorry - we encountered a problem communicating with the provider. Please try again later.</p>
                 </div>
             </section>
         </div>
