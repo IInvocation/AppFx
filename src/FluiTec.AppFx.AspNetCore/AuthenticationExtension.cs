@@ -19,8 +19,10 @@ namespace FluiTec.AppFx.AspNetCore
             var options = configuration.GetConfiguration<AuthenticationOptions>();
             services.AddSingleton(options);
 
+            var appOptions = configuration.GetConfiguration<ApplicationOptions>();
+
             var auth = services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
-            auth.AddCookie(o => o.LoginPath = new PathString("/Account/Login"));
+            auth.AddCookie(o => o.LoginPath = new PathString(appOptions.ApplicationLoginPath));
 
             if (options.Google != null && options.Google.Enabled)
             {

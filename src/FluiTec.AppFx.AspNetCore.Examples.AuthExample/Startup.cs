@@ -1,5 +1,4 @@
 ﻿using System;
-using FluiTec.AppFx.Mail.Configuration;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -52,6 +51,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
         /// <param name="services">     The services. </param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureApplication(Configuration);
             services.ConfigureOperator(Configuration);
             services.ConfigureErrorHandling(Configuration);
             services.ConfigureIdentity(Configuration);

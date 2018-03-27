@@ -86,5 +86,27 @@
         "Value": "{0} muss mit {1} übereinstimmen."
       }
     ]
+  },
+  {
+    "ResourceKey": "FluiTec.AppFx.AspNetCore.Models.Name",
+    "ModificationDate": "2018-03-24T14:50:36.248+01:00",
+    "Author": "Code",
+    "FromCode": "true",
+    "IsModified": "false",
+    "IsHidden": "false",
+    "Translations": [
+      {
+        "Language": "null",
+        "Value": "Auth-Sample"
+      },
+      {
+        "Language": "en",
+        "Value": "Auth-Sample"
+      },
+      {
+        "Language": "de",
+        "Value": "Auth-Beispiel"
+      }
+    ] 
   }
 ]

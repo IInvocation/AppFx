@@ -1,11 +1,15 @@
-﻿<cache expires-after="@System.TimeSpan.FromHours(value: 12)">
+﻿@using FluiTec.AppFx.AspNetCore.Models
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<ApplicationResource> Localizer
+
+<cache expires-after="@System.TimeSpan.FromHours(value: 12)">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
     <meta name="author" content="Achim Schnell" />
     <meta name="description" content="authentication-sample" />
     @if (string.IsNullOrWhiteSpace(ViewBag.Title))
     {
-        <title>Auth-Sample</title>
+        <title>@Localizer.GetString(() => ApplicationResource.Name)</title>
     }
     else
     {
