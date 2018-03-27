@@ -8,7 +8,7 @@ using RazorLight;
 namespace FluiTec.AppFx.Mail
 {
 	/// <summary>	A mail kit templating mail service. </summary>
-	public class MailKitTemplatingMailService : RazorTemplatingMailService
+	public class MailKitRazorLightTemplatingMailService : RazorLightTemplatingMailService
 	{
 		#region Properties
 
@@ -59,7 +59,7 @@ namespace FluiTec.AppFx.Mail
 		/// <summary>	Constructor. </summary>
 		/// <param name="engine"> 	The engine. </param>
 		/// <param name="options">	Options for controlling the operation. </param>
-		public MailKitTemplatingMailService(IRazorLightEngine engine, MailServiceOptions options) : base(engine)
+		public MailKitRazorLightTemplatingMailService(IRazorLightEngine engine, MailServiceOptions options) : base(engine)
 		{
 			Options = options ?? throw new ArgumentNullException(nameof(options));
 		}
@@ -71,7 +71,7 @@ namespace FluiTec.AppFx.Mail
 		/// </exception>
 		/// <param name="viewPath">	Full pathname of the view file. </param>
 		/// <param name="options"> 	Options for controlling the operation. </param>
-		public MailKitTemplatingMailService(string viewPath, MailServiceOptions options) : base(viewPath)
+		public MailKitRazorLightTemplatingMailService(string viewPath, MailServiceOptions options) : base(viewPath)
 		{
 			Options = options ?? throw new ArgumentNullException(nameof(options));
 		}

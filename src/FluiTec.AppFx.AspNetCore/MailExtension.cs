@@ -20,7 +20,7 @@ namespace FluiTec.AppFx.AspNetCore
         {
             services.AddSingleton(configuration.GetConfiguration<MailServiceOptions>());
             services.AddRazorLightSelf(environment, "MailViews");
-            services.AddScoped<ITemplatingMailService, MailKitTemplatingMailService>();
+            services.AddScoped<ITemplatingMailService, MailKitRazorLightTemplatingMailService>();
 
             return services;
         }

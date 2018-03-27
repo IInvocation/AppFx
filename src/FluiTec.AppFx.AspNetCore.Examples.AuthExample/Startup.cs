@@ -52,12 +52,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureErrorHandling(Configuration);
-            services.ConfigureMailService(Configuration, Environment);
             services.ConfigureIdentity(Configuration);
             services.ConfigureAuthentication(Configuration);
             services.ConfigureIdentityServer(Configuration);
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
+            services.ConfigureMailService(Configuration, Environment);
             services.ConfigureStatusCodeHandler(Configuration);
             services.ConfigureStaticFiles(Configuration);
         }

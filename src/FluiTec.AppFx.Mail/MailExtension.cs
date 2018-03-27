@@ -31,10 +31,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
 			// register
 		    services.AddSingleton(_options);
-		    services.AddRazorLightSelf(environment, _options.TemplateRoot);
-		    services.AddScoped<ITemplatingMailService, MailKitTemplatingMailService>();
+		    
+	        services.AddRazorLightSelf(environment, _options.TemplateRoot);
+		    services.AddScoped<ITemplatingMailService, MailKitRazorLightTemplatingMailService>();
 
-		    return services;
+	        //services.AddScoped<ITemplatingMailService, MailKitRazorTemplatingMailService>();
+
+            return services;
 	    }
 
 	    /// <summary>	An IServiceCollection extension method that adds a razor light self. </summary>
