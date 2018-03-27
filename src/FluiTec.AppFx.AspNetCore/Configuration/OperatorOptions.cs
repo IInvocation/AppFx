@@ -65,5 +65,25 @@ namespace FluiTec.AppFx.AspNetCore.Configuration
         /// <summary>Gets or sets the tax number.</summary>
         /// <value>The tax number.</value>
         public string TaxNumber { get; set; }
+
+        /// <summary>Gets or sets the representatives.</summary>
+        /// <value>The representatives.</value>
+        public string Representatives { get; set; }
+
+        /// <summary>Gets or sets a value indicating whether this object has complementary.</summary>
+        /// <value>True if this object has complementary, false if not.</value>
+        public bool HasComplementary { get; set; }
+
+        /// <summary>Gets or sets the name of the complementary.</summary>
+        /// <value>The name of the complementary.</value>
+        public string ComplementaryName { get; set; }
+
+        /// <summary>Gets or sets the complementary representatives.</summary>
+        /// <value>The complementary representatives.</value>
+        public string ComplementaryRepresentatives { get; set; }
+
+        /// <summary>Gets or sets the complementary commercial register.</summary>
+        /// <value>The complementary commercial register.</value>
+        public string ComplementaryCommercialRegister { get; set; }
     }
 }

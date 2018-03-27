@@ -37,25 +37,36 @@
             </table>
             <br />
             <h3>Representatives</h3>
-            <p>Name 1, Name 2</p>
+            <p>@Operator.Representatives</p>
 
             <h3>Legal</h3>
             <table>
                 <tbody>
-                    <tr>
-                        <th scope="row" style="width: 100px;">Commercial register:</th>
-                        <td>@Operator.CommercialRegister</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style="width: 100px;">Tax ID num.:</th>
-                        <td>@Operator.TaxIdNumber</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" style="width: 100px;">Tax num.:</th>
-                        <td>@Operator.TaxNumber</td>
-                    </tr>
+                <tr>
+                    <th scope="row" style="width: 100px;">Commercial register:</th>
+                    <td>@Operator.CommercialRegister</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 100px;">Tax ID num.:</th>
+                    <td>@Operator.TaxIdNumber</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 100px;">Tax num.:</th>
+                    <td>@Operator.TaxNumber</td>
+                </tr>
                 </tbody>
             </table>
+            
+            @if (Operator.HasComplementary)
+            {
+                <br />
+                <h3>Managing partner</h3>
+                <p>
+                    @Operator.ComplementaryName<br />
+                    Representatives: @Operator.ComplementaryRepresentatives<br />
+                    Commercial register: @Operator.ComplementaryCommercialRegister
+                </p>
+            }
         </section>
     </div>
 </section>

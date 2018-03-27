@@ -37,7 +37,7 @@
             </table>
             <br />
             <h3>Vertretungsberechtigte</h3>
-            <p>Name 1, Name 2</p>
+            <p>@Operator.Representatives</p>
             
             <h3>Rechtliches</h3>
             <table>
@@ -56,6 +56,17 @@
                 </tr>
                 </tbody>
             </table>
+
+            @if (Operator.HasComplementary)
+            {
+                <br />
+                <h3>Geschäftsführende Komplementärin</h3>
+                <p>
+                    @Operator.ComplementaryName<br />
+                    Vertretungsberechtigte: @Operator.ComplementaryRepresentatives<br />
+                    Handelsregister: @Operator.ComplementaryCommercialRegister
+                </p>
+            }
         </section>
     </div>
 </section>
