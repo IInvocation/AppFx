@@ -26,6 +26,10 @@ namespace FluiTec.AppFx.AspNetCore.Configuration
         /// <value>The phone.</value>
         public string Phone { get; set; }
 
+        /// <summary>Gets or sets the fax.</summary>
+        /// <value>The fax.</value>
+        public string Fax { get; set; }
+
         /// <summary>Gets or sets the homepage display.</summary>
         /// <value>The homepage display.</value>
         public string HomepageDisplay { get; set; }
@@ -49,5 +53,17 @@ namespace FluiTec.AppFx.AspNetCore.Configuration
         /// <summary>Gets or sets the privacy mail address.</summary>
         /// <value>The privacy mail address.</value>
         public string PrivacyMailAddress { get; set; }
+
+        /// <summary>Gets or sets the commercial register.</summary>
+        /// <value>The commercial register.</value>
+        public string CommercialRegister { get; set; }
+
+        /// <summary>Gets or sets the tax identifier number.</summary>
+        /// <value>The tax identifier number.</value>
+        public string TaxIdNumber { get; set; }
+
+        /// <summary>Gets or sets the tax number.</summary>
+        /// <value>The tax number.</value>
+        public string TaxNumber { get; set; }
     }
 }

@@ -1,4 +1,7 @@
-﻿<section id="maincontent" class="wrapper content-wrapper">
+﻿@using FluiTec.AppFx.AspNetCore.Configuration
+@inject OperatorOptions Operator
+
+<section id="maincontent" class="wrapper content-wrapper">
     <header>
         <h2>Impressum</h2>
     </header>
@@ -7,29 +10,28 @@
         <section>
             <h3>Adresse</h3>
             <p>
-                Name des Unternehmens<br />
-                Zusätzliche Informationen<br />
-                Straße<br />
-                PLZ, Ort
+                @Operator.Enterprise<br />
+                @Operator.Street<br />
+                @Operator.ZipCode @Operator.City
             </p>
             <h3>Kontakt</h3>
             <table>
                 <tbody>
                 <tr>
                     <th scope="row" style="width: 70px;">Telefon:</th>
-                    <td>+00 (0000) 00000 - 0</td>
+                    <td>@Operator.Phone</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 70px;">Fax:</th>
-                    <td>+00 (0000) 00000 - 0</td>
+                    <td>@Operator.Fax</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 70px;">E-Mail:</th>
-                    <td><a href="mailto:test@testdomain.test">test@testdomain.test</a></td>
+                    <td><a href="@Operator.MailAddress">@Operator.MailAddressDisplay</a></td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 70px;">Homepage:</th>
-                    <td><a href="http://test@testdomain.test">test@testdomain.test</a></td>
+                    <td><a href="@Operator.Homepage">@Operator.HomepageDisplay</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -42,15 +44,15 @@
                 <tbody>
                 <tr>
                     <th scope="row" style="width: 100px;">Handelsregister:</th>
-                    <td>HR Stadt HRA 00000</td>
+                    <td>@Operator.CommercialRegister</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 100px;">UST-IdNr.:</th>
-                    <td>DE00000000000</td>
+                    <td>@Operator.TaxIdNumber</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 100px;">Steuer-Nr.:</th>
-                    <td>00/000/0000</td>
+                    <td>@Operator.TaxNumber</td>
                 </tr>
                 </tbody>
             </table>
