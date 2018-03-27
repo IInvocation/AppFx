@@ -1,67 +1,20 @@
 ﻿using System;
-using System.Threading.Tasks;
 using FluiTec.AppFx.Mail.Configuration;
-using MailKit.Net.Smtp;
-using MimeKit;
 using RazorLight;
 
 namespace FluiTec.AppFx.Mail
 {
-	/// <summary>	A mail kit templating mail service. </summary>
-	public class MailKitRazorLightTemplatingMailService : RazorLightTemplatingMailService
-	{
-		#region Properties
-
-		/// <summary>	Options for controlling the operation. </summary>
-		protected readonly MailServiceOptions Options;
-
-		#endregion
-
-		#region Methods
-
-		protected void SendMail<TModel>(TModel model, string email, string content) where TModel : IMailModel
-		{
-			var message = new MimeMessage();
-			message.From.Add(new MailboxAddress(Options.FromName, Options.FromMail));
-			message.To.Add(new MailboxAddress(email, email));
-			message.Subject = model.Subject;
-
-			message.Body = new TextPart("html")
-			{
-				Text = content
-			};
-
-			using (var client = new SmtpClient())
-			{
-				// currently acceppt all certificates
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-
-				client.Connect(Options.SmtpServer, Options.SmtpPort, Options.EnableSsl);
-
-				// Note: since we don't have an OAuth2 token, disable
-				// the XOAUTH2 authentication mechanism.
-				client.AuthenticationMechanisms.Remove("XOAUTH2");
-
-				if (Options.Authenticate)
-				{
-					client.Authenticate(Options.Username, Options.Password);
-				}
-
-				client.Send(message);
-				client.Disconnect(true);
-			}
-		}
-
-		#endregion
-
+    /// <summary>	A mail kit templating mail service. </summary>
+    public class MailKitRazorLightTemplatingMailService : MailKitTemplatingMailService
+    {
 		#region Constructors
 
 		/// <summary>	Constructor. </summary>
 		/// <param name="engine"> 	The engine. </param>
 		/// <param name="options">	Options for controlling the operation. </param>
-		public MailKitRazorLightTemplatingMailService(IRazorLightEngine engine, MailServiceOptions options) : base(engine)
+		public MailKitRazorLightTemplatingMailService(IRazorLightEngine engine, MailServiceOptions options) 
+		    : base(new RazorLightTemplatingService(engine), options)
 		{
-			Options = options ?? throw new ArgumentNullException(nameof(options));
 		}
 
 		/// <summary>	Constructor. </summary>
@@ -71,42 +24,9 @@ namespace FluiTec.AppFx.Mail
 		/// </exception>
 		/// <param name="viewPath">	Full pathname of the view file. </param>
 		/// <param name="options"> 	Options for controlling the operation. </param>
-		public MailKitRazorLightTemplatingMailService(string viewPath, MailServiceOptions options) : base(viewPath)
-		{
-			Options = options ?? throw new ArgumentNullException(nameof(options));
-		}
-
-		#endregion
-
-		#region ITemplatingMailService
-
-		/// <summary>	Sends an email asynchronous. </summary>
-		/// <typeparam name="TModel">	Type of the model. </typeparam>
-		/// <param name="email">	The email. </param>
-		/// <param name="model">	The model. </param>
-		/// <returns>	A Task. </returns>
-		public override Task SendEmailAsync<TModel>(string email, TModel model)
-		{
-			return Task.Factory.StartNew(() =>
-			{
-				var text = Parse(model);
-				SendMail(model, email, text);
-			});
-		}
-
-		/// <summary>	Sends an email asynchronous. </summary>
-		/// <typeparam name="TModel">	Type of the model. </typeparam>
-		/// <param name="email">	   	The email. </param>
-		/// <param name="templateName">	Name of the template. </param>
-		/// <param name="model">	   	The model. </param>
-		/// <returns>	A Task. </returns>
-		public override Task SendEmailAsync<TModel>(string email, string templateName, TModel model)
-		{
-			return Task.Factory.StartNew(() =>
-			{
-				var text = Parse(templateName, model);
-				SendMail(model, email, text);
-			});
+		public MailKitRazorLightTemplatingMailService(string viewPath, MailServiceOptions options)
+		    : base(new RazorLightTemplatingService(viewPath), options)
+        {
 		}
 
 		#endregion
