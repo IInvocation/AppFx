@@ -315,6 +315,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 return View("Error");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            if (result.Succeeded)
+            {
+                // if admin is the one to confirm an account - notify the user about the confirmation
+                if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin)
+                {
+                    var mailModel = new AccountConfirmedModel(_localizerFactory, "");
+                    await _emailSender.SendEmailAsync(user.Email, mailModel);
+                }
+            }
+
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 

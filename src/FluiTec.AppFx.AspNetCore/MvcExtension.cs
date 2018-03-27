@@ -1,4 +1,5 @@
 ﻿using System;
+using FluiTec.AppFx.AspNetCore.ViewLocationExpanders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -46,6 +47,8 @@ namespace Microsoft.Extensions.DependencyInjection
 	            mvc.AddDataAnnotationsLocalization();
 	        else
 	            mvc.AddDataAnnotationsLocalization(configureDataLocalization.Invoke);
+
+	        mvc.AddRazorOptions(o => o.ViewLocationExpanders.Add(new CultureSubFolderViewLocationExpander()));
 
 			configureMvc?.Invoke(new MvcOptions(mvc));
 

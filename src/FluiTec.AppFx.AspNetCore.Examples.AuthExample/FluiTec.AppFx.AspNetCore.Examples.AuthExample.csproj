@@ -9,6 +9,7 @@
     <Content Remove="appsettings.json" />
     <Content Remove="appsettings.Production.json" />
     <Content Remove="appsettings.secret.json" />
+    <Content Remove="MailViews\AccountConfirmedModel.cshtml" />
     <Content Remove="MailViews\AdminConfirmMailModel.cshtml" />
     <Content Remove="MailViews\ErrorModel.cshtml" />
     <Content Remove="MailViews\RecoverPasswordMailModel.cshtml" />
@@ -20,6 +21,7 @@
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
     <None Include="appsettings.secret.json" />
+    <None Include="MailViews\AccountConfirmedModel.cshtml" />
     <None Include="MailViews\ErrorModel.cshtml" />
     <None Include="MailViews\AdminConfirmMailModel.cshtml" />
     <None Include="MailViews\RecoverPasswordMailModel.cshtml" />
