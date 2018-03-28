@@ -52,12 +52,15 @@ namespace DbLocalizationProvider.Internal
         /// <returns>   A string. </returns>
         internal static string BuildResourceKey(Type containerType, Stack<string> keyStack)
         {
-            return BuildResourceKey(containerType, keyStack.Aggregate(string.Empty, (prefix, name) => BuildResourceKey(prefix, name)));
+            return BuildResourceKey(containerType,
+                keyStack.Aggregate(string.Empty, (prefix, name) => BuildResourceKey(prefix, name)));
         }
 
         /// <summary>   Builds resource key. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are
+        ///     null.
+        /// </exception>
         /// <param name="keyPrefix">    The key prefix. </param>
         /// <param name="attribute">    The attribute. </param>
         /// <returns>   A string. </returns>
@@ -68,16 +71,20 @@ namespace DbLocalizationProvider.Internal
 
             var result = BuildResourceKey(keyPrefix, attribute.GetType());
             if(attribute.GetType().IsAssignableFrom(typeof(DataTypeAttribute)))
-                result += ((DataTypeAttribute) attribute).DataType;
+                result += ((DataTypeAttribute)attribute).DataType;
 
             return result;
         }
 
         /// <summary>   Builds resource key. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        /// <exception cref="ArgumentException">        Thrown when one or more arguments have
-        ///                                             unsupported or illegal values. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are
+        ///     null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when one or more arguments have
+        ///     unsupported or illegal values.
+        /// </exception>
         /// <param name="keyPrefix">        The key prefix. </param>
         /// <param name="attributeType">    Type of the attribute. </param>
         /// <returns>   A string. </returns>
@@ -124,11 +131,11 @@ namespace DbLocalizationProvider.Internal
 
             var prefix = string.Empty;
 
-            if (!string.IsNullOrEmpty(modelAttribute?.KeyPrefix))
+            if(!string.IsNullOrEmpty(modelAttribute?.KeyPrefix))
                 prefix = modelAttribute?.KeyPrefix;
 
             var resourceAttributeOnClass = containerType.GetCustomAttribute<LocalizedResourceAttribute>();
-            if (!string.IsNullOrEmpty(resourceAttributeOnClass?.KeyPrefix))
+            if(!string.IsNullOrEmpty(resourceAttributeOnClass?.KeyPrefix))
                 prefix = resourceAttributeOnClass?.KeyPrefix;
 
             if(mi != null)
@@ -138,14 +145,15 @@ namespace DbLocalizationProvider.Internal
                     return prefix.JoinNonEmpty(string.Empty, resourceKeyAttribute.Key);
             }
 
-            if (!string.IsNullOrEmpty(prefix))
+            if(!string.IsNullOrEmpty(prefix))
                 return prefix.JoinNonEmpty(separator, memberName);
 
             // ##### we need to understand where to look for the property
             var potentialResourceKey = containerType.FullName.JoinNonEmpty(separator, memberName);
 
             // 1. maybe property has [UseResource] attribute, if so - then we need to look for "redirects"
-            if (TypeDiscoveryHelper.UseResourceAttributeCache.TryGetValue(potentialResourceKey, out string redirectedResourceKey))
+            if(TypeDiscoveryHelper.UseResourceAttributeCache.TryGetValue(potentialResourceKey,
+                out string redirectedResourceKey))
                 return redirectedResourceKey;
 
             // 2. verify that property is declared on given container type
@@ -155,13 +163,15 @@ namespace DbLocalizationProvider.Internal
             // 3. if not - then we scan through discovered and cached properties during initial scanning process and try to find on which type that property is declared
             var declaringTypeName = FindPropertyDeclaringTypeName(containerType, memberName);
             return declaringTypeName != null
-                       ? declaringTypeName.JoinNonEmpty(separator, memberName)
-                       : potentialResourceKey;
+                ? declaringTypeName.JoinNonEmpty(separator, memberName)
+                : potentialResourceKey;
         }
 
         /// <summary>   Builds resource key. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when one or more arguments have unsupported or
+        ///     illegal values.
+        /// </exception>
         /// <param name="containerType">    Type of the container. </param>
         /// <returns>   A string. </returns>
         internal static string BuildResourceKey(Type containerType)
@@ -170,7 +180,9 @@ namespace DbLocalizationProvider.Internal
             var resourceAttribute = containerType.GetCustomAttribute<LocalizedResourceAttribute>();
 
             if(modelAttribute == null && resourceAttribute == null)
-                throw new ArgumentException($"Type `{containerType.FullName}` is not decorated with localizable attributes ([LocalizedModelAttribute] or [LocalizedResourceAttribute])", nameof(containerType));
+                throw new ArgumentException(
+                    $"Type `{containerType.FullName}` is not decorated with localizable attributes ([LocalizedModelAttribute] or [LocalizedResourceAttribute])",
+                    nameof(containerType));
 
             return containerType.FullName;
         }
@@ -184,7 +196,7 @@ namespace DbLocalizationProvider.Internal
             // make private copy
             var currentContainerType = containerType;
 
-            while (true)
+            while(true)
             {
                 if(currentContainerType == null)
                     return null;

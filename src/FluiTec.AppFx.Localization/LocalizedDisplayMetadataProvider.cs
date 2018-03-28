@@ -14,8 +14,10 @@ namespace FluiTec.AppFx.Localization
         ///     Sets the values for properties of
         ///     <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadataProviderContext.DisplayMetadata" />.
         /// </summary>
-        /// <param name="context">  The
-        ///                         <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadataProviderContext" />. </param>
+        /// <param name="context">
+        ///     The
+        ///     <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadataProviderContext" />.
+        /// </param>
         public void CreateDisplayMetadata(DisplayMetadataProviderContext context)
         {
             var theAttributes = context.Attributes;

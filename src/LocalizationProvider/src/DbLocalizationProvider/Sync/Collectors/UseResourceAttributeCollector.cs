@@ -28,7 +28,7 @@ namespace DbLocalizationProvider.Sync.Collectors
             var resourceRef = mi.GetCustomAttribute<UseResourceAttribute>();
             if(resourceRef != null)
                 TypeDiscoveryHelper.UseResourceAttributeCache.TryAdd(resourceKey,
-                                                                     ResourceKeyBuilder.BuildResourceKey(resourceRef.TargetContainer, resourceRef.PropertyName));
+                    ResourceKeyBuilder.BuildResourceKey(resourceRef.TargetContainer, resourceRef.PropertyName));
 
             return Enumerable.Empty<DiscoveredResource>();
         }

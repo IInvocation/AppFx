@@ -7,11 +7,11 @@ namespace FluiTec.AppFx.Identity.Localization
     /// <summary>A multi language identity error describer.</summary>
     public class MultiLanguageIdentityErrorDescriber : IdentityErrorDescriber
     {
-        /// <summary>Name of the type.</summary>
-        private readonly string _typeName;
-
         /// <summary>The localizer.</summary>
         private readonly IStringLocalizer<IdentityResource> _localizer;
+
+        /// <summary>Name of the type.</summary>
+        private readonly string _typeName;
 
         /// <summary>Constructor.</summary>
         /// <param name="localizer">    The localizer. </param>

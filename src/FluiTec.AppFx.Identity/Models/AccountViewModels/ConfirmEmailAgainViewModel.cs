@@ -8,7 +8,8 @@ namespace FluiTec.AppFx.Identity.Models.AccountViewModels
     public class ConfirmEmailAgainViewModel
     {
         /// <summary>Name of the full model.</summary>
-        private const string FullModelName = "FluiTec.AppFx.Identity.Models.AccountViewModels.ConfirmEmailAgainViewModel";
+        private const string FullModelName =
+            "FluiTec.AppFx.Identity.Models.AccountViewModels.ConfirmEmailAgainViewModel";
 
         /// <summary>Gets or sets the email.</summary>
         /// <value>The email.</value>

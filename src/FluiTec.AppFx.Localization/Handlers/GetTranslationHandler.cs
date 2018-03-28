@@ -9,7 +9,8 @@ using DbLocalizationProvider.Queries;
 namespace FluiTec.AppFx.Localization.Handlers
 {
     /// <summary>   A get translation handler. </summary>
-    public class GetTranslationHandler : GetTranslation.GetTranslationHandlerBase, IQueryHandler<GetTranslation.Query, string>
+    public class GetTranslationHandler : GetTranslation.GetTranslationHandlerBase,
+        IQueryHandler<GetTranslation.Query, string>
     {
         /// <summary>   The data service. </summary>
         private readonly ILocalizationDataService _dataService;
@@ -37,7 +38,8 @@ namespace FluiTec.AppFx.Localization.Handlers
             var cacheKey = CacheKeyHelper.BuildKey(key);
 
             if (ConfigurationContext.Current.CacheManager.Get(cacheKey) is LocalizationResource localizationResource)
-                return GetTranslationFromAvailableList(localizationResource.Translations, language, query.UseFallback)?.Value;
+                return GetTranslationFromAvailableList(localizationResource.Translations, language, query.UseFallback)
+                    ?.Value;
 
             var resource = GetResourceFromDb(key);
             LocalizationResourceTranslation localization = null;

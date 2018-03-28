@@ -31,7 +31,8 @@ namespace FluiTec.AppFx.Localization.Sync
             if (!ConfigurationContext.Current.DiscoverAndRegisterResources)
                 return;
 
-            var discoveredTypes = TypeDiscoveryHelper.GetTypes(t => t.GetCustomAttribute<LocalizedResourceAttribute>() != null,
+            var discoveredTypes = TypeDiscoveryHelper.GetTypes(
+                t => t.GetCustomAttribute<LocalizedResourceAttribute>() != null,
                 t => t.GetCustomAttribute<LocalizedModelAttribute>() != null);
 
             var discoveredResources = discoveredTypes[0];
@@ -103,7 +104,8 @@ namespace FluiTec.AppFx.Localization.Sync
                     {
                         if (resourceRepository.RefactorKey(refactoredResource.OldResourceKey, refactoredResource.Key))
                         {
-                            allResources.Single(r => r.ResourceKey == refactoredResource.OldResourceKey).ResourceKey = refactoredResource.Key;
+                            allResources.Single(r => r.ResourceKey == refactoredResource.OldResourceKey).ResourceKey =
+                                refactoredResource.Key;
                         }
                     }
 
@@ -160,11 +162,17 @@ namespace FluiTec.AppFx.Localization.Sync
                                 // if it doesnt - add it
                                 else
                                 {
-                                    translationRepository.Add(new TranslationEntity {Language = translation.Culture, ResourceId = existingResource.Id, Value = translation.Translation});
+                                    translationRepository.Add(new TranslationEntity
+                                    {
+                                        Language = translation.Culture,
+                                        ResourceId = existingResource.Id,
+                                        Value = translation.Translation
+                                    });
                                 }
                             }
                         }
                     }
+
                     uow.Commit();
                 }
             }

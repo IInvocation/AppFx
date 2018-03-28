@@ -28,8 +28,7 @@ namespace DbLocalizationProvider
 
         public int ResourceId { get; set; }
 
-        [JsonIgnore]
-        public LocalizationResource LocalizationResource { get; set; }
+        [JsonIgnore] public LocalizationResource LocalizationResource { get; set; }
 
         public string Language { get; set; }
 

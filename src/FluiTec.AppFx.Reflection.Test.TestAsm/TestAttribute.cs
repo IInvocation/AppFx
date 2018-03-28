@@ -4,7 +4,9 @@ namespace FluiTec.AppFx.Reflection.Test.TestAsm
 {
     public class TestAttribute : Attribute
     {
-        public TestAttribute() { }
+        public TestAttribute()
+        {
+        }
 
         public TestAttribute(string testText)
         {

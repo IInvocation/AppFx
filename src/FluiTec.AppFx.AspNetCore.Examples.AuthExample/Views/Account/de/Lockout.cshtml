@@ -1,6 +1,7 @@
-﻿@model DateTimeOffset
+﻿@using System.Globalization
+@model DateTimeOffset
 
-<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
+<cache vary-by="@CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(12)">
     <section id="maincontent" class="wrapper content-wrapper">
         <header>
             <h2>Account ist gesperrt</h2>

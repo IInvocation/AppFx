@@ -46,8 +46,10 @@ namespace FluiTec.AppFx.Localization.Mysql
         /// <summary>	Registers the identity repositories. </summary>
         protected virtual void RegisterIdentityRepositories()
         {
-            RegisterRepositoryProvider(new Func<IUnitOfWork, IResourceRepository>(work => new MysqlDapperResourceRepository(work)));
-            RegisterRepositoryProvider(new Func<IUnitOfWork, ITranslationRepository>(work => new MysqlDapperTranslationRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IResourceRepository>(work => new MysqlDapperResourceRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, ITranslationRepository>(work => new MysqlDapperTranslationRepository(work)));
         }
 
         #endregion

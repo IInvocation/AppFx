@@ -3,45 +3,47 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluiTec.AppFx.IdentityServer.LiteDb.Test
 {
-	[TestClass]
-	public class LiteDbSigningCredentialTest : SigningCredentialTest
-	{
-		public LiteDbSigningCredentialTest() : base(Helper.GetDataService()) { }
+    [TestClass]
+    public class LiteDbSigningCredentialTest : SigningCredentialTest
+    {
+        public LiteDbSigningCredentialTest() : base(Helper.GetDataService())
+        {
+        }
 
-		[TestMethod]
-		public override void CanAddAndGetSigningCredential()
-		{
-			base.CanAddAndGetSigningCredential();
-		}
+        [TestMethod]
+        public override void CanAddAndGetSigningCredential()
+        {
+            base.CanAddAndGetSigningCredential();
+        }
 
-		[TestMethod]
-		public override void CanAddAndGetSigningCredentials()
-		{
-			base.CanAddAndGetSigningCredentials();
-		}
+        [TestMethod]
+        public override void CanAddAndGetSigningCredentials()
+        {
+            base.CanAddAndGetSigningCredentials();
+        }
 
-		[TestMethod]
-		public override void CanUpdateSigningCredential()
-		{
-			base.CanUpdateSigningCredential();
-		}
+        [TestMethod]
+        public override void CanUpdateSigningCredential()
+        {
+            base.CanUpdateSigningCredential();
+        }
 
-		[TestMethod]
-		public override void CanDeleteSigningCredential()
-		{
-			base.CanDeleteSigningCredential();
-		}
+        [TestMethod]
+        public override void CanDeleteSigningCredential()
+        {
+            base.CanDeleteSigningCredential();
+        }
 
-		[TestMethod]
-		public override void CanGetLatest()
-		{
-			base.CanGetLatest();
-		}
+        [TestMethod]
+        public override void CanGetLatest()
+        {
+            base.CanGetLatest();
+        }
 
-		[TestMethod]
-		public override void CanGetValidationValid()
-		{
-			base.CanGetValidationValid();
-		}
-	}
+        [TestMethod]
+        public override void CanGetValidationValid()
+        {
+            base.CanGetValidationValid();
+        }
+    }
 }

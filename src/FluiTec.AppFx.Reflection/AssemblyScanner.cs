@@ -20,8 +20,8 @@ namespace FluiTec.AppFx.Reflection
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             foreach (var assembly in assemblies)
-                foreach (var type in GetAttributedTypes(assembly, attributeType))
-                    yield return type;
+            foreach (var type in GetAttributedTypes(assembly, attributeType))
+                yield return type;
         }
 
         /// <summary>   Gets the attributed types in this collection. </summary>
@@ -37,10 +37,8 @@ namespace FluiTec.AppFx.Reflection
             if (attributeType == null) throw new ArgumentNullException(nameof(attributeType));
 
             foreach (var type in assembly.GetTypes())
-            {
                 if (type.GetCustomAttributes(attributeType, true).Length > 0)
                     yield return type;
-            }
         }
     }
 }

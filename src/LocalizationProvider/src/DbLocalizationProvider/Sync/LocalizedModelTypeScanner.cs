@@ -50,12 +50,12 @@ namespace DbLocalizationProvider.Sync
 
             var refactoringInfo = target.GetCustomAttribute<RenamedResourceAttribute>();
             return DiscoverResourcesFromTypeMembers(target,
-                                                    resourceSources,
-                                                    resourceKeyPrefix,
-                                                    isKeyPrefixSpecified,
-                                                    isHidden,
-                                                    refactoringInfo?.OldName,
-                                                    refactoringInfo?.OldNamespace);
+                resourceSources,
+                resourceKeyPrefix,
+                isKeyPrefixSpecified,
+                isHidden,
+                refactoringInfo?.OldName,
+                refactoringInfo?.OldNamespace);
         }
 
         private static ICollection<MemberInfo> GetResourceSources(Type target)
@@ -70,10 +70,10 @@ namespace DbLocalizationProvider.Sync
                 flags = flags | BindingFlags.DeclaredOnly;
 
             return target.GetProperties(flags | BindingFlags.GetProperty)
-                         .Union(target.GetFields(flags).Cast<MemberInfo>())
-                         .Where(pi => pi.GetCustomAttribute<IgnoreAttribute>() == null)
-                         .Where(pi => !modelAttribute.OnlyIncluded || pi.GetCustomAttribute<IncludeAttribute>() != null)
-                         .ToList();
+                .Union(target.GetFields(flags).Cast<MemberInfo>())
+                .Where(pi => pi.GetCustomAttribute<IgnoreAttribute>() == null)
+                .Where(pi => !modelAttribute.OnlyIncluded || pi.GetCustomAttribute<IncludeAttribute>() != null)
+                .ToList();
         }
     }
 }

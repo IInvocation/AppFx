@@ -8,8 +8,8 @@ namespace FluiTec.AppFx.Authorization.Activity
 {
     /// <summary>A resource type activity authorization handler.</summary>
     /// <typeparam name="TResourceType">    Type of the resource type. </typeparam>
-    public class ResourceTypeActivityAuthorizationHandler<TResourceType> 
-        : AuthorizationHandler<OperationAuthorizationRequirement , TResourceType> 
+    public class ResourceTypeActivityAuthorizationHandler<TResourceType>
+        : AuthorizationHandler<OperationAuthorizationRequirement, TResourceType>
         where TResourceType : Type
     {
         /// <summary>The data service.</summary>
@@ -22,8 +22,10 @@ namespace FluiTec.AppFx.Authorization.Activity
             _dataService = dataService;
         }
 
-        /// <summary>Makes a decision if authorization is allowed based on a specific requirement and
-        /// resource.</summary>
+        /// <summary>
+        ///     Makes a decision if authorization is allowed based on a specific requirement and
+        ///     resource.
+        /// </summary>
         /// <param name="context">      The authorization context. </param>
         /// <param name="requirement">  The requirement to evaluate. </param>
         /// <param name="resourceType">     The resource to evaluate. </param>
@@ -44,9 +46,9 @@ namespace FluiTec.AppFx.Authorization.Activity
                 var activityRoles = uow.ActivityRoleRepository.ByActivity(activity).ToList();
                 if (activityRoles.Any(ar => ar.Allow == false)) // if any activity denies access explicitly - fail
                     context.Fail();
-                else if (activityRoles.Any(ar => ar.Allow == true)) // if any activity allows access explicitly - succeed
+                else if (activityRoles.Any(ar => ar.Allow == true)
+                ) // if any activity allows access explicitly - succeed
                     context.Succeed(requirement);
-
             }
 
             return Task.CompletedTask;

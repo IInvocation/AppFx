@@ -40,8 +40,8 @@ namespace DbLocalizationProvider.Sync
             var resourceAttribute = target.GetCustomAttribute<LocalizedResourceAttribute>();
 
             return !string.IsNullOrEmpty(resourceAttribute?.KeyPrefix)
-                       ? resourceAttribute?.KeyPrefix
-                       : (string.IsNullOrEmpty(keyPrefix) ? target.FullName : keyPrefix);
+                ? resourceAttribute?.KeyPrefix
+                : (string.IsNullOrEmpty(keyPrefix) ? target.FullName : keyPrefix);
         }
 
         public ICollection<DiscoveredResource> GetClassLevelResources(Type target, string resourceKeyPrefix)
@@ -65,25 +65,27 @@ namespace DbLocalizationProvider.Sync
             }
 
             return target.GetMembers(BindingFlags.Public | BindingFlags.Static)
-                         .Select(mi =>
-                         {
-                             var isResourceHidden = isHidden || mi.GetCustomAttribute<HiddenAttribute>() != null;
+                .Select(mi =>
+                {
+                    var isResourceHidden = isHidden || mi.GetCustomAttribute<HiddenAttribute>() != null;
 
-                             var translations = DiscoveredTranslation.FromSingle(GetEnumTranslation(mi));
-                             var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>().ToList();
-                             if(additionalTranslationsAttributes.Any())
-                                 translations.AddRange(additionalTranslationsAttributes.Select(_ => new DiscoveredTranslation(_.Translation, _.Culture)));
+                    var translations = DiscoveredTranslation.FromSingle(GetEnumTranslation(mi));
+                    var additionalTranslationsAttributes =
+                        mi.GetCustomAttributes<TranslationForCultureAttribute>().ToList();
+                    if(additionalTranslationsAttributes.Any())
+                        translations.AddRange(additionalTranslationsAttributes.Select(_ =>
+                            new DiscoveredTranslation(_.Translation, _.Culture)));
 
-                             return new DiscoveredResource(mi,
-                                                           ResourceKeyBuilder.BuildResourceKey(target, mi.Name),
-                                                           translations,
-                                                           mi.Name,
-                                                           target,
-                                                           enumType,
-                                                           enumType.IsSimpleType(),
-                                                           isResourceHidden);
-                         })
-                         .ToList();
+                    return new DiscoveredResource(mi,
+                        ResourceKeyBuilder.BuildResourceKey(target, mi.Name),
+                        translations,
+                        mi.Name,
+                        target,
+                        enumType,
+                        enumType.IsSimpleType(),
+                        isResourceHidden);
+                })
+                .ToList();
         }
     }
 }

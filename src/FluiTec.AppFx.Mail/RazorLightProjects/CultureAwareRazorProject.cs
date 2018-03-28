@@ -19,12 +19,15 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
         private readonly Func<CultureInfo, string, string> _templateKeyExpander;
 
         /// <summary>Constructor.</summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are
+        ///     null.
+        /// </exception>
         /// <param name="options">              Options for controlling the operation. </param>
         /// <param name="root">                 The root. </param>
         /// <param name="templateKeyExpander">  The template key expander. </param>
-        public CultureAwareRazorProject(MailServiceOptions options, string root, Func<CultureInfo, string, string> templateKeyExpander) : base(root)
+        public CultureAwareRazorProject(MailServiceOptions options, string root,
+            Func<CultureInfo, string, string> templateKeyExpander) : base(root)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _root = root;
@@ -38,10 +41,7 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
         /// <returns>The asynchronous result that yields the item asynchronous.</returns>
         public override Task<RazorLightProjectItem> GetItemAsync(string templateKey)
         {
-            if (!templateKey.EndsWith(_options.Extension))
-            {
-                templateKey = templateKey + _options.Extension;
-            }
+            if (!templateKey.EndsWith(_options.Extension)) templateKey = templateKey + _options.Extension;
 
             var expandedKey = _templateKeyExpander(CultureInfo.CurrentUICulture, templateKey);
             return base.GetItemAsync(expandedKey);

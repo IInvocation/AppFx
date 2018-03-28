@@ -22,7 +22,8 @@ namespace FluiTec.AppFx.Localization.Exporter
             app.HelpOption("-?|-h|--help");
 
             // add option for selecting the correct source type
-            var sourceTypeOption = app.AddCliOption("-t | --type <type>", "ExportSourceType (Mssql, Pgsql, Mysql, LiteDb, Assembly")
+            var sourceTypeOption = app
+                .AddCliOption("-t | --type <type>", "ExportSourceType (Mssql, Pgsql, Mysql, LiteDb, Assembly")
                 .IsRequired<string>()
                 .ValidatedWith(EnumHelper.IsEnum<ExportSourceType>, "Invalid ExportSourceType")
                 .TransformWith(EnumHelper.ParseEnum<ExportSourceType>);
@@ -60,7 +61,9 @@ namespace FluiTec.AppFx.Localization.Exporter
                     : reader.ReadAll().Where(e => e.ResourceKey.StartsWith(filter));
 
                 var optionValue = exportFileNameOption.Value();
-                var baseFileName = string.IsNullOrWhiteSpace(optionValue) ? "./json/" + FindCommonBasePath(entries) : optionValue;
+                var baseFileName = string.IsNullOrWhiteSpace(optionValue)
+                    ? "./json/" + FindCommonBasePath(entries)
+                    : optionValue;
                 var fileName = $"{baseFileName}.json";
                 Console.WriteLine($"--> Exporting to file {fileName}");
 

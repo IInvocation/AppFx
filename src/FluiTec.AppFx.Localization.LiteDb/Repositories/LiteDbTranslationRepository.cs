@@ -22,20 +22,11 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
 
         #endregion
 
-        /// <summary>Gets by resource identifier and culture.</summary>
-        /// <param name="resourceId">   Identifier for the resource. </param>
-        /// <param name="culture">      The culture. </param>
-        /// <returns>The by resource identifier and culture.</returns>
-        private TranslationEntity GetByResourceIdAndCulture(int resourceId, string culture)
-        {
-            return Collection.Find(e => e.ResourceId == resourceId && e.Language == culture).SingleOrDefault();
-        }
-
         /// <summary>Adds entity.</summary>
         /// <param name="entity">   The entity to add. </param>
         /// <returns>A TEntity.</returns>
         /// <remarks>
-        /// Make sure only distinct languages exist         
+        ///     Make sure only distinct languages exist
         /// </remarks>
         public override TranslationEntity Add(TranslationEntity entity)
         {
@@ -45,7 +36,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         /// <summary>Adds a range.</summary>
         /// <param name="entities"> An IEnumerable&lt;TEntity&gt; of items to append to this. </param>
         /// <remarks>
-        /// Make sure only distinct languages exist         
+        ///     Make sure only distinct languages exist
         /// </remarks>
         public override void AddRange(IEnumerable<TranslationEntity> entities)
         {
@@ -57,12 +48,14 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         }
 
         /// <summary>Updates the given entity.</summary>
-        /// <exception cref="InvalidOperationException">    Thrown when the requested operation is
-        ///                                                 invalid. </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Thrown when the requested operation is
+        ///     invalid.
+        /// </exception>
         /// <param name="entity">   The entity. </param>
         /// <returns>A TEntity.</returns>
         /// <remarks>
-        /// Make sure only distinct languages exist         
+        ///     Make sure only distinct languages exist
         /// </remarks>
         public override TranslationEntity Update(TranslationEntity entity)
         {
@@ -77,6 +70,15 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
                 return base.Update(entity);
 
             throw new InvalidOperationException("Duplicate key cannot be created");
+        }
+
+        /// <summary>Gets by resource identifier and culture.</summary>
+        /// <param name="resourceId">   Identifier for the resource. </param>
+        /// <param name="culture">      The culture. </param>
+        /// <returns>The by resource identifier and culture.</returns>
+        private TranslationEntity GetByResourceIdAndCulture(int resourceId, string culture)
+        {
+            return Collection.Find(e => e.ResourceId == resourceId && e.Language == culture).SingleOrDefault();
         }
 
         #region ITranslationRepository

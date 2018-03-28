@@ -34,7 +34,8 @@ namespace DbLocalizationProvider.DataAnnotations
     {
         /// <summary>   The use legacy mode. </summary>
         public static Func<string, bool> UseLegacyMode =
-             x => !string.IsNullOrWhiteSpace(x) && x.StartsWith("/") && ConfigurationContext.Current.ModelMetadataProviders.EnableLegacyMode();
+            x => !string.IsNullOrWhiteSpace(x) && x.StartsWith("/") &&
+                 ConfigurationContext.Current.ModelMetadataProviders.EnableLegacyMode();
 
         /// <summary>   Gets a translation. </summary>
         /// <param name="resourceKey">  The resource key. </param>

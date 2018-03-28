@@ -8,7 +8,8 @@ namespace DbLocalizationProvider
         private readonly ConcurrentDictionary<Type, Type> _decoratorMmappings;
         private readonly ConcurrentDictionary<Type, Func<object>> _mappings;
 
-        public SetHandlerExpression(ConcurrentDictionary<Type, Func<object>> mappings, ConcurrentDictionary<Type, Type> decoratorMmappings)
+        public SetHandlerExpression(ConcurrentDictionary<Type, Func<object>> mappings,
+            ConcurrentDictionary<Type, Type> decoratorMmappings)
         {
             _mappings = mappings;
             _decoratorMmappings = decoratorMmappings;

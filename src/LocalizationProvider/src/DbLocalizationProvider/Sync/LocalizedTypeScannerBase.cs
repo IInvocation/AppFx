@@ -52,12 +52,12 @@ namespace DbLocalizationProvider.Sync
             foreach(var resourceKeyAttribute in resourceAttributesOnModelClass)
             {
                 result.Add(new DiscoveredResource(null,
-                                                  ResourceKeyBuilder.BuildResourceKey(resourceKeyPrefix, resourceKeyAttribute.Key, string.Empty),
-                                                  DiscoveredTranslation.FromSingle(resourceKeyAttribute.Value),
-                                                  resourceKeyAttribute.Value,
-                                                  target,
-                                                  typeof(string),
-                                                  true));
+                    ResourceKeyBuilder.BuildResourceKey(resourceKeyPrefix, resourceKeyAttribute.Key, string.Empty),
+                    DiscoveredTranslation.FromSingle(resourceKeyAttribute.Value),
+                    resourceKeyAttribute.Value,
+                    target,
+                    typeof(string),
+                    true));
             }
 
             return result;
@@ -84,13 +84,13 @@ namespace DbLocalizationProvider.Sync
             }
 
             return members.SelectMany(mi => DiscoverResourcesFromMember(target,
-                                                                        typeInstance,
-                                                                        mi,
-                                                                        resourceKeyPrefix,
-                                                                        typeKeyPrefixSpecified,
-                                                                        isHidden,
-                                                                        typeOldName,
-                                                                        typeOldNamespace)).ToList();
+                typeInstance,
+                mi,
+                resourceKeyPrefix,
+                typeKeyPrefixSpecified,
+                isHidden,
+                typeOldName,
+                typeOldNamespace)).ToList();
         }
 
         private IEnumerable<DiscoveredResource> DiscoverResourcesFromMember(
@@ -110,7 +110,7 @@ namespace DbLocalizationProvider.Sync
             Type returnType = null;
             var isSimpleType = false;
 
-            switch (mi)
+            switch(mi)
             {
                 case PropertyInfo propertyInfo:
                     declaringType = propertyInfo.PropertyType;
@@ -148,7 +148,8 @@ namespace DbLocalizationProvider.Sync
         {
             var result = mi.Name;
 
-            switch (mi) {
+            switch(mi)
+            {
                 case PropertyInfo info1:
                     // try to extract resource value from property
                     var methodInfo = info1.GetGetMethod();

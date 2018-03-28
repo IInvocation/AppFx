@@ -4,16 +4,15 @@ using FluiTec.AppFx.Identity.Repositories;
 namespace FluiTec.AppFx.Identity.LiteDb
 {
     /// <summary>
-    /// A lite database identity unit of work.
+    ///     A lite database identity unit of work.
     /// </summary>
     public class LiteDbIdentityUnitOfWork : LiteDbUnitOfWork, IIdentityUnitOfWork
     {
         #region Constructors
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="dataService">  The data service. </param>
         public LiteDbIdentityUnitOfWork(LiteDbDataService dataService) : base(dataService)
         {
@@ -34,13 +33,16 @@ namespace FluiTec.AppFx.Identity.LiteDb
         #region IIdentityUnitOfWork
 
         /// <summary>	The user repository. </summary>
-        public IUserRepository UserRepository => _userRepository ?? (_userRepository = GetRepository<IUserRepository>());
+        public IUserRepository UserRepository =>
+            _userRepository ?? (_userRepository = GetRepository<IUserRepository>());
 
         /// <summary>	The claim repository. </summary>
-        public IClaimRepository ClaimRepository => _claimRepository ?? (_claimRepository = GetRepository<IClaimRepository>());
+        public IClaimRepository ClaimRepository =>
+            _claimRepository ?? (_claimRepository = GetRepository<IClaimRepository>());
 
         /// <summary>	The role repository. </summary>
-        public IRoleRepository RoleRepository => _roleRepository ?? (_roleRepository = GetRepository<IRoleRepository>());
+        public IRoleRepository RoleRepository =>
+            _roleRepository ?? (_roleRepository = GetRepository<IRoleRepository>());
 
         /// <summary>	The user role repository. </summary>
         public IUserRoleRepository UserRoleRepository => _userRoleRepository ??

@@ -14,160 +14,162 @@ using Newtonsoft.Json.Serialization;
 
 namespace FluiTec.AppFx.IdentityServer
 {
-	/// <summary>	A signing credential store. </summary>
-	public class SigningCredentialStore : ISigningCredentialStore, IValidationKeysStore
-	{
-		private const int RsaKeyLength = 32;
-		private const string Algorithm = "RS256";
+    /// <summary>	A signing credential store. </summary>
+    public class SigningCredentialStore : ISigningCredentialStore, IValidationKeysStore
+    {
+        private const int RsaKeyLength = 32;
+        private const string Algorithm = "RS256";
 
-		#region Constructors
+        #region Constructors
 
-		/// <summary>	Constructor. </summary>
-		/// <param name="options">	  	The settings service. </param>
-		/// <param name="dataService">	The data service. </param>
-		public SigningCredentialStore(SigningOptions options, IIdentityServerDataService dataService)
-		{
-			_signingOptions = options;
-			_dataService = dataService;
-		}
+        /// <summary>	Constructor. </summary>
+        /// <param name="options">	  	The settings service. </param>
+        /// <param name="dataService">	The data service. </param>
+        public SigningCredentialStore(SigningOptions options, IIdentityServerDataService dataService)
+        {
+            _signingOptions = options;
+            _dataService = dataService;
+        }
 
-		#endregion
+        #endregion
 
-		#region ISigningCredentialStore
+        #region ISigningCredentialStore
 
-		/// <summary>	Gets signing credentials asynchronous. </summary>
-		/// <returns>	The signing credentials asynchronous. </returns>
-		public Task<SigningCredentials> GetSigningCredentialsAsync()
-		{
-			return Task<SigningCredentials>.Factory.StartNew(() =>
-			{
-				SigningCredentials credentials;
-				using (var uow = _dataService.StartUnitOfWork())
-				{
-					var latest = uow.SigningCredentialRepository.GetLatest();
+        /// <summary>	Gets signing credentials asynchronous. </summary>
+        /// <returns>	The signing credentials asynchronous. </returns>
+        public Task<SigningCredentials> GetSigningCredentialsAsync()
+        {
+            return Task<SigningCredentials>.Factory.StartNew(() =>
+            {
+                SigningCredentials credentials;
+                using (var uow = _dataService.StartUnitOfWork())
+                {
+                    var latest = uow.SigningCredentialRepository.GetLatest();
 
-					// check if no valid signing credential is available
-					SigningCredentialEntity credential;
-					if (latest == null || latest.Issued.AddDays(_signingOptions.RolloverDays) < DateTime.UtcNow)
-					{
-						var key = CreateNewRsaKey();
-						var json = JsonConvert.SerializeObject(key,
-							new JsonSerializerSettings {ContractResolver = new RsaKeyContractResolver()});
-						credential = new SigningCredentialEntity {Issued = DateTime.UtcNow, Contents = json};
-						credential = uow.SigningCredentialRepository.Add(credential);
-						uow.Commit();
-					}
-					else
-					{
-						credential = latest;
-					}
+                    // check if no valid signing credential is available
+                    SigningCredentialEntity credential;
+                    if (latest == null || latest.Issued.AddDays(_signingOptions.RolloverDays) < DateTime.UtcNow)
+                    {
+                        var key = CreateNewRsaKey();
+                        var json = JsonConvert.SerializeObject(key,
+                            new JsonSerializerSettings {ContractResolver = new RsaKeyContractResolver()});
+                        credential = new SigningCredentialEntity {Issued = DateTime.UtcNow, Contents = json};
+                        credential = uow.SigningCredentialRepository.Add(credential);
+                        uow.Commit();
+                    }
+                    else
+                    {
+                        credential = latest;
+                    }
 
-					var tempKey = JsonConvert.DeserializeObject<TemporaryRsaKey>(credential.Contents);
-					credentials = new SigningCredentials(CreateRsaSecurityKey(tempKey.Parameters, tempKey.KeyId), Algorithm);
-				}
-				return credentials;
-			});
-		}
+                    var tempKey = JsonConvert.DeserializeObject<TemporaryRsaKey>(credential.Contents);
+                    credentials = new SigningCredentials(CreateRsaSecurityKey(tempKey.Parameters, tempKey.KeyId),
+                        Algorithm);
+                }
 
-		#endregion
+                return credentials;
+            });
+        }
 
-		#region IValidationKeysStore
+        #endregion
 
-		/// <summary>	Gets validation keys asynchronous. </summary>
-		/// <returns>	The validation keys asynchronous. </returns>
-		public Task<IEnumerable<SecurityKey>> GetValidationKeysAsync()
-		{
-			return Task<IEnumerable<SecurityKey>>.Factory.StartNew(() =>
-			{
-				using (var uow = _dataService.StartUnitOfWork())
-				{
-					var credentials =
-						uow.SigningCredentialRepository.GetValidationValid(
-							DateTime.UtcNow.Subtract(TimeSpan.FromDays(_signingOptions.ValidationValidDays)));
-					var keys = credentials.Select(c => JsonConvert.DeserializeObject<TemporaryRsaKey>(c.Contents));
-					return keys.Select(k => CreateRsaSecurityKey(k.Parameters, k.KeyId)).ToList();
-				}
-			});
-		}
+        #region IValidationKeysStore
 
-		#endregion
+        /// <summary>	Gets validation keys asynchronous. </summary>
+        /// <returns>	The validation keys asynchronous. </returns>
+        public Task<IEnumerable<SecurityKey>> GetValidationKeysAsync()
+        {
+            return Task<IEnumerable<SecurityKey>>.Factory.StartNew(() =>
+            {
+                using (var uow = _dataService.StartUnitOfWork())
+                {
+                    var credentials =
+                        uow.SigningCredentialRepository.GetValidationValid(
+                            DateTime.UtcNow.Subtract(TimeSpan.FromDays(_signingOptions.ValidationValidDays)));
+                    var keys = credentials.Select(c => JsonConvert.DeserializeObject<TemporaryRsaKey>(c.Contents));
+                    return keys.Select(k => CreateRsaSecurityKey(k.Parameters, k.KeyId)).ToList();
+                }
+            });
+        }
 
-		#region Fields
+        #endregion
 
-		/// <summary>	Options for controlling the signing. </summary>
-		private readonly SigningOptions _signingOptions;
+        #region Fields
 
-		/// <summary>	The data service. </summary>
-		private readonly IIdentityServerDataService _dataService;
+        /// <summary>	Options for controlling the signing. </summary>
+        private readonly SigningOptions _signingOptions;
 
-		#endregion
+        /// <summary>	The data service. </summary>
+        private readonly IIdentityServerDataService _dataService;
 
-		#region Methods
+        #endregion
 
-		/// <summary>
-		///     Creates a new RSA security key.
-		/// </summary>
-		/// <returns></returns>
-		private static RsaSecurityKey CreateRsaSecurityKey()
-		{
-			using (var rsa = RSA.Create())
-			{
-				rsa.KeySize = 2048;
-			    // ReSharper disable once RedundantArgumentDefaultValue
-				var key = new RsaSecurityKey(rsa) {KeyId = CryptoRandom.CreateUniqueId(RsaKeyLength)};
-				return key;
-			}
-		}
+        #region Methods
 
-		/// <summary>	Creates rsa security key. </summary>
-		/// <param name="parameters">	Options for controlling the operation. </param>
-		/// <param name="id">		 	The identifier. </param>
-		/// <returns>	The new rsa security key. </returns>
-		public static RsaSecurityKey CreateRsaSecurityKey(RSAParameters parameters, string id)
-		{
-			var key = new RsaSecurityKey(parameters)
-			{
-				KeyId = id
-			};
+        /// <summary>
+        ///     Creates a new RSA security key.
+        /// </summary>
+        /// <returns></returns>
+        private static RsaSecurityKey CreateRsaSecurityKey()
+        {
+            using (var rsa = RSA.Create())
+            {
+                rsa.KeySize = 2048;
+                // ReSharper disable once RedundantArgumentDefaultValue
+                var key = new RsaSecurityKey(rsa) {KeyId = CryptoRandom.CreateUniqueId(RsaKeyLength)};
+                return key;
+            }
+        }
 
-			return key;
-		}
+        /// <summary>	Creates rsa security key. </summary>
+        /// <param name="parameters">	Options for controlling the operation. </param>
+        /// <param name="id">		 	The identifier. </param>
+        /// <returns>	The new rsa security key. </returns>
+        public static RsaSecurityKey CreateRsaSecurityKey(RSAParameters parameters, string id)
+        {
+            var key = new RsaSecurityKey(parameters)
+            {
+                KeyId = id
+            };
 
-		/// <summary>	Creates new rsa key. </summary>
-		/// <returns>	The new new rsa key. </returns>
-		private static TemporaryRsaKey CreateNewRsaKey()
-		{
-			var key = CreateRsaSecurityKey();
+            return key;
+        }
 
-			var parameters = key.Rsa?.ExportParameters(true) ?? key.Parameters;
+        /// <summary>	Creates new rsa key. </summary>
+        /// <returns>	The new new rsa key. </returns>
+        private static TemporaryRsaKey CreateNewRsaKey()
+        {
+            var key = CreateRsaSecurityKey();
 
-			var rsaKey = new TemporaryRsaKey
-			{
-				Parameters = parameters,
-				KeyId = key.KeyId
-			};
+            var parameters = key.Rsa?.ExportParameters(true) ?? key.Parameters;
 
-			return rsaKey;
-		}
+            var rsaKey = new TemporaryRsaKey
+            {
+                Parameters = parameters,
+                KeyId = key.KeyId
+            };
 
-		/// <summary>	A temporary rsa key. </summary>
-		internal class TemporaryRsaKey
-		{
-			public string KeyId { get; set; }
-			public RSAParameters Parameters { get; set; }
-		}
+            return rsaKey;
+        }
 
-		/// <summary>	A rsa key contract resolver. </summary>
-		internal class RsaKeyContractResolver : DefaultContractResolver
-		{
-			protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-			{
-				var property = base.CreateProperty(member, memberSerialization);
-				property.Ignored = false;
-				return property;
-			}
-		}
+        /// <summary>	A temporary rsa key. </summary>
+        internal class TemporaryRsaKey
+        {
+            public string KeyId { get; set; }
+            public RSAParameters Parameters { get; set; }
+        }
 
-		#endregion
-	}
+        /// <summary>	A rsa key contract resolver. </summary>
+        internal class RsaKeyContractResolver : DefaultContractResolver
+        {
+            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+            {
+                var property = base.CreateProperty(member, memberSerialization);
+                property.Ignored = false;
+                return property;
+            }
+        }
+
+        #endregion
+    }
 }

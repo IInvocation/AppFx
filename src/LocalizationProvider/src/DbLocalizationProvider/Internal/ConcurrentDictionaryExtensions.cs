@@ -26,9 +26,9 @@ namespace DbLocalizationProvider.Internal
     internal static class ConcurrentDictionaryExtensions
     {
         public static TValue GetOrAdd<TKey, TValue, TArg>(this ConcurrentDictionary<TKey, TValue> dictionary,
-                                                          TKey key,
-                                                          TArg arg,
-                                                          Func<TKey, TArg, TValue> valueFactory)
+            TKey key,
+            TArg arg,
+            Func<TKey, TArg, TValue> valueFactory)
         {
             if(dictionary == null)
                 throw new ArgumentNullException(nameof(dictionary));
@@ -39,7 +39,7 @@ namespace DbLocalizationProvider.Internal
             if(valueFactory == null)
                 throw new ArgumentNullException(nameof(valueFactory));
 
-            while (true)
+            while(true)
             {
                 if(dictionary.TryGetValue(key, out var value))
                     return value;

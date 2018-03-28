@@ -9,7 +9,9 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
     {
         /// <summary>Specialised constructor for use only by derived class.</summary>
         /// <param name="dataService">  The data service. </param>
-        protected ActivityTest(IAuthorizationDataService dataService) : base(dataService) { }
+        protected ActivityTest(IAuthorizationDataService dataService) : base(dataService)
+        {
+        }
 
         /// <summary>Can add and get activity.</summary>
         public virtual void CanAddAndGetActivity()
@@ -59,7 +61,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                     {
                         Name = "Dummy",
                         ResourceName = "MyResource"
-                }
+                    }
                 );
 
                 activity.Name = "Changed";
@@ -77,7 +79,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                     {
                         Name = "Dummy",
                         ResourceName = "MyResource"
-                }
+                    }
                 );
 
                 uow.ActivityRepository.Delete(role.Id);

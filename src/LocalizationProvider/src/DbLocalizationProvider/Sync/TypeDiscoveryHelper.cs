@@ -32,9 +32,12 @@ namespace DbLocalizationProvider.Sync
     public class TypeDiscoveryHelper
     {
         /// <summary>   The discovered resource cache. </summary>
-        internal static ConcurrentDictionary<string, List<string>> DiscoveredResourceCache = new ConcurrentDictionary<string, List<string>>();
+        internal static ConcurrentDictionary<string, List<string>> DiscoveredResourceCache =
+            new ConcurrentDictionary<string, List<string>>();
+
         /// <summary>   The use resource attribute cache. </summary>
-        internal static ConcurrentDictionary<string, string> UseResourceAttributeCache = new ConcurrentDictionary<string, string>();
+        internal static ConcurrentDictionary<string, string> UseResourceAttributeCache =
+            new ConcurrentDictionary<string, string>();
 
         /// <summary>   The scanners. </summary>
         private readonly List<IResourceTypeScanner> _scanners = new List<IResourceTypeScanner>();
@@ -56,18 +59,23 @@ namespace DbLocalizationProvider.Sync
         }
 
         /// <summary>   Scans the resources in this collection. </summary>
-        /// <exception cref="DuplicateResourceKeyException">            Thrown when a Duplicate Resource
-        ///                                                             Key error condition occurs. </exception>
-        /// <exception cref="DuplicateResourceTranslationsException">   Thrown when a Duplicate Resource
-        ///                                                             Translations error condition
-        ///                                                             occurs. </exception>
+        /// <exception cref="DuplicateResourceKeyException">
+        ///     Thrown when a Duplicate Resource
+        ///     Key error condition occurs.
+        /// </exception>
+        /// <exception cref="DuplicateResourceTranslationsException">
+        ///     Thrown when a Duplicate Resource
+        ///     Translations error condition
+        ///     occurs.
+        /// </exception>
         /// <param name="target">       Target for the. </param>
         /// <param name="keyPrefix">    (Optional) The key prefix. </param>
         /// <param name="scanner">      (Optional) The scanner. </param>
         /// <returns>
         ///     An enumerator that allows foreach to be used to process the resources in this collection.
         /// </returns>
-        public IEnumerable<DiscoveredResource> ScanResources(Type target, string keyPrefix = null, IResourceTypeScanner scanner = null)
+        public IEnumerable<DiscoveredResource> ScanResources(Type target, string keyPrefix = null,
+            IResourceTypeScanner scanner = null)
         {
             var typeScanner = scanner;
 
@@ -86,8 +94,9 @@ namespace DbLocalizationProvider.Sync
             buffer.AddRange(typeScanner.GetClassLevelResources(target, resourceKeyPrefix));
             buffer.AddRange(typeScanner.GetResources(target, resourceKeyPrefix));
 
-            var result = buffer.Where(t => t.IsSimpleType || t.Info == null || t.Info.GetCustomAttribute<IncludeAttribute>() != null)
-                               .ToList();
+            var result = buffer.Where(t =>
+                    t.IsSimpleType || t.Info == null || t.Info.GetCustomAttribute<IncludeAttribute>() != null)
+                .ToList();
 
             foreach(var property in buffer.Where(t => !t.IsSimpleType))
             {
@@ -96,15 +105,19 @@ namespace DbLocalizationProvider.Sync
             }
 
             // throw up if there are any duplicate resources manually registered
-            var duplicateKeys = result.Where(r => r.FromResourceKeyAttribute).GroupBy(r => r.Key).Where(g => g.Count() > 1).ToList();
+            var duplicateKeys = result.Where(r => r.FromResourceKeyAttribute).GroupBy(r => r.Key)
+                .Where(g => g.Count() > 1).ToList();
             if(duplicateKeys.Any())
-                throw new DuplicateResourceKeyException($"Duplicate keys: [{string.Join(", ", duplicateKeys.Select(g => g.Key))}]");
+                throw new DuplicateResourceKeyException(
+                    $"Duplicate keys: [{string.Join(", ", duplicateKeys.Select(g => g.Key))}]");
 
             // throw up if there are multiple translations for the same culture (might come from misuse of [TranslationForCulture] attribute)
-            var duplicateTranslations = result.Where(r => r.Translations.GroupBy(t => t.Culture).Any(g => g.Count() > 1)).ToList();
+            var duplicateTranslations =
+                result.Where(r => r.Translations.GroupBy(t => t.Culture).Any(g => g.Count() > 1)).ToList();
             if(duplicateTranslations.Any())
                 throw new
-                    DuplicateResourceTranslationsException($"Duplicate translations for the same culture for following resources: [{string.Join(", ", duplicateTranslations.Select(g => g.Key))}]");
+                    DuplicateResourceTranslationsException(
+                        $"Duplicate translations for the same culture for following resources: [{string.Join(", ", duplicateTranslations.Select(g => g.Key))}]");
 
             // we need to filter out duplicate resources (this comes from the case when the same model is used in multiple places
             // in the same parent container type. for instance: billing address and office address. both of them will be registered
@@ -112,14 +125,17 @@ namespace DbLocalizationProvider.Sync
             result = result.DistinctBy(r => r.Key).ToList();
 
             // add scanned resources to the cache
-            DiscoveredResourceCache.TryAdd(target.FullName, result.Where(r => !string.IsNullOrEmpty(r.PropertyName)).Select(r => r.PropertyName).ToList());
+            DiscoveredResourceCache.TryAdd(target.FullName,
+                result.Where(r => !string.IsNullOrEmpty(r.PropertyName)).Select(r => r.PropertyName).ToList());
 
             return result;
         }
 
         /// <summary>   Gets the types. </summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are
+        ///     null.
+        /// </exception>
         /// <param name="filters">  A variable-length parameters list containing filters. </param>
         /// <returns>   The types. </returns>
         public static List<List<Type>> GetTypes(params Func<Type, bool>[] filters)
@@ -189,8 +205,8 @@ namespace DbLocalizationProvider.Sync
             var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             return allAssemblies.Where(a => a.FullName.StartsWith("DbLocalizationProvider"))
-                                .Concat(allAssemblies.Where(assemblyFilter))
-                                .Distinct();
+                .Concat(allAssemblies.Where(assemblyFilter))
+                .Distinct();
         }
 
         /// <summary>   Gets the types child of in assemblies in this collection. </summary>

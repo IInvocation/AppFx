@@ -6,10 +6,6 @@ namespace FluiTec.AppFx.Authorization.Activity.Entities
     [EntityName("AppFxAuthorization.ActivityRole")]
     public class ActivityRoleEntity : IEntity<int>
     {
-        /// <summary>Gets or sets the identifier.</summary>
-        /// <value>The identifier.</value>
-        public int Id { get; set; }
-
         /// <summary>Gets or sets the identifier of the activity.</summary>
         /// <value>The identifier of the activity.</value>
         public int ActivityId { get; set; }
@@ -21,10 +17,14 @@ namespace FluiTec.AppFx.Authorization.Activity.Entities
         /// <summary>Gets or sets the allow.</summary>
         /// <value>The allow.</value>
         /// <remarks>
-        /// NULL = neither deny - nor allow
-        /// TRUE = allow
-        /// FALSE = deny         
+        ///     NULL = neither deny - nor allow
+        ///     TRUE = allow
+        ///     FALSE = deny
         /// </remarks>
         public bool? Allow { get; set; }
+
+        /// <summary>Gets or sets the identifier.</summary>
+        /// <value>The identifier.</value>
+        public int Id { get; set; }
     }
 }

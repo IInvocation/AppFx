@@ -28,7 +28,7 @@ namespace DbLocalizationProvider.Import
 {
     public class JsonResourceFormatParser : IResourceFormatParser
     {
-        private static readonly string[] Extensions = { ".json" };
+        private static readonly string[] Extensions = {".json"};
 
         public string FormatName => "JSON";
 
@@ -38,7 +38,9 @@ namespace DbLocalizationProvider.Import
 
         public ParseResult Parse(string fileContent)
         {
-            var result = JsonConvert.DeserializeObject<ICollection<LocalizationResource>>(fileContent, JsonResourceExporter.DefaultSettings);
+            var result =
+                JsonConvert.DeserializeObject<ICollection<LocalizationResource>>(fileContent,
+                    JsonResourceExporter.DefaultSettings);
             var detectedLanguages = result.SelectMany(r => r.Translations.Select(t => t.Language))
                 .Distinct()
                 .Where(l => !string.IsNullOrEmpty(l));

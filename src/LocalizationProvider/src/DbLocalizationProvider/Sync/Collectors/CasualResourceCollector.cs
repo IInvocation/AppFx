@@ -40,25 +40,27 @@ namespace DbLocalizationProvider.Sync.Collectors
             var additionalTranslationsAttributes = mi.GetCustomAttributes<TranslationForCultureAttribute>().ToArray();
 
             if(additionalTranslationsAttributes != null && additionalTranslationsAttributes.Any())
-                translations.AddRange(additionalTranslationsAttributes.Select(a => new DiscoveredTranslation(a.Translation, a.Culture)));
+                translations.AddRange(additionalTranslationsAttributes.Select(a =>
+                    new DiscoveredTranslation(a.Translation, a.Culture)));
 
-            var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, mi.Name, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
+            var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, mi.Name, mi, resourceKeyPrefix,
+                typeOldName, typeOldNamespace);
 
             yield return new DiscoveredResource(mi,
-                                                resourceKey,
-                                                translations,
-                                                mi.Name,
-                                                declaringType,
-                                                returnType,
-                                                isSimpleType,
-                                                isResourceHidden)
-                         {
-                             TypeName = target.Name,
-                             TypeNamespace = target.Namespace,
-                             TypeOldName = oldResourceKeys.Item2,
-                             TypeOldNamespace = typeOldNamespace,
-                             OldResourceKey = oldResourceKeys.Item1
-                         };
+                resourceKey,
+                translations,
+                mi.Name,
+                declaringType,
+                returnType,
+                isSimpleType,
+                isResourceHidden)
+            {
+                TypeName = target.Name,
+                TypeNamespace = target.Namespace,
+                TypeOldName = oldResourceKeys.Item2,
+                TypeOldNamespace = typeOldNamespace,
+                OldResourceKey = oldResourceKeys.Item1
+            };
         }
     }
 }

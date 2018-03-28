@@ -51,13 +51,13 @@ namespace DbLocalizationProvider.Internal
     {
         public bool Equals(LocalizationResource x, LocalizationResource y)
         {
-            if (ReferenceEquals(x, y))
+            if(ReferenceEquals(x, y))
                 return true;
-            if (ReferenceEquals(x, null))
+            if(ReferenceEquals(x, null))
                 return false;
-            if (ReferenceEquals(y, null))
+            if(ReferenceEquals(y, null))
                 return false;
-            if (x.GetType() != y.GetType())
+            if(x.GetType() != y.GetType())
                 return false;
 
             return string.Equals(x.ResourceKey, y.ResourceKey) && string.Equals(x.ResourceKey, y.ResourceKey);

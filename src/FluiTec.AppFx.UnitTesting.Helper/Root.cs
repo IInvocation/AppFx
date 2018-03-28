@@ -3,7 +3,7 @@
 namespace FluiTec.AppFx.UnitTesting.Helper
 {
     /// <summary>
-    /// A json root-object.
+    ///     A json root-object.
     /// </summary>
     public class Root
     {

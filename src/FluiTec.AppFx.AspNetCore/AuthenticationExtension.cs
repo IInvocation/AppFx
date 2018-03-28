@@ -14,7 +14,8 @@ namespace FluiTec.AppFx.AspNetCore
         /// <param name="services">         The services to act on. </param>
         /// <param name="configuration">    The configuration. </param>
         /// <returns>   An IServiceCollection. </returns>
-        public static IServiceCollection ConfigureAuthentication(this IServiceCollection services, IConfigurationRoot configuration)
+        public static IServiceCollection ConfigureAuthentication(this IServiceCollection services,
+            IConfigurationRoot configuration)
         {
             var options = configuration.GetConfiguration<AuthenticationOptions>();
             services.AddSingleton(options);
@@ -25,22 +26,18 @@ namespace FluiTec.AppFx.AspNetCore
             auth.AddCookie(o => o.LoginPath = new PathString(appOptions.ApplicationLoginPath));
 
             if (options.Google != null && options.Google.Enabled)
-            {
                 auth.AddGoogle(o =>
                 {
                     o.ClientId = options.Google.ClientId;
                     o.ClientSecret = options.Google.ClientSecret;
                 });
-            }
 
             if (options.Amazon != null && options.Amazon.Enabled)
-            {
                 auth.AddAmazon(o =>
                 {
                     o.ClientId = options.Google.ClientId;
                     o.ClientSecret = options.Google.ClientSecret;
                 });
-            }
 
             return services;
         }

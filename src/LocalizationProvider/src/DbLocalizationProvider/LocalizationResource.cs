@@ -27,7 +27,9 @@ namespace DbLocalizationProvider
     [DebuggerDisplay("Key: {" + nameof(ResourceKey) + "}")]
     public class LocalizationResource
     {
-        public LocalizationResource() : this(null) { }
+        public LocalizationResource() : this(null)
+        {
+        }
 
         public LocalizationResource(string key)
         {
@@ -53,7 +55,7 @@ namespace DbLocalizationProvider
 
         public static LocalizationResource CreateNonExisting(string key)
         {
-            return new LocalizationResource(key) { Translations = null };
+            return new LocalizationResource(key) {Translations = null};
         }
     }
 }

@@ -27,7 +27,8 @@ namespace FluiTec.AppFx.Localization.TagHelpers
         private readonly string _applicationName;
         private readonly IHtmlLocalizerFactory _localizerFactory;
 
-        public DbGenericLocalizeTagHelper(IHtmlLocalizerFactory localizerFactory, IHostingEnvironment hostingEnvironment, IOptions<LocalizeTagHelperOptions> options)
+        public DbGenericLocalizeTagHelper(IHtmlLocalizerFactory localizerFactory,
+            IHostingEnvironment hostingEnvironment, IOptions<LocalizeTagHelperOptions> options)
         {
             _localizerFactory = localizerFactory ?? throw new ArgumentNullException(nameof(localizerFactory));
             if (hostingEnvironment == null) throw new ArgumentNullException(nameof(hostingEnvironment));
@@ -49,36 +50,29 @@ namespace FluiTec.AppFx.Localization.TagHelpers
             }
         }
 
-        [HtmlAttributeName(LocalizeHtml)]
-        public virtual bool IsHtml { get; set; }
+        [HtmlAttributeName(LocalizeHtml)] public virtual bool IsHtml { get; set; }
 
-        [HtmlAttributeName("dblocalizer")]
-        public IHtmlLocalizer Localizer { get; set; }
+        [HtmlAttributeName("dblocalizer")] public IHtmlLocalizer Localizer { get; set; }
 
-        [HtmlAttributeName(LocalizeName)]
-        public virtual string Name { get; set; } = string.Empty;
+        [HtmlAttributeName(LocalizeName)] public virtual string Name { get; set; } = string.Empty;
 
-        [HtmlAttributeName(LocalizeNewline)]
-        public virtual NewLineHandling NewLineHandling { get; set; }
+        [HtmlAttributeName(LocalizeNewline)] public virtual NewLineHandling NewLineHandling { get; set; }
 
-        [HtmlAttributeName(LocalizeTrimLines)]
-        public virtual bool TrimEachLine { get; set; }
+        [HtmlAttributeName(LocalizeTrimLines)] public virtual bool TrimEachLine { get; set; }
 
-        [HtmlAttributeName(LocalizeTrim)]
-        public virtual bool TrimWhitespace { get; set; }
+        [HtmlAttributeName(LocalizeTrim)] public virtual bool TrimWhitespace { get; set; }
 
-        [HtmlAttributeName(LocalizeType)]
-        public virtual Type Type { get; set; }
+        [HtmlAttributeName(LocalizeType)] public virtual Type Type { get; set; }
 
-        [HtmlAttributeNotBound]
-        [ViewContext]
-        public ViewContext ViewContext { get; set; }
+        [HtmlAttributeNotBound] [ViewContext] public ViewContext ViewContext { get; set; }
 
         protected virtual bool SupportsParameters => true;
 
         public override void Init(TagHelperContext context)
         {
-            Localizer = Localizer ?? throw new ArgumentNullException(nameof(Localizer)) ;//localizerFactory.ResolveLocalizer(ViewContext, applicationName, Type, Name);
+            Localizer = Localizer ??
+                        throw new ArgumentNullException(
+                            nameof(Localizer)); //localizerFactory.ResolveLocalizer(ViewContext, applicationName, Type, Name);
 
             if (!SupportsParameters)
             {
@@ -94,7 +88,7 @@ namespace FluiTec.AppFx.Localization.TagHelpers
             }
             else
             {
-                currentStack = (Stack<List<object>>)context.Items[typeof(DbGenericLocalizeTagHelper)];
+                currentStack = (Stack<List<object>>) context.Items[typeof(DbGenericLocalizeTagHelper)];
             }
 
             currentStack.Push(new List<object>());
@@ -169,7 +163,7 @@ namespace FluiTec.AppFx.Localization.TagHelpers
                 return new object[0];
             }
 
-            var stack = (Stack<List<object>>)context.Items[typeof(DbGenericLocalizeTagHelper)];
+            var stack = (Stack<List<object>>) context.Items[typeof(DbGenericLocalizeTagHelper)];
 
             return stack.Pop();
         }
@@ -179,12 +173,14 @@ namespace FluiTec.AppFx.Localization.TagHelpers
             outputContent.SetContent(content);
         }
 
-        protected virtual void SetHtmlContent(TagHelperContext context, TagHelperContent outputContent, IHtmlContent htmlContent)
+        protected virtual void SetHtmlContent(TagHelperContext context, TagHelperContent outputContent,
+            IHtmlContent htmlContent)
         {
             outputContent.SetHtmlContent(htmlContent);
         }
 
-        private static void AppendContent(string content, bool trimEachLine, StringBuilder newContent, int lastIndex, int index)
+        private static void AppendContent(string content, bool trimEachLine, StringBuilder newContent, int lastIndex,
+            int index)
         {
             var substring = content.Substring(lastIndex, index - lastIndex);
             if (trimEachLine)
@@ -197,7 +193,8 @@ namespace FluiTec.AppFx.Localization.TagHelpers
             }
         }
 
-        private static void AppendNewLine(string content, bool trimEachLine, StringBuilder newContent, int index, string newLine)
+        private static void AppendNewLine(string content, bool trimEachLine, StringBuilder newContent, int index,
+            string newLine)
         {
             if (newLine == null)
             {
@@ -243,6 +240,7 @@ namespace FluiTec.AppFx.Localization.TagHelpers
             {
                 return content;
             }
+
             if (trimEachLine)
             {
                 content = content.Trim();

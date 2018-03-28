@@ -18,8 +18,10 @@ namespace FluiTec.AppFx.Localization.Mysql.Repositories
         }
 
         /// <summary>Gets all compounds in this collection.</summary>
-        /// <returns>An enumerator that allows foreach to be used to process all compounds in this
-        /// collection.</returns>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process all compounds in this
+        ///     collection.
+        /// </returns>
         public override IEnumerable<CompoundTranslationEntity> GetAllCompound()
         {
             var command = $"SELECT * FROM {UnitOfWork.GetRepository<IResourceRepository>().TableName} AS resource" +

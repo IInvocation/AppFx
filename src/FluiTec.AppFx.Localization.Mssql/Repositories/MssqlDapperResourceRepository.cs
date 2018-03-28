@@ -27,15 +27,17 @@ namespace FluiTec.AppFx.Localization.Mssql.Repositories
         /// <returns>True if it succeeds, false if it fails.</returns>
         public override bool RefactorKey(string oldKey, string newKey)
         {
-            var command = $"UPDATE {TableName} SET {nameof(ResourceEntity.ResourceKey)} @NewKey WHERE {nameof(ResourceEntity.ResourceKey)} = @OldKey";
-            return UnitOfWork.Connection.Execute(command, new {NewKey = newKey, OldKey = oldKey}, UnitOfWork.Transaction) > 0;
+            var command =
+                $"UPDATE {TableName} SET {nameof(ResourceEntity.ResourceKey)} @NewKey WHERE {nameof(ResourceEntity.ResourceKey)} = @OldKey";
+            return UnitOfWork.Connection.Execute(command, new {NewKey = newKey, OldKey = oldKey},
+                       UnitOfWork.Transaction) > 0;
         }
 
         /// <summary>Resets the synchronise status.</summary>
         public override void ResetSyncStatus()
         {
             var command = $"UPDATE {TableName} SET {nameof(ResourceEntity.FromCode)} = @FromCode";
-            UnitOfWork.Connection.Execute(command, new { FromCode = false }, UnitOfWork.Transaction);
+            UnitOfWork.Connection.Execute(command, new {FromCode = false}, UnitOfWork.Transaction);
         }
 
         #endregion

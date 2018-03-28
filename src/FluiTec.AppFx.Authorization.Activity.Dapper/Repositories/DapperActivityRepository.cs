@@ -22,8 +22,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Repositories
         /// <returns>The by resource and activity.</returns>
         public ActivityEntity GetByResourceAndActivity(string resourceName, string activityName)
         {
-            var command = $"SELECT * FROM {TableName} WHERE {nameof(ActivityEntity.ResourceName)} = @ResourceName AND {nameof(ActivityEntity.Name)} = @Name";
-            return UnitOfWork.Connection.Query<ActivityEntity>(command, new { ResourceName = resourceName, Name = activityName },
+            var command =
+                $"SELECT * FROM {TableName} WHERE {nameof(ActivityEntity.ResourceName)} = @ResourceName AND {nameof(ActivityEntity.Name)} = @Name";
+            return UnitOfWork.Connection.Query<ActivityEntity>(command,
+                new {ResourceName = resourceName, Name = activityName},
                 UnitOfWork.Transaction).SingleOrDefault();
         }
     }

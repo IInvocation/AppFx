@@ -36,7 +36,8 @@ namespace FluiTec.AppFx.Localization.Dapper
         /// <summary>Gets the translation repository.</summary>
         /// <value>The translation repository.</value>
         public ITranslationRepository TranslationRepository => _translationRepository ??
-                                                               (_translationRepository = GetRepository<ITranslationRepository>());
+                                                               (_translationRepository =
+                                                                   GetRepository<ITranslationRepository>());
 
         #endregion
     }

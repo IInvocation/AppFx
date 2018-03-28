@@ -26,8 +26,10 @@ namespace FluiTec.AppFx.Localization
         }
 
         /// <summary>   Gets all string resources. </summary>
-        /// <param name="includeParentCultures">    A <see cref="T:System.Boolean" /> indicating whether
-        ///                                         to include strings from parent cultures. </param>
+        /// <param name="includeParentCultures">
+        ///     A <see cref="T:System.Boolean" /> indicating whether
+        ///     to include strings from parent cultures.
+        /// </param>
         /// <returns>   The strings. </returns>
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {

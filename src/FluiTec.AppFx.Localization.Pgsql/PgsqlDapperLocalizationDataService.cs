@@ -46,8 +46,10 @@ namespace FluiTec.AppFx.Localization.Pgsql
         /// <summary>	Registers the identity repositories. </summary>
         protected virtual void RegisterIdentityRepositories()
         {
-            RegisterRepositoryProvider(new Func<IUnitOfWork, IResourceRepository>(work => new PgsqlDapperResourceRepository(work)));
-            RegisterRepositoryProvider(new Func<IUnitOfWork, ITranslationRepository>(work => new PgsqlDapperTranslationRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IResourceRepository>(work => new PgsqlDapperResourceRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, ITranslationRepository>(work => new PgsqlDapperTranslationRepository(work)));
         }
 
         #endregion

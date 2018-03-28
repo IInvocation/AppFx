@@ -10,8 +10,8 @@
         <section>
             <h3>Adresse</h3>
             <p>
-                @Operator.Enterprise<br />
-                @Operator.Street<br />
+                @Operator.Enterprise<br/>
+                @Operator.Street<br/>
                 @Operator.ZipCode @Operator.City
             </p>
             <h3>Kontakt</h3>
@@ -27,18 +27,22 @@
                 </tr>
                 <tr>
                     <th scope="row" style="width: 70px;">E-Mail:</th>
-                    <td><a href="@Operator.MailAddress">@Operator.MailAddressDisplay</a></td>
+                    <td>
+                        <a href="@Operator.MailAddress">@Operator.MailAddressDisplay</a>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 70px;">Homepage:</th>
-                    <td><a href="@Operator.Homepage">@Operator.HomepageDisplay</a></td>
+                    <td>
+                        <a href="@Operator.Homepage">@Operator.HomepageDisplay</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-            <br />
+            <br/>
             <h3>Vertretungsberechtigte</h3>
             <p>@Operator.Representatives</p>
-            
+
             <h3>Rechtliches</h3>
             <table>
                 <tbody>
@@ -59,11 +63,11 @@
 
             @if (Operator.HasComplementary)
             {
-                <br />
+                <br/>
                 <h3>Geschäftsführende Komplementärin</h3>
                 <p>
-                    @Operator.ComplementaryName<br />
-                    Vertretungsberechtigte: @Operator.ComplementaryRepresentatives<br />
+                    @Operator.ComplementaryName<br/>
+                    Vertretungsberechtigte: @Operator.ComplementaryRepresentatives<br/>
                     Handelsregister: @Operator.ComplementaryCommercialRegister
                 </p>
             }

@@ -10,8 +10,10 @@ namespace DbLocalizationProvider.Abstractions
         /// <summary>   Obviously creates new instance of the attribute. </summary>
         /// <param name="display">      The display-name. </param>
         /// <param name="translation">  Translation of the resource for given language. </param>
-        /// <param name="culture">      Language for the additional translation (will be used as argument
-        ///                             for <see cref="CultureInfo"/>). </param>
+        /// <param name="culture">
+        ///     Language for the additional translation (will be used as argument
+        ///     for <see cref="CultureInfo" />).
+        /// </param>
         public DisplayTranslationForCultureAttribute(string display, string translation, string culture)
         {
             Display = display;
@@ -24,12 +26,12 @@ namespace DbLocalizationProvider.Abstractions
         public string Display { get; }
 
         /// <summary>
-        /// Translation of the resource for given language.
+        ///     Translation of the resource for given language.
         /// </summary>
         public string Translation { get; }
 
         /// <summary>
-        /// Language for the additional translation (will be used as argument for <see cref="CultureInfo"/>).
+        ///     Language for the additional translation (will be used as argument for <see cref="CultureInfo" />).
         /// </summary>
         public string Culture { get; }
     }

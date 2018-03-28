@@ -17,82 +17,82 @@ namespace FluiTec.AppFx.IdentityServer.Dynamic
     /// <summary>	An identity data provider. </summary>
     public class IdentityServerDataProvider
     {
-	    /// <summary>	Options for controlling the operation. </summary>
-	    private readonly IdentityServerOptions _options;
+        /// <summary>	Options for controlling the operation. </summary>
+        private readonly IdentityServerOptions _options;
 
-	    /// <summary>	Constructor. </summary>
-	    /// <param name="options">	Options for controlling the operation. </param>
-	    public IdentityServerDataProvider(IdentityServerOptions options)
-	    {
-		    _options = options ?? throw new ArgumentNullException(nameof(options));
-	    }
+        /// <summary>	Constructor. </summary>
+        /// <param name="options">	Options for controlling the operation. </param>
+        public IdentityServerDataProvider(IdentityServerOptions options)
+        {
+            _options = options ?? throw new ArgumentNullException(nameof(options));
+        }
 
-	    /// <summary>	Gets data service. </summary>
-	    /// <param name="configuration">	The configuration. </param>
-	    /// <returns>	The data service. </returns>
-	    public IIdentityServerDataService GetDataService(IConfigurationRoot configuration)
-	    {
-		    switch (_options.Provider)
-		    {
-				case DataProvider.MSSQL:
-					return MssqlHelper.ProvideService(configuration);
-				case DataProvider.PGSQL:
-					return PgsqlHelper.ProvideService(configuration);
-				case DataProvider.MYSQL:
-					return MysqlHelper.ProvideService(configuration);
-				case DataProvider.LITEDB:
-					return LiteDbHelper.ProvideService(configuration);
-				default:
-					throw new NotImplementedException($"Provider {_options.Provider} was not implemented!");
-		    }   
-	    }
+        /// <summary>	Gets data service. </summary>
+        /// <param name="configuration">	The configuration. </param>
+        /// <returns>	The data service. </returns>
+        public IIdentityServerDataService GetDataService(IConfigurationRoot configuration)
+        {
+            switch (_options.Provider)
+            {
+                case DataProvider.MSSQL:
+                    return MssqlHelper.ProvideService(configuration);
+                case DataProvider.PGSQL:
+                    return PgsqlHelper.ProvideService(configuration);
+                case DataProvider.MYSQL:
+                    return MysqlHelper.ProvideService(configuration);
+                case DataProvider.LITEDB:
+                    return LiteDbHelper.ProvideService(configuration);
+                default:
+                    throw new NotImplementedException($"Provider {_options.Provider} was not implemented!");
+            }
+        }
 
-	    private static class MssqlHelper
-	    {
-		    private static IDapperServiceOptions _options;
+        private static class MssqlHelper
+        {
+            private static IDapperServiceOptions _options;
 
-		    internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
-		    {
-			    if (_options == null)
-				    _options = configuration.GetConfiguration<MssqlDapperServiceOptions>();
-				return new MssqlDapperIdentityServerDataService(_options);
-		    }
-	    }
+            internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
+            {
+                if (_options == null)
+                    _options = configuration.GetConfiguration<MssqlDapperServiceOptions>();
+                return new MssqlDapperIdentityServerDataService(_options);
+            }
+        }
 
-	    private static class PgsqlHelper
-	    {
-		    private static IDapperServiceOptions _options;
+        private static class PgsqlHelper
+        {
+            private static IDapperServiceOptions _options;
 
-		    internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
-		    {
-			    if (_options == null)
-				    _options = configuration.GetConfiguration<PgsqlDapperServiceOptions>();
-			    return new PgsqlDapperIdentityServerDataService(_options);
-		    }
-	    }
+            internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
+            {
+                if (_options == null)
+                    _options = configuration.GetConfiguration<PgsqlDapperServiceOptions>();
+                return new PgsqlDapperIdentityServerDataService(_options);
+            }
+        }
 
-	    private static class MysqlHelper
-	    {
-		    private static IDapperServiceOptions _options;
+        private static class MysqlHelper
+        {
+            private static IDapperServiceOptions _options;
 
-		    internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
-		    {
-			    if (_options == null)
-				    _options = configuration.GetConfiguration<MysqlDapperServiceOptions>();
-			    return new MysqlDapperIdentityServerDataService(_options);
-		    }
-	    }
+            internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
+            {
+                if (_options == null)
+                    _options = configuration.GetConfiguration<MysqlDapperServiceOptions>();
+                return new MysqlDapperIdentityServerDataService(_options);
+            }
+        }
 
-	    private static class LiteDbHelper
-	    {
-		    private static ILiteDbServiceOptions _options;
+        private static class LiteDbHelper
+        {
+            private static ILiteDbServiceOptions _options;
 
-		    internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
-		    {
-			    if (_options == null)
-				    _options = configuration.GetConfiguration<LiteDbServiceOptions>();
-				return new LiteDbIdentityServerDataService(_options);
-		    }
-	    }
+            internal static IIdentityServerDataService ProvideService(IConfigurationRoot configuration)
+            {
+                if (_options == null)
+                    _options = configuration.GetConfiguration<LiteDbServiceOptions>();
+                return new LiteDbIdentityServerDataService(_options);
+            }
+        }
     }
 }

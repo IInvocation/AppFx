@@ -21,7 +21,9 @@
 namespace DbLocalizationProvider.Abstractions
 {
     /// <summary>
-    /// Interface to implement for commands
+    ///     Interface to implement for commands
     /// </summary>
-    public interface ICommand { }
+    public interface ICommand
+    {
+    }
 }

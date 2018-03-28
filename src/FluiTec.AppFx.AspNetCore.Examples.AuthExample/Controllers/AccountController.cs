@@ -7,6 +7,7 @@ using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Models.AccountViewModels;
+using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Mail;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using FluiTec.AppFx.Localization;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
@@ -23,34 +23,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        #region Fields
-
-        /// <summary>   Manager for user. </summary>
-        private readonly UserManager<IdentityUserEntity> _userManager;
-
-        /// <summary>   Manager for sign in. </summary>
-        private readonly SignInManager<IdentityUserEntity> _signInManager;
-
-        /// <summary>   The email sender. </summary>
-        private readonly ITemplatingMailService _emailSender;
-
-        /// <summary>   The logger. </summary>
-        private readonly ILogger _logger;
-
-        /// <summary>   Options for controlling the admin. </summary>
-        private readonly AdminOptions _adminOptions;
-
-        /// <summary>   The localizer. </summary>
-        private readonly IStringLocalizer<AccountResource> _localizer;
-
-        /// <summary>   The localizer factory. </summary>
-        private readonly IStringLocalizerFactory _localizerFactory;
-
-        /// <summary>   The identity data service. </summary>
-        private readonly IIdentityDataService _identityDataService;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>   Constructor. </summary>
@@ -82,6 +54,47 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _localizerFactory = localizerFactory;
             _identityDataService = identityDataService;
         }
+
+        #endregion
+
+        #region Logout
+
+        /// <summary>   Logout. </summary>
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>   Manager for user. </summary>
+        private readonly UserManager<IdentityUserEntity> _userManager;
+
+        /// <summary>   Manager for sign in. </summary>
+        private readonly SignInManager<IdentityUserEntity> _signInManager;
+
+        /// <summary>   The email sender. </summary>
+        private readonly ITemplatingMailService _emailSender;
+
+        /// <summary>   The logger. </summary>
+        private readonly ILogger _logger;
+
+        /// <summary>   Options for controlling the admin. </summary>
+        private readonly AdminOptions _adminOptions;
+
+        /// <summary>   The localizer. </summary>
+        private readonly IStringLocalizer<AccountResource> _localizer;
+
+        /// <summary>   The localizer factory. </summary>
+        private readonly IStringLocalizerFactory _localizerFactory;
+
+        /// <summary>   The identity data service. </summary>
+        private readonly IIdentityDataService _identityDataService;
 
         #endregion
 
@@ -158,7 +171,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new {ReturnUrl = returnUrl});
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
@@ -169,9 +182,11 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         {
             if (remoteError != null)
             {
-                ModelState.AddModelError(string.Empty, $"{_localizer.GetString(r => r.ExternalProviderError)} {remoteError}");
+                ModelState.AddModelError(string.Empty,
+                    $"{_localizer.GetString(r => r.ExternalProviderError)} {remoteError}");
                 return View(nameof(Login));
             }
+
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
@@ -185,10 +200,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
             }
+
             if (result.RequiresTwoFactor)
             {
                 throw new NotImplementedException("TwoFactor-Authentication not implemented!");
             }
+
             if (result.IsLockedOut)
             {
                 return View("Lockout");
@@ -198,12 +215,14 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["LoginProvider"] = info.LoginProvider;
             var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            return View(viewName: "ExternalLoginConfirmation", model: new ExternalLoginConfirmationViewModel { Email = email });
+            return View(viewName: "ExternalLoginConfirmation",
+                model: new ExternalLoginConfirmationViewModel {Email = email});
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model,
+            string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -214,7 +233,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     return View("ExternalLoginFailure");
                 }
 
-                var user = new IdentityUserEntity { Name = model.Name, Email = model.Email };
+                var user = new IdentityUserEntity {Name = model.Name, Email = model.Email};
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -222,16 +241,24 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     if (result.Succeeded)
                     {
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+                        var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account",
+                            new {userId = user.Identifier, code}, HttpContext.Request.Scheme);
 
                         if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
-                            await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
-                                    ? _adminOptions.AdminConfirmationRecipient : model.Email,
-                                new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = model.Email });
+                            await _emailSender.SendEmailAsync(
+                                _adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                                    ? _adminOptions.AdminConfirmationRecipient
+                                    : model.Email,
+                                new UserConfirmMailModel(_localizerFactory, callbackUrl) {Email = model.Email});
                         else
-                            await _emailSender.SendEmailAsync(_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
-                                    ? _adminOptions.AdminConfirmationRecipient : model.Email,
-                                new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+                            await _emailSender.SendEmailAsync(
+                                _adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.Admin
+                                    ? _adminOptions.AdminConfirmationRecipient
+                                    : model.Email,
+                                new AdminConfirmMailModel(_localizerFactory, callbackUrl)
+                                {
+                                    Email = _adminOptions.AdminConfirmationRecipient
+                                });
 
                         // disabled to force the the user to confirm his mail address
                         // await _signInManager.SignInAsync(user, isPersistent: false);
@@ -239,6 +266,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                         return RedirectToAction(nameof(ConfirmEmailNotification));
                     }
                 }
+
                 AddErrors(result);
             }
 
@@ -266,12 +294,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new IdentityUserEntity { Name = model.Name, Email = model.Email, Phone = model.Phone };
+                var user = new IdentityUserEntity {Name = model.Name, Email = model.Email, Phone = model.Phone};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SendConfirmationMail(user);
-                    
+
                     // sign the user in
                     // disabled to force the the user to confirm his mail address
                     //await _signInManager.SignInAsync(user, isPersistent: false);
@@ -279,6 +307,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     _logger.LogInformation(3, "User created a new account with password.");
                     return RedirectToAction(nameof(ConfirmEmailNotification));
                 }
+
                 AddErrors(result);
             }
 
@@ -305,14 +334,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             {
                 return View("Error");
             }
+
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 return View("Error");
             }
+
             var result = await _userManager.ConfirmEmailAsync(user, code);
 
-            if (!result.Succeeded || _adminOptions.ConfirmationRecipient != MailAddressConfirmationRecipient.Admin) return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if (!result.Succeeded || _adminOptions.ConfirmationRecipient != MailAddressConfirmationRecipient.Admin)
+                return View(result.Succeeded ? "ConfirmEmail" : "Error");
 
             var mailModel = new AccountConfirmedModel(_localizerFactory, "");
             await _emailSender.SendEmailAsync(user.Email, mailModel);
@@ -349,19 +381,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
-        #region Logout
-
-        /// <summary>   Logout. </summary>
-        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
-
-        #endregion
-
         #region ForgotPassword
 
         [HttpGet]
@@ -386,7 +405,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new {userId = user.Identifier, code},
+                HttpContext.Request.Scheme);
             var mailModel = new RecoverPasswordMailModel(_localizerFactory, callbackUrl);
             await _emailSender.SendEmailAsync(model.Email, mailModel);
             _logger.LogInformation($"Send password-recovery mail for user {user.Email}.");
@@ -417,17 +437,20 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             {
                 return View(model);
             }
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
+
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(ResetPasswordConfirmation), "Account");
             }
+
             AddErrors(result);
             return View();
         }
@@ -448,14 +471,18 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         private async Task SendConfirmationMail(IdentityUserEntity user)
         {
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Identifier, code }, HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new {userId = user.Identifier, code},
+                HttpContext.Request.Scheme);
 
             if (_adminOptions.ConfirmationRecipient == MailAddressConfirmationRecipient.User)
                 await _emailSender.SendEmailAsync(user.Email,
-                    new UserConfirmMailModel(_localizerFactory, callbackUrl) { Email = user.Email });
+                    new UserConfirmMailModel(_localizerFactory, callbackUrl) {Email = user.Email});
             else
                 await _emailSender.SendEmailAsync(_adminOptions.AdminConfirmationRecipient,
-                    new AdminConfirmMailModel(_localizerFactory, callbackUrl) { Email = _adminOptions.AdminConfirmationRecipient });
+                    new AdminConfirmMailModel(_localizerFactory, callbackUrl)
+                    {
+                        Email = _adminOptions.AdminConfirmationRecipient
+                    });
         }
 
         /// <summary>   Adds the errors. </summary>
@@ -477,6 +504,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

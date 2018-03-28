@@ -13,6 +13,7 @@ namespace FluiTec.AppFx.Localization.Compound
         {
             Translations = new List<TranslationEntity>();
         }
+
         #endregion
 
         #region Properties

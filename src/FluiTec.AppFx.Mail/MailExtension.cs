@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using FluiTec.AppFx.Mail;
 using FluiTec.AppFx.Mail.Configuration;
 using FluiTec.AppFx.Mail.LocationExpanders;
@@ -17,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class MailServiceExtension
     {
         /// <summary>	Options for controlling the operation. </summary>
-	    private static MailServiceOptions _options;
+        private static MailServiceOptions _options;
 
         /// <summary>	Configure mail service. </summary>
         /// <param name="services">			The services. </param>
@@ -26,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configure">		The configure. </param>
         /// <returns>	An IServiceCollection. </returns>
         public static IServiceCollection ConfigureMailService(this IServiceCollection services,
-            IConfigurationRoot configuration, IHostingEnvironment environment, Action<MailServiceOptions> configure = null)
+            IConfigurationRoot configuration, IHostingEnvironment environment,
+            Action<MailServiceOptions> configure = null)
         {
             // parse options
             _options = configuration.GetConfiguration<MailServiceOptions>();
@@ -47,9 +49,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">   	The services. </param>
         /// <param name="environment">	The environment. </param>
         /// <param name="root">		  	The root. </param>
-        private static void AddRazorLight(this IServiceCollection services, IHostingEnvironment environment, string root)
+        private static void AddRazorLight(this IServiceCollection services, IHostingEnvironment environment,
+            string root)
         {
-            var absoluteRoot = System.IO.Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
 
             var engine = new RazorLightEngineBuilder()
                 .UseFilesystemProject(absoluteRoot)
@@ -94,7 +97,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddRazorLightLocalized(this IServiceCollection services, IHostingEnvironment environment,
             string root, MailServiceOptions options, Func<CultureInfo, string, string> templateKeyExpander)
         {
-            var absoluteRoot = System.IO.Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
 
             var project = new CultureAwareRazorProject(options, absoluteRoot, templateKeyExpander);
             var engine = new RazorLightEngineBuilder()
@@ -110,7 +113,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configuration">    The configuration. </param>
         /// <param name="configure">        (Optional) The configure. </param>
         /// <returns>An IServiceCollection.</returns>
-        public static IServiceCollection ConfigureMailServiceTemplated(this IServiceCollection services, IHostingEnvironment environment, IConfigurationRoot configuration, Action<MailServiceOptions> configure = null)
+        public static IServiceCollection ConfigureMailServiceTemplated(this IServiceCollection services,
+            IHostingEnvironment environment, IConfigurationRoot configuration,
+            Action<MailServiceOptions> configure = null)
         {
             // parse options
             _options = configuration.GetConfiguration<MailServiceOptions>();
@@ -134,7 +139,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void AddRazorLightTemplating(this IServiceCollection services, IHostingEnvironment environment,
             MailServiceOptions options, string root)
         {
-            var absoluteRoot = System.IO.Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
 
             var expanders = new ILocationExpander[]
             {

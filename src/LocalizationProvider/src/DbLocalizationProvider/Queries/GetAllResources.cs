@@ -25,6 +25,8 @@ namespace DbLocalizationProvider.Queries
 {
     public class GetAllResources
     {
-        public class Query : IQuery<IEnumerable<LocalizationResource>> { }
+        public class Query : IQuery<IEnumerable<LocalizationResource>>
+        {
+        }
     }
 }

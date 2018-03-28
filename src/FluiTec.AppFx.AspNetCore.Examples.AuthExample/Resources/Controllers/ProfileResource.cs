@@ -1,6 +1,6 @@
 ﻿using System;
-using FluiTec.AppFx.Localization;
 using DbLocalizationProvider.Abstractions;
+using FluiTec.AppFx.Localization;
 using Microsoft.Extensions.Localization;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers
@@ -53,12 +53,15 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers
         public static string RemoveLoginSuccess => "The provider has been removed";
 
         /// <summary>Initializes this object from the given from manage message.</summary>
-        /// <exception cref="ArgumentOutOfRangeException">  Thrown when one or more arguments are outside
-        ///                                                 the required range. </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     Thrown when one or more arguments are outside
+        ///     the required range.
+        /// </exception>
         /// <param name="localizer">    The localizer. </param>
         /// <param name="message">      (Optional) The message. </param>
         /// <returns>A string.</returns>
-        public static LocalizedString FromManageMessage(IStringLocalizer<ProfileResource> localizer, ManageMessageId? message = null)
+        public static LocalizedString FromManageMessage(IStringLocalizer<ProfileResource> localizer,
+            ManageMessageId? message = null)
         {
             switch (message)
             {

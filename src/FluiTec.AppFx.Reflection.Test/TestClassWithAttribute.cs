@@ -3,6 +3,5 @@
     [Test("mytext")]
     public class TestClassWithAttribute
     {
-
     }
 }

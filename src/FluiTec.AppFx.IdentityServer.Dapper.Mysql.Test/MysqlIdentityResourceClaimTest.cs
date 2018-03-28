@@ -3,39 +3,41 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test
 {
-	[TestClass]
-	public class MysqlIdentityResourceClaimTest : IdentityResourceClaimTest
-	{
-		public MysqlIdentityResourceClaimTest() : base(Helper.GetDataService()) { }
+    [TestClass]
+    public class MysqlIdentityResourceClaimTest : IdentityResourceClaimTest
+    {
+        public MysqlIdentityResourceClaimTest() : base(Helper.GetDataService())
+        {
+        }
 
-		[TestMethod]
-		public override void CanAddAndGetIdentityResourceClaim()
-		{
-			base.CanAddAndGetIdentityResourceClaim();
-		}
+        [TestMethod]
+        public override void CanAddAndGetIdentityResourceClaim()
+        {
+            base.CanAddAndGetIdentityResourceClaim();
+        }
 
-		[TestMethod]
-		public override void CanAddAndGetIdentityResourceClaims()
-		{
-			base.CanAddAndGetIdentityResourceClaims();
-		}
+        [TestMethod]
+        public override void CanAddAndGetIdentityResourceClaims()
+        {
+            base.CanAddAndGetIdentityResourceClaims();
+        }
 
-		[TestMethod]
-		public override void CanUpdateIdentityResource()
-		{
-			base.CanUpdateIdentityResource();
-		}
+        [TestMethod]
+        public override void CanUpdateIdentityResource()
+        {
+            base.CanUpdateIdentityResource();
+        }
 
-		[TestMethod]
-		public override void CanDeleteIdentityResource()
-		{
-			base.CanDeleteIdentityResource();
-		}
+        [TestMethod]
+        public override void CanDeleteIdentityResource()
+        {
+            base.CanDeleteIdentityResource();
+        }
 
-		[TestMethod]
-		public override void CanGetByIdentityId()
-		{
-			base.CanGetByIdentityId();
-		}
-	}
+        [TestMethod]
+        public override void CanGetByIdentityId()
+        {
+            base.CanGetByIdentityId();
+        }
+    }
 }

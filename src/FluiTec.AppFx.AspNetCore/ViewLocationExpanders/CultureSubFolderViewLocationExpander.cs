@@ -14,9 +14,11 @@ namespace FluiTec.AppFx.AspNetCore.ViewLocationExpanders
         ///     values are used to determine if the view location has changed since the last time it was
         ///     located.
         /// </summary>
-        /// <param name="context">  The
-        ///                         <see cref="T:Microsoft.AspNetCore.Mvc.Razor.ViewLocationExpanderContext" />
-        ///                         for the current view location expansion operation. </param>
+        /// <param name="context">
+        ///     The
+        ///     <see cref="T:Microsoft.AspNetCore.Mvc.Razor.ViewLocationExpanderContext" />
+        ///     for the current view location expansion operation.
+        /// </param>
         public void PopulateValues(ViewLocationExpanderContext context)
         {
             // ignore
@@ -26,23 +28,25 @@ namespace FluiTec.AppFx.AspNetCore.ViewLocationExpanders
         ///     Invoked by a <see cref="T:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngine" /> to determine
         ///     potential locations for a view.
         /// </summary>
-        /// <param name="context">          The
-        ///                                 <see cref="T:Microsoft.AspNetCore.Mvc.Razor.ViewLocationExpanderContext" />
-        ///                                 for the current view location expansion operation. </param>
+        /// <param name="context">
+        ///     The
+        ///     <see cref="T:Microsoft.AspNetCore.Mvc.Razor.ViewLocationExpanderContext" />
+        ///     for the current view location expansion operation.
+        /// </param>
         /// <param name="viewLocations">    The sequence of view locations to expand. </param>
         /// <returns>   A list of expanded view locations. </returns>
-        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context,
+            IEnumerable<string> viewLocations)
         {
             var shortName = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
             var name = CultureInfo.CurrentUICulture;
 
             return new[]
             {
-                
                 "Views/{1}/" + shortName + "/{0}.cshtml",
                 "Views/{1}/" + name + "/{0}.cshtml",
                 "Views/{1}/{0}.cshtml",
-                
+
                 "Views/Shared/" + shortName + "/{0}.cshtml",
                 "Views/Shared/" + name + "/{0}.cshtml",
                 "Views/Shared/{0}.cshtml"

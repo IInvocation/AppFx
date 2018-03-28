@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         /// <param name="entity">   The entity to add. </param>
         /// <returns>   A TEntity. </returns>
         /// <remarks>
-        ///  Makes sure the key is distinct        
+        ///     Makes sure the key is distinct
         /// </remarks>
         public override ResourceEntity Add(ResourceEntity entity)
         {
@@ -35,7 +35,7 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         /// <summary>   Adds a range. </summary>
         /// <param name="entities"> An IEnumerable&lt;TEntity&gt; of items to append to this. </param>
         /// <remarks>
-        /// Make sure the keys are distinct         
+        ///     Make sure the keys are distinct
         /// </remarks>
         public override void AddRange(IEnumerable<ResourceEntity> entities)
         {
@@ -47,12 +47,14 @@ namespace FluiTec.AppFx.Localization.LiteDb.Repositories
         }
 
         /// <summary>   Updates the given entity. </summary>
-        /// <exception cref="InvalidOperationException">    Thrown when the requested operation is
-        ///                                                 invalid. </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Thrown when the requested operation is
+        ///     invalid.
+        /// </exception>
         /// <param name="entity">   The entity. </param>
         /// <returns>   A TEntity. </returns>
-        ///  <remarks>
-        ///  Makes sure the key is distinct
+        /// <remarks>
+        ///     Makes sure the key is distinct
         /// </remarks>
         public override ResourceEntity Update(ResourceEntity entity)
         {

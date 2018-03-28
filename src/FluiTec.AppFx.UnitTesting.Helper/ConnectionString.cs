@@ -1,25 +1,23 @@
 ﻿namespace FluiTec.AppFx.UnitTesting.Helper
 {
     /// <summary>
-    /// A connection string.
+    ///     A connection string.
     /// </summary>
     public class ConnectionString
     {
         /// <summary>
-        /// Gets or sets the name.
+        ///     Gets or sets the name.
         /// </summary>
-        ///
         /// <value>
-        /// The name.
+        ///     The name.
         /// </value>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the value.
+        ///     Gets or sets the value.
         /// </summary>
-        ///
         /// <value>
-        /// The ConnectionString.
+        ///     The ConnectionString.
         /// </value>
         public string Value { get; set; }
     }

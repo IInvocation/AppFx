@@ -41,7 +41,8 @@ namespace FluiTec.AppFx.Localization.Test
             {
                 var resourceType = typeof(TestResource);
 
-                var resources = new[] {
+                var resources = new[]
+                {
                     new ResourceEntity
                     {
                         ResourceKey = resourceType.FullName + nameof(TestResource.Name),

@@ -34,9 +34,11 @@ namespace FluiTec.AppFx.Localization.Exporter
         /// <returns>An enumerator that allows foreach to be used to process read all in this collection.</returns>
         public IEnumerable<LocalizationResource> ReadAll()
         {
-            ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>().SetHandler<DetermineDefaultCulture.Handler>();
+            ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>()
+                .SetHandler<DetermineDefaultCulture.Handler>();
 
-            var discoveredTypes = TypeDiscoveryHelper.GetTypes(t => t.GetCustomAttribute<LocalizedResourceAttribute>() != null,
+            var discoveredTypes = TypeDiscoveryHelper.GetTypes(
+                t => t.GetCustomAttribute<LocalizedResourceAttribute>() != null,
                 t => t.GetCustomAttribute<LocalizedModelAttribute>() != null);
 
             var discoveredResources = discoveredTypes[0];

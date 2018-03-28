@@ -7,28 +7,44 @@ using FluiTec.AppFx.Identity.Repositories;
 namespace FluiTec.AppFx.Identity.LiteDb
 {
     /// <summary>
-    /// A lite database identity data service.
+    ///     A lite database identity data service.
     /// </summary>
     public class LiteDbIdentityDataService : LiteDbDataService, IIdentityDataService
     {
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the name.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
+        public override string Name => "LiteDbIdentityDataService";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="useSingletonConnection">   True to use singleton connection. </param>
         /// <param name="dbFilePath">               Full pathname of the database file. </param>
         /// <param name="applicationFolder">        (Optional) Pathname of the application folder. </param>
-        public LiteDbIdentityDataService(bool useSingletonConnection, string dbFilePath, string applicationFolder = null) 
-            : this(new LiteDbServiceOptions { UseSingletonConnection = useSingletonConnection, ApplicationFolder = applicationFolder, DbFileName = dbFilePath})
+        public LiteDbIdentityDataService(bool useSingletonConnection, string dbFilePath,
+            string applicationFolder = null)
+            : this(new LiteDbServiceOptions
+            {
+                UseSingletonConnection = useSingletonConnection,
+                ApplicationFolder = applicationFolder,
+                DbFileName = dbFilePath
+            })
         {
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="options">  Options for controlling the operation. </param>
         public LiteDbIdentityDataService(ILiteDbServiceOptions options) : base(options)
         {
@@ -38,27 +54,13 @@ namespace FluiTec.AppFx.Identity.LiteDb
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        ///
-        /// <value>
-        /// The name.
-        /// </value>
-        public override string Name => "LiteDbIdentityDataService";
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Starts unit of work.
+        ///     Starts unit of work.
         /// </summary>
-        ///
         /// <returns>
-        /// An IIdentityUnitOfWork.
+        ///     An IIdentityUnitOfWork.
         /// </returns>
         public IIdentityUnitOfWork StartUnitOfWork()
         {
@@ -66,11 +68,10 @@ namespace FluiTec.AppFx.Identity.LiteDb
         }
 
         /// <summary>
-        /// Begins unit of work.
+        ///     Begins unit of work.
         /// </summary>
-        ///
         /// <returns>
-        /// An IUnitOfWork.
+        ///     An IUnitOfWork.
         /// </returns>
         public override IUnitOfWork BeginUnitOfWork()
         {
@@ -78,12 +79,13 @@ namespace FluiTec.AppFx.Identity.LiteDb
         }
 
         /// <summary>
-        /// Registers the repository providers.
+        ///     Registers the repository providers.
         /// </summary>
         protected virtual void RegisterRepositoryProviders()
         {
             RegisterRepositoryProvider(new Func<IUnitOfWork, IUserRepository>(work => new LiteDbUserRepository(work)));
-            RegisterRepositoryProvider(new Func<IUnitOfWork, IClaimRepository>(work => new LiteDbClaimRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IClaimRepository>(work => new LiteDbClaimRepository(work)));
             RegisterRepositoryProvider(new Func<IUnitOfWork, IRoleRepository>(work => new LiteDbRoleRepository(work)));
             RegisterRepositoryProvider(
                 new Func<IUnitOfWork, IUserRoleRepository>(work => new LiteDbUserRoleRepository(work)));

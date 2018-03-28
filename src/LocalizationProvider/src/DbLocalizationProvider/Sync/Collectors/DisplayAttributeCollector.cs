@@ -28,7 +28,8 @@ namespace DbLocalizationProvider.Sync.Collectors
             var displayAttribute = mi.GetCustomAttribute<DisplayAttribute>();
             if(displayAttribute?.Description == null) yield break;
             var propertyName = $"{mi.Name}-Description";
-            var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi, resourceKeyPrefix, typeOldName, typeOldNamespace);
+            var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target, propertyName, mi,
+                resourceKeyPrefix, typeOldName, typeOldNamespace);
 
             var translations = new List<DiscoveredTranslation>();
             translations.AddRange(DiscoveredTranslation.FromSingle(displayAttribute.Description));
@@ -38,8 +39,10 @@ namespace DbLocalizationProvider.Sync.Collectors
                 var validationAttributeName = displayAttribute.GetType().Name;
                 if(validationAttributeName.EndsWith("Attribute"))
                     validationAttributeName =
-                        validationAttributeName.Substring(0, validationAttributeName.LastIndexOf("Attribute", StringComparison.Ordinal));
-                translations.Add(new DiscoveredTranslation(validationTranslationAttribute.Translation, validationTranslationAttribute.Culture));
+                        validationAttributeName.Substring(0,
+                            validationAttributeName.LastIndexOf("Attribute", StringComparison.Ordinal));
+                translations.Add(new DiscoveredTranslation(validationTranslationAttribute.Translation,
+                    validationTranslationAttribute.Culture));
             }
 
             yield return new DiscoveredResource(mi,

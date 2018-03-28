@@ -17,7 +17,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dynamic
     public class ActivityAuthorizationDataProvider
     {
         /// <summary>	Options for controlling the operation. </summary>
-	    private readonly ActivityAuthorizationOptions _options;
+        private readonly ActivityAuthorizationOptions _options;
 
         /// <summary>	Constructor. </summary>
         /// <param name="options">	Options for controlling the operation. </param>

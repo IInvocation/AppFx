@@ -1,5 +1,5 @@
 ﻿@using FluiTec.AppFx.Identity.Models.ManageViewModels
-@model IndexViewModel
+@model FluiTec.AppFx.Identity.Models.ManageViewModels.IndexViewModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -8,15 +8,15 @@
     <div class="container">
         <section>
             <h4>Change settings</h4>
-            <hr />
+            <hr/>
             @if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
             {
-            <h5>State</h5>
-            <div class="row uniform">
-                <div class="col-lg-6">
-                    <p>@Model.StatusMessage</p>
+                <h5>State</h5>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <p>@Model.StatusMessage</p>
+                    </div>
                 </div>
-            </div>
             }
             <h5>Account</h5>
             <div class="row uniform">
@@ -32,21 +32,21 @@
             <div class="row uniform">
                 <div class="col-lg-6">
                     @if (Model.HasPassword)
-                {
-                    <ul class="actions">
-                        <li>
-                            <a asp-controller="Profile" asp-action="ChangePassword">Change password</a>
-                        </li>
-                    </ul>
-                }
-                else
-                {
-                    <ul class="actions">
-                        <li>
-                            <a asp-controller="Profile" asp-action="SetPassword">Set password</a>
-                        </li>
-                    </ul>
-                }
+                    {
+                        <ul class="actions">
+                            <li>
+                                <a asp-controller="Profile" asp-action="ChangePassword">Change password</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="actions">
+                            <li>
+                                <a asp-controller="Profile" asp-action="SetPassword">Set password</a>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
             <h5>External logins</h5>
@@ -65,7 +65,7 @@
                 <div class="col-lg-6">
                     @if (!string.IsNullOrWhiteSpace(Model.PhoneNumber))
                     {
-                    <p>@Model.PhoneNumber</p>
+                        <p>@Model.PhoneNumber</p>
                     }
                     <ul class="actions">
                         <li>

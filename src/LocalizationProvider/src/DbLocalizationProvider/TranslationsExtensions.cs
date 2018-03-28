@@ -27,17 +27,20 @@ namespace DbLocalizationProvider
 {
     public static class TranslationsExtensions
     {
-        public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations, CultureInfo language)
+        public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations,
+            CultureInfo language)
         {
             return ByLanguage(translations, language.Name);
         }
 
-        public static LocalizationResourceTranslation FindByLanguage(this ICollection<LocalizationResourceTranslation> translations, CultureInfo language)
+        public static LocalizationResourceTranslation FindByLanguage(
+            this ICollection<LocalizationResourceTranslation> translations, CultureInfo language)
         {
             return FindByLanguage(translations, language.Name);
         }
 
-        public static LocalizationResourceTranslation FindByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language)
+        public static LocalizationResourceTranslation FindByLanguage(
+            this ICollection<LocalizationResourceTranslation> translations, string language)
         {
             var translation = translations.FirstOrDefault(t => t.Language == language);
             if(translation != null)
@@ -48,7 +51,8 @@ namespace DbLocalizationProvider
             //return translations.FirstOrDefault(t => t.Language == language);
         }
 
-        public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language, bool invariantCultureFallback)
+        public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language,
+            bool invariantCultureFallback)
         {
             if(translations == null)
                 return string.Empty;
@@ -57,9 +61,8 @@ namespace DbLocalizationProvider
                 throw new ArgumentNullException(nameof(language));
 
             var translation = translations.FindByLanguage(language);
-            return translation != null ?
-                       translation.Value :
-                       invariantCultureFallback ? translations.FindByLanguage(string.Empty)?.Value : string.Empty;
+            return translation != null ? translation.Value :
+                invariantCultureFallback ? translations.FindByLanguage(string.Empty)?.Value : string.Empty;
         }
 
         public static string ByLanguage(this ICollection<LocalizationResourceTranslation> translations, string language)
@@ -67,7 +70,8 @@ namespace DbLocalizationProvider
             return ByLanguage(translations, language, ConfigurationContext.Current.EnableInvariantCultureFallback);
         }
 
-        public static bool ExistsLanguage(this ICollection<LocalizationResourceTranslation> translations, string language)
+        public static bool ExistsLanguage(this ICollection<LocalizationResourceTranslation> translations,
+            string language)
         {
             if(string.IsNullOrEmpty(language))
                 throw new ArgumentNullException(nameof(language));

@@ -33,11 +33,11 @@ namespace DbLocalizationProvider.Sync.Collectors
                     var customAttributeKey = ResourceKeyBuilder.BuildResourceKey(resourceKey, customAttribute);
                     var propertyName = customAttributeKey.Split('.').Last();
                     var oldResourceKeys = OldResourceKeyBuilder.GenerateOldResourceKey(target,
-                                                                                       propertyName,
-                                                                                       mi,
-                                                                                       resourceKeyPrefix,
-                                                                                       typeOldName,
-                                                                                       typeOldNamespace);
+                        propertyName,
+                        mi,
+                        resourceKeyPrefix,
+                        typeOldName,
+                        typeOldNamespace);
                     var foreignTranslation = string.Empty;
                     if(descriptor.GenerateTranslation)
                     {
@@ -48,19 +48,19 @@ namespace DbLocalizationProvider.Sync.Collectors
                     }
 
                     yield return new DiscoveredResource(mi,
-                                                        customAttributeKey,
-                                                        DiscoveredTranslation.FromSingle(foreignTranslation),
-                                                        propertyName,
-                                                        declaringType,
-                                                        returnType,
-                                                        isSimpleType)
-                                 {
-                                     TypeName = target.Name,
-                                     TypeNamespace = target.Namespace,
-                                     TypeOldName = oldResourceKeys.Item2,
-                                     TypeOldNamespace = typeOldNamespace,
-                                     OldResourceKey = oldResourceKeys.Item1
-                                 };
+                        customAttributeKey,
+                        DiscoveredTranslation.FromSingle(foreignTranslation),
+                        propertyName,
+                        declaringType,
+                        returnType,
+                        isSimpleType)
+                    {
+                        TypeName = target.Name,
+                        TypeNamespace = target.Namespace,
+                        TypeOldName = oldResourceKeys.Item2,
+                        TypeOldNamespace = typeOldNamespace,
+                        OldResourceKey = oldResourceKeys.Item1
+                    };
                 }
             }
         }

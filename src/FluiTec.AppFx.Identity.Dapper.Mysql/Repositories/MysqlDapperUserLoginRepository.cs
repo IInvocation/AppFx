@@ -5,24 +5,24 @@ using FluiTec.AppFx.Identity.Entities;
 
 namespace FluiTec.AppFx.Identity.Dapper.Mysql.Repositories
 {
-	/// <summary>	A mssql dapper user login repository. </summary>
-	public class MysqlDapperUserLoginRepository : DapperUserLoginRepository
-	{
-		/// <summary>	Constructor. </summary>
-		/// <param name="unitOfWork">	The unit of work. </param>
-		public MysqlDapperUserLoginRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-		{
-		}
+    /// <summary>	A mssql dapper user login repository. </summary>
+    public class MysqlDapperUserLoginRepository : DapperUserLoginRepository
+    {
+        /// <summary>	Constructor. </summary>
+        /// <param name="unitOfWork">	The unit of work. </param>
+        public MysqlDapperUserLoginRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
-		/// <summary>	Removes the by name and key. </summary>
-		/// <param name="providerName">	Name of the provider. </param>
-		/// <param name="providerKey"> 	The provider key. </param>
-		public override void RemoveByNameAndKey(string providerName, string providerKey)
-		{
-			var command =
-				$"DELETE FROM {TableName} WHERE {nameof(IdentityUserLoginEntity.ProviderName)} = @ProviderName AND {nameof(IdentityUserLoginEntity.ProviderKey)} = @ProviderKey";
-			UnitOfWork.Connection.Execute(command, new {ProviderName = providerName, ProviderKey = providerKey},
-				UnitOfWork.Transaction);
-		}
-	}
+        /// <summary>	Removes the by name and key. </summary>
+        /// <param name="providerName">	Name of the provider. </param>
+        /// <param name="providerKey"> 	The provider key. </param>
+        public override void RemoveByNameAndKey(string providerName, string providerKey)
+        {
+            var command =
+                $"DELETE FROM {TableName} WHERE {nameof(IdentityUserLoginEntity.ProviderName)} = @ProviderName AND {nameof(IdentityUserLoginEntity.ProviderKey)} = @ProviderKey";
+            UnitOfWork.Connection.Execute(command, new {ProviderName = providerName, ProviderKey = providerKey},
+                UnitOfWork.Transaction);
+        }
+    }
 }

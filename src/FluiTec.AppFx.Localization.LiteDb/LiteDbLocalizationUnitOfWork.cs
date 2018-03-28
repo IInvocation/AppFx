@@ -9,9 +9,8 @@ namespace FluiTec.AppFx.Localization.LiteDb
         #region Constructors
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="dataService">  The data service. </param>
         public LiteDbLocalizationUnitOfWork(LiteDbDataService dataService) : base(dataService)
         {
@@ -30,11 +29,13 @@ namespace FluiTec.AppFx.Localization.LiteDb
 
         /// <summary>Gets or sets the resource repository.</summary>
         /// <value>The resource repository.</value>
-        public IResourceRepository ResourceRepository => _resourceRepository ?? (_resourceRepository = GetRepository<IResourceRepository>());
+        public IResourceRepository ResourceRepository =>
+            _resourceRepository ?? (_resourceRepository = GetRepository<IResourceRepository>());
 
         /// <summary>Gets or sets the translation repository.</summary>
         /// <value>The translation repository.</value>
-        public ITranslationRepository TranslationRepository => _translationRepository ?? (_translationRepository = GetRepository<ITranslationRepository>());
+        public ITranslationRepository TranslationRepository =>
+            _translationRepository ?? (_translationRepository = GetRepository<ITranslationRepository>());
 
         #endregion
     }

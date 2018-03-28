@@ -15,7 +15,8 @@ namespace FluiTec.AppFx.Localization
         /// <returns>   An IApplicationBuilder. </returns>
         public static IApplicationBuilder UseDbLocalizationProvider(this IApplicationBuilder builder)
         {
-            var synchronizer = new ResourceSynchronizer(builder.ApplicationServices.GetService<ILocalizationDataService>());
+            var synchronizer =
+                new ResourceSynchronizer(builder.ApplicationServices.GetService<ILocalizationDataService>());
             synchronizer.DiscoverAndRegister();
 
             // in cases when there has been already a call to LoclaizationProvider.Current (some static weird things)

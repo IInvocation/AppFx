@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using FluiTec.AppFx.AspNetCore.Examples.LocalizationExample.Models;
 using FluiTec.AppFx.AspNetCore.Examples.LocalizationExample.Resources;
 using FluiTec.AppFx.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample.Controllers
@@ -44,7 +44,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.LocalizationExample.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

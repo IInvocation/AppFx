@@ -36,7 +36,7 @@ namespace DbLocalizationProvider
     {
         private static Lazy<LocalizationProvider> _instance =
             new Lazy<LocalizationProvider>(() =>
-                                               new LocalizationProvider(ConfigurationContext.Current.EnableInvariantCultureFallback));
+                new LocalizationProvider(ConfigurationContext.Current.EnableInvariantCultureFallback));
 
         private readonly bool _fallbackEnabled;
 
@@ -52,10 +52,7 @@ namespace DbLocalizationProvider
         public static LocalizationProvider Current
         {
             get => _instance.Value;
-            set
-            {
-                _instance = new Lazy<LocalizationProvider>(() => value);
-            }
+            set { _instance = new Lazy<LocalizationProvider>(() => value); }
         }
 
         public static void Initialize()
@@ -116,7 +113,8 @@ namespace DbLocalizationProvider
         ///     those.
         /// </param>
         /// <returns>Translation for the resource with specific key.</returns>
-        public virtual string GetStringByCulture(Expression<Func<object>> resource, CultureInfo culture, params object[] formatArguments)
+        public virtual string GetStringByCulture(Expression<Func<object>> resource, CultureInfo culture,
+            params object[] formatArguments)
         {
             if(resource == null)
                 throw new ArgumentNullException(nameof(resource));
@@ -138,7 +136,8 @@ namespace DbLocalizationProvider
         ///     those.
         /// </param>
         /// <returns>Translation for the resource with specific key.</returns>
-        public virtual string GetStringByCulture(string resourceKey, CultureInfo culture, params object[] formatArguments)
+        public virtual string GetStringByCulture(string resourceKey, CultureInfo culture,
+            params object[] formatArguments)
         {
             if(string.IsNullOrWhiteSpace(resourceKey))
                 throw new ArgumentNullException(nameof(resourceKey));
@@ -172,8 +171,8 @@ namespace DbLocalizationProvider
             // check if first element is not scalar - format with named placeholders
             var first = formatArguments.First();
             return !first.GetType().IsSimpleType()
-                       ? FormatWithAnonymousObject(message, first)
-                       : string.Format(message, formatArguments);
+                ? FormatWithAnonymousObject(message, first)
+                : string.Format(message, formatArguments);
         }
 
         private static string FormatWithAnonymousObject(string message, object model)
@@ -200,7 +199,8 @@ namespace DbLocalizationProvider
                     placeholderMap.Add(placeHolder, val);
             }
 
-            return placeholderMap.Aggregate(message, (current, pair) => current.Replace(pair.Key, pair.Value.ToString()));
+            return placeholderMap.Aggregate(message,
+                (current, pair) => current.Replace(pair.Key, pair.Value.ToString()));
         }
     }
 }

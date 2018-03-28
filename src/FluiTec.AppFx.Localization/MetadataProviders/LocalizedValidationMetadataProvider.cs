@@ -22,8 +22,10 @@ namespace FluiTec.AppFx.Localization.MetadataProviders
         ///     which should be added to
         ///     <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext.Results" />.
         /// </remarks>
-        /// <param name="context">  The
-        ///                         <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext" />. </param>
+        /// <param name="context">
+        ///     The
+        ///     <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext" />.
+        /// </param>
         public void CreateValidators(ModelValidatorProviderContext context)
         {
             for (var i = 0; i < context.Results.Count; i++)

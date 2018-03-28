@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Localization.Mssql
         #endregion
 
         #region Properties
-        
+
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
         public override string Name => "MssqlDapperLocalizationDataService";
@@ -47,8 +47,10 @@ namespace FluiTec.AppFx.Localization.Mssql
         /// <summary>	Registers the identity repositories. </summary>
         protected virtual void RegisterIdentityRepositories()
         {
-            RegisterRepositoryProvider(new Func<IUnitOfWork, IResourceRepository>(work => new MssqlDapperResourceRepository(work)));
-            RegisterRepositoryProvider(new Func<IUnitOfWork, ITranslationRepository>(work => new MssqlDapperTranslationRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IResourceRepository>(work => new MssqlDapperResourceRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, ITranslationRepository>(work => new MssqlDapperTranslationRepository(work)));
         }
 
         #endregion

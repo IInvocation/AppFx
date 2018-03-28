@@ -8,7 +8,8 @@ namespace FluiTec.AppFx.Identity.Models.AccountViewModels
     public class ExternalLoginConfirmationViewModel
     {
         /// <summary>Name of the full model.</summary>
-        private const string FullModelName = "FluiTec.AppFx.Identity.Models.AccountViewModels.ExternalLoginConfirmationViewModel";
+        private const string FullModelName =
+            "FluiTec.AppFx.Identity.Models.AccountViewModels.ExternalLoginConfirmationViewModel";
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>

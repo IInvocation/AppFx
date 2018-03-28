@@ -4,8 +4,8 @@ using System;
 
 namespace FluiTec.AppFx.InversionOfControl.SimpleIoC
 {
-	[AttributeUsage(AttributeTargets.Constructor)]
-	public sealed class PreferredConstructorAttribute : Attribute
-	{
-	}
+    [AttributeUsage(AttributeTargets.Constructor)]
+    public sealed class PreferredConstructorAttribute : Attribute
+    {
+    }
 }

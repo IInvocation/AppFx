@@ -1,13 +1,14 @@
-﻿<cache vary-by="@System.Globalization.CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
-    @{ var file = "/lib/jquery-validation/src/localization/messages_" + System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + ".js";}
+﻿@using System.Globalization
+<cache vary-by="@CultureInfo.CurrentUICulture.Name" expires-after="@TimeSpan.FromHours(value: 12)">
+    @{ var file = "/lib/jquery-validation/src/localization/messages_" + CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLower() + ".js"; }
     <environment names="Development">
         <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        @if (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en")
+        @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en")
         {
             <script src="@file"></script>
         }
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-        <recaptcha-script />
+        <recaptcha-script/>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
@@ -16,7 +17,7 @@
                 crossorigin="anonymous"
                 integrity="sha384-Fnqn3nxp3506LP/7Y3j/25BlWeA3PXTyT1l78LjECcPaKCV12TsZP7yyMxOe/G/k">
         </script>
-        @if (System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en")
+        @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName != "en")
         {
             <script src="@file"></script>
         }
@@ -26,6 +27,6 @@
                 crossorigin="anonymous"
                 integrity="sha384-JrXK+k53HACyavUKOsL+NkmSesD2P+73eDMrbTtTk0h4RmOF8hF8apPlkp26JlyH">
         </script>
-        <recaptcha-script />
+        <recaptcha-script/>
     </environment>
 </cache>

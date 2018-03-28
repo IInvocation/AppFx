@@ -15,7 +15,8 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
         /// <summary>Specialised constructor for use only by derived class.</summary>
         /// <param name="dataService">          The data service. </param>
         /// <param name="identityDataService">  The identity data service. </param>
-        protected ActivityRoleTest(IAuthorizationDataService dataService, IIdentityDataService identityDataService) : base(dataService)
+        protected ActivityRoleTest(IAuthorizationDataService dataService, IIdentityDataService identityDataService) :
+            base(dataService)
         {
             _identityDataService = identityDataService;
         }
@@ -55,7 +56,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                         Allow = true
                     };
 
-                    
+
                     uow.ActivityRoleRepository.Add(aRole);
 
                     Assert.AreEqual(aRole.Id, uow.ActivityRoleRepository.Get(aRole.Id).Id);
@@ -171,7 +172,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                         RoleId = role.Id,
                         Allow = true
                     };
- 
+
                     uow.ActivityRoleRepository.Add(aRole);
 
                     aRole.Allow = false;

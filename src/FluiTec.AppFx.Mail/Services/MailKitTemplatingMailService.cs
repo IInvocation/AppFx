@@ -9,13 +9,20 @@ namespace FluiTec.AppFx.Mail
     /// <summary>A mail kit templating mail service.</summary>
     public abstract class MailKitTemplatingMailService : ITemplatingMailService
     {
-        #region Fields
+        #region Constructors
 
-        /// <summary>	Options for controlling the operation. </summary>
-        protected readonly MailServiceOptions Options;
-
-        /// <summary>The tempaling service.</summary>
-        protected readonly ITemplatingService TempalingService;
+        /// <summary>Constructor.</summary>
+        /// <exception cref="ArgumentNullException">
+        ///     Thrown when one or more required arguments are
+        ///     null.
+        /// </exception>
+        /// <param name="templatingService">    The engine. </param>
+        /// <param name="options">              Options for controlling the operation. </param>
+        protected MailKitTemplatingMailService(ITemplatingService templatingService, MailServiceOptions options)
+        {
+            TempalingService = templatingService ?? throw new ArgumentNullException(nameof(templatingService));
+            Options = options ?? throw new ArgumentNullException(nameof(options));
+        }
 
         #endregion
 
@@ -49,10 +56,7 @@ namespace FluiTec.AppFx.Mail
                 // the XOAUTH2 authentication mechanism.
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                if (Options.Authenticate)
-                {
-                    client.Authenticate(Options.Username, Options.Password);
-                }
+                if (Options.Authenticate) client.Authenticate(Options.Username, Options.Password);
 
                 client.Send(message);
                 client.Disconnect(true);
@@ -61,18 +65,13 @@ namespace FluiTec.AppFx.Mail
 
         #endregion
 
-        #region Constructors
+        #region Fields
 
-        /// <summary>Constructor.</summary>
-        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
-        ///                                             null. </exception>
-        /// <param name="templatingService">    The engine. </param>
-        /// <param name="options">              Options for controlling the operation. </param>
-        protected MailKitTemplatingMailService(ITemplatingService templatingService, MailServiceOptions options)
-        {
-            TempalingService = templatingService ?? throw new ArgumentNullException(nameof(templatingService));
-            Options = options ?? throw new ArgumentNullException(nameof(options));
-        }
+        /// <summary>	Options for controlling the operation. </summary>
+        protected readonly MailServiceOptions Options;
+
+        /// <summary>The tempaling service.</summary>
+        protected readonly ITemplatingService TempalingService;
 
         #endregion
 

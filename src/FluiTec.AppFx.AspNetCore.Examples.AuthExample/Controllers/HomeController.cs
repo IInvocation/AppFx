@@ -13,6 +13,24 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
     /// <summary>A controller for handling homes.</summary>
     public class HomeController : Controller
     {
+        #region Constructors
+
+        /// <summary>   Constructor. </summary>
+        /// <param name="logger">           The logger. </param>
+        /// <param name="mailService">      The mail service. </param>
+        /// <param name="errorOptions">     Options for controlling the error. </param>
+        /// <param name="localizerFactory"> The localizer factory. </param>
+        public HomeController(ILogger<HomeController> logger, ITemplatingMailService mailService,
+            ErrorOptions errorOptions, IStringLocalizerFactory localizerFactory)
+        {
+            _logger = logger;
+            _mailService = mailService;
+            _errorOptions = errorOptions;
+            _localizerFactory = localizerFactory;
+        }
+
+        #endregion
+
         #region Fields
 
         /// <summary>	The logger. </summary>
@@ -26,23 +44,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   The localizer factory. </summary>
         private readonly IStringLocalizerFactory _localizerFactory;
-
-        #endregion
-
-        #region Constructors
-        
-        /// <summary>   Constructor. </summary>
-        /// <param name="logger">           The logger. </param>
-        /// <param name="mailService">      The mail service. </param>
-        /// <param name="errorOptions">     Options for controlling the error. </param>
-        /// <param name="localizerFactory"> The localizer factory. </param>
-        public HomeController(ILogger<HomeController> logger, ITemplatingMailService mailService, ErrorOptions errorOptions, IStringLocalizerFactory localizerFactory)
-        {
-            _logger = logger;
-            _mailService = mailService;
-            _errorOptions = errorOptions;
-            _localizerFactory = localizerFactory;
-        }
 
         #endregion
 
@@ -85,7 +86,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 {
                     _logger.LogError(0, e, "Unhandled exception in error-handling api");
                 }
-
             }
 
             return View();

@@ -28,7 +28,8 @@ namespace DbLocalizationProvider.Sync.Collectors
 
             foreach(var resourceKeyAttribute in keyAttributes)
                 yield return new DiscoveredResource(mi,
-                    ResourceKeyBuilder.BuildResourceKey(typeKeyPrefixSpecified ? resourceKeyPrefix : null, resourceKeyAttribute.Key, string.Empty),
+                    ResourceKeyBuilder.BuildResourceKey(typeKeyPrefixSpecified ? resourceKeyPrefix : null,
+                        resourceKeyAttribute.Key, string.Empty),
                     DiscoveredTranslation.FromSingle(string.IsNullOrEmpty(resourceKeyAttribute.Value)
                         ? translation
                         : resourceKeyAttribute.Value),

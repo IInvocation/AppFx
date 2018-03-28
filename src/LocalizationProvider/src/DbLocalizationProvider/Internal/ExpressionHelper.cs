@@ -33,7 +33,7 @@ namespace DbLocalizationProvider.Internal
         /// <returns>The member name.</returns>
         public static string GetMemberName(Expression memberSelector)
         {
-            var memberStack = WalkExpression((LambdaExpression) memberSelector);
+            var memberStack = WalkExpression((LambdaExpression)memberSelector);
 
             return memberStack.Item2.Pop();
         }
@@ -53,7 +53,7 @@ namespace DbLocalizationProvider.Internal
         /// <returns>The full member name.</returns>
         public static string GetFullMemberName(Expression<Func<object>> memberSelector)
         {
-            return GetFullMemberName((LambdaExpression) memberSelector);
+            return GetFullMemberName((LambdaExpression)memberSelector);
         }
 
         /// <summary>Gets full member name.</summary>
@@ -68,8 +68,10 @@ namespace DbLocalizationProvider.Internal
         }
 
         /// <summary>Walk expression.</summary>
-        /// <exception cref="NotSupportedException">    Thrown when the requested operation is not
-        ///                                             supported. </exception>
+        /// <exception cref="NotSupportedException">
+        ///     Thrown when the requested operation is not
+        ///     supported.
+        /// </exception>
         /// <param name="expression">   The expression. </param>
         /// <returns>A Tuple&lt;Type,Stack&lt;string&gt;&gt;</returns>
         public static Tuple<Type, Stack<string>> WalkExpression(LambdaExpression expression)
@@ -80,19 +82,19 @@ namespace DbLocalizationProvider.Internal
             Type containerType = null;
 
             var e = expression.Body;
-            while (e != null)
+            while(e != null)
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (e.NodeType)
+                switch(e.NodeType)
                 {
                     case ExpressionType.MemberAccess:
-                        var memberExpr = (MemberExpression) e;
+                        var memberExpr = (MemberExpression)e;
 
                         // ReSharper disable once SwitchStatementMissingSomeCases
-                        switch (memberExpr.Member.MemberType)
+                        switch(memberExpr.Member.MemberType)
                         {
                             case MemberTypes.Field:
-                                var fieldInfo = (FieldInfo) memberExpr.Member;
+                                var fieldInfo = (FieldInfo)memberExpr.Member;
                                 if(fieldInfo.IsStatic)
                                 {
                                     stack.Push(fieldInfo.Name);
@@ -120,12 +122,13 @@ namespace DbLocalizationProvider.Internal
                                     containerType = fieldInfo.GetUnderlyingType();
                                     stack.Push(containerType.FullName);
                                 }
+
                                 break;
 
                             case MemberTypes.Property:
                                 stack.Push(memberExpr.Member.Name);
 
-                                var propertyInfo = (PropertyInfo) memberExpr.Member;
+                                var propertyInfo = (PropertyInfo)memberExpr.Member;
                                 if(propertyInfo.GetGetMethod().IsStatic)
                                 {
                                     // property is static -> so expression is null afterwards
@@ -136,6 +139,7 @@ namespace DbLocalizationProvider.Internal
                                         stack.Push(propertyInfo.DeclaringType.FullName);
                                     }
                                 }
+
                                 break;
                         }
 
@@ -145,7 +149,7 @@ namespace DbLocalizationProvider.Internal
                     case ExpressionType.Convert:
                     case ExpressionType.ConvertChecked:
                         // usually System.Enum comes here
-                        e = ((UnaryExpression) e).Operand;
+                        e = ((UnaryExpression)e).Operand;
 
                         if(e is ConstantExpression item)
                         {
@@ -153,6 +157,7 @@ namespace DbLocalizationProvider.Internal
                             stack.Push(item.Type.FullName);
                             containerType = item.Type;
                         }
+
                         break;
 
                     case ExpressionType.Constant:

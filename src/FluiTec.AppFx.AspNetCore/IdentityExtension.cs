@@ -1,4 +1,7 @@
-﻿using FluiTec.AppFx.AspNetCore.Configuration;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Identity.Localization;
@@ -7,14 +10,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace FluiTec.AppFx.AspNetCore
 {
     /// <summary>	An identity server extension. </summary>
-	public static class IdentityExtension
+    public static class IdentityExtension
     {
         /// <summary>	An IServiceCollection extension method that configure identity server. </summary>
         /// <param name="services">			The services to act on. </param>
@@ -33,12 +33,13 @@ namespace FluiTec.AppFx.AspNetCore
 
             // configure aspnet-identity
             services.AddIdentity<IdentityUserEntity, IdentityRoleEntity>(config =>
-            {
-                config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ öäüÖÄÜ ß 12345678";
-                config.SignIn.RequireConfirmedEmail = true;
-                config.Lockout.AllowedForNewUsers = true;
-                config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            })
+                {
+                    config.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ öäüÖÄÜ ß 12345678";
+                    config.SignIn.RequireConfirmedEmail = true;
+                    config.Lockout.AllowedForNewUsers = true;
+                    config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                })
                 .AddErrorDescriber<MultiLanguageIdentityErrorDescriber>()
                 .AddDefaultTokenProviders();
             services.AddIdentityStores();
@@ -52,8 +53,8 @@ namespace FluiTec.AppFx.AspNetCore
                     OnRedirectToLogin = context =>
                     {
                         if (context.Request.Path.StartsWithSegments(apiOptions.ApiOnlyPath) &&
-                            context.Response.StatusCode == (int)HttpStatusCode.OK)
-                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            context.Response.StatusCode == (int) HttpStatusCode.OK)
+                            context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
                         else
                             context.Response.Redirect(context.RedirectUri);
 

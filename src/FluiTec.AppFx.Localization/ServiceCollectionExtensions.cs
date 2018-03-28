@@ -4,8 +4,7 @@ using DbLocalizationProvider.Cache;
 using DbLocalizationProvider.Queries;
 using FluiTec.AppFx.Localization.Cache;
 using FluiTec.AppFx.Localization.Handlers;
-using FluiTec.AppFx.Localization.MetadataProviders;
-using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -22,14 +21,18 @@ namespace FluiTec.AppFx.Localization
         /// <param name="services"> The services to act on. </param>
         /// <param name="setup">    (Optional) The setup. </param>
         /// <returns>   An IServiceCollection. </returns>
-        public static IServiceCollection AddDbLocalizationProvider(this IServiceCollection services, Action<ConfigurationContext> setup = null)
+        public static IServiceCollection AddDbLocalizationProvider(this IServiceCollection services,
+            Action<ConfigurationContext> setup = null)
         {
             // build serviceProvider to initialize localization
             var serviceProvider = services.BuildServiceProvider();
 
-            ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler(() => new GetTranslationHandler(serviceProvider.GetService<ILocalizationDataService>()));
-            ConfigurationContext.Current.TypeFactory.ForQuery<GetAllResources.Query>().SetHandler(() => new GetAllResourcesHandler(serviceProvider.GetService<ILocalizationDataService>()));
-            ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>().SetHandler<DetermineDefaultCulture.Handler>();
+            ConfigurationContext.Current.TypeFactory.ForQuery<GetTranslation.Query>().SetHandler(() =>
+                new GetTranslationHandler(serviceProvider.GetService<ILocalizationDataService>()));
+            ConfigurationContext.Current.TypeFactory.ForQuery<GetAllResources.Query>().SetHandler(() =>
+                new GetAllResourcesHandler(serviceProvider.GetService<ILocalizationDataService>()));
+            ConfigurationContext.Current.TypeFactory.ForQuery<DetermineDefaultCulture.Query>()
+                .SetHandler<DetermineDefaultCulture.Handler>();
             ConfigurationContext.Current.TypeFactory.ForCommand<ClearCache.Command>().SetHandler<ClearCacheHandler>();
 
             // check if there's a registered cache - if not - add one
@@ -42,7 +45,7 @@ namespace FluiTec.AppFx.Localization
 
             // setup model metadata providers
             if (ConfigurationContext.Current.ModelMetadataProviders.ReplaceProviders)
-                services.Configure<Microsoft.AspNetCore.Mvc.MvcOptions>(_ =>
+                services.Configure<MvcOptions>(_ =>
                 {
                     _.ModelMetadataDetailsProviders.Add(new LocalizedDisplayMetadataProvider());
                     //_.ModelValidatorProviders.Add(new LocalizedValidationMetadataProvider());

@@ -30,7 +30,7 @@ namespace DbLocalizationProvider.Internal
             if(target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            return string.Join(separator, new[] { target }.Union(args.Where(s => !string.IsNullOrEmpty(s)).ToArray()));
+            return string.Join(separator, new[] {target}.Union(args.Where(s => !string.IsNullOrEmpty(s)).ToArray()));
         }
     }
 }

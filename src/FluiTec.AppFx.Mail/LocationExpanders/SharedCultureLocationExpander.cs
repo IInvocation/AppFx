@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Mail.LocationExpanders
         /// <returns>An enumerator that allows foreach to be used to process expand in this collection.</returns>
         public IEnumerable<string> Expand(string viewName)
         {
-            return new[] { $"Shared/{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}/{viewName}" };
+            return new[] {$"Shared/{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}/{viewName}"};
         }
     }
 }

@@ -8,7 +8,8 @@ namespace FluiTec.AppFx.Identity.Models.ManageViewModels
     public class VerifyPhoneNumberViewModel
     {
         /// <summary>Name of the full model.</summary>
-        private const string FullModelName = "FluiTec.AppFx.Identity.Models.ManageViewModels.VerifyPhoneNumberViewModel";
+        private const string FullModelName =
+            "FluiTec.AppFx.Identity.Models.ManageViewModels.VerifyPhoneNumberViewModel";
 
         /// <summary>Gets or sets the code.</summary>
         /// <value>The code.</value>

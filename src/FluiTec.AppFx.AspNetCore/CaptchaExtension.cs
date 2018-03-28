@@ -13,7 +13,8 @@ namespace FluiTec.AppFx.AspNetCore
         /// <param name="services">         The services to act on. </param>
         /// <param name="configuration">    The configuration. </param>
         /// <returns>An IServiceCollection.</returns>
-        public static IServiceCollection ConfigureCaptcha(this IServiceCollection services, IConfigurationRoot configuration)
+        public static IServiceCollection ConfigureCaptcha(this IServiceCollection services,
+            IConfigurationRoot configuration)
         {
             // parse config
             var options = configuration.GetConfiguration<CaptchaOptions>();

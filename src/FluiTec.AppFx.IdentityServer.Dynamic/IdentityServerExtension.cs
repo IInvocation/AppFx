@@ -9,16 +9,16 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary>	An identity extension. </summary>
     public static class IdentityServerExtension
     {
-	    /// <summary>	An IServiceCollection extension method that configure identity. </summary>
-	    /// <param name="services">			The services to act on. </param>
-	    /// <param name="configuration">	The configuration. </param>
-	    /// <returns>	An IServiceCollection. </returns>
-	    public static IServiceCollection ConfigureIdentityServerDataService(this IServiceCollection services,
-		    IConfigurationRoot configuration)
-	    {
-			var provider = new IdentityServerDataProvider(configuration.GetConfiguration<IdentityServerOptions>());
-		    services.AddScoped(p => provider.GetDataService(configuration));
-		    return services;
-	    }
+        /// <summary>	An IServiceCollection extension method that configure identity. </summary>
+        /// <param name="services">			The services to act on. </param>
+        /// <param name="configuration">	The configuration. </param>
+        /// <returns>	An IServiceCollection. </returns>
+        public static IServiceCollection ConfigureIdentityServerDataService(this IServiceCollection services,
+            IConfigurationRoot configuration)
+        {
+            var provider = new IdentityServerDataProvider(configuration.GetConfiguration<IdentityServerOptions>());
+            services.AddScoped(p => provider.GetDataService(configuration));
+            return services;
+        }
     }
 }

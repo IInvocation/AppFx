@@ -6,23 +6,23 @@ namespace FluiTec.AppFx.Authorization.Activity
     public static class Activities
     {
         /// <summary>The access requirement.</summary>
-        public static OperationAuthorizationRequirement Access = 
-            new OperationAuthorizationRequirement { Name = nameof(Access) };
+        public static OperationAuthorizationRequirement Access =
+            new OperationAuthorizationRequirement {Name = nameof(Access)};
 
         /// <summary>The create requirement.</summary>
-        public static OperationAuthorizationRequirement Create = 
-            new OperationAuthorizationRequirement { Name = nameof(Create) };
+        public static OperationAuthorizationRequirement Create =
+            new OperationAuthorizationRequirement {Name = nameof(Create)};
 
         /// <summary>The read requirement.</summary>
-        public static OperationAuthorizationRequirement Read = 
-            new OperationAuthorizationRequirement { Name = nameof(Read) };
+        public static OperationAuthorizationRequirement Read =
+            new OperationAuthorizationRequirement {Name = nameof(Read)};
 
         /// <summary>The update requirement.</summary>
-        public static OperationAuthorizationRequirement Update = 
-            new OperationAuthorizationRequirement { Name = nameof(Update) };
+        public static OperationAuthorizationRequirement Update =
+            new OperationAuthorizationRequirement {Name = nameof(Update)};
 
         /// <summary>The delete requirement.</summary>
-        public static OperationAuthorizationRequirement Delete = 
-            new OperationAuthorizationRequirement { Name = nameof(Delete) };
+        public static OperationAuthorizationRequirement Delete =
+            new OperationAuthorizationRequirement {Name = nameof(Delete)};
     }
 }

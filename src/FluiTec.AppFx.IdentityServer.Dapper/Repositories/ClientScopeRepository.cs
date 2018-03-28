@@ -7,26 +7,26 @@ using FluiTec.AppFx.IdentityServer.Repositories;
 
 namespace FluiTec.AppFx.IdentityServer.Dapper.Repositories
 {
-	/// <summary>	A client scope repository. </summary>
-	public abstract class ClientScopeRepository : DapperRepository<ClientScopeEntity, int>, IClientScopeRepository
-	{
-		/// <summary>	Specialised constructor for use only by derived class. </summary>
-		/// <param name="unitOfWork">	The unit of work. </param>
-		protected ClientScopeRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-		{
-		}
+    /// <summary>	A client scope repository. </summary>
+    public abstract class ClientScopeRepository : DapperRepository<ClientScopeEntity, int>, IClientScopeRepository
+    {
+        /// <summary>	Specialised constructor for use only by derived class. </summary>
+        /// <param name="unitOfWork">	The unit of work. </param>
+        protected ClientScopeRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
-		/// <summary>	Gets the client identifiers in this collection. </summary>
-		/// <param name="id">	The identifier. </param>
-		/// <returns>
-		///     An enumerator that allows foreach to be used to process the client identifiers in this
-		///     collection.
-		/// </returns>
-		public virtual IEnumerable<ClientScopeEntity> GetByClientId(int id)
-		{
-			var command = SqlBuilder.SelectByFilter(EntityType, nameof(ClientScopeEntity.ClientId));
-			return UnitOfWork.Connection.Query<ClientScopeEntity>(command, new { ClientId = id },
-				UnitOfWork.Transaction);
-		}
-	}
+        /// <summary>	Gets the client identifiers in this collection. </summary>
+        /// <param name="id">	The identifier. </param>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process the client identifiers in this
+        ///     collection.
+        /// </returns>
+        public virtual IEnumerable<ClientScopeEntity> GetByClientId(int id)
+        {
+            var command = SqlBuilder.SelectByFilter(EntityType, nameof(ClientScopeEntity.ClientId));
+            return UnitOfWork.Connection.Query<ClientScopeEntity>(command, new {ClientId = id},
+                UnitOfWork.Transaction);
+        }
+    }
 }

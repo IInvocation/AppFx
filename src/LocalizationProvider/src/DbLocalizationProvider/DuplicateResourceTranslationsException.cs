@@ -24,16 +24,27 @@ using System.Runtime.Serialization;
 namespace DbLocalizationProvider
 {
     /// <summary>
-    /// If synchronizer detects duplicate translations for the same resource key and the same culture - this exception will be thrown.
+    ///     If synchronizer detects duplicate translations for the same resource key and the same culture - this exception will
+    ///     be thrown.
     /// </summary>
     public class DuplicateResourceTranslationsException : Exception
     {
-        public DuplicateResourceTranslationsException() { }
+        public DuplicateResourceTranslationsException()
+        {
+        }
 
-        public DuplicateResourceTranslationsException(string message) : base(message) { }
+        public DuplicateResourceTranslationsException(string message) : base(message)
+        {
+        }
 
-        public DuplicateResourceTranslationsException(string message, Exception innerException) : base(message, innerException) { }
+        public DuplicateResourceTranslationsException(string message, Exception innerException) : base(message,
+            innerException)
+        {
+        }
 
-        protected DuplicateResourceTranslationsException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected DuplicateResourceTranslationsException(SerializationInfo info, StreamingContext context) : base(info,
+            context)
+        {
+        }
     }
 }

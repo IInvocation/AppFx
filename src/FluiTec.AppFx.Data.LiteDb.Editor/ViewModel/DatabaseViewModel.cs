@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using GalaSoft.MvvmLight;
-using LiteDB;
 using System.IO;
 using System.Linq;
+using GalaSoft.MvvmLight;
+using LiteDB;
 
 namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
 {
@@ -12,7 +12,11 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
     public class DatabaseViewModel : ViewModelBase, IDisposable
     {
         private readonly LiteDatabase _db;
+
+        private string _activeCollection;
         private List<BsonDocument> _bson;
+
+        private DataTable _data;
 
         public DatabaseViewModel() : this(null)
         {
@@ -28,9 +32,7 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
 
         /// <summary>   Gets a list of names of the collections. </summary>
         /// <value> A list of names of the collections. </value>
-        public IEnumerable<string> CollectionNames { get;}
-
-        private string _activeCollection;
+        public IEnumerable<string> CollectionNames { get; }
 
         /// <summary>   Gets or sets the active collection. </summary>
         /// <value> A collection of actives. </value>
@@ -49,20 +51,17 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
 
                     var table = new DataTable(_activeCollection);
                     for (var i = 0; i < tableKeys.Count; i++)
-                    {
                         table.Columns.Add(tableKeys.ElementAt(i).Key, tableKeys.ElementAt(i).Value);
-                    }
 
                     foreach (var entry in _bson)
                     {
                         var netValues = new object[tableKeys.Count];
-                        
+
                         for (var i = 0; i < tableKeys.Count; i++)
-                        {
                             netValues[i] = GetValue(entry[tableKeys.ElementAt(i).Key]);
-                        }
                         table.Rows.Add(netValues);
                     }
+
                     Data = table;
                     Data.RowChanged += Data_RowChanged;
                     Data.RowDeleting += Data_RowDeleted;
@@ -74,24 +73,33 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                         Data.RowChanged -= Data_RowChanged;
                         Data.RowDeleted -= Data_RowDeleted;
                     }
+
                     Data = null;
                 }
             }
+        }
+
+        /// <summary>   Gets or sets the data. </summary>
+        /// <value> The data. </value>
+        public DataTable Data
+        {
+            get => _data;
+            private set => Set(ref _data, value);
+        }
+
+        public void Dispose()
+        {
+            _db?.Dispose();
+            _data?.Dispose();
         }
 
         private Dictionary<string, Type> GetKeys(List<BsonDocument> data)
         {
             var dictionary = new Dictionary<string, Type>();
             foreach (var entity in data)
-            {
-                foreach (var key in entity.Keys)
-                {
-                    if (!dictionary.ContainsKey(key))
-                    {
-                        dictionary.Add(key, GetType(entity[key].Type));
-                    }
-                }
-            }
+            foreach (var key in entity.Keys)
+                if (!dictionary.ContainsKey(key))
+                    dictionary.Add(key, GetType(entity[key].Type));
             return dictionary;
         }
 
@@ -109,7 +117,8 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                 case DataRowAction.Add:
                 {
                     var collection = _db.GetCollection(ActiveCollection);
-                    var entry = collection.FindAll().First().Keys.ToDictionary(key => key, key => new BsonValue(e.Row[key]));
+                    var entry = collection.FindAll().First().Keys
+                        .ToDictionary(key => key, key => new BsonValue(e.Row[key]));
                     collection.Insert(new BsonDocument(entry));
                     break;
                 }
@@ -119,12 +128,8 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                     var collection = _db.GetCollection(ActiveCollection);
                     var entry = collection.FindById(new BsonValue(key));
                     foreach (var eKey in entry.Keys)
-                    {
                         if (eKey != "_id")
-                        {
                             entry.Set(eKey, new BsonValue(e.Row[eKey]));
-                        }
-                    }
                     collection.Update(entry);
                     break;
                 }
@@ -136,16 +141,6 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
                     break;
                 }
             }
-        }
-
-        private DataTable _data;
-
-        /// <summary>   Gets or sets the data. </summary>
-        /// <value> The data. </value>
-        public DataTable Data
-        {
-            get => _data;
-            private set => Set(ref _data, value);
         }
 
         private static Type GetType(BsonType type)
@@ -207,12 +202,6 @@ namespace FluiTec.AppFx.Data.LiteDb.Editor.ViewModel
         public void Close()
         {
             _db?.Dispose();
-        }
-
-        public void Dispose()
-        {
-            _db?.Dispose();
-            _data?.Dispose();
         }
     }
 }

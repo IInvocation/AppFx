@@ -49,7 +49,11 @@ namespace FluiTec.AppFx.Localization.Exporter
         /// <returns>An IExportSourceReader.</returns>
         private static IExportSourceReader UseMssql(string connectionString)
         {
-            var dataService = new MssqlDapperLocalizationDataService(new MssqlDapperServiceOptions {ConnectionString = connectionString });
+            var dataService =
+                new MssqlDapperLocalizationDataService(new MssqlDapperServiceOptions
+                {
+                    ConnectionString = connectionString
+                });
             return new RepositoryExportSourceReader(dataService);
         }
 
@@ -58,7 +62,11 @@ namespace FluiTec.AppFx.Localization.Exporter
         /// <returns>An IExportSourceReader.</returns>
         private static IExportSourceReader UsePgsql(string connectionString)
         {
-            var dataService = new PgsqlDapperLocalizationDataService(new PgsqlDapperServiceOptions { ConnectionString = connectionString });
+            var dataService =
+                new PgsqlDapperLocalizationDataService(new PgsqlDapperServiceOptions
+                {
+                    ConnectionString = connectionString
+                });
             return new RepositoryExportSourceReader(dataService);
         }
 
@@ -67,7 +75,11 @@ namespace FluiTec.AppFx.Localization.Exporter
         /// <returns>An IExportSourceReader.</returns>
         private static IExportSourceReader UseMysql(string connectionString)
         {
-            var dataService = new MysqlDapperLocalizationDataService(new MysqlDapperServiceOptions { ConnectionString = connectionString });
+            var dataService =
+                new MysqlDapperLocalizationDataService(new MysqlDapperServiceOptions
+                {
+                    ConnectionString = connectionString
+                });
             return new RepositoryExportSourceReader(dataService);
         }
     }

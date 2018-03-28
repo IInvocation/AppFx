@@ -1,6 +1,6 @@
 ﻿namespace FluiTec.AppFx.Data.Test.Fixtures
 {
-	[EntityName("TestEntity")]
+    [EntityName("TestEntity")]
     public class AttributedDummyEntity
     {
     }

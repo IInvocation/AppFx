@@ -12,7 +12,8 @@ namespace FluiTec.AppFx.AspNetCore
         /// <param name="services">         The services to act on. </param>
         /// <param name="configuration">    The configuration. </param>
         /// <returns>An IServiceCollection.</returns>
-        public static IServiceCollection ConfigureApplication(this IServiceCollection services, IConfigurationRoot configuration)
+        public static IServiceCollection ConfigureApplication(this IServiceCollection services,
+            IConfigurationRoot configuration)
         {
             services.AddSingleton(configuration.GetConfiguration<ApplicationOptions>());
             return services;

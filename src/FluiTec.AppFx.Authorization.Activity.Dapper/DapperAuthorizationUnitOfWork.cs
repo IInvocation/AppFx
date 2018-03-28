@@ -30,11 +30,13 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper
 
         /// <summary>Gets the activity repository.</summary>
         /// <value>The activity repository.</value>
-        public IActivityRepository ActivityRepository => _activityRepository ?? (_activityRepository = GetRepository<IActivityRepository>());
+        public IActivityRepository ActivityRepository =>
+            _activityRepository ?? (_activityRepository = GetRepository<IActivityRepository>());
 
         /// <summary>Gets or sets the activity role repository.</summary>
         /// <value>The activity role repository.</value>
-        public IActivityRoleRepository ActivityRoleRepository => _activityRoleRepository ?? (_activityRoleRepository = GetRepository<IActivityRoleRepository>());
+        public IActivityRoleRepository ActivityRoleRepository =>
+            _activityRoleRepository ?? (_activityRoleRepository = GetRepository<IActivityRoleRepository>());
 
         #endregion
     }

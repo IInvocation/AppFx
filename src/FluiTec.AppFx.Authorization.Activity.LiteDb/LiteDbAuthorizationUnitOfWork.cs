@@ -27,12 +27,13 @@ namespace FluiTec.AppFx.Authorization.Activity.LiteDb
         /// <summary>Gets or sets the client repository.</summary>
         /// <value>The client repository.</value>
         public IActivityRepository ActivityRepository => _activityRepository ??
-                                                     (_activityRepository = GetRepository<IActivityRepository>());
+                                                         (_activityRepository = GetRepository<IActivityRepository>());
 
         /// <summary>Gets or sets the activity role repository.</summary>
         /// <value>The activity role repository.</value>
         public IActivityRoleRepository ActivityRoleRepository => _activityRoleRepository ??
-                                                                 (_activityRoleRepository = GetRepository<IActivityRoleRepository>());
+                                                                 (_activityRoleRepository =
+                                                                     GetRepository<IActivityRoleRepository>());
 
         #endregion
     }

@@ -26,9 +26,10 @@ using DbLocalizationProvider.Internal;
 namespace DbLocalizationProvider
 {
     /// <summary>
-    /// Use this class if you would like to include "foreign" types in scanning and resource discovery process.
-    /// Foreign resources here means types that are not decorated with either <see cref="LocalizedResourceAttribute"/> or <see cref="LocalizedModelAttribute"/> attributes.
-    /// Foreign resources usually are located in assemblies to which you don't have access to the source code.
+    ///     Use this class if you would like to include "foreign" types in scanning and resource discovery process.
+    ///     Foreign resources here means types that are not decorated with either <see cref="LocalizedResourceAttribute" /> or
+    ///     <see cref="LocalizedModelAttribute" /> attributes.
+    ///     Foreign resources usually are located in assemblies to which you don't have access to the source code.
     /// </summary>
     public class ForeignResourceDescriptor
     {
@@ -38,20 +39,22 @@ namespace DbLocalizationProvider
         }
 
         /// <summary>
-        /// Target type that contains resources (properties or fields).
+        ///     Target type that contains resources (properties or fields).
         /// </summary>
         public Type ResourceType { get; }
     }
 
     public static class CollectionOfForeignResourceDescriptorExtensions
     {
-        public static ICollection<ForeignResourceDescriptor> Add(this ICollection<ForeignResourceDescriptor> collection, Type target)
+        public static ICollection<ForeignResourceDescriptor> Add(this ICollection<ForeignResourceDescriptor> collection,
+            Type target)
         {
             collection.Add(new ForeignResourceDescriptor(target));
             return collection;
         }
 
-        public static ICollection<ForeignResourceDescriptor> Add<T>(this ICollection<ForeignResourceDescriptor> collection)
+        public static ICollection<ForeignResourceDescriptor> Add<T>(
+            this ICollection<ForeignResourceDescriptor> collection)
         {
             collection.Add(new ForeignResourceDescriptor(typeof(T)));
             return collection;

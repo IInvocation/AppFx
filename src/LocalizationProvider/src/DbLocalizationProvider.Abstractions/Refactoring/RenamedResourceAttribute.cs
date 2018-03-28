@@ -27,11 +27,15 @@ namespace DbLocalizationProvider.Abstractions.Refactoring
     public class RenamedResourceAttribute : Attribute
     {
         /// <summary>   Default constructor. </summary>
-        public RenamedResourceAttribute() { }
+        public RenamedResourceAttribute()
+        {
+        }
 
         /// <summary>   Constructor. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when one or more arguments have unsupported or
+        ///     illegal values.
+        /// </exception>
         /// <param name="oldName">      The name of the old. </param>
         /// <param name="oldNamespace"> The old namespace. </param>
         public RenamedResourceAttribute(string oldName, string oldNamespace)
@@ -45,7 +49,9 @@ namespace DbLocalizationProvider.Abstractions.Refactoring
 
         /// <summary>   Constructor. </summary>
         /// <param name="oldName">  The name of the old. </param>
-        public RenamedResourceAttribute(string oldName) : this(oldName, null) { }
+        public RenamedResourceAttribute(string oldName) : this(oldName, null)
+        {
+        }
 
         /// <summary>   Gets or sets the name of the old. </summary>
         /// <value> The name of the old. </value>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DbLocalizationProvider;
 using DbLocalizationProvider.Abstractions;
-using DbLocalizationProvider.Internal;
 using DbLocalizationProvider.Queries;
 
 namespace FluiTec.AppFx.Localization.Handlers
@@ -33,7 +32,7 @@ namespace FluiTec.AppFx.Localization.Handlers
             using (var uow = _dataService.StartUnitOfWork())
             {
                 var compound = uow.TranslationRepository.GetAllCompound();
-                
+
                 // ReSharper disable once IteratorMethodResultIsIgnored
                 foreach (var entity in compound)
                 {
@@ -48,7 +47,7 @@ namespace FluiTec.AppFx.Localization.Handlers
                     };
                     resource.Translations = new List<LocalizationResourceTranslation>(entity.Translations.Select(t =>
                         new LocalizationResourceTranslation
-                        { 
+                        {
                             Id = t.Id,
                             Language = t.Language,
                             LocalizationResource = resource,

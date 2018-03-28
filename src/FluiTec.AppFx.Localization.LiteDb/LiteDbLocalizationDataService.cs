@@ -9,24 +9,40 @@ namespace FluiTec.AppFx.Localization.LiteDb
     /// <summary>A lite database localization data service.</summary>
     public class LiteDbLocalizationDataService : LiteDbDataService, ILocalizationDataService
     {
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the name.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
+        public override string Name => "LiteDbLocalizationDataService";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="useSingletonConnection">   True to use singleton connection. </param>
         /// <param name="dbFilePath">               Full pathname of the database file. </param>
         /// <param name="applicationFolder">        (Optional) Pathname of the application folder. </param>
-        public LiteDbLocalizationDataService(bool useSingletonConnection, string dbFilePath, string applicationFolder = null)
-            : this(new LiteDbServiceOptions { UseSingletonConnection = useSingletonConnection, ApplicationFolder = applicationFolder, DbFileName = dbFilePath })
+        public LiteDbLocalizationDataService(bool useSingletonConnection, string dbFilePath,
+            string applicationFolder = null)
+            : this(new LiteDbServiceOptions
+            {
+                UseSingletonConnection = useSingletonConnection,
+                ApplicationFolder = applicationFolder,
+                DbFileName = dbFilePath
+            })
         {
         }
 
         /// <summary>
-        /// Constructor.
+        ///     Constructor.
         /// </summary>
-        ///
         /// <param name="options">  Options for controlling the operation. </param>
         public LiteDbLocalizationDataService(ILiteDbServiceOptions options) : base(options)
         {
@@ -36,27 +52,13 @@ namespace FluiTec.AppFx.Localization.LiteDb
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        ///
-        /// <value>
-        /// The name.
-        /// </value>
-        public override string Name => "LiteDbLocalizationDataService";
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Starts unit of work.
+        ///     Starts unit of work.
         /// </summary>
-        ///
         /// <returns>
-        /// An IIdentityUnitOfWork.
+        ///     An IIdentityUnitOfWork.
         /// </returns>
         public ILocalizationUnitOfWork StartUnitOfWork()
         {
@@ -64,11 +66,10 @@ namespace FluiTec.AppFx.Localization.LiteDb
         }
 
         /// <summary>
-        /// Begins unit of work.
+        ///     Begins unit of work.
         /// </summary>
-        ///
         /// <returns>
-        /// An IUnitOfWork.
+        ///     An IUnitOfWork.
         /// </returns>
         public override IUnitOfWork BeginUnitOfWork()
         {
@@ -76,12 +77,14 @@ namespace FluiTec.AppFx.Localization.LiteDb
         }
 
         /// <summary>
-        /// Registers the repository providers.
+        ///     Registers the repository providers.
         /// </summary>
         protected virtual void RegisterRepositoryProviders()
         {
-            RegisterRepositoryProvider(new Func<IUnitOfWork, IResourceRepository>(work => new LiteDbResourceRepository(work)));
-            RegisterRepositoryProvider(new Func<IUnitOfWork, ITranslationRepository>(work => new LiteDbTranslationRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IResourceRepository>(work => new LiteDbResourceRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, ITranslationRepository>(work => new LiteDbTranslationRepository(work)));
         }
 
         #endregion

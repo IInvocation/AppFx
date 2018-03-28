@@ -18,12 +18,14 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Repositories
 
         /// <summary>Enumerates by activity in this collection.</summary>
         /// <param name="entity">   The entity. </param>
-        /// <returns>An enumerator that allows foreach to be used to process by activity in this
-        /// collection.</returns>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process by activity in this
+        ///     collection.
+        /// </returns>
         public IEnumerable<ActivityRoleEntity> ByActivity(ActivityEntity entity)
         {
             var command = $"SELECT * FROM {TableName} WHERE {nameof(ActivityRoleEntity.ActivityId)} = @ActivityId";
-            return UnitOfWork.Connection.Query<ActivityRoleEntity>(command, new { ActivityId = entity.Id },
+            return UnitOfWork.Connection.Query<ActivityRoleEntity>(command, new {ActivityId = entity.Id},
                 UnitOfWork.Transaction);
         }
     }

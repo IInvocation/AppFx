@@ -2,14 +2,14 @@
 
 namespace FluiTec.AppFx.Cryptography.Test
 {
-	[TestClass]
+    [TestClass]
     public class IdGeneratorTest
     {
-		[TestMethod]
-	    public void Test_Generate_Default()
-		{
-			// ciphers + separators
-			Assert.AreEqual(64 + 3, IdGenerator.GetIdString().Length);
-		}
+        [TestMethod]
+        public void Test_Generate_Default()
+        {
+            // ciphers + separators
+            Assert.AreEqual(64 + 3, IdGenerator.GetIdString().Length);
+        }
     }
 }
