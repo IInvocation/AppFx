@@ -5,7 +5,7 @@ using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the user confirm mail. </summary>
     public class UserConfirmMailModel : MailModel

@@ -7,7 +7,7 @@ using RazorLight.Razor;
 namespace FluiTec.AppFx.Mail.RazorLightProjects
 {
     /// <summary>A culture aware razor light project.</summary>
-    public class CultureAwareRazorLightProject : FileSystemRazorProject
+    public class CultureAwareRazorProject : FileSystemRazorProject
     {
         /// <summary>Options for controlling the operation.</summary>
         private readonly MailServiceOptions _options;
@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
         /// <param name="options">              Options for controlling the operation. </param>
         /// <param name="root">                 The root. </param>
         /// <param name="templateKeyExpander">  The template key expander. </param>
-        public CultureAwareRazorLightProject(MailServiceOptions options, string root, Func<CultureInfo, string, string> templateKeyExpander) : base(root)
+        public CultureAwareRazorProject(MailServiceOptions options, string root, Func<CultureInfo, string, string> templateKeyExpander) : base(root)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _root = root;

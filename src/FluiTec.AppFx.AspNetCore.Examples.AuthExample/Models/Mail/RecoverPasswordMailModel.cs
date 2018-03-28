@@ -2,9 +2,10 @@
 using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the recover password mail. </summary>
     public class RecoverPasswordMailModel : MailModel

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Localization;
 
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the admin confirm mail. </summary>
     public class AdminConfirmMailModel : MailModel

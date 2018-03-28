@@ -1,4 +1,4 @@
-﻿namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
+﻿namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A mail globals. </summary>
     public static class MailGlobals

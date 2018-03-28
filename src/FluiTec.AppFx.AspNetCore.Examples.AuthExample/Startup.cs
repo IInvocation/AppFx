@@ -60,7 +60,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
             services.ConfigureCaptcha(Configuration);
-            services.ConfigureMailServiceLocalized(Configuration, Environment, (info, s) => $"{info.TwoLetterISOLanguageName}/{s}");
+            services.ConfigureMailServiceTemplated(Environment, Configuration);
             services.ConfigureStatusCodeHandler(Configuration);
             services.ConfigureStaticFiles(Configuration);
         }
@@ -73,8 +73,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory,
             IApplicationLifetime appLifetime, IServiceProvider serviceProvider)
         {
+            // disable ApplicationInsights
             app.ApplicationServices.GetService<TelemetryConfiguration>().DisableTelemetry = true;
 
+            // run the application
             app.UseLogging(Environment, appLifetime, Configuration, loggerFactory);
             app.UseErrorHandling(Environment);
             app.UseDevelopmentExtension(Environment);

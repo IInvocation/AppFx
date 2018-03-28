@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
-using FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.Controllers;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;

@@ -2,6 +2,7 @@
 using System.Globalization;
 using FluiTec.AppFx.Mail;
 using FluiTec.AppFx.Mail.Configuration;
+using FluiTec.AppFx.Mail.LocationExpanders;
 using FluiTec.AppFx.Mail.RazorLightProjects;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Hosting;
@@ -95,11 +96,60 @@ namespace FluiTec.AppFx.AspNetCore
         {
             var absoluteRoot = System.IO.Path.Combine(environment.ContentRootPath, root);
 
-            var project = new CultureAwareRazorLightProject(options, absoluteRoot, templateKeyExpander);
+            var project = new CultureAwareRazorProject(options, absoluteRoot, templateKeyExpander);
             var engine = new RazorLightEngineBuilder()
                 .UseProject(project)
                 .UseCachingProvider(new MemoryCachingProvider())
                 .Build();
+            services.AddSingleton<IRazorLightEngine>(engine);
+        }
+
+        /// <summary>An IServiceCollection extension method that configure mail service templated.</summary>
+        /// <param name="services">         The services. </param>
+        /// <param name="environment">      The environment. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <param name="configure">        (Optional) The configure. </param>
+        /// <returns>An IServiceCollection.</returns>
+        public static IServiceCollection ConfigureMailServiceTemplated(this IServiceCollection services, IHostingEnvironment environment, IConfigurationRoot configuration, Action<MailServiceOptions> configure = null)
+        {
+            // parse options
+            _options = configuration.GetConfiguration<MailServiceOptions>();
+
+            // let user apply changes
+            configure?.Invoke(_options);
+
+            // register
+            services.AddSingleton(_options);
+            services.AddRazorLightTemplating(environment, _options, _options.TemplateRoot);
+            services.AddScoped<ITemplatingMailService, MailKitRazorLightTemplatingMailService>();
+
+            return services;
+        }
+
+        /// <summary>An IServiceCollection extension method that adds a razor light templating.</summary>
+        /// <param name="services">     The services. </param>
+        /// <param name="environment">  The environment. </param>
+        /// <param name="options">      Options for controlling the operation. </param>
+        /// <param name="root">         The root. </param>
+        private static void AddRazorLightTemplating(this IServiceCollection services, IHostingEnvironment environment,
+            MailServiceOptions options, string root)
+        {
+            var absoluteRoot = System.IO.Path.Combine(environment.ContentRootPath, root);
+
+            var expanders = new ILocationExpander[]
+            {
+                new DefaultCultureLocationExpander(),
+                new SharedCultureLocationExpander(),
+                new SharedLocationExpander(),
+                new DefaultLocationExpander()
+            };
+
+            var project = new LocationExpandingRazorProject(options, absoluteRoot, expanders);
+            var engine = new RazorLightEngineBuilder()
+                .UseProject(project)
+                .UseCachingProvider(new MemoryCachingProvider())
+                .Build();
+
             services.AddSingleton<IRazorLightEngine>(engine);
         }
     }

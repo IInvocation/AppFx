@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
-using FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.Mail;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;

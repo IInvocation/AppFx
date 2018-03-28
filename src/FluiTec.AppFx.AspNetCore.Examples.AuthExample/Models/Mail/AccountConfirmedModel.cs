@@ -1,10 +1,11 @@
 ﻿using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
+using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
-using FluiTec.AppFx.Localization;
+
 // ReSharper disable VirtualMemberCallInConstructor
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.MailModels
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the account confirmed. </summary>
     public class AccountConfirmedModel : MailModel
