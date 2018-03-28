@@ -22,7 +22,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 
             Subject = localizer.GetString(() => ErrorModelResource.Subject);
             Header = localizer.GetString(() => ErrorModelResource.Header);
-            ExceptionPreText = localizer.GetString(() => ErrorModelResource.ExceptionPreText);
 
             ExceptionText = exception?.ToString();
         }

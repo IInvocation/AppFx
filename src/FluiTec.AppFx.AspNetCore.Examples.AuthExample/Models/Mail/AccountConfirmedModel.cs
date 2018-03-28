@@ -23,9 +23,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 
             Subject = localizer.GetString(() => AccountConfirmedResource.Subject);
             Header = localizer.GetString(() => AccountConfirmedResource.Header);
-
-            ConfirmationText = localizer.GetString(() => AccountConfirmedResource.ConfirmedText);
-            LoginText = localizer.GetString(() => AccountConfirmedResource.LoginText, loginLink, MailGlobals.ApplicationName);
         }
 
         /// <summary>   Gets or sets the confirmation text. </summary>

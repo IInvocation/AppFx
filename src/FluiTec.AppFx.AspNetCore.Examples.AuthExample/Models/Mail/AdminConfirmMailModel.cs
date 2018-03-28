@@ -24,10 +24,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 
             Subject = localizer.GetString(() => AdminConfirmMailResource.Subject);
             Header = localizer.GetString(() => AdminConfirmMailResource.Header);
-            PleaseConfirmText = localizer.GetString(() => AdminConfirmMailResource.PleaeConfirmText);
             ConfirmLinkText = localizer.GetString(() => AdminConfirmMailResource.ConfirmLinkText);
-            ConfirmEmailReasonText = localizer.GetString(() => AdminConfirmMailResource.ConfirmEmailReasonText, MailGlobals.ApplicationUrl, MailGlobals.ApplicationUrlDisplay);
-            ThankYouText = localizer.GetString(() => AdminConfirmMailResource.ThankYouText, MailGlobals.ApplicationUrl, MailGlobals.ApplicationUrlDisplay);
         }
 
         /// <summary>	Gets or sets URL of the validation. </summary>

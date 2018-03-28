@@ -1,24 +1,7 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.ErrorModel
+﻿@using RazorLight
+@inherits TemplatePage<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.ErrorModel>
 <html>
-<head>
-    <title>@Model.ApplicationName - @Model.Subject</title>
-    <style media="screen" type="text/css">
-        body {
-            margin: 20px;
-            padding: 0;
-            background-color: #FFFFFF;
-        }
-
-        a:link, a:visited {
-            color: #e0555a;
-            text-decoration: none;
-        }
-
-        a:hover, a:active {
-            color: #000000;
-        }
-    </style>
-</head>
+@{ await IncludeAsync("/Shared/_Style.cshtml", Model); }
 <body>
     <p></p>
     <table width="700" align="center" cellspacing="0" cellpadding="15" style="border: 1px #808080 solid; background: #fff;">
@@ -31,14 +14,14 @@
             <td style="border-bottom: 5px #646464 solid; border-top: 5px #646464 solid; padding: 10px; background-color: #646464">
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #FFFFFF" align="center">@Model.Header</p>
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #FFFFFF" align="center">
-                    <i>@Model.Subject</i>
+                    <i>Unbehandelter Fehler</i>
                 </p>
             </td>
         </tr>
         <tr>
             <td>
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #435058;">
-                    @Raw(Model.ExceptionPreText) - @Raw(Model.ErrorRoute)
+                    Ein unbehandelter Fehler ist aufgetreten unter: @Raw(Model.ErrorRoute).
                 </p>
             </td>
         </tr>

@@ -21,10 +21,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 
             Subject = localizer.GetString(() => RecoverPasswordResource.Subject);
             Header = localizer.GetString(() => RecoverPasswordResource.Header);
-            PleaseConfirmText = localizer.GetString(() => RecoverPasswordResource.PleaeConfirmText);
             ConfirmLinkText = localizer.GetString(() => RecoverPasswordResource.ConfirmLinkText);
-            ConfirmEmailReasonText = localizer.GetString(() => RecoverPasswordResource.ConfirmEmailReasonText);
-            ThankYouText = localizer.GetString(() => RecoverPasswordResource.ThankYouText, MailGlobals.ApplicationUrl, MailGlobals.ApplicationUrlDisplay);
         }
 
         /// <summary>	Gets or sets URL of the validation. </summary>

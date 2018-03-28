@@ -1,5 +1,5 @@
 ﻿@using RazorLight
-@inherits TemplatePage<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.AdminConfirmMailModel>
+@inherits TemplatePage<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.AccountConfirmedModel>
 <html>
 @{ await IncludeAsync("/Shared/_Style.cshtml", Model); }
 <body>
@@ -14,38 +14,22 @@
             <td style="border-bottom: 5px #646464 solid; border-top: 5px #646464 solid; padding: 10px; background-color: #646464">
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #FFFFFF" align="center">@Model.Header</p>
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #FFFFFF" align="center">
-                    <i>Bitte bestätigen Sie diesen Account</i>
+                    <i>Your account was confirmed</i>
                 </p>
             </td>
         </tr>
         <tr>
             <td>
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #435058;">
-                    Hallo,<br />
-                    soeben wurde ein neuer Account auf @Model.ApplicationName erstellt - der Benutzer bittet um Freischaltung.<br />
-                    Die Freischaltung kann jederzeit unter folgendem Link getätigt werden: <a href="@Model.ValidationUrl">@Model.ConfirmLinkText</a>.
+                    Hi,<br />
+                    your account on @Model.ApplicationName was just confirmed and can now be used.
                 </p>
             </td>
         </tr>
         <tr>
             <td>
                 <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #435058;">
-                    Die E-Mail-Adresse, die bestätigt werden soll lautet: <a href="mailto:@Model.Email">@Model.Email</a>.
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #435058;">
-                    Sie erhalten diese Nachricht, da Sie als Administrator für @Model.ApplicationName eingetragen wurden und soeben ein Nutzer einen Account angelegt hat.<br />
-                    Bei einer Freischaltung wird der Benutzer automatisch über die Freischaltung benachrichtigt.
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #435058;">
-                    Vielen Dank im Voraus. Ihr Team von @Model.ApplicationName.
+                    You can now login to your account and use connected services.
                 </p>
             </td>
         </tr>
