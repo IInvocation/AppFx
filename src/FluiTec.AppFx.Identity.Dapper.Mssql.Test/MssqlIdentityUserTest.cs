@@ -51,11 +51,5 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql.Test
         {
             base.CanAddAndFindByNormalizedEmail();
         }
-
-        [TestMethod]
-        public override void CanCount()
-        {
-            base.CanCount();
-        }
     }
 }

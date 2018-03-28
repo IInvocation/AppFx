@@ -93,6 +93,13 @@ namespace FluiTec.AppFx.Data.LiteDb
             return Collection.FindAll();
         }
 
+        /// <summary>Gets the count.</summary>
+        /// <returns>An int.</returns>
+        public int Count()
+        {
+            return Collection.Count();
+        }
+
         #endregion
     }
 }

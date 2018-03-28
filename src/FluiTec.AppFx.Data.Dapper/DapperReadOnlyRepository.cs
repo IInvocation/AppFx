@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dapper;
 using FluiTec.AppFx.Data.Sql;
 
 namespace FluiTec.AppFx.Data.Dapper
@@ -76,6 +77,14 @@ namespace FluiTec.AppFx.Data.Dapper
         public virtual IEnumerable<TEntity> GetAll()
         {
             return UnitOfWork.Connection.GetAll<TEntity>(UnitOfWork.Transaction);
+        }
+
+        /// <summary>Gets the count.</summary>
+        /// <returns>An int.</returns>
+        public int Count()
+        {
+            var command = $"SELECT COUNT({SqlBuilder.Adapter.RenderPropertyName(nameof(IEntity<int>.Id))}) FROM {TableName}";
+            return UnitOfWork.Connection.ExecuteScalar<int>(command, null, UnitOfWork.Transaction);
         }
 
         #endregion

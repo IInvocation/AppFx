@@ -18,6 +18,11 @@ namespace FluiTec.AppFx.Data.Test
             throw new NotImplementedException();
         }
 
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+
         public DummyEntity Add(DummyEntity entity)
         {
             throw new NotImplementedException();

@@ -22,5 +22,9 @@ namespace FluiTec.AppFx.Data
         ///     An enumerator that allows foreach to be used to process all items in this collection.
         /// </returns>
         IEnumerable<TEntity> GetAll();
+
+        /// <summary>Gets the count.</summary>
+        /// <returns>An int.</returns>
+        int Count();
     }
 }

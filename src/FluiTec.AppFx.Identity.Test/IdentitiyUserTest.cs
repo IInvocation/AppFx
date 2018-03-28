@@ -148,46 +148,6 @@ namespace FluiTec.AppFx.Identity.Test
             }
         }
 
-
-        /// <summary>   Can count. </summary>
-        public virtual void CanCount()
-        {
-            var users = new[]
-            {
-                new IdentityUserEntity
-                {
-                    Identifier = Guid.NewGuid(),
-                    Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
-                    Email = "a.schnell@wtschnell.de",
-                    NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
-                    AccessFailedCount = 0,
-                    ApplicationId = 0,
-                    EmailConfirmed = true,
-                    IsAnonymous = false,
-                    LastActivityDate = DateTime.Now
-                },
-                new IdentityUserEntity
-                {
-                    Identifier = Guid.NewGuid(),
-                    Name = "Stefan Schnell",
-                    LoweredUserName = "STEFAN SCHNELL",
-                    Email = "s.schnell@wtschnell.de",
-                    NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
-                    AccessFailedCount = 0,
-                    ApplicationId = 0,
-                    EmailConfirmed = true,
-                    IsAnonymous = false,
-                    LastActivityDate = DateTime.Now
-                }
-            };
-            using (var uow = DataService.StartUnitOfWork())
-            {
-                uow.UserRepository.AddRange(users);
-                Assert.AreEqual(users.Length, uow.UserRepository.CountUsers());
-            }
-        }
-
         /// <summary>	(Unit Test Method) can update user. </summary>
         public virtual void CanUpdateUser()
         {

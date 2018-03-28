@@ -64,14 +64,6 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
         /// <returns>	The found login. </returns>
         public abstract IdentityUserEntity FindByLogin(string providerName, string providerKey);
 
-        /// <summary>   Count users. </summary>
-        /// <returns>   The total number of users. </returns>
-        public int CountUsers()
-        {
-            var command = $"SELECT COUNT({nameof(IdentityUserEntity.Id)}) FROM {TableName}";
-            return UnitOfWork.Connection.ExecuteScalar<int>(command, null, UnitOfWork.Transaction);
-        }
-
         /// <summary>	Adds entity. </summary>
         /// <param name="entity">	The entity. </param>
         /// <returns>	An IdentityUserEntity. </returns>

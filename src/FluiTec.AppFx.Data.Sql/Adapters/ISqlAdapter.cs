@@ -70,5 +70,15 @@ namespace FluiTec.AppFx.Data.Sql.Adapters
         /// <param name="selectFields">	   	The select fields. </param>
         /// <returns>	The by filter statement. </returns>
         string GetByFilterStatement(Type type, string[] filterProperties, string[] selectFields);
+
+        /// <summary>Renders the property name described by propertyInfo.</summary>
+        /// <param name="propertyInfo"> Information describing the property. </param>
+        /// <returns>A string.</returns>
+        string RenderPropertyName(PropertyInfo propertyInfo);
+
+        /// <summary>Renders the property name described by propertyName.</summary>
+        /// <param name="propertyName"> Name of the property. </param>
+        /// <returns>A string.</returns>
+        string RenderPropertyName(string propertyName);
     }
 }

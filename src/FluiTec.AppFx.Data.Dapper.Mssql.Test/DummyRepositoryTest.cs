@@ -75,6 +75,24 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
         }
 
         [TestMethod]
+        public void CanCount()
+        {
+            Initialize();
+            try
+            {
+                var entities = new[] { new DummyEntity { Name = "Test 1" }, new DummyEntity { Name = "Test 2" } };
+                Repository.AddRange(entities);
+
+                Assert.AreEqual(entities.Length, Repository.Count());
+            }
+            catch (Exception)
+            {
+                Cleanup();
+                throw;
+            }
+        }
+
+        [TestMethod]
         public void CanUpdateEntity()
         {
             Initialize();
