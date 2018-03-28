@@ -294,7 +294,19 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new IdentityUserEntity {Name = model.Name, Email = model.Email, Phone = model.Phone};
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    if (uow.UserRepository.Count() == 0)
+                    {
+                        var admin = await RegisterFirstUserAdminWithoutConfirmation(uow, model, returnUrl);
+                        if (admin == null)
+                            return View(model);
+                        await _signInManager.SignInAsync(admin, false);
+                        return RedirectToLocal(returnUrl);
+                    }
+                }
+
+                var user = new IdentityUserEntity { Name = model.Name, Email = model.Email, Phone = model.Phone };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -465,6 +477,36 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         #endregion
 
         #region Helpers
+
+        /// <summary>Registers the first user admin without confirmation.</summary>
+        /// <param name="uow">          The uow. </param>
+        /// <param name="model">        The model. </param>
+        /// <param name="returnUrl">    URL of the return. </param>
+        /// <returns>The asynchronous result that yields an IdentityUserEntity.</returns>
+        private async Task<IdentityUserEntity> RegisterFirstUserAdminWithoutConfirmation(IIdentityUnitOfWork uow, RegisterViewModel model, string returnUrl)
+        {
+            var admin = uow.RoleRepository.FindByLoweredName("ADMINISTRATOR") ?? uow.RoleRepository.Add(
+                            new IdentityRoleEntity
+                            {
+                                ApplicationId = 0,
+                                Description = "Administrator-Role",
+                                Identifier = Guid.NewGuid(),
+                                LoweredName = "ADMINISTRATOR",
+                                Name = "Administrator"
+                            });
+            uow.Commit();
+
+            var user = new IdentityUserEntity { Name = model.Name, Email = model.Email, Phone = model.Phone };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, admin.Name);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                await _userManager.ConfirmEmailAsync(user, code);
+            }
+
+            return user;
+        }
 
         /// <summary>Sends a confirmation mail.</summary>
         /// <param name="user"> The user. </param>

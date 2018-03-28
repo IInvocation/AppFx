@@ -386,6 +386,10 @@ namespace FluiTec.AppFx.Identity
             {
                 try
                 {
+                    var roles = UnitOfWork.UserRoleRepository.FindByUser(user);
+                    foreach(var role in roles)
+                        UnitOfWork.UserRoleRepository.Delete(role);
+
                     UnitOfWork.UserRepository.Delete(user);
                     return IdentityResult.Success;
                 }
