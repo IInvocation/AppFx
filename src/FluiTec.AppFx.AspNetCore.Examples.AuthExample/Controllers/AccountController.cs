@@ -46,19 +46,23 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   The localizer factory. </summary>
         private readonly IStringLocalizerFactory _localizerFactory;
 
+        /// <summary>   The identity data service. </summary>
+        private readonly IIdentityDataService _identityDataService;
+
         #endregion
 
         #region Constructors
 
         /// <summary>   Constructor. </summary>
-        /// <param name="userManager">      Manager for user. </param>
-        /// <param name="signInManager">    Manager for sign in. </param>
-        /// <param name="emailSender">      The email sender. </param>
-        /// <param name="loggerFactory">    The logger factory. </param>
-        /// <param name="dataService">      The data service. </param>
-        /// <param name="adminOptions">     Options for controlling the admin. </param>
-        /// <param name="localizer">        The localizer. </param>
-        /// <param name="localizerFactory"> The localizer factory. </param>
+        /// <param name="userManager">          Manager for user. </param>
+        /// <param name="signInManager">        Manager for sign in. </param>
+        /// <param name="emailSender">          The email sender. </param>
+        /// <param name="loggerFactory">        The logger factory. </param>
+        /// <param name="dataService">          The data service. </param>
+        /// <param name="adminOptions">         Options for controlling the admin. </param>
+        /// <param name="localizer">            The localizer. </param>
+        /// <param name="localizerFactory">     The localizer factory. </param>
+        /// <param name="identityDataService">  The identity data service. </param>
         public AccountController(
             UserManager<IdentityUserEntity> userManager,
             SignInManager<IdentityUserEntity> signInManager,
@@ -67,7 +71,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             IIdentityDataService dataService,
             AdminOptions adminOptions,
             IStringLocalizer<AccountResource> localizer,
-            IStringLocalizerFactory localizerFactory)
+            IStringLocalizerFactory localizerFactory, IIdentityDataService identityDataService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -76,6 +80,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _adminOptions = adminOptions;
             _localizer = localizer;
             _localizerFactory = localizerFactory;
+            _identityDataService = identityDataService;
         }
 
         #endregion

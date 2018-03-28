@@ -34,5 +34,9 @@ namespace FluiTec.AppFx.Identity.Repositories
 		/// <param name="providerKey"> 	The provider key. </param>
 		/// <returns>	The found login. </returns>
 		IdentityUserEntity FindByLogin(string providerName, string providerKey);
+        
+        /// <summary>   Count users. </summary>
+        /// <returns>   The total number of users. </returns>
+	    int CountUsers();
 	}
 }

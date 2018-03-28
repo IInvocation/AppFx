@@ -91,6 +91,13 @@ namespace FluiTec.AppFx.Identity.LiteDb.Repositories
             return Get(login.UserId.ToString());
         }
 
+        /// <summary>   Count users. </summary>
+        /// <returns>   The total number of users. </returns>
+        public int CountUsers()
+        {
+            return Collection.Count();
+        }
+
         #endregion
     }
 }

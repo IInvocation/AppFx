@@ -52,5 +52,11 @@ namespace FluiTec.AppFx.Identity.LiteDb.Test
 		{
 			base.CanAddAndFindByNormalizedEmail();
 		}
+
+        [TestMethod]
+	    public override void CanCount()
+	    {
+	        base.CanCount();
+	    }
 	}
 }
