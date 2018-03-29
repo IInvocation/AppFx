@@ -88,7 +88,7 @@
     ]
   },
   {
-    "ResourceKey": "FluiTec.AppFx.AspNetCore.Models.Name",
+    "ResourceKey": "FluiTec.AppFx.AspNetCore.Models.ApplicationResource.Name",
     "ModificationDate": "2018-03-24T14:50:36.248+01:00",
     "Author": "Code",
     "FromCode": "true",

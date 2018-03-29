@@ -1,36 +1,33 @@
 ﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
-@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.RoleEditModel
+@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.UserLockoutModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Rollenverwaltung</h2>
+        <h2>User management</h2>
     </header>
     <div class="container">
         <section>
-            <h4>Rolle bearbeiten</h4>
+            <h4>Lockout user</h4>
             <hr />
-            @Html.Partial("_ModelUpdateResult", Model)
-            <form asp-controller="Admin" asp-action="ManageRole" method="post">
+            <form asp-controller="Admin" asp-action="LockoutUser" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
-                <input type="hidden" name="Id" id="Id" value="@Model?.Id" readonly />
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="Name" placeholder="Name" data-rule-required="true" data-msg-required="Name ist ein Pflichtfeld" />
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" placeholder="Name" readonly />
                     </div>
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="Description" placeholder="Beschreibung" data-rule-required="true" data-msg-required="Beschreibung ist ein Pflichtfeld" />
+                        <label asp-for="LockoutTime"></label>
+                        <input asp-for="LockoutTime" placeholder="Name" data-rule-required="true" data-msg-required="Lockout time is required" />
                     </div>
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="Bearbeiten" />
-                            </li>
-                            <li>
-                                <input type="reset" value="Zurücksetzen" />
+                                <input type="submit" value="Lock out" />
                             </li>
                         </ul>
                     </div>
@@ -41,14 +38,8 @@
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageRoles">Rollenverwaltung</a>
+                            <a asp-controller="Admin" asp-action="ManageUsers">User management</a>
                         </li>
-                        @if (Model != null)
-                        {
-                        <li>
-                            <a asp-controller="Admin" asp-action="DeleteRole" asp-route-roleid="@Model.Id">Rolle löschen</a>
-                        </li>
-                        }
                     </ul>
                 </div>
             </div>

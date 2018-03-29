@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
@@ -39,5 +40,11 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         [Phone(ErrorMessage = "PhoneMessage")]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
+
+        /// <summary>   Gets or sets the lockout time. </summary>
+        /// <value> The lockout time. </value>
+        [Display(Name = FullModelName + "LockoutTime", Description = "Lockout time")]
+        [DisplayTranslationForCulture("LockoutTime", "Aussperrzeit", "de")]
+        public DateTime? LockoutTime { get; set; }
     }
 }

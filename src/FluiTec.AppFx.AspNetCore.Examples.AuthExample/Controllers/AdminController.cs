@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
@@ -17,15 +20,20 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   The identity data service. </summary>
         private readonly IIdentityDataService _identityDataService;
 
+        /// <summary>   Manager for user. </summary>
+        private readonly UserManager<IdentityUserEntity> _userManager;
+
         #endregion
 
         #region Constructors
 
         /// <summary>   Constructor. </summary>
         /// <param name="identityDataService">  The identity data service. </param>
-        public AdminController(IIdentityDataService identityDataService)
+        /// <param name="userManager">          Manager for user. </param>
+        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager)
         {
             _identityDataService = identityDataService;
+            _userManager = userManager;
         }
 
         #endregion
@@ -62,7 +70,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var user = uow.UserRepository.Get(userId);
-                return View(new UserEditModel { Email = user.Email, Phone = user.Phone, Id = user.Id, Name = user.Name });
+                return View(new UserEditModel { Email = user.Email, Phone = user.Phone, Id = user.Id, Name = user.Name, LockoutTime = user.LockedOutTill?.LocalDateTime });
             }
         }
 
@@ -87,6 +95,84 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     uow.UserRepository.Update(dbUser);
                     uow.Commit();
                     model.UpdateSuccess();
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>   Lockout user. </summary>
+        /// <param name="userId">   Identifier for the user. </param>
+        /// <returns>   An IActionResult. </returns>
+        public IActionResult LockoutUser(int userId)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var user = uow.UserRepository.Get(userId);
+                return View(new UserLockoutModel {Email = user.Email, LockoutTime = DateTime.Now.AddDays(1)});
+            }
+        }
+
+        /// <summary>   Lockout user. </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An asynchronous result that yields an IActionResult. </returns>
+        [HttpPost]
+        public async Task<IActionResult> LockoutUser(UserLockoutModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (model.LockoutTime.HasValue && model.LockoutTime > DateTime.Now) // locks the user out
+                {
+                    await _userManager.SetLockoutEndDateAsync(user,
+                        new DateTimeOffset(model.LockoutTime.Value.ToUniversalTime()));
+                    return RedirectToAction(nameof(ManageUser), new {userId = user.Id});
+                }
+
+                await _userManager.SetLockoutEndDateAsync(user, null);
+                return RedirectToAction(nameof(ManageUser), new { userId = user.Id });
+            }
+
+            return View(model);
+        }
+
+        /// <summary>   Deletes the user described by userId. </summary>
+        /// <param name="userId">   Identifier for the user. </param>
+        /// <returns>   An IActionResult. </returns>
+        public IActionResult DeleteUser(int userId)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var user = uow.UserRepository.Get(userId);
+                return View(new UserDeleteModel { Email = user.Email });
+            }
+        }
+
+        /// <summary>
+        ///     Deletes the user described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        public IActionResult DeleteUser(UserDeleteModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    var user = uow.UserRepository.FindByNormalizedEmail(model.Email.ToLower(CultureInfo.InvariantCulture));
+                    var userRoles = uow.UserRoleRepository.FindByUser(user);
+                    var userLogins = uow.LoginRepository.FindByUserId(user.Identifier);
+
+                    foreach(var userRole in userRoles)
+                        uow.UserRoleRepository.Delete(userRole);
+                    
+                    foreach(var userLogin in userLogins)
+                        uow.LoginRepository.Delete(userLogin);
+
+                    uow.UserRepository.Delete(user);
+                    uow.Commit();
+                    return RedirectToAction(nameof(ManageUsers));
                 }
             }
 
@@ -174,11 +260,50 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     };
                     uow.RoleRepository.Add(role);
                     uow.Commit();
-                    RedirectToAction(nameof(ManageRoles));
+                    return RedirectToAction(nameof(ManageRoles));
                 }
             }
 
             return View(model);
+        }
+
+        /// <summary>   Deletes the role described by roleId. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <returns>   An IActionResult. </returns>
+        public IActionResult DeleteRole(int roleId)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var role = uow.RoleRepository.Get(roleId);
+                return View(new RoleDeleteModel { Id = role.Id, Name = role.Name });
+            }
+        }
+
+        /// <summary>
+        ///     Deletes the role described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        public IActionResult DeleteRole(RoleDeleteModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    var role = uow.RoleRepository.Get(model.Id);
+                    var userRoles = uow.UserRoleRepository.FindByRole(role);
+
+                    foreach (var userRole in userRoles)
+                        uow.UserRoleRepository.Delete(userRole);
+                    uow.RoleRepository.Delete(role);
+
+                    uow.Commit();
+                    return RedirectToAction(nameof(ManageRoles));
+                }
+            }
+
+            return View();
         }
 
         #endregion
