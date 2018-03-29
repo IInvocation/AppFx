@@ -1,7 +1,7 @@
 ﻿@using FluiTec.AppFx.Identity.Entities
 @using FluiTec.AppFx.Identity.Models.AccountViewModels
 @using Microsoft.AspNetCore.Identity
-@model FluiTec.AppFx.Identity.Models.AccountViewModels.RegisterViewModel
+@model RegisterViewModel
 @inject SignInManager<IdentityUserEntity> SignInManager
 
 <section id="maincontent" class="wrapper content-wrapper">
@@ -38,6 +38,11 @@
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <input asp-for="ConfirmPassword" placeholder="Password confirmation" data-rule-required="true" data-msg-required="Password confirmation is required"/>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <recaptcha/>
                     </div>
                 </div>
                 <div class="row uniform">
