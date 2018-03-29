@@ -206,7 +206,10 @@ namespace FluiTec.AppFx.Identity
             return Task<IList<Claim>>.Factory.StartNew(
                 () =>
                 {
-                    return UnitOfWork.ClaimRepository.GetByUser(user).Select(c => new Claim(c.Type, c.Value)).ToList();
+                    var roleIds = UnitOfWork.UserRoleRepository.FindByUser(user);
+                    var roles = UnitOfWork.RoleRepository.FindByIds(roleIds);
+                    var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r.Name));
+                    return UnitOfWork.ClaimRepository.GetByUser(user).Select(c => new Claim(c.Type, c.Value)).Concat(roleClaims).ToList();
                 },
                 cancellationToken);
         }

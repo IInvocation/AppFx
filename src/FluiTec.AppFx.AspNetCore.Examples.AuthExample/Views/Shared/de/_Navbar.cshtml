@@ -1,5 +1,4 @@
-﻿@using FluiTec.AppFx.Identity
-@using FluiTec.AppFx.Identity.Entities
+﻿@using FluiTec.AppFx.Identity.Entities
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUserEntity> SignInManager
 
@@ -29,17 +28,17 @@
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Logout">
                         <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout"/>Abmelden</a>
                     </li>
+                    if (User.IsInRole("Administrator"))
+                    {
+                    <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile"/>Admin</a>
+                    </li>
+                    }
                 }
                 else
                 {
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Login">
                         <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="/images/login.png" alt="login or register"/>Anmelden</a>
-                    </li>
-                }
-                @if (User.HasClaim(IdentityClaims.HasAdministrativeRights, "true"))
-                {
-                    <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
-                        <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile"/>Admin</a>
                     </li>
                 }
             </ul>

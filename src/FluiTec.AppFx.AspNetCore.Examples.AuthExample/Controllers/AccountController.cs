@@ -36,6 +36,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="localizer">            The localizer. </param>
         /// <param name="localizerFactory">     The localizer factory. </param>
         /// <param name="identityDataService">  The identity data service. </param>
+        /// <param name="applicationOptions">   Options for controlling the application. </param>
         public AccountController(
             UserManager<IdentityUserEntity> userManager,
             SignInManager<IdentityUserEntity> signInManager,
@@ -131,6 +132,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 {
                     var result =
                         await _signInManager.PasswordSignInAsync(tUser, model.Password, model.RememberMe, true);
+
+                    var myUser = User;
                     if (result.Succeeded)
                     {
                         _logger.LogInformation(1, "User logged in.");
