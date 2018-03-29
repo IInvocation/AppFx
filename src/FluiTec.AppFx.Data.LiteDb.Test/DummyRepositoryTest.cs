@@ -54,10 +54,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
 
                 Assert.AreEqual(entity.Name, name);
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -75,10 +74,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
 
                 Assert.IsTrue(repoCount + originalCount >= entities.Length);
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -98,10 +96,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
 
                 Assert.AreEqual(updateName, entity.Name);
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -118,10 +115,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
 
                 Assert.IsNull(Repository.Get(entity.Id));
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -138,10 +134,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
 
                 Assert.IsNull(Repository.Get(entity.Id));
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -155,10 +150,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
                 Repository.Add(new DummyEntity());
                 UnitOfWork.Commit();
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
 
             Initialize();
@@ -169,10 +163,9 @@ namespace FluiTec.AppFx.Data.LiteDb.Test
                 foreach (var entry in Repository.GetAll()) Repository.Delete(entry);
                 UnitOfWork.Commit();
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
     }

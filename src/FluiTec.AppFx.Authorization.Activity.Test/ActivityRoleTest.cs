@@ -77,12 +77,12 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
         {
             var activity1 = new ActivityEntity
             {
-                Name = "MyActivity",
+                Name = "MyActivity 1",
                 ResourceName = "MyResource"
             };
             var activity2 = new ActivityEntity
             {
-                Name = "MyActivity",
+                Name = "MyActivity 2",
                 ResourceName = "MyResource"
             };
 

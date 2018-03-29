@@ -42,10 +42,9 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.AreEqual(entity.Name, name);
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -61,10 +60,10 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.AreEqual(entities.Length, repoCount);
             }
-            catch (Exception)
+
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -79,10 +78,9 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.AreEqual(entities.Length, Repository.Count());
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -102,10 +100,9 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.AreEqual(updateName, entity.Name);
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -122,10 +119,9 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.IsNull(Repository.Get(entity.Id));
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 
@@ -142,10 +138,9 @@ namespace FluiTec.AppFx.Data.Dapper.SqLite.Test
 
                 Assert.IsNull(Repository.Get(entity.Id));
             }
-            catch (Exception)
+            finally
             {
                 Cleanup();
-                throw;
             }
         }
 

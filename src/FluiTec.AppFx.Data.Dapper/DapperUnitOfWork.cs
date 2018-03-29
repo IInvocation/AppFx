@@ -55,6 +55,7 @@ namespace FluiTec.AppFx.Data.Dapper
             Transaction.Commit();
             Transaction.Dispose();
             Transaction = null;
+            Connection.Close();
             Connection.Dispose();
             Connection = null;
         }
@@ -69,6 +70,7 @@ namespace FluiTec.AppFx.Data.Dapper
             Transaction.Rollback();
             Transaction.Dispose();
             Transaction = null;
+            Connection.Close();
             Connection.Dispose();
             Connection = null;
         }
