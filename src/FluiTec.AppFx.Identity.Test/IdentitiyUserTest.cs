@@ -23,7 +23,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
+                    NormalizedName = "ACHIM SCHNELL",
                     Email = "a.schnell@wtschnell.de",
                     NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -47,7 +47,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
+                    NormalizedName = "ACHIM SCHNELL",
                     Email = "a.schnell@wtschnell.de",
                     NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -71,7 +71,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
+                    NormalizedName = "ACHIM SCHNELL",
                     Email = "a.schnell@wtschnell.de",
                     NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -82,7 +82,7 @@ namespace FluiTec.AppFx.Identity.Test
                 };
 
                 uow.UserRepository.Add(user);
-                Assert.AreEqual(user.Name, uow.UserRepository.FindByLoweredName(user.LoweredUserName).Name);
+                Assert.AreEqual(user.Name, uow.UserRepository.FindByLoweredName(user.NormalizedName).Name);
             }
         }
 
@@ -94,7 +94,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
+                    NormalizedName = "ACHIM SCHNELL",
                     Email = "a.schnell@wtschnell.de",
                     NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -118,7 +118,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Achim Schnell",
-                    LoweredUserName = "ACHIM SCHNELL",
+                    NormalizedName = "ACHIM SCHNELL",
                     Email = "a.schnell@wtschnell.de",
                     NormalizedEmail = "A.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -131,7 +131,7 @@ namespace FluiTec.AppFx.Identity.Test
                 {
                     Identifier = Guid.NewGuid(),
                     Name = "Stefan Schnell",
-                    LoweredUserName = "STEFAN SCHNELL",
+                    NormalizedName = "STEFAN SCHNELL",
                     Email = "s.schnell@wtschnell.de",
                     NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
                     AccessFailedCount = 0,
@@ -157,7 +157,7 @@ namespace FluiTec.AppFx.Identity.Test
                     {
                         Identifier = Guid.NewGuid(),
                         Name = "Stefan Schnell",
-                        LoweredUserName = "STEFAN SCHNELL",
+                        NormalizedName = "STEFAN SCHNELL",
                         Email = "s.schnell@wtschnell.de",
                         NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
                         AccessFailedCount = 0,
@@ -183,7 +183,7 @@ namespace FluiTec.AppFx.Identity.Test
                     {
                         Identifier = Guid.NewGuid(),
                         Name = "Stefan Schnell",
-                        LoweredUserName = "STEFAN SCHNELL",
+                        NormalizedName = "STEFAN SCHNELL",
                         Email = "s.schnell@wtschnell.de",
                         NormalizedEmail = "S.SCHNELL@WTSCHNELL.DE",
                         AccessFailedCount = 0,

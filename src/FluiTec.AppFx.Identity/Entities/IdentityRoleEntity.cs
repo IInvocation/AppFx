@@ -17,7 +17,7 @@ namespace FluiTec.AppFx.Identity.Entities
 
         /// <summary>	Gets or sets the name of the lowered. </summary>
         /// <value>	The name of the lowered. </value>
-        public string LoweredName { get; set; }
+        public string NormalizedName { get; set; }
 
         /// <summary>	Gets or sets the description. </summary>
         /// <value>	The description. </value>

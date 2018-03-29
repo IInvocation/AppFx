@@ -50,6 +50,8 @@
     <Compile Include="Versions\Migration1\UserLoginTable.cs" />
     <Compile Include="Versions\Migration1\UserRoleTable.cs" />
     <Compile Include="Versions\Migration1\UserTable.cs" />
+    <Compile Include="Versions\Migration2\RoleTable.cs" />
+    <Compile Include="Versions\Migration2\UserTable.cs" />
     <Compile Include="VersionTable.cs" />
   </ItemGroup>
   <ItemGroup>

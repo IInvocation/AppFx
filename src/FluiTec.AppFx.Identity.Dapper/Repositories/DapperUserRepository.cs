@@ -30,13 +30,13 @@ namespace FluiTec.AppFx.Identity.Dapper.Repositories
         }
 
         /// <summary>	Searches for the first lowered name. </summary>
-        /// <param name="loweredName">	Name of the lowered. </param>
+        /// <param name="normalizedName">	Name of the lowered. </param>
         /// <returns>	The found lowered name. </returns>
-        public virtual IdentityUserEntity FindByLoweredName(string loweredName)
+        public virtual IdentityUserEntity FindByLoweredName(string normalizedName)
         {
-            var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserEntity.LoweredUserName));
+            var command = SqlBuilder.SelectByFilter(EntityType, nameof(IdentityUserEntity.NormalizedName));
             return UnitOfWork.Connection.QuerySingleOrDefault<IdentityUserEntity>(command,
-                new {LoweredUserName = loweredName},
+                new {NormalizedName = normalizedName},
                 UnitOfWork.Transaction);
         }
 

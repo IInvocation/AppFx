@@ -49,7 +49,7 @@ namespace FluiTec.AppFx.Identity.LiteDb.Repositories
         /// </returns>
         public IdentityUserEntity FindByLoweredName(string loweredName)
         {
-            return Collection.Find(e => e.LoweredUserName == loweredName).SingleOrDefault();
+            return Collection.Find(e => e.NormalizedName == loweredName).SingleOrDefault();
         }
 
         /// <summary>

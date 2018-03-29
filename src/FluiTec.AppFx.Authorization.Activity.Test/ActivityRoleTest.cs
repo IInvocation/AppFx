@@ -29,7 +29,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 ApplicationId = 0,
                 Description = "MyRole",
                 Identifier = Guid.NewGuid(),
-                LoweredName = "myrole",
+                NormalizedName = "myrole",
                 Name = "MyRole"
             };
             using (var iUow = _identityDataService.StartUnitOfWork())
@@ -91,7 +91,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 ApplicationId = 0,
                 Description = "MyRole",
                 Identifier = Guid.NewGuid(),
-                LoweredName = "myrole",
+                NormalizedName = "myrole",
                 Name = "MyRole"
             };
 
@@ -146,7 +146,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 ApplicationId = 0,
                 Description = "MyRole",
                 Identifier = Guid.NewGuid(),
-                LoweredName = "myrole",
+                NormalizedName = "myrole",
                 Name = "MyRole"
             };
             using (var iUow = _identityDataService.StartUnitOfWork())
@@ -199,7 +199,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 ApplicationId = 0,
                 Description = "MyRole",
                 Identifier = Guid.NewGuid(),
-                LoweredName = "myrole",
+                NormalizedName = "myrole",
                 Name = "MyRole"
             };
             using (var iUow = _identityDataService.StartUnitOfWork())

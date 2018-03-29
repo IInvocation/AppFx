@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FluiTec.AppFx.Identity.Entities.IdentityRoleEntity>
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>Role management</h2>
+    </header>
+    <div class="container">
+        <section>
+            <h4>Manage role</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>
+                            @role.Name
+                        </td>
+                        <td>
+                            @role.Description
+                        </td>
+                        <td>
+                            <a asp-controller="Admin" asp-action="ManageRole" asp-route-roleid="@role.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <h4>Aktionen</h4>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Admin" asp-action="Index">Admin</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Admin" asp-action="AddRole">Add role</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

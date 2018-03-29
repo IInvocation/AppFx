@@ -2,6 +2,15 @@
 $brandColor: #DF545A;
 $footerLinkColor: #545454;
 
+/* Update-Feedback */
+.edit-feedback-success {
+    color: #22B14C;
+    margin-bottom: -40px;
+}
+.edit-feedback-fault {
+    color: #ED1C24;
+}
+
 /* OpenId-Buttons */
 .Amazon-btn {
     background-image: url("/images/amazon.png");

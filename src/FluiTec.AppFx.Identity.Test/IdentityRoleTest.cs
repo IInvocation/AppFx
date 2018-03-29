@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole",
                     ApplicationId = 0,
                     Description = "DummyRole",
-                    LoweredName = "dummyrole"
+                    NormalizedName = "dummyrole"
                 };
 
                 uow.RoleRepository.Add(role);
@@ -44,7 +44,7 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole",
                     ApplicationId = 0,
                     Description = "DummyRole",
-                    LoweredName = "dummyrole"
+                    NormalizedName = "dummyrole"
                 };
 
                 uow.RoleRepository.Add(role);
@@ -62,11 +62,11 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole",
                     ApplicationId = 0,
                     Description = "DummyRole",
-                    LoweredName = "dummyrole"
+                    NormalizedName = "dummyrole"
                 };
 
                 uow.RoleRepository.Add(role);
-                Assert.AreEqual(role.Name, uow.RoleRepository.FindByLoweredName(role.LoweredName).Name);
+                Assert.AreEqual(role.Name, uow.RoleRepository.FindByLoweredName(role.NormalizedName).Name);
             }
         }
 
@@ -80,7 +80,7 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole",
                     ApplicationId = 0,
                     Description = "DummyRole",
-                    LoweredName = "dummyrole"
+                    NormalizedName = "dummyrole"
                 };
 
                 uow.RoleRepository.Add(role);
@@ -99,7 +99,7 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole",
                     ApplicationId = 0,
                     Description = "DummyRole",
-                    LoweredName = "dummyrole"
+                    NormalizedName = "dummyrole"
                 },
                 new IdentityRoleEntity
                 {
@@ -107,7 +107,7 @@ namespace FluiTec.AppFx.Identity.Test
                     Name = "DummyRole2",
                     ApplicationId = 0,
                     Description = "DummyRole2",
-                    LoweredName = "dummyrole2"
+                    NormalizedName = "dummyrole2"
                 }
             };
             using (var uow = DataService.StartUnitOfWork())
@@ -128,7 +128,7 @@ namespace FluiTec.AppFx.Identity.Test
                         Name = "DummyRole2",
                         ApplicationId = 0,
                         Description = "DummyRole2",
-                        LoweredName = "dummyrole2"
+                        NormalizedName = "dummyrole2"
                     }
                 );
 
@@ -149,7 +149,7 @@ namespace FluiTec.AppFx.Identity.Test
                         Name = "DummyRole2",
                         ApplicationId = 0,
                         Description = "DummyRole2",
-                        LoweredName = "dummyrole2"
+                        NormalizedName = "dummyrole2"
                     }
                 );
 

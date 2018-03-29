@@ -321,7 +321,7 @@ namespace FluiTec.AppFx.Identity
         /// <returns>	The normalized user name asynchronous. </returns>
         public Task<string> GetNormalizedUserNameAsync(IdentityUserEntity user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.LoweredUserName);
+            return Task.FromResult(user.NormalizedName);
         }
 
         /// <summary>	Sets normalized user name asynchronous. </summary>
@@ -334,7 +334,7 @@ namespace FluiTec.AppFx.Identity
         {
             return Task.Factory.StartNew(() =>
             {
-                user.LoweredUserName = normalizedName;
+                user.NormalizedName = normalizedName;
                 UnitOfWork.UserRepository.Update(user);
             }, cancellationToken);
         }
@@ -562,7 +562,7 @@ namespace FluiTec.AppFx.Identity
         /// <returns>	The normalized role name asynchronous. </returns>
         public Task<string> GetNormalizedRoleNameAsync(IdentityRoleEntity role, CancellationToken cancellationToken)
         {
-            return Task.FromResult(role.LoweredName);
+            return Task.FromResult(role.NormalizedName);
         }
 
         /// <summary>	Sets normalized role name asynchronous. </summary>
@@ -575,7 +575,7 @@ namespace FluiTec.AppFx.Identity
         {
             return Task.Factory.StartNew(() =>
             {
-                role.LoweredName = normalizedName;
+                role.NormalizedName = normalizedName;
                 UnitOfWork.RoleRepository.Update(role);
             }, cancellationToken);
         }

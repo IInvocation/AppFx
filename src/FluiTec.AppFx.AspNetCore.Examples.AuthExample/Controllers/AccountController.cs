@@ -484,7 +484,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                                 ApplicationId = 0,
                                 Description = "Administrator-Role",
                                 Identifier = Guid.NewGuid(),
-                                LoweredName = "ADMINISTRATOR",
+                                NormalizedName = "ADMINISTRATOR",
                                 Name = "Administrator"
                             });
             uow.Commit();
