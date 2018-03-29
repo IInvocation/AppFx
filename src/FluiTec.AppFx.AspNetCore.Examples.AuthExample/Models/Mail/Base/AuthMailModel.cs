@@ -9,6 +9,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
     /// <summary>   A data Model for the authentication mail. </summary>
     public class AuthMailModel : MailModel
     {
+        private string _subject;
+
         /// <summary>   Constructor. </summary>
         /// <param name="localizerFactory"> The localizer factory. </param>
         /// <param name="appOptions">       Options for controlling the application. </param>
@@ -19,6 +21,19 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
             ApplicationName = localizer.GetString(() => ApplicationResource.Name);
             ApplicationUrl = appOptions?.ApplicationRoot;
             ApplicationUrlDisplay = appOptions?.ApplicationRootDisplay;
+        }
+
+        /// <summary>   Gets or sets the subject. </summary>
+        /// <value> The subject. </value>
+        public override string Subject
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_subject))
+                    return ApplicationName;
+                return !_subject.StartsWith(ApplicationName) ? $"{ApplicationName}: {_subject}" : _subject;
+            }
+            set => _subject = value;
         }
     }
 }
