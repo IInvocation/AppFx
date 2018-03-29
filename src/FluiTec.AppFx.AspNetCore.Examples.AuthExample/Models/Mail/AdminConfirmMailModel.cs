@@ -1,6 +1,6 @@
-﻿using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
+﻿using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
 using FluiTec.AppFx.Localization;
-using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -8,23 +8,21 @@ using Microsoft.Extensions.Localization;
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the admin confirm mail. </summary>
-    public class AdminConfirmMailModel : MailModel
+    public class AdminConfirmMailModel : AuthMailModel
     {
         /// <summary>   Constructor. </summary>
         /// <param name="localizerFactory"> The localizer factory. </param>
+        /// <param name="appOptions">       Options for controlling the application. </param>
         /// <param name="validationUrl">    URL of the validation. </param>
-        public AdminConfirmMailModel(IStringLocalizerFactory localizerFactory, string validationUrl)
+        /// <param name="email">            The email. </param>
+        public AdminConfirmMailModel(IStringLocalizerFactory localizerFactory, ApplicationOptions appOptions, string validationUrl, string email) : base(localizerFactory, appOptions)
         {
             var localizer = localizerFactory.Create(typeof(UserConfirmMailResource));
             ValidationUrl = validationUrl;
-
-            ApplicationName = MailGlobals.ApplicationName;
-            ApplicationUrl = MailGlobals.ApplicationUrl;
-            ApplicationUrlDisplay = MailGlobals.ApplicationUrlDisplay;
+            Email = email;
 
             Subject = localizer.GetString(() => AdminConfirmMailResource.Subject);
             Header = localizer.GetString(() => AdminConfirmMailResource.Header);
-            ConfirmLinkText = localizer.GetString(() => AdminConfirmMailResource.ConfirmLinkText);
         }
 
         /// <summary>	Gets or sets URL of the validation. </summary>
@@ -34,21 +32,5 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
         /// <summary>	Gets or sets the email. </summary>
         /// <value>	The email. </value>
         public string Email { get; set; }
-
-        /// <summary>   Gets or sets the thank you text. </summary>
-        /// <value> The thank you text. </value>
-        public string ThankYouText { get; set; }
-
-        /// <summary>   Gets or sets the confirm email reason text. </summary>
-        /// <value> The confirm email reason text. </value>
-        public string ConfirmEmailReasonText { get; set; }
-
-        /// <summary>   Gets or sets the confirm link text. </summary>
-        /// <value> The confirm link text. </value>
-        public string ConfirmLinkText { get; set; }
-
-        /// <summary>   Gets or sets the please confirm text. </summary>
-        /// <value> The please confirm text. </value>
-        public string PleaseConfirmText { get; set; }
     }
 }

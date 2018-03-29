@@ -16,17 +16,19 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         #region Constructors
 
         /// <summary>   Constructor. </summary>
-        /// <param name="logger">           The logger. </param>
-        /// <param name="mailService">      The mail service. </param>
-        /// <param name="errorOptions">     Options for controlling the error. </param>
-        /// <param name="localizerFactory"> The localizer factory. </param>
+        /// <param name="logger">               The logger. </param>
+        /// <param name="mailService">          The mail service. </param>
+        /// <param name="errorOptions">         Options for controlling the error. </param>
+        /// <param name="localizerFactory">     The localizer factory. </param>
+        /// <param name="applicationOptions">   Options for controlling the application. </param>
         public HomeController(ILogger<HomeController> logger, ITemplatingMailService mailService,
-            ErrorOptions errorOptions, IStringLocalizerFactory localizerFactory)
+            ErrorOptions errorOptions, IStringLocalizerFactory localizerFactory, ApplicationOptions applicationOptions)
         {
             _logger = logger;
             _mailService = mailService;
             _errorOptions = errorOptions;
             _localizerFactory = localizerFactory;
+            _applicationOptions = applicationOptions;
         }
 
         #endregion
@@ -44,6 +46,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   The localizer factory. </summary>
         private readonly IStringLocalizerFactory _localizerFactory;
+
+        /// <summary>   Options for controlling the application. </summary>
+        private readonly ApplicationOptions _applicationOptions;
 
         #endregion
 
@@ -79,7 +84,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
                 try
                 {
-                    var mailModel = new ErrorModel(_localizerFactory, exception);
+                    var mailModel = new ErrorMailModel(_localizerFactory, _applicationOptions, route, exception);
                     await _mailService.SendEmailAsync(_errorOptions.ErrorRecipient, mailModel);
                 }
                 catch (Exception e)

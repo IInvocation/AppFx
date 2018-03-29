@@ -1,4 +1,4 @@
-﻿@inherits RazorLight.TemplatePage<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.ErrorModel>
+﻿@inherits RazorLight.TemplatePage<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail.ErrorMailModel>
 <html>
 @{ await IncludeAsync("/Shared/_Style.cshtml", Model); }
 <body>
@@ -13,14 +13,14 @@
         <td style="background-color: #646464; border-bottom: 5px #646464 solid; border-top: 5px #646464 solid; padding: 10px;">
             <p style="color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold;" align="center">@Model.Header</p>
             <p style="color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold;" align="center">
-                <i>Unhandled error</i>
+                <i>Unbehandelter Fehler</i>
             </p>
         </td>
     </tr>
     <tr>
         <td>
             <p style="color: #435058; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
-                An unhandled error occured under: @Raw(Model.ErrorRoute).
+                Ein unbehandelter Fehler ist aufgetreten unter: @Raw(Model.ErrorRoute).
             </p>
         </td>
     </tr>

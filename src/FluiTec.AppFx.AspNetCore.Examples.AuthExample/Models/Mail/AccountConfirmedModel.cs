@@ -1,6 +1,6 @@
-﻿using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
+﻿using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
 using FluiTec.AppFx.Localization;
-using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
 
 // ReSharper disable VirtualMemberCallInConstructor
@@ -8,29 +8,18 @@ using Microsoft.Extensions.Localization;
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the account confirmed. </summary>
-    public class AccountConfirmedModel : MailModel
+    public class AccountConfirmedModel : AuthMailModel
     {
         /// <summary>   Constructor. </summary>
         /// <param name="localizerFactory"> The localizer factory. </param>
+        /// <param name="appOptions">       Options for controlling the application. </param>
         /// <param name="loginLink">        The login link. </param>
-        public AccountConfirmedModel(IStringLocalizerFactory localizerFactory, string loginLink)
+        public AccountConfirmedModel(IStringLocalizerFactory localizerFactory, ApplicationOptions appOptions, string loginLink) : base(localizerFactory, appOptions)
         {
             var localizer = localizerFactory.Create(typeof(AccountConfirmedResource));
-
-            ApplicationName = MailGlobals.ApplicationName;
-            ApplicationUrl = MailGlobals.ApplicationUrl;
-            ApplicationUrlDisplay = MailGlobals.ApplicationUrlDisplay;
 
             Subject = localizer.GetString(() => AccountConfirmedResource.Subject);
             Header = localizer.GetString(() => AccountConfirmedResource.Header);
         }
-
-        /// <summary>   Gets or sets the confirmation text. </summary>
-        /// <value> The confirmation text. </value>
-        public string ConfirmationText { get; set; }
-
-        /// <summary>   Gets or sets the login text. </summary>
-        /// <value> The login text. </value>
-        public string LoginText { get; set; }
     }
 }

@@ -24,7 +24,7 @@
     <None Include="MailViews\de\AccountConfirmedModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="MailViews\de\ErrorModel.cshtml">
+    <None Include="MailViews\de\ErrorMailModel.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="MailViews\de\AdminConfirmMailModel.cshtml">

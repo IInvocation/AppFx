@@ -1,34 +1,29 @@
 ﻿using System;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Resources.MailViews;
 using FluiTec.AppFx.Localization;
-using FluiTec.AppFx.Mail;
 using Microsoft.Extensions.Localization;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
 {
     /// <summary>   A data Model for the error. This class cannot be inherited. </summary>
-    public sealed class ErrorModel : MailModel
+    public sealed class ErrorMailModel : AuthMailModel
     {
         /// <summary>   Constructor. </summary>
         /// <param name="localizerFactory"> The localizer factory. </param>
+        /// <param name="appOptions">       Options for controlling the application. </param>
+        /// <param name="errorRoute">       The error route. </param>
         /// <param name="exception">        The exception. </param>
-        public ErrorModel(IStringLocalizerFactory localizerFactory, Exception exception)
+        public ErrorMailModel(IStringLocalizerFactory localizerFactory, ApplicationOptions appOptions, string errorRoute, Exception exception) : base(localizerFactory, appOptions)
         {
             var localizer = localizerFactory.Create(typeof(ErrorModelResource));
-
-            ApplicationName = MailGlobals.ApplicationName;
-            ApplicationUrl = MailGlobals.ApplicationUrl;
-            ApplicationUrlDisplay = MailGlobals.ApplicationUrlDisplay;
 
             Subject = localizer.GetString(() => ErrorModelResource.Subject);
             Header = localizer.GetString(() => ErrorModelResource.Header);
 
+            ErrorRoute = errorRoute;
             ExceptionText = exception?.ToString();
         }
-
-        /// <summary>	Gets or sets the exception pre text. </summary>
-        /// <value>	The exception pre text. </value>
-        public string ExceptionPreText { get; set; }
 
         /// <summary>	Gets or sets the exception text. </summary>
         /// <value>	The exception text. </value>
