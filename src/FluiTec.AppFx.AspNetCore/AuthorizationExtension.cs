@@ -31,9 +31,27 @@ namespace FluiTec.AppFx.AspNetCore
                         ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
                         ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity))
                     })));
+                AddDefaultPolicies(services, options);
             });
 
             return services;
+        }
+
+        /// <summary>An IServiceCollection extension method that adds a default policies.</summary>
+        /// <param name="services">             The services to act on. </param>
+        /// <param name="authorizationOptions"> Options for controlling the authorization. </param>
+        public static void AddDefaultPolicies(this IServiceCollection services, AuthorizationOptions authorizationOptions)
+        {
+            foreach (var policy in new DefaultPolicies().Policies)
+            {
+                authorizationOptions.AddPolicy(policy.Name, builder =>
+                {
+                    foreach (var requirement in policy.Requirements)
+                    {
+                        builder.Requirements.Add(requirement);
+                    }
+                });
+            }
         }
     }
 }

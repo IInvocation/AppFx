@@ -59,12 +59,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   Manage users. </summary>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> ManageUsers()
+        [Authorize(PolicyNames.UsersAccess)]
+        public IActionResult ManageUsers()
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)));
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var users = uow.UserRepository.GetAll();
@@ -75,16 +72,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Manage user. </summary>
         /// <param name="userId">   Identifier for the user. </param>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> ManageUser(int userId)
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
+        public IActionResult ManageUser(int userId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new []
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var user = uow.UserRepository.Get(userId);
@@ -108,16 +99,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public async Task<IActionResult> ManageUser(UserEditModel model)
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
+        public IActionResult ManageUser(UserEditModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             model.Update();
             if (ModelState.IsValid)
             {
@@ -142,16 +127,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Lockout user. </summary>
         /// <param name="userId">   Identifier for the user. </param>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> LockoutUser(int userId)
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
+        public IActionResult LockoutUser(int userId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var user = uow.UserRepository.Get(userId);
@@ -163,16 +142,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An asynchronous result that yields an IActionResult. </returns>
         [HttpPost]
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
         public async Task<IActionResult> LockoutUser(UserLockoutModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
@@ -193,16 +166,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Deletes the user described by userId. </summary>
         /// <param name="userId">   Identifier for the user. </param>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> DeleteUser(int userId)
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersDelete)]
+        public IActionResult DeleteUser(int userId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.DeleteRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var user = uow.UserRepository.Get(userId);
@@ -216,16 +183,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public async Task<IActionResult> DeleteUser(UserDeleteModel model)
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersDelete)]
+        public IActionResult DeleteUser(UserDeleteModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.DeleteRequirement(typeof(IdentityUserEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (ModelState.IsValid)
             {
                 using (var uow = _identityDataService.StartUnitOfWork())
@@ -249,7 +210,14 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             return View(model);
         }
 
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.UsersUpdate)
+        /// adds a user role.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>The asynchronous result that yields an IActionResult.</returns>
         [HttpPost]
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
+        [Authorize(PolicyNames.RolesUpdate)]
         public async Task<IActionResult> AddUserRole(UserRoleModel model)
         {
             var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
@@ -281,7 +249,14 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             return View("Error");
         }
 
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.RolesUpdate)
+        /// removes the user role described by model.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>The asynchronous result that yields an IActionResult.</returns>
         [HttpPost]
+        [Authorize(PolicyNames.UsersAccess)]
+        [Authorize(PolicyNames.UsersUpdate)]
+        [Authorize(PolicyNames.RolesUpdate)]
         public async Task<IActionResult> RemoveUserRole(UserRoleModel model)
         {
             var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
@@ -324,15 +299,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   Manage roles. </summary>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> ManageRoles()
+        [Authorize(PolicyNames.RolesAccess)]
+        public IActionResult ManageRoles()
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var roles = uow.RoleRepository.GetAll()
@@ -344,16 +313,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Manage role. </summary>
         /// <param name="roleId">   Identifier for the role. </param>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> ManageRole(int roleId)
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesUpdate)]
+        public IActionResult ManageRole(int roleId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var role = uow.RoleRepository.Get(roleId);
@@ -365,16 +328,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public async Task<IActionResult> ManageRole(RoleEditModel model)
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesUpdate)]
+        public IActionResult ManageRole(RoleEditModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             model.Update();
             if (ModelState.IsValid)
             {
@@ -397,16 +354,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   Adds role. </summary>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> AddRole()
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesCreate)]
+        public IActionResult AddRole()
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             return View();
         }
 
@@ -414,16 +365,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public async Task<IActionResult> AddRole(RoleAddModel model)
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesCreate)]
+        public IActionResult AddRole(RoleAddModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (ModelState.IsValid)
             {
                 using (var uow = _identityDataService.StartUnitOfWork())
@@ -448,16 +393,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Deletes the role described by roleId. </summary>
         /// <param name="roleId">   Identifier for the role. </param>
         /// <returns>   An IActionResult. </returns>
-        public async Task<IActionResult> DeleteRole(int roleId)
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesDelete)]
+        public IActionResult DeleteRole(int roleId)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var role = uow.RoleRepository.Get(roleId);
@@ -471,16 +410,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public async Task<IActionResult> DeleteRole(RoleDeleteModel model)
+        [Authorize(PolicyNames.RolesAccess)]
+        [Authorize(PolicyNames.RolesDelete)]
+        public IActionResult DeleteRole(RoleDeleteModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
-                ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (ModelState.IsValid)
             {
                 using (var uow = _identityDataService.StartUnitOfWork())
