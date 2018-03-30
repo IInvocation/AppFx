@@ -179,6 +179,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

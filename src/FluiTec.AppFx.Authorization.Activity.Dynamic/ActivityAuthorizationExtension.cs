@@ -15,12 +15,12 @@ namespace FluiTec.AppFx.Authorization.Activity.Dynamic
         /// <param name="services">         The services to act on. </param>
         /// <param name="configuration">    The configuration. </param>
         /// <returns>An IServiceCollection.</returns>
-        public static IServiceCollection ConfigureAppFxIdentityServer(this IServiceCollection services,
+        public static IServiceCollection ConfigureAppFxAuthorizationData(this IServiceCollection services,
             IConfigurationRoot configuration)
         {
             var provider =
                 new ActivityAuthorizationDataProvider(configuration.GetConfiguration<ActivityAuthorizationOptions>());
-            services.AddScoped(p => provider.GetDataService(configuration));
+            services.AddSingleton(p => provider.GetDataService(configuration));
             return services;
         }
     }

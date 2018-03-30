@@ -29,5 +29,16 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql.Repositories
             return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new {Ids = roleIds.ToArray()},
                 UnitOfWork.Transaction);
         }
+
+        /// <summary>Finds the names in this collection.</summary>
+        /// <param name="names">    The names. </param>
+        /// <returns>An enumerator that allows foreach to be used to process the names in this collection.</returns>
+        public override IEnumerable<IdentityRoleEntity> FindByNames(IEnumerable<string> names)
+        {
+            var command =
+                $"{SqlBuilder.SelectAll(typeof(IdentityRoleEntity))} WHERE {nameof(IdentityUserEntity.Name)} IN @Names";
+            return UnitOfWork.Connection.Query<IdentityRoleEntity>(command, new { Names = names },
+                UnitOfWork.Transaction);
+        }
     }
 }

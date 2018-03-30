@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             IConfigurationRoot configuration)
         {
             var provider = new IdentityDataProvider(configuration.GetConfiguration<IdentityOptions>());
-            services.AddScoped(p => provider.GetDataService(configuration));
+            services.AddSingleton(p => provider.GetDataService(configuration));
             return services;
         }
     }

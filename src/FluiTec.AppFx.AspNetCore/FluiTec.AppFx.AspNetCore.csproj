@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Identity.Dynamic\FluiTec.AppFx.Identity.Dynamic.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dynamic\FluiTec.AppFx.IdentityServer.Dynamic.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj" />

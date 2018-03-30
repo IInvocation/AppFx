@@ -1,5 +1,8 @@
-﻿@using FluiTec.AppFx.Identity.Entities
+﻿@using FluiTec.AppFx.AspNetCore
+@using FluiTec.AppFx.Identity.Entities
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @inject SignInManager<IdentityUserEntity> SignInManager
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light fixed-top">
@@ -23,22 +26,22 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item" is-active-route asp-controller="Manage" asp-action="Index">
-                        <a class="nav-link" asp-controller="Profile" asp-action="Index"><img src="/images/profile.png" alt="profile"/>Profile</a>
+                        <a class="nav-link" asp-controller="Profile" asp-action="Index"><img src="/images/profile.png" alt="profile" />Profile</a>
                     </li>
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Logout">
-                        <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout"/>Logout</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout" />Logout</a>
                     </li>
-                    if (User.IsInRole("Administrator"))
+                    if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.AdministrativeAccess)).Succeeded)
                     {
-                    <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
-                        <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile"/>Admin</a>
-                    </li>
+                        <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile" />Admin</a>
+                        </li>
                     }
                 }
                 else
                 {
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Login">
-                        <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="/images/login.png" alt="login or register"/>Login</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="/images/login.png" alt="login or register" />Login</a>
                     </li>
                 }
             </ul>

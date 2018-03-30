@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
@@ -46,5 +47,13 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         [Display(Name = FullModelName + "LockoutTime", Description = "Lockout time")]
         [DisplayTranslationForCulture("LockoutTime", "Aussperrzeit", "de")]
         public DateTime? LockoutTime { get; set; }
+
+        /// <summary>Gets or sets the user roles.</summary>
+        /// <value>The user roles.</value>
+        public IEnumerable<UserRoleModel> UserRoles { get; set; }
+
+        /// <summary>Gets or sets the roles.</summary>
+        /// <value>The roles.</value>
+        public IEnumerable<UserRoleModel> Roles { get; set; }
     }
 }

@@ -57,6 +57,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureIdentity(Configuration);
             services.ConfigureAuthentication(Configuration);
             services.ConfigureIdentityServer(Configuration);
+
+            services.ConfigureAuthorization(Configuration);
+
             services.ConfigureMvc(Configuration);
             services.ConfigureLocalization(Configuration);
             services.ConfigureCaptcha(Configuration);

@@ -468,6 +468,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
+        #region AccessDenied
+
+        /// <summary>Access denied.</summary>
+        /// <returns>An IActionResult.</returns>
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        #endregion
+
         #region Helpers
 
         /// <summary>Registers the first user admin without confirmation.</summary>

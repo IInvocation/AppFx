@@ -64,6 +64,14 @@ namespace FluiTec.AppFx.Identity.LiteDb.Repositories
             return GetAll().Where(e => roleIds.Contains(e.Id));
         }
 
+        /// <summary>Finds the names in this collection.</summary>
+        /// <param name="names">    The names. </param>
+        /// <returns>An enumerator that allows foreach to be used to process the names in this collection.</returns>
+        public IEnumerable<IdentityRoleEntity> FindByNames(IEnumerable<string> names)
+        {
+            return GetAll().Where(e => names.Contains(e.Name));
+        }
+
         #endregion
     }
 }
