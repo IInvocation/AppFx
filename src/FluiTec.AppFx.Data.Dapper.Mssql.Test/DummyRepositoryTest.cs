@@ -155,27 +155,25 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
         [TestMethod]
         public void TestCommit()
         {
-            Initialize();
-            try
+            using (var dataService = new DummyMssqlDataService())
             {
-                Repository.Add(new DummyEntity());
-                UnitOfWork.Commit();
-            }
-            finally
-            {
-                Cleanup();
-            }
+                dataService.RegisterRepositoryProvider(
+                    new Func<IUnitOfWork, IDummyRepository>(work => new DummyRepository(work)));
+                using (var uow = dataService.BeginUnitOfWork())
+                {
+                    var repo = uow.GetRepository<IDummyRepository>();
+                    repo.Add(new DummyEntity());
+                    uow.Commit();
+                }
 
-            Initialize();
-            try
-            {
-                Assert.AreEqual(Repository.GetAll().Count(), 1);
-                Repository.Delete(Repository.GetAll().First());
-                UnitOfWork.Commit();
-            }
-            finally
-            {
-                Cleanup();
+                using (var uow = dataService.BeginUnitOfWork())
+                {
+                    var repo = uow.GetRepository<IDummyRepository>();
+
+                    Assert.AreEqual(repo.GetAll().Count(), 1);
+                    repo.Delete(repo.GetAll().First());
+                    uow.Commit();
+                }
             }
         }
     }

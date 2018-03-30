@@ -17,15 +17,15 @@ namespace FluiTec.AppFx.Identity
     {
         #region Constructors
 
-        /// <summary>	Constructor. </summary>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when one or more required arguments are
-        ///     null.
-        /// </exception>
-        /// <param name="dataService">	The data service. </param>
-        public IdentityStore(IIdentityDataService dataService)
+        /// <summary>Constructor.</summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="dataService">  The data service. </param>
+        /// <param name="describer">    The describer. </param>
+        public IdentityStore(IIdentityDataService dataService, IdentityErrorDescriber describer)
         {
             UnitOfWork = dataService?.StartUnitOfWork() ?? throw new ArgumentNullException(nameof(dataService));
+            ErrorDescriber = describer;
         }
 
         #endregion
@@ -35,6 +35,10 @@ namespace FluiTec.AppFx.Identity
         /// <summary>	Gets or sets the unit of work. </summary>
         /// <value>	The unit of work. </value>
         protected IIdentityUnitOfWork UnitOfWork { get; set; }
+
+        /// <summary>Gets or sets the error describer.</summary>
+        /// <value>The error describer.</value>
+        protected IdentityErrorDescriber ErrorDescriber { get; set; }
 
         #endregion
 
@@ -349,6 +353,9 @@ namespace FluiTec.AppFx.Identity
             {
                 try
                 {
+                    if (UnitOfWork.UserRepository.FindByNormalizedEmail(user.NormalizedEmail) != null)
+                        return IdentityResult.Failed(ErrorDescriber.DuplicateEmail(user.Email));
+
                     UnitOfWork.UserRepository.Add(user);
                     return IdentityResult.Success;
                 }
