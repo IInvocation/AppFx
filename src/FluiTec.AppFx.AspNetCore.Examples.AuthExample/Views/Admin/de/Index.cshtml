@@ -1,8 +1,14 @@
-﻿<section id="maincontent" class="wrapper content-wrapper">
+﻿@using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<section id="maincontent" class="wrapper content-wrapper">
     <header>
         <h2>Admin</h2>
     </header>
     <div class="container">
+    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.UsersAccess)).Succeeded)
+    {
         <section>
             <h4>Benutzer verwalten</h4>
             <div class="row uniform">
@@ -15,6 +21,9 @@
                 </div>
             </div>
         </section>
+    }
+    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesAccess)).Succeeded)
+    {
         <section>
             <h4>Rollen verwalten</h4>
             <div class="row uniform">
@@ -27,5 +36,6 @@
                 </div>
             </div>
         </section>
+    }
     </div>
 </section>

@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<FluiTec.AppFx.Identity.Entities.IdentityUserEntity>
+@using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
         <h2>Benutzerverwaltung</h2>
@@ -8,11 +12,14 @@
             <h4>Benutzer verwalten</h4>
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>#</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.UsersUpdate)).Succeeded)
+                    {
+                        <th>#</th>
+                    }
+                    </tr>
                 </thead>
                 @foreach (var user in Model)
                 {
@@ -24,7 +31,10 @@
                             @user.Email
                         </td>
                         <td>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.UsersUpdate)).Succeeded)
+                        {
                             <a asp-controller="Admin" asp-action="ManageUser" asp-route-userid="@user.Id">Bearbeiten</a>
+                        }
                         </td>
                     </tr>
                 }

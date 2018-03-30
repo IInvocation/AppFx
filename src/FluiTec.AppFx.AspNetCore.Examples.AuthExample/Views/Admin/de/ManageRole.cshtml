@@ -1,5 +1,8 @@
 ﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 @model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.RoleEditModel
+@using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -43,11 +46,11 @@
                         <li>
                             <a asp-controller="Admin" asp-action="ManageRoles">Rollenverwaltung</a>
                         </li>
-                        @if (Model != null)
+                        @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesDelete)).Succeeded)
                         {
-                        <li>
-                            <a asp-controller="Admin" asp-action="DeleteRole" asp-route-roleid="@Model.Id">Rolle löschen</a>
-                        </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="DeleteRole" asp-route-roleid="@Model.Id">Rolle löschen</a>
+                            </li>
                         }
                     </ul>
                 </div>

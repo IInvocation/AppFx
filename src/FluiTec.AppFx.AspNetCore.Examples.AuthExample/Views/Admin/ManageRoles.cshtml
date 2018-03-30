@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<FluiTec.AppFx.Identity.Entities.IdentityRoleEntity>
+@using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
         <h2>Role management</h2>
@@ -8,11 +12,14 @@
             <h4>Manage role</h4>
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>#</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+                    {
+                        <th>#</th>
+                    }
+                    </tr>
                 </thead>
                 @foreach (var role in Model)
                 {
@@ -23,9 +30,12 @@
                         <td>
                             @role.Description
                         </td>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+                    {
                         <td>
                             <a asp-controller="Admin" asp-action="ManageRole" asp-route-roleid="@role.Id">Edit</a>
                         </td>
+                    }
                     </tr>
                 }
             </table>
@@ -36,9 +46,12 @@
                         <li>
                             <a asp-controller="Admin" asp-action="Index">Admin</a>
                         </li>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesCreate)).Succeeded)
+                    {
                         <li>
                             <a asp-controller="Admin" asp-action="AddRole">Add role</a>
                         </li>
+                    }
                     </ul>
                 </div>
             </div>

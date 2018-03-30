@@ -2,13 +2,17 @@
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin;
+using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.Authorization.Activity;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
+using FluiTec.AppFx.Mail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 {
@@ -27,6 +31,16 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>The authorization service.</summary>
         private readonly IAuthorizationService _authorizationService;
 
+        /// <summary>Gets options for controlling the application.</summary>
+        /// <value>Options that control the application.</value>
+        private readonly ApplicationOptions _applicationOptions;
+
+        /// <summary>The email sender.</summary>
+        private readonly ITemplatingMailService _emailSender;
+
+        /// <summary>The localizer factory.</summary>
+        private readonly IStringLocalizerFactory _localizerFactory;
+
         #endregion
 
         #region Constructors
@@ -35,11 +49,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="identityDataService">  The identity data service. </param>
         /// <param name="userManager">          Manager for user. </param>
         /// <param name="authorizationService"> The authorization service. </param>
-        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager, IAuthorizationService authorizationService)
+        /// <param name="applicationOptions">   Gets options for controlling the application. </param>
+        /// <param name="emailSender">          The email sender. </param>
+        /// <param name="localizerFactory">     The localizer factory. </param>
+        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager, IAuthorizationService authorizationService, ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory)
         {
             _identityDataService = identityDataService;
             _userManager = userManager;
             _authorizationService = authorizationService;
+            _applicationOptions = applicationOptions;
+            _emailSender = emailSender;
+            _localizerFactory = localizerFactory;
         }
 
         #endregion
@@ -291,6 +311,29 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
 
             return View("Error");
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.UsersAccess)
+        /// confirm user.</summary>
+        /// <param name="userId">   Identifier for the user. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.UsersAccess)]
+        public async Task<IActionResult> ConfirmUser(int userId)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var user = uow.UserRepository.Get(userId);
+                if (user != null)
+                {
+                    user.EmailConfirmed = true;
+                    uow.Commit();
+
+                    var mailModel = new AccountConfirmedModel(_localizerFactory, _applicationOptions, Url.Action(nameof(AccountController.Login), "Account"));
+                    await _emailSender.SendEmailAsync(user.Email, mailModel);
+                }
+            }
+            return RedirectToAction(nameof(ManageUsers));
         }
 
         #endregion

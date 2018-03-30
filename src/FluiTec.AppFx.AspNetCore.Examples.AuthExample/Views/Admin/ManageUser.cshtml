@@ -1,4 +1,7 @@
 ﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
+@using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.UserEditModel
 
 <section id="maincontent" class="wrapper content-wrapper">
@@ -30,12 +33,12 @@
                 </div>
                 @if (Model?.LockoutTime != null)
                 {
-                <div class="row uniform">
-                    <div class="col-lg-6">
-                        <label asp-for="LockoutTime"></label>
-                        <input asp-for="LockoutTime" readonly/>
+                    <div class="row uniform">
+                        <div class="col-lg-6">
+                            <label asp-for="LockoutTime"></label>
+                            <input asp-for="LockoutTime" readonly />
+                        </div>
                     </div>
-                </div>
                 }
                 <div class="row uniform">
                     <div class="col-lg-6">
@@ -50,7 +53,10 @@
                     </div>
                 </div>
             </form>
+        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+        {
             @Html.Partial("_ManageUserRoles", Model)
+        }
             <h4>Actions</h4>
             <div class="row uniform">
                 <div class="col-lg-6">
@@ -58,9 +64,12 @@
                         <li>
                             <a asp-controller="Admin" asp-action="LockoutUser" asp-route-userid="@Model?.Id">Lock out</a>
                         </li>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.UsersDelete)).Succeeded)
+                    {
                         <li>
                             <a asp-controller="Admin" asp-action="DeleteUser" asp-route-userid="@Model?.Id">Delete</a>
                         </li>
+                    }
                         <li>
                             <a asp-controller="Admin" asp-action="ManageUsers">User management</a>
                         </li>

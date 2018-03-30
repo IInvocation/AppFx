@@ -1,37 +1,44 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
+﻿@using FluiTec.AppFx.AspNetCore
+@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 @model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.UserEditModel
+using FluiTec.AppFx.AspNetCore
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 
-<section>
-    @if (Model.UserRoles.Any())
-    {
-        <h4>Remove roles</h4>
-        <form asp-controller="Admin" asp-action="RemoveUserRole" method="post" class="form-horizontal">
-            <div id="socialLoginList">
-                <p>
-                    @foreach (var role in Model.UserRoles)
-                    {
-                        <input name="UserId" value="@Model.Id" type="hidden" readonly="" />
-                        <input name="Name" value="@role.Name" type="hidden" readonly="" />
-                        <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)" />
-                    }
-                </p>
-            </div>
-        </form>
-    }
-    @if (Model.Roles.Any())
-    {
-        <h4>Add roles</h4>
-        <form asp-controller="Admin" asp-action="AddUserRole" method="post" class="form-horizontal">
-            <div id="socialLoginList">
-                <p>
-                    @foreach (var role in Model.Roles)
-                    {
-                        <input name="UserId" value="@Model.Id" type="hidden" readonly="" />
-                        <input name="Name" value="@role.Name" type="hidden" readonly="" />
-                        <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
-                    }
-                </p>
-            </div>
-        </form>
-    }
-</section>
+@if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+{
+    <section>
+        @if (Model.UserRoles.Any())
+        {
+            <h4>Remove roles</h4>
+            <form asp-controller="Admin" asp-action="RemoveUserRole" method="post" class="form-horizontal">
+                <div id="socialLoginList">
+                    <p>
+                        @foreach (var role in Model.UserRoles)
+                        {
+                            <input name="UserId" value="@Model.Id" type="hidden" readonly=""/>
+                            <input name="Name" value="@role.Name" type="hidden" readonly=""/>
+                            <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+        @if (Model.Roles.Any())
+        {
+            <h4>Add roles</h4>
+            <form asp-controller="Admin" asp-action="AddUserRole" method="post" class="form-horizontal">
+                <div id="socialLoginList">
+                    <p>
+                        @foreach (var role in Model.Roles)
+                        {
+                            <input name="UserId" value="@Model.Id" type="hidden" readonly=""/>
+                            <input name="Name" value="@role.Name" type="hidden" readonly=""/>
+                            <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
+                        }
+                    </p>
+                </div>
+            </form>
+        }
+    </section>
+}
