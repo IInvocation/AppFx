@@ -212,7 +212,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 using (var uow = _identityDataService.StartUnitOfWork())
                 {
                     var user = uow.UserRepository.FindByNormalizedEmail(model.Email.ToLower(CultureInfo.InvariantCulture));
-                    var userRoles = uow.UserRoleRepository.FindByUser(user);
+                    var roles = uow.UserRoleRepository.FindByUser(user);
+                    var userRoles = roles.Select(r => uow.UserRoleRepository.FindByUserIdAndRoleId(user.Id, r)).ToList();
                     var userLogins = uow.LoginRepository.FindByUserId(user.Identifier);
 
                     foreach(var userRole in userRoles)
