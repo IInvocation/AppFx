@@ -21,7 +21,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 var activity = new ActivityEntity
                 {
                     Name = "MyActivity",
-                    ResourceName = "MyResource"
+                    ResourceName = "MyResource",
+                    ResourceDisplayName = "MyDisplayName",
+                    GroupName = "MyGroupName",
+                    GroupDisplayName = "MyGroupDisplayName"
                 };
 
                 uow.ActivityRepository.Add(activity);
@@ -37,12 +40,18 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 new ActivityEntity
                 {
                     Name = "MyActivity1",
-                    ResourceName = "MyResource"
+                    ResourceName = "MyResource",
+                    ResourceDisplayName = "MyDisplayName",
+                    GroupName = "MyGroupName",
+                    GroupDisplayName = "MyGroupDisplayName"
                 },
                 new ActivityEntity
                 {
                     Name = "MyActivity2",
-                    ResourceName = "MyResource"
+                    ResourceName = "MyResource",
+                    ResourceDisplayName = "MyDisplayName",
+                    GroupName = "MyGroupName",
+                    GroupDisplayName = "MyGroupDisplayName"
                 }
             };
             using (var uow = DataService.StartUnitOfWork())
@@ -60,8 +69,11 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 var activity = uow.ActivityRepository.Add(new ActivityEntity
                     {
                         Name = "Dummy",
-                        ResourceName = "MyResource"
-                    }
+                        ResourceName = "MyResource",
+                        ResourceDisplayName = "MyDisplayName",
+                        GroupName = "MyGroupName",
+                        GroupDisplayName = "MyGroupDisplayName"
+                }
                 );
 
                 activity.Name = "Changed";
@@ -78,8 +90,11 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                 var role = uow.ActivityRepository.Add(new ActivityEntity
                     {
                         Name = "Dummy",
-                        ResourceName = "MyResource"
-                    }
+                        ResourceName = "MyResource",
+                        ResourceDisplayName = "MyDisplayName",
+                        GroupName = "MyGroupName",
+                        GroupDisplayName = "MyGroupDisplayName"
+                }
                 );
 
                 uow.ActivityRepository.Delete(role.Id);

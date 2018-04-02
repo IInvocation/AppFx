@@ -45,7 +45,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                     var activity = new ActivityEntity
                     {
                         Name = "MyActivity",
-                        ResourceName = "MyResource"
+                        ResourceName = "MyResource",
+                        ResourceDisplayName = "MyDisplayName",
+                        GroupName = "MyGroupName",
+                        GroupDisplayName = "MyGroupDisplayName"
                     };
                     activity = uow.ActivityRepository.Add(activity);
 
@@ -78,12 +81,18 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
             var activity1 = new ActivityEntity
             {
                 Name = "MyActivity 1",
-                ResourceName = "MyResource"
+                ResourceName = "MyResource",
+                ResourceDisplayName = "MyDisplayName",
+                GroupName = "MyGroupName",
+                GroupDisplayName = "MyGroupDisplayName"
             };
             var activity2 = new ActivityEntity
             {
                 Name = "MyActivity 2",
-                ResourceName = "MyResource"
+                ResourceName = "MyResource",
+                ResourceDisplayName = "MyDisplayName",
+                GroupName = "MyGroupName",
+                GroupDisplayName = "MyGroupDisplayName"
             };
 
             var role = new IdentityRoleEntity
@@ -162,7 +171,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                     var activity = new ActivityEntity
                     {
                         Name = "MyActivity",
-                        ResourceName = "MyResource"
+                        ResourceName = "MyResource",
+                        ResourceDisplayName = "MyDisplayName",
+                        GroupName = "MyGroupName",
+                        GroupDisplayName = "MyGroupDisplayName"
                     };
                     activity = uow.ActivityRepository.Add(activity);
 
@@ -215,7 +227,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Test
                     var activity = new ActivityEntity
                     {
                         Name = "MyActivity",
-                        ResourceName = "MyResource"
+                        ResourceName = "MyResource",
+                        ResourceDisplayName = "MyDisplayName",
+                        GroupName = "MyGroupName",
+                        GroupDisplayName = "MyGroupDisplayName"
                     };
                     activity = uow.ActivityRepository.Add(activity);
 

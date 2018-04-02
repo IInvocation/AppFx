@@ -47,6 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Versions\Migration2\ActivityRoleTable.cs" />
     <Compile Include="Versions\Migration1\ActivityTable.cs" />
+    <Compile Include="Versions\Migration3\ActivityTable.cs" />
     <Compile Include="VersionTable.cs" />
   </ItemGroup>
   <ItemGroup>
