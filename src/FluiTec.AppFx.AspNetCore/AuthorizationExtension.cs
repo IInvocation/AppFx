@@ -74,7 +74,8 @@ namespace FluiTec.AppFx.AspNetCore
                         {
                             uow.ActivityRepository.Add(new ActivityEntity
                             { 
-                                Name  = resource.Name,
+                                Name = activity.Name,
+                                ResourceName  = resource.Name,
                                 ResourceDisplayName = resource.DisplayName,
                                 GroupName = resource.GroupName,
                                 GroupDisplayName = resource.GroupDisplayName
