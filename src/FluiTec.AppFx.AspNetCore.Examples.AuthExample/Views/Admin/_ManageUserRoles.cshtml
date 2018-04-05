@@ -1,11 +1,9 @@
 ﻿@using FluiTec.AppFx.AspNetCore
-@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 @model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.UserEditModel
-using FluiTec.AppFx.AspNetCore
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
-@if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+@if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesAccess)).Succeeded)
 {
     <section>
         @if (Model.UserRoles.Any())

@@ -238,7 +238,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.UsersAccess)]
         [Authorize(PolicyNames.UsersUpdate)]
-        [Authorize(PolicyNames.RolesUpdate)]
+        [Authorize(PolicyNames.RolesAccess)]
         public async Task<IActionResult> AddUserRole(UserRoleModel model)
         {
             var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
@@ -277,7 +277,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.UsersAccess)]
         [Authorize(PolicyNames.UsersUpdate)]
-        [Authorize(PolicyNames.RolesUpdate)]
+        [Authorize(PolicyNames.RolesAccess)]
         public async Task<IActionResult> RemoveUserRole(UserRoleModel model)
         {
             var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]

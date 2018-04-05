@@ -39,7 +39,9 @@
                     </div>
                 </div>
             </form>
-            <h4>Actions</h4>
+            @Html.Partial("_ManageRoleActivities")
+            <h4>Aktionen</h4>
+            <hr />
             <div class="row uniform">
                 <div class="col-lg-6">
                     <ul class="actions">
@@ -47,11 +49,11 @@
                             <a asp-controller="Admin" asp-action="ManageRoles">Rollenverwaltung</a>
                         </li>
                         @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesDelete)).Succeeded)
-                        {
-                            <li>
-                                <a asp-controller="Admin" asp-action="DeleteRole" asp-route-roleid="@Model.Id">Rolle löschen</a>
-                            </li>
-                        }
+                {
+                    <li>
+                        <a asp-controller="Admin" asp-action="DeleteRole" asp-route-roleid="@Model.Id">Rolle löschen</a>
+                    </li>
+        }
                     </ul>
                 </div>
             </div>
