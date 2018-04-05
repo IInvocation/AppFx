@@ -41,6 +41,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
                 .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile("appsettings.secret.json", false, true)
+                .AddJsonFile("appsettings.Localization.json", true, true)
                 .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true);
 
             builder.AddEnvironmentVariables();

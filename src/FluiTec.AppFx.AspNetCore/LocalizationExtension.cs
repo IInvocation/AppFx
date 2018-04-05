@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
-using DbLocalizationProvider;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Localization.Entities;
@@ -13,7 +9,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -57,9 +52,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbLocalizationProvider();
 
             // import json-defined localizations
-            if (!File.Exists("localization.import.json")) return services;
-            var content = File.ReadAllText("localization.import.json", Encoding.UTF8);
-            var resources = JsonConvert.DeserializeObject<IEnumerable<LocalizationResource>>(content);
+            var resourceOptions = configuration.GetConfiguration<DbLocalizationResourceOptions>();
+            if (resourceOptions == null || !resourceOptions.Resources.Any())
+                return services;
+
+            var resources = resourceOptions.Resources;
             using (var uow = services.BuildServiceProvider().GetService<ILocalizationDataService>().StartUnitOfWork())
             {
                 foreach (var resource in resources)

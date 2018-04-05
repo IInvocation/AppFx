@@ -7,6 +7,7 @@
   <ItemGroup>
     <Content Remove="appsettings.Development.json" />
     <Content Remove="appsettings.json" />
+    <Content Remove="appsettings.Localization.json" />
     <Content Remove="appsettings.Production.json" />
     <Content Remove="appsettings.secret.json" />
     <Content Remove="MailViews\AccountConfirmedModel.cshtml" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="appsettings.Localization.json" />
     <None Include="appsettings.Development.json" />
     <None Include="appsettings.json" />
     <None Include="appsettings.Production.json" />
