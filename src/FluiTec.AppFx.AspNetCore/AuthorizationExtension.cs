@@ -22,9 +22,9 @@ namespace FluiTec.AppFx.AspNetCore
         public static IServiceCollection ConfigureAuthorization(this IServiceCollection services, IConfigurationRoot configuration)
         {
             services.ConfigureAppFxAuthorizationData(configuration);
-            services.AddSingleton<IAuthorizationHandler, ResourceTypOperationAuthorizationHandler>();
-            services.AddSingleton<ResourceTypOperationAuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, AdministrativeAccessAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, ResourceTypOperationAuthorizationHandler>();
+            services.AddScoped<ResourceTypOperationAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, AdministrativeAccessAuthorizationHandler>();
 
             services.AddAuthorization(options =>
             {

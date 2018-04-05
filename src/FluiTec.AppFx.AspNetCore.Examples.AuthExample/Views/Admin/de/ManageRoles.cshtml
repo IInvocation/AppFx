@@ -33,7 +33,7 @@
                     @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
                     {
                         <td>
-                            <a asp-controller="Admin" asp-action="ManageRole" asp-route-roleid="@role.Id">Edit</a>
+                            <a asp-controller="Admin" asp-action="ManageRole" asp-route-roleid="@role.Id">Bearbeiten</a>
                         </td>
                     }
                     </tr>

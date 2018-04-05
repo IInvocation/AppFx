@@ -20,7 +20,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dynamic
         {
             var provider =
                 new ActivityAuthorizationDataProvider(configuration.GetConfiguration<ActivityAuthorizationOptions>());
-            services.AddSingleton(p => provider.GetDataService(configuration));
+            services.AddScoped(p => provider.GetDataService(configuration));
             return services;
         }
     }
