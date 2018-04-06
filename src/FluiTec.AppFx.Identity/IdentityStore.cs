@@ -213,7 +213,9 @@ namespace FluiTec.AppFx.Identity
                     var roleIds = UnitOfWork.UserRoleRepository.FindByUser(user);
                     var roles = UnitOfWork.RoleRepository.FindByIds(roleIds);
                     var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r.Name));
-                    return UnitOfWork.ClaimRepository.GetByUser(user).Select(c => new Claim(c.Type, c.Value)).Concat(roleClaims).ToList();
+                    var userClaims = new[]
+                        {new Claim(ClaimTypes.HomePhone, user.Phone), new Claim(ClaimTypes.Name, user.Name)};
+                    return UnitOfWork.ClaimRepository.GetByUser(user).Select(c => new Claim(c.Type, c.Value)).Concat(roleClaims).Concat(userClaims).ToList();
                 },
                 cancellationToken);
         }
