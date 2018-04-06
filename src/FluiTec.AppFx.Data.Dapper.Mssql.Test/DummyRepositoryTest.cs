@@ -164,8 +164,14 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
                     var repo = uow.GetRepository<IDummyRepository>();
                     repo.Add(new DummyEntity());
                     uow.Commit();
+                    uow.Dispose();
                 }
+            }
 
+            using (var dataService = new DummyMssqlDataService())
+            {
+                dataService.RegisterRepositoryProvider(
+                    new Func<IUnitOfWork, IDummyRepository>(work => new DummyRepository(work)));
                 using (var uow = dataService.BeginUnitOfWork())
                 {
                     var repo = uow.GetRepository<IDummyRepository>();
@@ -173,6 +179,7 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test
                     Assert.AreEqual(repo.GetAll().Count(), 1);
                     repo.Delete(repo.GetAll().First());
                     uow.Commit();
+                    uow.Dispose();
                 }
             }
         }

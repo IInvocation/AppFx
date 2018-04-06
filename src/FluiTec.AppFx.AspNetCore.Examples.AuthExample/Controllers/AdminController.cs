@@ -326,27 +326,23 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             return View("Error");
         }
 
-        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.UsersAccess)
-        /// confirm user.</summary>
-        /// <param name="userId">   Identifier for the user. </param>
-        /// <returns>An IActionResult.</returns>
-        [HttpPost]
+        [HttpGet]
         [Authorize(PolicyNames.UsersAccess)]
         public async Task<IActionResult> ConfirmUser(int userId)
         {
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var user = uow.UserRepository.Get(userId);
-                if (user != null)
-                {
-                    user.EmailConfirmed = true;
-                    uow.Commit();
+                if (user == null) return RedirectToAction(nameof(ManageUsers));
 
-                    var mailModel = new AccountConfirmedModel(_localizerFactory, _applicationOptions, Url.Action(nameof(AccountController.Login), "Account"));
-                    await _emailSender.SendEmailAsync(user.Email, mailModel);
-                }
+                user.EmailConfirmed = true;
+                uow.UserRepository.Update(user);
+                uow.Commit();
+
+                var mailModel = new AccountConfirmedModel(_localizerFactory, _applicationOptions, Url.Action(nameof(AccountController.Login), "Account"));
+                await _emailSender.SendEmailAsync(user.Email, mailModel);
             }
-            return RedirectToAction(nameof(ManageUsers));
+            return RedirectToAction(nameof(ManageUser), new {userId});
         }
 
         #endregion

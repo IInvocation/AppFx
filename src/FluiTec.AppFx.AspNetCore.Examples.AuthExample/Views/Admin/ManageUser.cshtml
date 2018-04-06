@@ -40,6 +40,14 @@
                         </div>
                     </div>
                 }
+                @if (Model != null && !Model.Confirmed)
+                {
+                    <div class="row uniform">
+                        <div class="col-lg-6">
+                            <a asp-controller="Admin" asp-action="ConfirmUser" asp-route-userid="@Model.Id">Confirm account now</a>
+                        </div>
+                    </div>
+                }
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">

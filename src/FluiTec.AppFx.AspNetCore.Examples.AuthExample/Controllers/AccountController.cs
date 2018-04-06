@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Org.BouncyCastle.Bcpg;
 using PaulMiami.AspNetCore.Mvc.Recaptcha;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
@@ -524,7 +525,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     new UserConfirmMailModel(_localizerFactory, _applicationOptions, user.Email, callbackUrl));
             else
                 await _emailSender.SendEmailAsync(_adminOptions.AdminConfirmationRecipient,
-                    new AdminConfirmMailModel(_localizerFactory, _applicationOptions, callbackUrl, _adminOptions.AdminConfirmationRecipient));
+                    new AdminConfirmMailModel(_localizerFactory, _applicationOptions, callbackUrl, _adminOptions.AdminConfirmationRecipient, Url.Action(nameof(AdminController.ManageUser), "Admin", new { userId = user.Id}, HttpContext.Request.Scheme)));
         }
 
         /// <summary>   Adds the errors. </summary>

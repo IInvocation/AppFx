@@ -48,6 +48,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         [DisplayTranslationForCulture("LockoutTime", "Aussperrzeit", "de")]
         public DateTime? LockoutTime { get; set; }
 
+        /// <summary>Gets or sets a value indicating whether the confirmed.</summary>
+        /// <value>True if confirmed, false if not.</value>
+        public bool Confirmed { get; set; }
+
         /// <summary>Gets or sets the user roles.</summary>
         /// <value>The user roles.</value>
         public IEnumerable<UserRoleModel> UserRoles { get; set; }

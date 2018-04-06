@@ -21,8 +21,23 @@
         <td>
             <p style="color: #435058; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
                 Hi,<br/>
-                right now, a user created a new account on @Model.ApplicationName that needs to be confirmed.<br/>
-                The confirmation can be initiated with the following link: <a href="@Model.ValidationUrl">Confirm account now</a>.
+                right now, a user created a new account on @Model.ApplicationName that needs to be confirmed.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="color: #435058; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+                In case you want to confirm the account immediately - please click on the following link:<br />
+                <a href="@Model.ValidationUrl">Confirm account right now</a>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="color: #435058; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px;">
+                If you need to make a few settings before confirming the account - please click on the following link:<br />
+                <a href="@Model.UserEditUrl">Edit account</a>
             </p>
         </td>
     </tr>

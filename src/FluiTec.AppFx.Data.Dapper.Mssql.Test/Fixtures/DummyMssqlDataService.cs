@@ -3,11 +3,10 @@
 namespace FluiTec.AppFx.Data.Dapper.Mssql.Test.Fixtures
 {
     /// <summary>	A dummy mssql data service. </summary>
-    public class DummyMssqlDataService : DapperDataService
+    public class DummyMssqlDataService : MssqlDapperDataService
     {
         /// <summary>	Default constructor. </summary>
-        public DummyMssqlDataService() : base(ConnectionStringHelper.GetConnectionStringFor("MSSQL"),
-            new MssqlConnectionFactory())
+        public DummyMssqlDataService() : base(ConnectionStringHelper.GetConnectionStringFor("MSSQL"))
         {
         }
 

@@ -10,15 +10,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
     /// <summary>   A data Model for the admin confirm mail. </summary>
     public class AdminConfirmMailModel : AuthMailModel
     {
-        /// <summary>   Constructor. </summary>
+        /// <summary>Constructor.</summary>
         /// <param name="localizerFactory"> The localizer factory. </param>
         /// <param name="appOptions">       Options for controlling the application. </param>
         /// <param name="validationUrl">    URL of the validation. </param>
         /// <param name="email">            The email. </param>
-        public AdminConfirmMailModel(IStringLocalizerFactory localizerFactory, ApplicationOptions appOptions, string validationUrl, string email) : base(localizerFactory, appOptions)
+        /// <param name="userEditUrl">      The user edit URL. </param>
+        public AdminConfirmMailModel(IStringLocalizerFactory localizerFactory, ApplicationOptions appOptions, string validationUrl, string email, string userEditUrl) : base(localizerFactory, appOptions)
         {
             var localizer = localizerFactory.Create(typeof(UserConfirmMailResource));
             ValidationUrl = validationUrl;
+            UserEditUrl = userEditUrl;
             Email = email;
 
             Subject = localizer.GetString(() => AdminConfirmMailResource.Subject);
@@ -28,6 +30,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail
         /// <summary>	Gets or sets URL of the validation. </summary>
         /// <value>	The validation URL. </value>
         public string ValidationUrl { get; set; }
+
+        /// <summary>Gets or sets URL of the user edit.</summary>
+        /// <value>The user edit URL.</value>
+        public string UserEditUrl { get; set; }
 
         /// <summary>	Gets or sets the email. </summary>
         /// <value>	The email. </value>

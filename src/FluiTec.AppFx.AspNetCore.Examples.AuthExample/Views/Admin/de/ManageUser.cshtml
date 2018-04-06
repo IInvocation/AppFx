@@ -31,6 +31,14 @@
                         <input asp-for="Phone" placeholder="Telefon" data-rule-required="true" data-msg-required="Telefon ist ein Pflichtfeld" />
                     </div>
                 </div>
+                @if (Model != null && !Model.Confirmed)
+                {
+                    <div class="row uniform">
+                        <div class="col-lg-6">
+                            <a asp-controller="Admin" asp-action="ConfirmUser" asp-route-userid="@Model.Id">Account jetzt bestätigen</a>
+                        </div>
+                    </div>
+                }
                 @if (Model?.LockoutTime != null)
                 {
                     <div class="row uniform">
