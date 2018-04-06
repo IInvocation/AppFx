@@ -15,8 +15,7 @@
                         @foreach (var role in Model.UserRoles)
                         {
                             <input name="UserId" value="@Model.Id" type="hidden" readonly=""/>
-                            <input name="Name" value="@role.Name" type="hidden" readonly=""/>
-                            <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
+                            <input type="submit" class="btn btn-default" name="Name" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
                         }
                     </p>
                 </div>
@@ -31,8 +30,7 @@
                         @foreach (var role in Model.Roles)
                         {
                             <input name="UserId" value="@Model.Id" type="hidden" readonly=""/>
-                            <input name="Name" value="@role.Name" type="hidden" readonly=""/>
-                            <input type="submit" class="btn btn-default" name="provider" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
+                            <input type="submit" class="btn btn-default" name="Name" value="@role.Name" title="@string.Format("add {0}", role.Name)"/>
                         }
                     </p>
                 </div>

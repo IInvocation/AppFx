@@ -25,5 +25,15 @@ namespace FluiTec.AppFx.Authorization.Activity.LiteDb.Repositories
         {
             return Collection.Find(e => e.ActivityId == entity.Id);
         }
+
+        /// <summary>   Enumerates by role in this collection. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process by role in this collection.
+        /// </returns>
+        public IEnumerable<ActivityRoleEntity> ByRole(int roleId)
+        {
+            return Collection.Find(e => e.RoleId == roleId);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.Authorization.Activity;
+using FluiTec.AppFx.Authorization.Activity.Entities;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.Mail;
@@ -32,7 +34,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         private readonly IAuthorizationService _authorizationService;
 
         /// <summary>Gets options for controlling the application.</summary>
-        /// <value>Options that control the application.</value>
         private readonly ApplicationOptions _applicationOptions;
 
         /// <summary>The email sender.</summary>
@@ -41,18 +42,22 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>The localizer factory.</summary>
         private readonly IStringLocalizerFactory _localizerFactory;
 
+        /// <summary>   The authorization data service. </summary>
+        private readonly IAuthorizationDataService _authorizationDataService;
+
         #endregion
 
         #region Constructors
 
-        /// <summary>Constructor.</summary>
-        /// <param name="identityDataService">  The identity data service. </param>
-        /// <param name="userManager">          Manager for user. </param>
-        /// <param name="authorizationService"> The authorization service. </param>
-        /// <param name="applicationOptions">   Gets options for controlling the application. </param>
-        /// <param name="emailSender">          The email sender. </param>
-        /// <param name="localizerFactory">     The localizer factory. </param>
-        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager, IAuthorizationService authorizationService, ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory)
+        /// <summary>   Constructor. </summary>
+        /// <param name="identityDataService">      The identity data service. </param>
+        /// <param name="userManager">              Manager for user. </param>
+        /// <param name="authorizationService">     The authorization service. </param>
+        /// <param name="applicationOptions">       Gets options for controlling the application. </param>
+        /// <param name="emailSender">              The email sender. </param>
+        /// <param name="localizerFactory">         The localizer factory. </param>
+        /// <param name="authorizationDataService"> The authorization data service. </param>
+        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager, IAuthorizationService authorizationService, ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory, IAuthorizationDataService authorizationDataService)
         {
             _identityDataService = identityDataService;
             _userManager = userManager;
@@ -60,6 +65,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _applicationOptions = applicationOptions;
             _emailSender = emailSender;
             _localizerFactory = localizerFactory;
+            _authorizationDataService = authorizationDataService;
         }
 
         #endregion
@@ -124,14 +130,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         public IActionResult ManageUser(UserEditModel model)
         {
             model.Update();
-            if (ModelState.IsValid)
+            using (var uow = _identityDataService.StartUnitOfWork())
             {
-                using (var uow = _identityDataService.StartUnitOfWork())
-                {
-                    var dbUser = uow.UserRepository.Get(model.Id);
-                    if (dbUser == null)
-                        return View("Error");
+                var dbUser = uow.UserRepository.Get(model.Id);
+                var roles = uow.RoleRepository.GetAll();
+                var userRoles = uow.UserRoleRepository.FindByUser(dbUser).Select(ur => roles.Single(r => r.Id == ur)).ToList();
 
+                if (dbUser == null)
+                    return View("Error");
+
+                if (ModelState.IsValid)
+                {
                     dbUser.Email = model.Email;
                     dbUser.Name = model.Name;
                     dbUser.Phone = model.Phone;
@@ -139,6 +148,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     uow.Commit();
                     model.UpdateSuccess();
                 }
+
+                model.UserRoles = userRoles.Select(ur => new UserRoleModel {Name = ur.Name});
+                model.Roles = roles.Except(userRoles).Select(r => new UserRoleModel {Name = r.Name});
             }
 
             return View(model);
@@ -256,7 +268,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 using (var uow = _identityDataService.StartUnitOfWork())
                 {
                     var user = uow.UserRepository.Get(model.UserId);
-                    var role = uow.RoleRepository.FindByLoweredName(model.Name.ToUpper(CultureInfo.InvariantCulture));
+                    var role = uow.RoleRepository.FindByNames(new [] {model.Name}).SingleOrDefault();
 
                     if (user != null && role != null)
                     {
@@ -295,7 +307,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 using (var uow = _identityDataService.StartUnitOfWork())
                 {
                     var user = uow.UserRepository.Get(model.UserId);
-                    var role = uow.RoleRepository.FindByLoweredName(model.Name.ToUpper(CultureInfo.InvariantCulture));
+                    var role = uow.RoleRepository.FindByNames(new[] {model.Name}).SingleOrDefault();
 
                     if (user != null && role != null)
                     {
@@ -364,7 +376,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityDataService.StartUnitOfWork())
             {
                 var role = uow.RoleRepository.Get(roleId);
-                return View(new RoleEditModel {Id = role.Id, Name = role.Name, Description = role.Description});
+                return View(new RoleEditModel {Id = role.Id, Name = role.Name, Description = role.Description, Rights = GetRightsFor(role.Id)});
             }
         }
 
@@ -374,8 +386,23 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.RolesAccess)]
         [Authorize(PolicyNames.RolesUpdate)]
-        public IActionResult ManageRole(RoleEditModel model)
+        public async Task<IActionResult> ManageRole(RoleEditModel model)
         {
+            // save updated rights
+            var variables = await HttpContext.Request.ReadFormAsync();
+            var rightValues = new Dictionary<int, int>();
+            foreach (var variable in variables)
+            {
+                if (!int.TryParse(variable.Key, NumberStyles.Number, CultureInfo.InvariantCulture, out int x) ||
+                    !int.TryParse(variable.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out int y))
+                    continue;
+
+                if (!rightValues.ContainsKey(x))
+                    rightValues.Add(x, y);
+                else
+                    rightValues[x] = y;
+            }
+
             model.Update();
             if (ModelState.IsValid)
             {
@@ -389,9 +416,14 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     dbRole.Description = model.Description;
                     uow.RoleRepository.Update(dbRole);
                     uow.Commit();
+
+                    SaveUpdatedRightsFor(model.Id, rightValues);
+
                     model.UpdateSuccess();
                 }
             }
+
+            model.Rights = GetRightsFor(model.Id);
 
             return View(model);
         }
@@ -475,6 +507,116 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
 
             return View();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        /// <summary>   Gets rights for. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <returns>   The rights for. </returns>
+        private List<ActivityRightGroup> GetRightsFor(int roleId)
+        {
+            var rights = new List<ActivityRightGroup>();
+
+            List<ActivityEntity> activities;
+            List<ActivityRoleEntity> roleActivities;
+
+            using (var uow = _authorizationDataService.StartUnitOfWork())
+            {
+                activities = uow.ActivityRepository.GetAll().ToList();
+                roleActivities = uow.ActivityRoleRepository.ByRole(roleId).ToList();
+            }
+
+            foreach (var activityGroup in activities.GroupBy(a => a.GroupDisplayName))
+            {
+                var group = new ActivityRightGroup
+                {
+                    Name = activityGroup.First().GroupName,
+                    DisplayName = activityGroup.Key,
+                    Rights = new List<ActivityRight>()
+                };
+
+                foreach (var activity in activityGroup)
+                {
+                    var rA = roleActivities.SingleOrDefault(r => r.ActivityId == activity.Id);
+                    int rightValue = 0;
+                    if (rA?.Allow != null)
+                    {
+                        rightValue = rA.Allow.Value ? 2 : 1;
+                    }
+
+                    var right = new ActivityRight
+                    {
+                        ActivityId = activity.Id,
+                        ActivityType = activity.Name,
+                        Value = rightValue
+                    };
+
+                    group.Rights.Add(right);
+                }
+                rights.Add(group);
+            }
+
+            return rights;
+        }
+
+        /// <summary>   Saves an updated rights for. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <param name="rights">   The rights. </param>
+        private void SaveUpdatedRightsFor(int roleId, Dictionary<int, int> rights)
+        {
+            using (var uow = _authorizationDataService.StartUnitOfWork())
+            {
+                var existing = uow.ActivityRoleRepository.ByRole(roleId).ToList();
+                foreach (var right in rights)
+                {
+                    var current = existing.SingleOrDefault(e => e.RoleId == roleId && e.ActivityId == right.Key);
+                    if (current != null) // update or delete
+                    {
+                        if (right.Value != 0)
+                        {
+                            current.Allow = GetTristateValue(right.Value);
+                            uow.ActivityRoleRepository.Update(current);
+                        }
+
+                        {
+                            uow.ActivityRoleRepository.Delete(current);
+                        }
+                    }
+                    else // create
+                    {
+                        if (right.Value != 0) // only for values other than "not defined"
+                        {
+                            var newEntry = new ActivityRoleEntity
+                            {
+                                ActivityId = right.Key,
+                                RoleId = roleId,
+                                Allow = GetTristateValue(right.Value)
+                            };
+                            uow.ActivityRoleRepository.Add(newEntry);
+                        }
+                    }
+                }
+                uow.Commit();
+            }
+        }
+
+        /// <summary>   Gets tristate value. </summary>
+        /// <param name="i">    Zero-based index of the. </param>
+        /// <returns>   The tristate value. </returns>
+        private bool? GetTristateValue(int i)
+        {
+            switch (i)
+            {
+                case 1:
+                    return false;
+                case 2:
+                    return true;
+                default:
+                    return null;
+            }
         }
 
         #endregion

@@ -28,5 +28,17 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Repositories
             return UnitOfWork.Connection.Query<ActivityRoleEntity>(command, new {ActivityId = entity.Id},
                 UnitOfWork.Transaction);
         }
+
+        /// <summary>   Enumerates by role in this collection. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process by role in this collection.
+        /// </returns>
+        public IEnumerable<ActivityRoleEntity> ByRole(int roleId)
+        {
+            var command = $"SELECT * FROM {TableName} WHERE {nameof(ActivityRoleEntity.RoleId)} = @RoleId";
+            return UnitOfWork.Connection.Query<ActivityRoleEntity>(command, new { RoleId = roleId },
+                UnitOfWork.Transaction);
+        }
     }
 }

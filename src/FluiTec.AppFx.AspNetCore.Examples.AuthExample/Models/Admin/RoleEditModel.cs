@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 {
@@ -27,6 +29,43 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         [Display(Name = FullModelName + "Description", Description = "Name")]
         [DisplayTranslationForCulture("Description", "Beschreibung", "de")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
-        public string Description { get; set; } 
+        public string Description { get; set; }
+
+        public List<ActivityRightGroup> Rights { get; set; }
+    }
+
+    public class ActivityRightGroup
+    {
+        /// <summary>   Gets or sets the name. </summary>
+        /// <value> The name. </value>
+        public string Name { get; set; }
+
+        /// <summary>   Gets or sets the name of the display. </summary>
+        /// <value> The name of the display. </value>
+        public string DisplayName { get; set; }
+
+        /// <summary>   Gets or sets the rights. </summary>
+        /// <value> The rights. </value>
+        public List<ActivityRight> Rights { get; set; }
+    }
+
+    public class ActivityRight
+    {
+        /// <summary>   Gets or sets the identifier of the activity. </summary>
+        /// <value> The identifier of the activity. </value>
+        public int ActivityId { get; set; }
+
+        /// <summary>   Gets or sets the type of the activity. </summary>
+        /// <value> The type of the activity. </value>
+        public string ActivityType { get; set; }
+
+        /// <summary>   Gets or sets the value. </summary>
+        /// <value> The value. </value>
+        /// <remarks>
+        /// 0 = NULL,
+        /// 1 = DENY, 
+        /// 2 = ALLOW         
+        /// </remarks>
+        public int Value { get; set; }
     }
 }

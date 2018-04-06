@@ -2,7 +2,7 @@
 @model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.RoleEditModel
 @inject IViewLocalizer Localizer
 
-<h4>Manage rights</h4>
+<h4>Rechte verwalten</h4>
 <hr />
 <div id="rights-accordion">
     @for (var x = 0; x < Model.Rights.Count; x++)
@@ -24,51 +24,51 @@
                             @switch (Model.Rights[x].Rights[y].ActivityType)
                             {
                                 case "Access":
-                                    <span class="input-group-text input-width-fixed text-info" id="rights-addon">Access</span>
+                                    <span class="input-group-text input-width-fixed text-info" id="rights-addon">Zugriff</span>
                                     break;
                                 case "Create":
-                                    <span class="input-group-text input-width-fixed text-primary" id="rights-addon">Create</span>
+                                    <span class="input-group-text input-width-fixed text-primary" id="rights-addon">Erstellen</span>
                                     break;
                                 case "Read":
-                                    <span class="input-group-text input-width-fixed text-success" id="rights-addon">Read</span>
+                                    <span class="input-group-text input-width-fixed text-success" id="rights-addon">Lesen</span>
                                     break;
                                 case "Update":
-                                    <span class="input-group-text input-width-fixed text-warning" id="rights-addon">Edit</span>
+                                    <span class="input-group-text input-width-fixed text-warning" id="rights-addon">Bearbeiten</span>
                                     break;
                                 case "Delete":
-                                    <span class="input-group-text input-width-fixed text-danger" id="rights-addon">Delete</span>
+                                    <span class="input-group-text input-width-fixed text-danger" id="rights-addon">Löschen</span>
                                     break;
                                 default:
                                     <span class="input-group-text input-width-fixed text-primary" id="rights-addon">@Model.Rights[x].Rights[y].ActivityType</span>
                                     break;
                             }
-
+                            
                         </div>
                         <select class="custom-select mr-sm-2" name="@Model.Rights[x].Rights[y].ActivityId" aria-describedby="rights-addon">
-                            @if (Model.Rights[x].Rights[y].Value == 0)
-                            {
-                                <option value="0" selected>undefined</option>
-                            }
-                            else
-                            {
-                                <option value="0">undefined</option>
-                            }
-                            @if (Model.Rights[x].Rights[y].Value == 1)
-                            {
-                                <option value="1" selected>deny</option>
-                            }
-                            else
-                            {
-                                <option value="1">deny</option>
-                            }
-                            @if (Model.Rights[x].Rights[y].Value == 2)
-                            {
-                                <option value="2" selected>allow</option>
-                            }
-                            else
-                            {
-                                <option value="2">allow</option>
-                            }
+                        @if (Model.Rights[x].Rights[y].Value == 0)
+                        {
+                            <option value="0" selected>nicht definiert</option>
+                        }
+                        else
+                        {
+                            <option value="0">nicht definiert</option>
+                        }
+                        @if (Model.Rights[x].Rights[y].Value == 1)
+                        {
+                            <option value="1" selected>verweigern</option>
+                        }
+                        else
+                        {
+                            <option value="1">verweigern</option>
+                        }
+                        @if (Model.Rights[x].Rights[y].Value == 2)
+                        {
+                            <option value="2" selected>erlauben</option>
+                        }
+                        else
+                        {
+                            <option value="2">erlauben</option>
+                        }
                         </select>
                     </div>
                 }

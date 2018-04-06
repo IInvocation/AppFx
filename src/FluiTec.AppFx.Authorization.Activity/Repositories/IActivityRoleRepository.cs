@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FluiTec.AppFx.Authorization.Activity.Entities;
 using FluiTec.AppFx.Data;
+using FluiTec.AppFx.Identity.Entities;
 
 namespace FluiTec.AppFx.Authorization.Activity.Repositories
 {
@@ -14,5 +15,12 @@ namespace FluiTec.AppFx.Authorization.Activity.Repositories
         ///     collection.
         /// </returns>
         IEnumerable<ActivityRoleEntity> ByActivity(ActivityEntity entity);
+
+        /// <summary>   Enumerates by role in this collection. </summary>
+        /// <param name="roleId">   Identifier for the role. </param>
+        /// <returns>
+        ///     An enumerator that allows foreach to be used to process by role in this collection.
+        /// </returns>
+        IEnumerable<ActivityRoleEntity> ByRole(int roleId);
     }
 }
