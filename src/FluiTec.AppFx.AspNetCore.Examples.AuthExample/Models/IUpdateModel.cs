@@ -18,7 +18,7 @@
             SuccessfullyUpdated = true;
         }
 
-        /// <summary>   Updates the fail. </summary>
+        /// <summary>   Updates the model. </summary>
         public void Update()
         {
             Updated = true;

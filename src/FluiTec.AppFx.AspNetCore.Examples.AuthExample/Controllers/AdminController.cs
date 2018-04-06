@@ -511,6 +511,169 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
+        #region Claims
+
+        /// <summary>   (An Action that handles HTTP GET requests) manage user claims. </summary>
+        /// <param name="userid">   The userid. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        public IActionResult ManageUserClaims(int userid)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var user = uow.UserRepository.Get(userid);
+                var claims = uow.ClaimRepository.GetByUser(user);
+                return View(new UserClaimsModel
+                {
+                    UserId = userid,
+                    ClaimEntries = claims.Select(c => new UserClaimsModel.ClaimEntry {Type = c.Type, Value = c.Value}).ToList()
+                });
+            }
+        }
+
+        /// <summary>   (An Action that handles HTTP GET requests) adds a user claim. </summary>
+        /// <param name="userid">   The userid. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult AddUserClaim(int userid)
+        {
+            return View(new AddClaimModel {UserId = userid});
+        }
+
+        /// <summary>   Adds a user claim. </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult AddUserClaim(AddClaimModel model)
+        {
+            model.Update();
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    var user = uow.UserRepository.Get(model.UserId);
+
+                    var existing = uow.ClaimRepository.GetByUser(user).SingleOrDefault(c => c.Type == model.Type);
+                    if (existing == null)
+                    {
+                        uow.ClaimRepository.Add(new IdentityClaimEntity
+                        {
+                            UserId = user.Id,
+                            Type = model.Type,
+                            Value = model.Value
+                        });
+                    }
+                    else
+                    {
+                        existing.Value = model.Value;
+                        uow.ClaimRepository.Update(existing);
+                    }
+
+                    uow.Commit();
+                    model.UpdateSuccess();
+                    RedirectToAction(nameof(ManageUserClaims), new { userid = model.UserId });
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>   Edit user claim. </summary>
+        /// <param name="userid">       The userid. </param>
+        /// <param name="claimType">    Type of the claim. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult EditUserClaim(int userid, string claimType)
+        {
+            using (var uow = _identityDataService.StartUnitOfWork())
+            {
+                var user = uow.UserRepository.Get(userid);
+                var claim = uow.ClaimRepository.GetByUser(user).SingleOrDefault(c => c.Type == claimType);
+                return View(new EditClaimModel { UserId = userid, Type = claimType, Value = claim?.Value});
+            }
+        }
+
+        /// <summary>   (An Action that handles HTTP POST requests) edit user claim. </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult EditUserClaim(EditClaimModel model)
+        {
+            model.Update();
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    var user = uow.UserRepository.Get(model.UserId);
+
+                    var existing = uow.ClaimRepository.GetByUser(user).SingleOrDefault(c => c.Type == model.Type);
+                    if (existing == null)
+                        return View("Error");
+
+                    existing.Value = model.Value;
+                    uow.ClaimRepository.Update(existing);
+
+                    uow.Commit();
+                    model.UpdateSuccess();
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP GET requests) (Restricted to PolicyNames.ClaimsDelete)
+        ///     deletes the user claim.
+        /// </summary>
+        /// <param name="userId">       Identifier for the user. </param>
+        /// <param name="claimType">    Type of the claim. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsDelete)]
+        public IActionResult DeleteUserClaim(int userId, string claimType)
+        {
+            return View(new DeleteClaimModel {UserId = userId, Type = claimType});
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClaimsDelete)
+        ///     deletes the user claim described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsDelete)]
+        public IActionResult DeleteUserClaim(DeleteClaimModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityDataService.StartUnitOfWork())
+                {
+                    var user = uow.UserRepository.Get(model.UserId);
+                    var claim = uow.ClaimRepository.GetByUser(user).SingleOrDefault(c => c.Type == model.Type);
+                    uow.ClaimRepository.Delete(claim);
+                    uow.Commit();
+                }
+
+                return RedirectToAction(nameof(ManageUserClaims), new {userid = model.UserId});
+            }
+
+            return View("Error");
+        }
+
+        #endregion
+
         #region Helpers
 
         /// <summary>   Gets rights for. </summary>

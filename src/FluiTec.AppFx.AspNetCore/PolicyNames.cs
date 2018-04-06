@@ -29,5 +29,17 @@
 
         /// <summary>The roles delete.</summary>
         public const string RolesDelete = "RolesDelete";
+
+        /// <summary>   The claims access. </summary>
+        public const string ClaimsAccess = "ClaimsAccess";
+
+        /// <summary>   The claims create. </summary>
+        public const string ClaimsCreate = "ClaimsCreate";
+
+        /// <summary>   The claims update. </summary>
+        public const string ClaimsUpdate = "ClaimsUpdate";
+
+        /// <summary>   The claims delete. </summary>
+        public const string ClaimsDelete = "ClaimsDelete";
     }
 }

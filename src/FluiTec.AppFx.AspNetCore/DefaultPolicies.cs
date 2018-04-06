@@ -25,7 +25,11 @@ namespace FluiTec.AppFx.AspNetCore
                 RolesAccess,
                 RolesCreate,
                 RolesUpdate,
-                RolesDelete
+                RolesDelete,
+                ClaimsAccess,
+                ClaimsCreate,
+                ClaimsUpdate,
+                ClaimsDelete
             });
         }
 
@@ -68,5 +72,22 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the roles delete.</summary>
         /// <value>The roles delete.</value>
         public DefaultPolicy RolesDelete { get; } = new DefaultPolicy(PolicyNames.RolesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Claims access.</summary>
+        /// <value>The Claims access.</value>
+        public DefaultPolicy ClaimsAccess { get; } = new DefaultPolicy(PolicyNames.ClaimsAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Claims create.</summary>
+        /// <value>The Claims create.</value>
+        public DefaultPolicy ClaimsCreate { get; } = new DefaultPolicy(PolicyNames.ClaimsCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Claims update.</summary>
+        /// <value>The Claims update.</value>
+        public DefaultPolicy ClaimsUpdate { get; } = new DefaultPolicy(PolicyNames.ClaimsUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Claims delete.</summary>
+        /// <value>The Claims delete.</value>
+        public DefaultPolicy ClaimsDelete { get; } = new DefaultPolicy(PolicyNames.ClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
     }
 }
