@@ -10,6 +10,8 @@ using FluiTec.AppFx.Authorization.Activity;
 using FluiTec.AppFx.Authorization.Activity.Entities;
 using FluiTec.AppFx.Identity;
 using FluiTec.AppFx.Identity.Entities;
+using FluiTec.AppFx.IdentityServer;
+using FluiTec.AppFx.IdentityServer.Entities;
 using FluiTec.AppFx.Mail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -45,19 +47,26 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   The authorization data service. </summary>
         private readonly IAuthorizationDataService _authorizationDataService;
 
+        /// <summary>The identity server data service.</summary>
+        private readonly IIdentityServerDataService _identityServerDataService;
+
         #endregion
 
         #region Constructors
 
-        /// <summary>   Constructor. </summary>
-        /// <param name="identityDataService">      The identity data service. </param>
-        /// <param name="userManager">              Manager for user. </param>
-        /// <param name="authorizationService">     The authorization service. </param>
-        /// <param name="applicationOptions">       Gets options for controlling the application. </param>
-        /// <param name="emailSender">              The email sender. </param>
-        /// <param name="localizerFactory">         The localizer factory. </param>
-        /// <param name="authorizationDataService"> The authorization data service. </param>
-        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager, IAuthorizationService authorizationService, ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory, IAuthorizationDataService authorizationDataService)
+        /// <summary>Constructor.</summary>
+        /// <param name="identityDataService">          The identity data service. </param>
+        /// <param name="userManager">                  Manager for user. </param>
+        /// <param name="authorizationService">         The authorization service. </param>
+        /// <param name="applicationOptions">           Gets options for controlling the application. </param>
+        /// <param name="emailSender">                  The email sender. </param>
+        /// <param name="localizerFactory">             The localizer factory. </param>
+        /// <param name="authorizationDataService">     The authorization data service. </param>
+        /// <param name="identityServerDataService">    The identity server data service. </param>
+        public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager,
+            IAuthorizationService authorizationService, ApplicationOptions applicationOptions,
+            ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory,
+            IAuthorizationDataService authorizationDataService, IIdentityServerDataService identityServerDataService)
         {
             _identityDataService = identityDataService;
             _userManager = userManager;
@@ -66,6 +75,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _emailSender = emailSender;
             _localizerFactory = localizerFactory;
             _authorizationDataService = authorizationDataService;
+            _identityServerDataService = identityServerDataService;
         }
 
         #endregion
@@ -666,6 +676,150 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
 
             return View("Error");
+        }
+
+        #endregion
+
+        #region Clients
+
+        /// <summary>(Restricted to PolicyNames.ClientsAccess) gets the manage clients.</summary>
+        /// <value>The manage clients.</value>
+        [Authorize(PolicyNames.ClientsAccess)]
+        public IActionResult ManageClients()
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var clients = uow.ClientRepository.GetAll();
+                return View(clients);
+            }
+        }
+
+        /// <summary>(Restricted to PolicyNames.ClientsCreate) adds client.</summary>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsCreate)]
+        public IActionResult AddClient()
+        {
+            return View(new ClientAddModel());
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClientsCreate)
+        /// adds a client.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsCreate)]
+        public IActionResult AddClient(ClientAddModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    uow.ClientRepository.Add(new ClientEntity
+                    {
+                        Name = model.Name,
+                        ClientId = RandomStringCreator.GenerateRandomString(64),
+                        Secret = RandomStringCreator.GenerateRandomString(64),
+                        RedirectUri = model.RedirectUri,
+                        PostLogoutUri = model.PostLogoutUri,
+                        AllowOfflineAccess = model.AllowOfflineAccess,
+                        GrantTypes = string.Join(',', model.GrantTypes)
+                    });
+                    uow.Commit();
+                }
+                return RedirectToAction(nameof(ManageClients));
+            }
+
+            return View(model);
+        }
+
+        /// <summary>(Restricted to PolicyNames.ClientsUpdate) manage client.</summary>
+        /// <param name="clientId"> Identifier for the client. </param>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsUpdate)]
+        public IActionResult ManageClient(int clientId)
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var client = uow.ClientRepository.Get(clientId);
+                return View(new ClientEditModel
+                {
+                    Id = client.Id,
+                    ClientId = client.ClientId,
+                    ClientSecret = client.Secret,
+                    AllowOfflineAccess = client.AllowOfflineAccess,
+                    GrantTypes = client.GrantTypes.Split(",").ToList(),
+                    Name = client.Name,
+                    PostLogoutUri = client.PostLogoutUri,
+                    RedirectUri = client.RedirectUri
+                });
+            }
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClientsUpdate)
+        /// manage client.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsUpdate)]
+        public IActionResult ManageClient(ClientEditModel model)
+        {
+            model.Update();
+
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var existing = uow.ClientRepository.Get(model.Id);
+                    existing.AllowOfflineAccess = model.AllowOfflineAccess;
+                    existing.GrantTypes = string.Join(',', model.GrantTypes);
+                    existing.Name = model.Name;
+                    existing.PostLogoutUri = model.PostLogoutUri;
+                    existing.RedirectUri = model.RedirectUri;
+                    uow.ClientRepository.Update(existing);
+                    uow.Commit();
+                }
+
+                model.UpdateSuccess();
+                return View(model);
+            }
+
+            return View(model);
+        }
+
+        /// <summary>(Restricted to PolicyNames.ClientsDelete) deletes the client described by
+        /// clientId.</summary>
+        /// <param name="clientId"> Identifier for the client. </param>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsDelete)]
+        public IActionResult DeleteClient(int clientId)
+        {
+            return View(new ClientDeleteModel { Id = clientId });
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClientsDelete)
+        /// deletes the client described by model.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsDelete)]
+        public IActionResult DeleteClient(ClientDeleteModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    uow.ClientRepository.Delete(model.Id);
+                    uow.Commit();
+                }
+            }
+
+            return RedirectToAction(nameof(ManageClients));
         }
 
         #endregion

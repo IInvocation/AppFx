@@ -1,42 +1,38 @@
-﻿@model IEnumerable<FluiTec.AppFx.Identity.Entities.IdentityRoleEntity>
+﻿@model IEnumerable<FluiTec.AppFx.IdentityServer.Entities.ClientEntity>
 @using FluiTec.AppFx.AspNetCore
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Role management</h2>
+        <h2>Client management</h2>
     </header>
     <div class="container">
         <section>
-            <h4>Manage role</h4>
+            <h4>Manage clients</h4>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsUpdate)).Succeeded)
                     {
                         <th>#</th>
                     }
                     </tr>
                 </thead>
-                @foreach (var role in Model)
+                @foreach (var client in Model)
                 {
-                    <tr>
-                        <td>
-                            @role.Name
-                        </td>
-                        <td>
-                            @role.Description
-                        </td>
+                <tr>
+                    <td>
+                        @client.Name
+                    </td>
                     @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
                     {
-                        <td>
-                            <a asp-controller="Admin" asp-action="ManageRole" asp-route-roleid="@role.Id">Edit</a>
-                        </td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="ManageClient" asp-route-clientid="@client.Id">Edit</a>
+                    </td>
                     }
-                    </tr>
+                </tr>
                 }
             </table>
             <h4>Actions</h4>
@@ -46,10 +42,10 @@
                         <li>
                             <a asp-controller="Admin" asp-action="Index">Admin</a>
                         </li>
-                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesCreate)).Succeeded)
+                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsCreate)).Succeeded)
                     {
                         <li>
-                            <a asp-controller="Admin" asp-action="AddRole">Add role</a>
+                            <a asp-controller="Admin" asp-action="AddClient">Add client</a>
                         </li>
                     }
                     </ul>

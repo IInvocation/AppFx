@@ -2,6 +2,7 @@
 using FluiTec.AppFx.Authorization.Activity;
 using FluiTec.AppFx.Authorization.Activity.Requirements;
 using FluiTec.AppFx.Identity.Entities;
+using FluiTec.AppFx.IdentityServer.Entities;
 
 namespace FluiTec.AppFx.AspNetCore
 {
@@ -10,7 +11,7 @@ namespace FluiTec.AppFx.AspNetCore
     {
         /// <summary>Gets or sets the policies.</summary>
         /// <value>The policies.</value>
-        public IEnumerable<DefaultPolicy> Policies { get; set; }
+        public IReadOnlyList<DefaultPolicy> Policies { get; }
 
         /// <summary>Default constructor.</summary>
         public DefaultPolicies()
@@ -18,19 +19,11 @@ namespace FluiTec.AppFx.AspNetCore
             Policies = new List<DefaultPolicy>(new[]
             {
                 AdministrativeAccess,
-                UsersAccess,
-                UsersCreate,
-                UsersUpdate,
-                UsersDelete,
-                RolesAccess,
-                RolesCreate,
-                RolesUpdate,
-                RolesDelete,
-                ClaimsAccess,
-                ClaimsCreate,
-                ClaimsUpdate,
-                ClaimsDelete
-            });
+                UsersAccess, UsersCreate, UsersUpdate, UsersDelete,
+                RolesAccess, RolesCreate, RolesUpdate, RolesDelete,
+                ClaimsAccess, ClaimsCreate, ClaimsUpdate, ClaimsDelete,
+                ClientsAccess, ClientsCreate, ClientsUpdate, ClientsDelete
+            }).AsReadOnly();
         }
 
         /// <summary>Gets the administrative access.</summary>
@@ -38,8 +31,11 @@ namespace FluiTec.AppFx.AspNetCore
         public DefaultPolicy AdministrativeAccess { get; } = new DefaultPolicy(PolicyNames.AdministrativeAccess, new AdministrativeAccessRequirement(new[]
         {
             ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-            ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity))
+            ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
+            ResourceActivities.AccessRequirement(typeof(ClientEntity))
         }));
+
+        #region Users
 
         /// <summary>Gets the users access.</summary>
         /// <value>The users access.</value>
@@ -57,6 +53,10 @@ namespace FluiTec.AppFx.AspNetCore
         /// <value>The users delete.</value>
         public DefaultPolicy UsersDelete { get; } = new DefaultPolicy(PolicyNames.UsersDelete, ResourceActivities.DeleteRequirement(typeof(IdentityUserEntity)));
 
+        #endregion
+
+        #region Roles
+
         /// <summary>Gets the roles access.</summary>
         /// <value>The roles access.</value>
         public DefaultPolicy RolesAccess { get; } = new DefaultPolicy(PolicyNames.RolesAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
@@ -72,6 +72,10 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the roles delete.</summary>
         /// <value>The roles delete.</value>
         public DefaultPolicy RolesDelete { get; } = new DefaultPolicy(PolicyNames.RolesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region Claims
 
         /// <summary>Gets the Claims access.</summary>
         /// <value>The Claims access.</value>
@@ -89,5 +93,26 @@ namespace FluiTec.AppFx.AspNetCore
         /// <value>The Claims delete.</value>
         public DefaultPolicy ClaimsDelete { get; } = new DefaultPolicy(PolicyNames.ClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
 
+        #endregion
+
+        #region Clients
+
+        /// <summary>Gets the Clients access.</summary>
+        /// <value>The Clients access.</value>
+        public DefaultPolicy ClientsAccess { get; } = new DefaultPolicy(PolicyNames.ClientsAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Clients create.</summary>
+        /// <value>The Clients create.</value>
+        public DefaultPolicy ClientsCreate { get; } = new DefaultPolicy(PolicyNames.ClientsCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Clients update.</summary>
+        /// <value>The Clients update.</value>
+        public DefaultPolicy ClientsUpdate { get; } = new DefaultPolicy(PolicyNames.ClientsUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Clients delete.</summary>
+        /// <value>The Clients delete.</value>
+        public DefaultPolicy ClientsDelete { get; } = new DefaultPolicy(PolicyNames.ClientsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
     }
 }

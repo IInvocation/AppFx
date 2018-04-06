@@ -6,6 +6,8 @@
         /// <summary>Gets or sets the administrative access.</summary>
         public const string AdministrativeAccess = "AdministrativeAccess";
 
+        #region Users
+
         /// <summary>The users access.</summary>
         public const string UsersAccess = "UsersAccess";
 
@@ -17,6 +19,10 @@
 
         /// <summary>The users delete.</summary>
         public const string UsersDelete = "UsersDelete";
+
+        #endregion
+
+        #region Roles
 
         /// <summary>The roles access.</summary>
         public const string RolesAccess = "RolesAccess";
@@ -30,6 +36,10 @@
         /// <summary>The roles delete.</summary>
         public const string RolesDelete = "RolesDelete";
 
+        #endregion
+
+        #region Claims
+
         /// <summary>   The claims access. </summary>
         public const string ClaimsAccess = "ClaimsAccess";
 
@@ -41,5 +51,23 @@
 
         /// <summary>   The claims delete. </summary>
         public const string ClaimsDelete = "ClaimsDelete";
+
+        #endregion
+
+        #region Clients
+
+        /// <summary>   The Clients access. </summary>
+        public const string ClientsAccess = "ClientsAccess";
+
+        /// <summary>   The Clients create. </summary>
+        public const string ClientsCreate = "ClientsCreate";
+
+        /// <summary>   The Clients update. </summary>
+        public const string ClientsUpdate = "ClientsUpdate";
+
+        /// <summary>   The Clients delete. </summary>
+        public const string ClientsDelete = "ClientsDelete";
+
+        #endregion
     }
 }
