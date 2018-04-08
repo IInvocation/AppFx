@@ -824,6 +824,116 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
+        #region Scopes
+
+        /// <summary>(Restricted to PolicyNames.ScopesAccess) manage scopes.</summary>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ScopesAccess)]
+        public IActionResult ManageScopes()
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var scopes = uow.ScopeRepository.GetAll();
+                return View(scopes);
+            }
+        }
+
+        /// <summary>(Restricted to PolicyNames.ScopesCreate) adds scope.</summary>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesCreate)]
+        public IActionResult AddScope()
+        {
+            return View(new ScopeAddModel { Emphasize = true, Required = true, ShowInDiscoveryDocument = true });
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.ScopesCreate)
+        /// adds a scope.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesCreate)]
+        public IActionResult AddScope(ScopeAddModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    uow.ScopeRepository.Add(new ScopeEntity
+                    {
+                        Name = model.Name,
+                        DisplayName = model.DisplayName,
+                        Description = model.Description,
+                        Required = model.Required,
+                        Emphasize = model.Emphasize,
+                        ShowInDiscoveryDocument = model.ShowInDiscoveryDocument
+                    });
+                    uow.Commit();
+                }
+
+                return RedirectToAction(nameof(ManageScopes));
+            }
+
+            return View(model);
+        }
+
+        /// <summary>(Restricted to PolicyNames.ScopesUpdate) manage scope.</summary>
+        /// <param name="scopeId">  Identifier for the scope. </param>
+        /// <returns>An IActionResult.</returns>
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesUpdate)]
+        public IActionResult ManageScope(int scopeId)
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var scope = uow.ScopeRepository.Get(scopeId);
+                return View(new ScopeEditModel
+                {
+                    Id = scope.Id,
+                    Name = scope.Name,
+                    DisplayName = scope.DisplayName,
+                    Description = scope.Description,
+                    Required = scope.Required,
+                    Emphasize = scope.Emphasize,
+                    ShowInDiscoveryDocument = scope.ShowInDiscoveryDocument
+                });
+            }
+        }
+
+        /// <summary>(An Action that handles HTTP POST requests) (Restricted to PolicyNames.ScopesUpdate)
+        /// manage scope.</summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>An IActionResult.</returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesUpdate)]
+        public IActionResult ManageScope(ScopeEditModel model)
+        {
+            model.Update();
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var existing = uow.ScopeRepository.Get(model.Id);
+                    existing.Name = model.Name;
+                    existing.DisplayName = model.DisplayName;
+                    existing.Description = model.Description;
+                    existing.Required = model.Required;
+                    existing.Emphasize = model.Emphasize;
+                    existing.ShowInDiscoveryDocument = model.ShowInDiscoveryDocument;
+                    uow.ScopeRepository.Update(existing);
+                    uow.Commit();
+
+                    model.UpdateSuccess();
+                }
+            }
+
+            return View(model);
+        }
+
+        #endregion
+
         #region Helpers
 
         /// <summary>   Gets rights for. </summary>

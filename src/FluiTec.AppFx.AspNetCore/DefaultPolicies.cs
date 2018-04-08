@@ -22,7 +22,8 @@ namespace FluiTec.AppFx.AspNetCore
                 UsersAccess, UsersCreate, UsersUpdate, UsersDelete,
                 RolesAccess, RolesCreate, RolesUpdate, RolesDelete,
                 ClaimsAccess, ClaimsCreate, ClaimsUpdate, ClaimsDelete,
-                ClientsAccess, ClientsCreate, ClientsUpdate, ClientsDelete
+                ClientsAccess, ClientsCreate, ClientsUpdate, ClientsDelete,
+                ScopesAccess, ScopesCreate, ScopesUpdate, ScopesDelete
             }).AsReadOnly();
         }
 
@@ -112,6 +113,26 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the Clients delete.</summary>
         /// <value>The Clients delete.</value>
         public DefaultPolicy ClientsDelete { get; } = new DefaultPolicy(PolicyNames.ClientsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region Scopes
+
+        /// <summary>Gets the Scopes access.</summary>
+        /// <value>The Scopes access.</value>
+        public DefaultPolicy ScopesAccess { get; } = new DefaultPolicy(PolicyNames.ScopesAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Scopes create.</summary>
+        /// <value>The Scopes create.</value>
+        public DefaultPolicy ScopesCreate { get; } = new DefaultPolicy(PolicyNames.ScopesCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Scopes update.</summary>
+        /// <value>The Scopes update.</value>
+        public DefaultPolicy ScopesUpdate { get; } = new DefaultPolicy(PolicyNames.ScopesUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the Scopes delete.</summary>
+        /// <value>The Scopes delete.</value>
+        public DefaultPolicy ScopesDelete { get; } = new DefaultPolicy(PolicyNames.ScopesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
 
         #endregion
     }

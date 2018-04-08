@@ -24,6 +24,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         /// <remarks>
         /// Cant be edited         
         /// </remarks>
+        [Display(Name = FullModelName + "ClientId", Description = "Id")]
+        [DisplayTranslationForCulture("ClientId", "Id", "de")]
         public string ClientId { get; set; }
 
         /// <summary>Gets or sets the client secret.</summary>
@@ -31,6 +33,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
         /// <remarks>
         /// Cant be edited         
         /// </remarks>
+        [Display(Name = FullModelName + "ClientSecret", Description = "Secret")]
+        [DisplayTranslationForCulture("ClientSecret", "Geheimnis", "de")]
         public string ClientSecret { get; set; }
 
         [Display(Name = FullModelName + "Name", Description = "Name")]
