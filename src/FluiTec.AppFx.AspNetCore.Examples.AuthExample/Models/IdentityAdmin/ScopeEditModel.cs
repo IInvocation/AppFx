@@ -8,7 +8,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
     public class ScopeEditModel : UpdateModel
     {
         /// <summary>Name of the full model.</summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeEditModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ScopeEditModel";
 
         /// <summary>Gets or sets the identifier.</summary>
         /// <value>The identifier.</value>

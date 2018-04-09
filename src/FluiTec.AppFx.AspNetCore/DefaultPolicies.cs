@@ -23,7 +23,8 @@ namespace FluiTec.AppFx.AspNetCore
                 RolesAccess, RolesCreate, RolesUpdate, RolesDelete,
                 ClaimsAccess, ClaimsCreate, ClaimsUpdate, ClaimsDelete,
                 ClientsAccess, ClientsCreate, ClientsUpdate, ClientsDelete,
-                ScopesAccess, ScopesCreate, ScopesUpdate, ScopesDelete
+                ScopesAccess, ScopesCreate, ScopesUpdate, ScopesDelete,
+                ClientClaimsAccess, ClientClaimsCreate, ClientClaimsUpdate, ClientClaimsDelete
             }).AsReadOnly();
         }
 
@@ -133,6 +134,26 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the Scopes delete.</summary>
         /// <value>The Scopes delete.</value>
         public DefaultPolicy ScopesDelete { get; } = new DefaultPolicy(PolicyNames.ScopesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region ClientClaims
+
+        /// <summary>Gets the ClientClaims access.</summary>
+        /// <value>The ClientClaims access.</value>
+        public DefaultPolicy ClientClaimsAccess { get; } = new DefaultPolicy(PolicyNames.ClientClaimsAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ClientClaims create.</summary>
+        /// <value>The ClientClaims create.</value>
+        public DefaultPolicy ClientClaimsCreate { get; } = new DefaultPolicy(PolicyNames.ClientClaimsCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ClientClaims update.</summary>
+        /// <value>The ClientClaims update.</value>
+        public DefaultPolicy ClientClaimsUpdate { get; } = new DefaultPolicy(PolicyNames.ClientClaimsUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ClientClaims delete.</summary>
+        /// <value>The ClientClaims delete.</value>
+        public DefaultPolicy ClientClaimsDelete { get; } = new DefaultPolicy(PolicyNames.ClientClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
 
         #endregion
     }

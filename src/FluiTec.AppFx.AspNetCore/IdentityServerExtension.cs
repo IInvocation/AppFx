@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.Identity.Entities;
+﻿using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.IdentityServer;
 using FluiTec.AppFx.IdentityServer.Configuration;
 using FluiTec.AppFx.IdentityServer.Dynamic.Configuration;
@@ -25,7 +26,7 @@ namespace FluiTec.AppFx.AspNetCore
             services.ConfigureIdentityServerDataService(configuration);
 
             services.AddSingleton(configuration.GetConfiguration<SigningOptions>());
-            services.AddSingleton(configuration.GetConfiguration<IdentityServerOptions>());
+            services.AddSingleton(configuration.GetConfiguration<IdentityServerClaimOptions>());
 
             var idSrv = services.AddIdentityServer(options =>
             {

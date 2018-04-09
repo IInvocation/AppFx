@@ -4,11 +4,11 @@ using FluiTec.AppFx.Options;
 namespace FluiTec.AppFx.AspNetCore.Configuration
 {
     /// <summary>   An identity server options. </summary>
-    [ConfigurationName("IdentityServer")]
-    public class IdentityServerOptions
+    [ConfigurationName("IdentityServerClaim")]
+    public class IdentityServerClaimOptions
     {
         /// <summary>   Default constructor. </summary>
-        public IdentityServerOptions()
+        public IdentityServerClaimOptions()
         {
             DefaultClaimTypes = new List<DefaultClaimType>();
         }

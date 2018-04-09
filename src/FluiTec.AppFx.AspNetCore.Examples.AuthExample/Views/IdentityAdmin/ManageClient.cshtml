@@ -81,6 +81,12 @@
                         <li>
                             <a asp-controller="IdentityAdmin" asp-action="ManageClients">Client management</a>
                         </li>
+                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientClaimsAccess)).Succeeded)
+                        {
+                            <li>
+                                <a asp-controller="IdentityAdmin" asp-action="ManageClientClaims" asp-route-clientid="@Model?.Id">Manage claims</a>
+                            </li>
+                        }
                         @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsDelete)).Succeeded)
                         {
                         <li>

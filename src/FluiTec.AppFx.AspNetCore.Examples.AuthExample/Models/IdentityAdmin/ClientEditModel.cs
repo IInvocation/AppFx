@@ -9,7 +9,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
     public class ClientEditModel : UpdateModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientEditModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientEditModel";
 
         /// <summary>Gets or sets the identifier.</summary>
         /// <value>The identifier.</value>

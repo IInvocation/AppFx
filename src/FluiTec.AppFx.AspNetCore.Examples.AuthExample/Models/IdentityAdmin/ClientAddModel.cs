@@ -9,7 +9,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
     public class ClientAddModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientAddModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientAddModel";
 
         [Display(Name = FullModelName + "Name", Description = "Name")]
         [DisplayTranslationForCulture("Name", "Name", "de")]

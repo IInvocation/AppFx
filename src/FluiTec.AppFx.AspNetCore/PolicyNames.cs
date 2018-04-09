@@ -85,5 +85,21 @@
         public const string ScopesDelete = "ScopesDelete";
 
         #endregion
+
+        #region Claims
+
+        /// <summary>   The ClientClaims access. </summary>
+        public const string ClientClaimsAccess = "ClientClaimsAccess";
+
+        /// <summary>   The ClientClaims create. </summary>
+        public const string ClientClaimsCreate = "ClientClaimsCreate";
+
+        /// <summary>   The ClientClaims update. </summary>
+        public const string ClientClaimsUpdate = "ClientClaimsUpdate";
+
+        /// <summary>   The ClientClaims delete. </summary>
+        public const string ClientClaimsDelete = "ClientClaimsDelete";
+
+        #endregion
     }
 }
