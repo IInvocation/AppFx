@@ -91,6 +91,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityServerDataService.StartUnitOfWork())
             {
                 var client = uow.ClientRepository.Get(clientId);
+                var scopes = uow.ScopeRepository.GetAll();
+                var clientScopes = uow.ClientScopeRepository.GetByClientId(client.Id).Select(cs => scopes.Single(s => s.Id == cs.ScopeId)).ToList();
+                
                 return View(new ClientEditModel
                 {
                     Id = client.Id,
@@ -100,7 +103,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     GrantTypes = client.GrantTypes.Split(",").ToList(),
                     Name = client.Name,
                     PostLogoutUri = client.PostLogoutUri,
-                    RedirectUri = client.RedirectUri
+                    RedirectUri = client.RedirectUri,
+                    ClientScopes = clientScopes.Select(cs => new ClientScopeModel { Id = clientId, Name = cs.Name, DisplayName = cs.DisplayName }),
+                    Scopes = scopes.Except(clientScopes).Select(cs => new ClientScopeModel { Id = clientId, Name = cs.Name, DisplayName = cs.DisplayName })
                 });
             }
         }
@@ -116,9 +121,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         {
             model.Update();
 
-            if (ModelState.IsValid)
+            using (var uow = _identityServerDataService.StartUnitOfWork())
             {
-                using (var uow = _identityServerDataService.StartUnitOfWork())
+                var scopes = uow.ScopeRepository.GetAll();
+                var clientScopes = uow.ClientScopeRepository.GetByClientId(model.Id).Select(cs => scopes.Single(s => s.Id == cs.ScopeId)).ToList();
+
+                if (ModelState.IsValid)
                 {
                     var existing = uow.ClientRepository.Get(model.Id);
                     existing.AllowOfflineAccess = model.AllowOfflineAccess;
@@ -128,10 +136,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     existing.RedirectUri = model.RedirectUri;
                     uow.ClientRepository.Update(existing);
                     uow.Commit();
+                    model.UpdateSuccess();
                 }
-
-                model.UpdateSuccess();
-                return View(model);
+                model.ClientScopes = clientScopes.Select(cs => new ClientScopeModel { Id = model.Id, Name = cs.Name, DisplayName = cs.DisplayName });
+                model.Scopes = scopes.Except(clientScopes).Select(cs => new ClientScopeModel { Id = model.Id, Name = cs.Name, DisplayName = cs.DisplayName });
             }
 
             return View(model);
@@ -167,6 +175,75 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             }
 
             return RedirectToAction(nameof(ManageClients));
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ScopesAccess) adds
+        ///     a client scope.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsUpdate)]
+        [Authorize(PolicyNames.ScopesAccess)]
+        public IActionResult AddClientScope(ClientScopeModel model)
+        {
+            if (model.Id > 0)
+            {
+                // add user to role membership
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var client = uow.ClientRepository.Get(model.Id);
+                    var scope = uow.ScopeRepository.GetByNames(new[] { model.Name }).SingleOrDefault();
+
+                    if (client != null && scope != null)
+                    {
+                        uow.ClientScopeRepository.Add(new ClientScopeEntity { ScopeId = scope.Id, ClientId = client.Id });
+                        uow.Commit();
+                        return RedirectToAction(nameof(ManageClient), new { clientId = model.Id });
+                    }
+                }
+            }
+
+            return View("Error");
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ScopesAccess)
+        ///     removes the client scope described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClientsAccess)]
+        [Authorize(PolicyNames.ClientsUpdate)]
+        [Authorize(PolicyNames.ScopesAccess)]
+        public IActionResult RemoveClientScope(ClientScopeModel model)
+        {
+            if (model.Id > 0)
+            {
+                // remove user from role membership
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var client = uow.ClientRepository.Get(model.Id);
+                    var scope = uow.ScopeRepository.GetByNames(new[] { model.Name }).SingleOrDefault();
+
+                    if (client != null && scope != null)
+                    {
+                        var scopeToRemove = uow.ClientScopeRepository.GetByClientId(client.Id).SingleOrDefault(cs => cs.ScopeId == scope.Id);
+                        if (scopeToRemove != null)
+                        {
+                            uow.ClientScopeRepository.Delete(scopeToRemove);
+                            uow.Commit();
+                        }
+
+                        return RedirectToAction(nameof(ManageClient), new { clientId = model.Id });
+                    }
+                }
+            }
+
+            return View("Error");
         }
 
         #endregion

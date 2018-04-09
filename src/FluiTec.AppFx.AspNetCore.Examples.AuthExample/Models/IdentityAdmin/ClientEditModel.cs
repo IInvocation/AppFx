@@ -58,5 +58,13 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
         [DisplayTranslationForCulture("GrantTypes", "Zugriffstypen", "de")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
         public List<string> GrantTypes { get; set; }
+
+        /// <summary>   Gets or sets the client scopes. </summary>
+        /// <value> The client scopes. </value>
+        public IEnumerable<ClientScopeModel> ClientScopes { get; set; }
+
+        /// <summary>   Gets or sets the scopes. </summary>
+        /// <value> The scopes. </value>
+        public IEnumerable<ClientScopeModel> Scopes { get; set; }
     }
 }

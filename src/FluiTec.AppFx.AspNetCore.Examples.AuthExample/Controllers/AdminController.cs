@@ -31,9 +31,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   Manager for user. </summary>
         private readonly UserManager<IdentityUserEntity> _userManager;
 
-        /// <summary>The authorization service.</summary>
-        private readonly IAuthorizationService _authorizationService;
-
         /// <summary>Gets options for controlling the application.</summary>
         private readonly ApplicationOptions _applicationOptions;
 
@@ -56,20 +53,17 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>Constructor.</summary>
         /// <param name="identityDataService">          The identity data service. </param>
         /// <param name="userManager">                  Manager for user. </param>
-        /// <param name="authorizationService">         The authorization service. </param>
         /// <param name="applicationOptions">           Gets options for controlling the application. </param>
         /// <param name="emailSender">                  The email sender. </param>
         /// <param name="localizerFactory">             The localizer factory. </param>
         /// <param name="authorizationDataService">     The authorization data service. </param>
         /// <param name="identityServerDataService">    The identity server data service. </param>
         public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager,
-            IAuthorizationService authorizationService, ApplicationOptions applicationOptions,
-            ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory,
+            ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory,
             IAuthorizationDataService authorizationDataService, IIdentityServerDataService identityServerDataService)
         {
             _identityDataService = identityDataService;
             _userManager = userManager;
-            _authorizationService = authorizationService;
             _applicationOptions = applicationOptions;
             _emailSender = emailSender;
             _localizerFactory = localizerFactory;
@@ -260,17 +254,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.UsersAccess)]
         [Authorize(PolicyNames.UsersUpdate)]
         [Authorize(PolicyNames.RolesAccess)]
-        public async Task<IActionResult> AddUserRole(UserRoleModel model)
+        public IActionResult AddUserRole(UserRoleModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (model.UserId > 0)
             {
                 // add user to role membership
@@ -299,17 +284,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.UsersAccess)]
         [Authorize(PolicyNames.UsersUpdate)]
         [Authorize(PolicyNames.RolesAccess)]
-        public async Task<IActionResult> RemoveUserRole(UserRoleModel model)
+        public IActionResult RemoveUserRole(UserRoleModel model)
         {
-            var authResult = await _authorizationService.AuthorizeAsync(User, typeof(IdentityUserEntity), new[]
-            {
-                ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityUserEntity)),
-                ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity))
-            });
-            if (!authResult.Succeeded)
-                return RedirectToAction(nameof(AccountController.AccessDenied), "Account");
-
             if (model.UserId > 0)
             {
                 // remove user from role membership

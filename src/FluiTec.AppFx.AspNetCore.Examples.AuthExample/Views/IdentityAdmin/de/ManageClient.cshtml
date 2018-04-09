@@ -73,6 +73,10 @@
                     </div>
                 </div>
             </form>
+            @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ScopesAccess)).Succeeded)
+            {
+                @Html.Partial("_ManageClientScopes", Model)
+            }
             <h4>Aktionen</h4>
             <hr />
             <div class="row uniform">

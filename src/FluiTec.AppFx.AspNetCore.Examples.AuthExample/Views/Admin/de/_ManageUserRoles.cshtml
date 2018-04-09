@@ -10,7 +10,7 @@
         {
             <h4>Rollen entfernen</h4>
             <form asp-controller="Admin" asp-action="RemoveUserRole" method="post" class="form-horizontal">
-                <div id="socialLoginList">
+                <div>
                     <p>
                         @foreach (var role in Model.UserRoles)
                         {
@@ -25,7 +25,7 @@
         {
             <h4>Rollen hinzufügen</h4>
             <form asp-controller="Admin" asp-action="AddUserRole" method="post" class="form-horizontal">
-                <div id="socialLoginList">
+                <div>
                     <p>
                         @foreach (var role in Model.Roles)
                         {
