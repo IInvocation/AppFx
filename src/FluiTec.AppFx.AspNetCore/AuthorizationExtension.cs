@@ -7,6 +7,8 @@ using FluiTec.AppFx.Authorization.Activity.Dynamic;
 using FluiTec.AppFx.Authorization.Activity.Entities;
 using FluiTec.AppFx.Authorization.Activity.Requirements;
 using FluiTec.AppFx.Identity.Entities;
+using FluiTec.AppFx.IdentityServer.Entities;
+using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Authorization;
 
@@ -32,7 +34,12 @@ namespace FluiTec.AppFx.AspNetCore
                     policy.Requirements.Add(new AdministrativeAccessRequirement(new[]
                     {
                         ResourceActivities.AccessRequirement(typeof(IdentityUserEntity)),
-                        ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity))
+                        ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)),
+                        ResourceActivities.AccessRequirement(typeof(ClientEntity)),
+                        ResourceActivities.AccessRequirement(typeof(ScopeEntity)),
+                        ResourceActivities.AccessRequirement(typeof(ApiResourceEntity)),
+                        ResourceActivities.AccessRequirement(typeof(IdentityResourceEntity)),
+                        ResourceActivities.AccessRequirement(typeof(ResourceEntity))
                     })));
 
                 AddConfigurationActivities(services, options, configuration);

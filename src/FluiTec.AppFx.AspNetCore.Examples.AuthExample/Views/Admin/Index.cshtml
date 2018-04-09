@@ -97,5 +97,20 @@
             </div>
         </section>
     }
+    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.LocalizationAccess)).Succeeded)
+    {
+        <section>
+            <h4>Manage localizations</h4>
+            <div class="row uniform">
+                <div class="col-lg-6">
+                    <ul class="actions">
+                        <li>
+                            <a asp-controller="Localization" asp-action="Index">Open localization management</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    }
     </div>
 </section>

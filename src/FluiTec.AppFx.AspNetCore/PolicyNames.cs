@@ -165,5 +165,21 @@
         public const string IdentityResourceClaimsDelete = "IdentityResourceClaimsDelete";
 
         #endregion
+
+        #region Localization
+
+        /// <summary>The Localization access.</summary>
+        public const string LocalizationAccess = "LocalizationAccess";
+
+        /// <summary>The Localization create.</summary>
+        public const string LocalizationCreate = "LocalizationCreate";
+
+        /// <summary>The Localization update.</summary>
+        public const string LocalizationUpdate = "LocalizationUpdate";
+
+        /// <summary>The Localization delete.</summary>
+        public const string LocalizationDelete = "LocalizationDelete";
+
+        #endregion
     }
 }

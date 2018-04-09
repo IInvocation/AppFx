@@ -3,6 +3,7 @@ using FluiTec.AppFx.Authorization.Activity;
 using FluiTec.AppFx.Authorization.Activity.Requirements;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.IdentityServer.Entities;
+using FluiTec.AppFx.Localization.Entities;
 
 namespace FluiTec.AppFx.AspNetCore
 {
@@ -28,7 +29,8 @@ namespace FluiTec.AppFx.AspNetCore
                 ApiResourcesAccess, ApiResourcesCreate, ApiResourcesUpdate, ApiResourcesDelete,
                 ApiResourceClaimsAccess, ApiResourceClaimsCreate, ApiResourceClaimsUpdate, ApiResourceClaimsDelete,
                 IdentityResourcesAccess, IdentityResourcesCreate, IdentityResourcesUpdate, IdentityResourcesDelete,
-                IdentityResourceClaimsAccess, IdentityResourceClaimsCreate, IdentityResourceClaimsUpdate, IdentityResourceClaimsDelete
+                IdentityResourceClaimsAccess, IdentityResourceClaimsCreate, IdentityResourceClaimsUpdate, IdentityResourceClaimsDelete,
+                LocalizationAccess, LocalizationCreate, LocalizationUpdate, LocalizationDelete
             }).AsReadOnly();
         }
 
@@ -238,6 +240,26 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the IdentityResourceClaims delete.</summary>
         /// <value>The IdentityResourceClaims delete.</value>
         public DefaultPolicy IdentityResourceClaimsDelete { get; } = new DefaultPolicy(PolicyNames.IdentityResourceClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region Localization
+
+        /// <summary>Gets the Localization access.</summary>
+        /// <value>The Localization access.</value>
+        public DefaultPolicy LocalizationAccess { get; } = new DefaultPolicy(PolicyNames.LocalizationAccess, ResourceActivities.AccessRequirement(typeof(ResourceEntity)));
+
+        /// <summary>Gets the Localization create.</summary>
+        /// <value>The Localization create.</value>
+        public DefaultPolicy LocalizationCreate { get; } = new DefaultPolicy(PolicyNames.LocalizationCreate, ResourceActivities.CreateRequirement(typeof(ResourceEntity)));
+
+        /// <summary>Gets the Localization update.</summary>
+        /// <value>The Localization update.</value>
+        public DefaultPolicy LocalizationUpdate { get; } = new DefaultPolicy(PolicyNames.LocalizationUpdate, ResourceActivities.UpdateRequirement(typeof(ResourceEntity)));
+
+        /// <summary>Gets the Localization delete.</summary>
+        /// <value>The Localization delete.</value>
+        public DefaultPolicy LocalizationDelete { get; } = new DefaultPolicy(PolicyNames.LocalizationDelete, ResourceActivities.DeleteRequirement(typeof(ResourceEntity)));
 
         #endregion
     }
