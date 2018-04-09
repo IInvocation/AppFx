@@ -1,37 +1,32 @@
 ﻿@using FluiTec.AppFx.AspNetCore
 @using FluiTec.AppFx.AspNetCore.Configuration
 @using Microsoft.AspNetCore.Authorization
-@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddClientClaimModel
+@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.EditResourceClaimModel
 @inject IdentityServerClaimOptions IdentityServerOptions
 @inject IViewLocalizer Localizer
 @inject IAuthorizationService AuthorizationService
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Klienten-Eigenschaftsverwaltung</h2>
+        <h2>Api resource claims management</h2>
     </header>
     <div class="container">
         <section>
-            <h4>Eigenschaft ändern</h4>
+            <h4>Edit claim</h4>
             <hr />
             @Html.Partial("_ModelUpdateResult", Model)
-            <form asp-controller="IdentityAdmin" asp-action="EditClientClaim" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="EditApiResourceClaim" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
-                <input asp-for="ClientId" value="@Model.ClientId" hidden />
+                <input asp-for="ResourceId" value="@Model.ResourceId" hidden />
                 <input asp-for="Type" value="@Model.Type" hidden />
-                <div class="row uniform">
-                    <div class="col-lg-6">
-                        <input asp-for="Value" placeholder="Wert" data-rule-required="true" data-msg-required="Wert ist ein Pflichtfeld" />
-                    </div>
-                </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="Bearbeiten" />
+                                <input type="submit" value="Edit" />
                             </li>
                             <li>
-                                <input type="reset" value="Zurücksetzen" />
+                                <input type="reset" value="Reset" />
                             </li>
                         </ul>
                     </div>
@@ -42,18 +37,18 @@
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClients">Klientenverwaltung</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageApiResources">Api resource management</a>
                         </li>
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClient" asp-route-clientid="@Model.ClientId">Klient verwalten</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageApiResource" asp-route-resourceid="@Model.ResourceId">Manage resource</a>
                         </li>
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClientClaims" asp-route-clientid="@Model.ClientId">Eigenschaften</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageApiResourceClaims" asp-route-resourceid="@Model.ResourceId">Manage resource claims</a>
                         </li>
-                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientClaimsDelete)).Succeeded)
+                        @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ApiResourceClaimsDelete)).Succeeded)
                         {
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="DeleteClientClaim" asp-route-clientid="@Model.ClientId" asp-route-claimtype="@Model.Type">Eigenschaft löschen</a>
+                            <a asp-controller="IdentityAdmin" asp-action="DeleteApiResourceClaim" asp-route-resourceid="@Model.ResourceId" asp-route-claimtype="@Model.Type">Delete claim</a>
                         </li>
                         }
                     </ul>

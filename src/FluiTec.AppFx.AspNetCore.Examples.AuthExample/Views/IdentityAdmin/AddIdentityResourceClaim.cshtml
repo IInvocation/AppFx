@@ -1,20 +1,20 @@
 ﻿@using FluiTec.AppFx.AspNetCore.Configuration
-@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddClientClaimModel
+@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddResourceClaimModel
 @inject IdentityServerClaimOptions IdentityServerOptions
 @inject IViewLocalizer Localizer
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Client claims management</h2>
+        <h2>Identity resource management</h2>
     </header>
     <div class="container">
         <section>
             <h4>Add claim</h4>
             <hr />
             @Html.Partial("_ModelUpdateResult", Model)
-            <form asp-controller="IdentityAdmin" asp-action="AddClientClaim" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="AddIdentityResourceClaim" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
-                <input asp-for="ClientId" value="@Model.ClientId" hidden />
+                <input asp-for="ResourceId" value="@Model.ResourceId" hidden />
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <select class="custom-select mr-sm-2" name="Type" Id="Type">
@@ -23,11 +23,6 @@
                                 <option value="@claimType.Name">@Localizer.GetString(claimType.DisplayName)</option>
                             }
                         </select>
-                    </div>
-                </div>
-                <div class="row uniform">
-                    <div class="col-lg-6">
-                        <input asp-for="Value" placeholder="Value" data-rule-required="true" data-msg-required="Value is required" />
                     </div>
                 </div>
                 <div class="row uniform">
@@ -48,13 +43,13 @@
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClients">Client management</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageIdentityResources">Identity resource management</a>
                         </li>
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClient" asp-route-clientid="@Model.ClientId">Manage client</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageIdentityResource" asp-route-resourceid="@Model.ResourceId">Manage resource</a>
                         </li>
                         <li>
-                            <a asp-controller="IdentityAdmin" asp-action="ManageClientClaims" asp-route-clientid="@Model.ClientId">Manage client claims</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageIdentityResourceClaims" asp-route-resourceid="@Model.ResourceId">Manage resource claims</a>
                         </li>
                     </ul>
                 </div>

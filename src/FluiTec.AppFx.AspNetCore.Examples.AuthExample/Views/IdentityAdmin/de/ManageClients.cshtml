@@ -26,7 +26,7 @@
                     <td>
                         @client.Name
                     </td>
-                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
+                    @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsUpdate)).Succeeded)
                     {
                     <td>
                         <a asp-controller="IdentityAdmin" asp-action="ManageClient" asp-route-clientid="@client.Id">Bearbeiten</a>
