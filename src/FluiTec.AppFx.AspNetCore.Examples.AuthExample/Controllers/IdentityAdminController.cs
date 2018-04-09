@@ -248,6 +248,162 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
+        #region ClientClaims
+
+        /// <summary>   (An Action that handles HTTP GET requests) manage Client claims. </summary>
+        /// <param name="clientid">   The client-id. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        public IActionResult ManageClientClaims(int clientid)
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var claims = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == clientid);
+                return View(new ClientClaimsModel
+                {
+                    ClientId = clientid,
+                    ClaimEntries = claims.Select(c => new ClientClaimsModel.ClaimEntry { Type = c.ClaimType, Value = c.ClaimValue }).ToList()
+                });
+            }
+        }
+
+        /// <summary>   (An Action that handles HTTP GET requests) adds a Client claim. </summary>
+        /// <param name="clientid">   The client-id. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult AddClientClaim(int clientid)
+        {
+            return View(new AddClaimModel { ClientId = clientid });
+        }
+
+        /// <summary>   Adds a Client claim. </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult AddClientClaim(AddClaimModel model)
+        {
+            model.Update();
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var existing = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
+                    if (existing == null)
+                    {
+                        uow.ClientClaimRepository.Add(new ClientClaimEntity
+                        {
+                            ClientId = model.ClientId,
+                            ClaimType = model.Type,
+                            ClaimValue = model.Value
+                        });
+                    }
+                    else
+                    {
+                        existing.ClaimValue = model.Value;
+                        uow.ClientClaimRepository.Update(existing);
+                    }
+
+                    uow.Commit();
+                    model.UpdateSuccess();
+                    RedirectToAction(nameof(ManageClientClaims), new { Clientid = model.ClientId });
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>   Edit Client claim. </summary>
+        /// <param name="clientid">       The client-id. </param>
+        /// <param name="claimType">    Type of the claim. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult EditClientClaim(int clientid, string claimType)
+        {
+            using (var uow = _identityServerDataService.StartUnitOfWork())
+            {
+                var claim = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == clientid).SingleOrDefault(c => c.ClaimType == claimType);
+                return View(new EditClaimModel { ClientId = clientid, Type = claimType, Value = claim?.ClaimValue });
+            }
+        }
+
+        /// <summary>   (An Action that handles HTTP POST requests) edit Client claim. </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsUpdate)]
+        public IActionResult EditClientClaim(EditClaimModel model)
+        {
+            model.Update();
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var existing = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
+                    if (existing == null)
+                        return View("Error");
+
+                    existing.ClaimValue = model.Value;
+                    uow.ClientClaimRepository.Update(existing);
+
+                    uow.Commit();
+                    model.UpdateSuccess();
+                }
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP GET requests) (Restricted to PolicyNames.ClaimsDelete)
+        ///     deletes the Client claim.
+        /// </summary>
+        /// <param name="clientId">       Identifier for the Client. </param>
+        /// <param name="claimType">    Type of the claim. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpGet]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsDelete)]
+        public IActionResult DeleteClientClaim(int clientId, string claimType)
+        {
+            return View(new DeleteClaimModel { ClientId = clientId, Type = claimType });
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClaimsDelete)
+        ///     deletes the Client claim described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ClaimsAccess)]
+        [Authorize(PolicyNames.ClaimsDelete)]
+        public IActionResult DeleteClientClaim(DeleteClaimModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var claim = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
+                    uow.ClientClaimRepository.Delete(claim);
+                    uow.Commit();
+                }
+
+                return RedirectToAction(nameof(ManageClientClaims), new { Clientid = model.ClientId });
+            }
+
+            return View("Error");
+        }
+
+        #endregion
+
         #region Scopes
 
         /// <summary>(Restricted to PolicyNames.ScopesAccess) manage scopes.</summary>
@@ -396,159 +552,19 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         #endregion
 
-        #region ClientClaims
+        #region ApiResources
 
-        /// <summary>   (An Action that handles HTTP GET requests) manage Client claims. </summary>
-        /// <param name="clientid">   The client-id. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpGet]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        public IActionResult ManageClientClaims(int clientid)
-        {
-            using (var uow = _identityServerDataService.StartUnitOfWork())
-            {
-                var claims = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == clientid);
-                return View(new ClientClaimsModel
-                {
-                    ClientId = clientid,
-                    ClaimEntries = claims.Select(c => new ClientClaimsModel.ClaimEntry { Type = c.ClaimType, Value = c.ClaimValue }).ToList()
-                });
-            }
-        }
+        #endregion
 
-        /// <summary>   (An Action that handles HTTP GET requests) adds a Client claim. </summary>
-        /// <param name="clientid">   The client-id. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpGet]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult AddClientClaim(int clientid)
-        {
-            return View(new AddClaimModel { ClientId = clientid });
-        }
+        #region ApiResourceClaims
 
-        /// <summary>   Adds a Client claim. </summary>
-        /// <param name="model">    The model. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpPost]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult AddClientClaim(AddClaimModel model)
-        {
-            model.Update();
-            if (ModelState.IsValid)
-            {
-                using (var uow = _identityServerDataService.StartUnitOfWork())
-                {
-                    var existing = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
-                    if (existing == null)
-                    {
-                        uow.ClientClaimRepository.Add(new ClientClaimEntity
-                        {
-                            ClientId = model.ClientId,
-                            ClaimType = model.Type,
-                            ClaimValue = model.Value
-                        });
-                    }
-                    else
-                    {
-                        existing.ClaimValue = model.Value;
-                        uow.ClientClaimRepository.Update(existing);
-                    }
+        #endregion
 
-                    uow.Commit();
-                    model.UpdateSuccess();
-                    RedirectToAction(nameof(ManageClientClaims), new { Clientid = model.ClientId });
-                }
-            }
+        #region IdentityResources
 
-            return View(model);
-        }
+        #endregion
 
-        /// <summary>   Edit Client claim. </summary>
-        /// <param name="clientid">       The client-id. </param>
-        /// <param name="claimType">    Type of the claim. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpGet]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult EditClientClaim(int clientid, string claimType)
-        {
-            using (var uow = _identityServerDataService.StartUnitOfWork())
-            { 
-                var claim = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == clientid).SingleOrDefault(c => c.ClaimType == claimType);
-                return View(new EditClaimModel { ClientId = clientid, Type = claimType, Value = claim?.ClaimValue });
-            }
-        }
-
-        /// <summary>   (An Action that handles HTTP POST requests) edit Client claim. </summary>
-        /// <param name="model">    The model. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpPost]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult EditClientClaim(EditClaimModel model)
-        {
-            model.Update();
-            if (ModelState.IsValid)
-            {
-                using (var uow = _identityServerDataService.StartUnitOfWork())
-                {
-                    var existing = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
-                    if (existing == null)
-                        return View("Error");
-
-                    existing.ClaimValue = model.Value;
-                    uow.ClientClaimRepository.Update(existing);
-
-                    uow.Commit();
-                    model.UpdateSuccess();
-                }
-            }
-
-            return View(model);
-        }
-
-        /// <summary>
-        ///     (An Action that handles HTTP GET requests) (Restricted to PolicyNames.ClaimsDelete)
-        ///     deletes the Client claim.
-        /// </summary>
-        /// <param name="clientId">       Identifier for the Client. </param>
-        /// <param name="claimType">    Type of the claim. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpGet]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsDelete)]
-        public IActionResult DeleteClientClaim(int clientId, string claimType)
-        {
-            return View(new DeleteClaimModel { ClientId = clientId, Type = claimType });
-        }
-
-        /// <summary>
-        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ClaimsDelete)
-        ///     deletes the Client claim described by model.
-        /// </summary>
-        /// <param name="model">    The model. </param>
-        /// <returns>   An IActionResult. </returns>
-        [HttpPost]
-        [Authorize(PolicyNames.ClaimsAccess)]
-        [Authorize(PolicyNames.ClaimsDelete)]
-        public IActionResult DeleteClientClaim(DeleteClaimModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                using (var uow = _identityServerDataService.StartUnitOfWork())
-                {
-                    var claim = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == model.ClientId).SingleOrDefault(c => c.ClaimType == model.Type);
-                    uow.ClientClaimRepository.Delete(claim);
-                    uow.Commit();
-                }
-
-                return RedirectToAction(nameof(ManageClientClaims), new { Clientid = model.ClientId });
-            }
-
-            return View("Error");
-        }
+        #region IdentityResourceClaims
 
         #endregion
     }

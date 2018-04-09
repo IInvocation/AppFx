@@ -24,7 +24,11 @@ namespace FluiTec.AppFx.AspNetCore
                 ClaimsAccess, ClaimsCreate, ClaimsUpdate, ClaimsDelete,
                 ClientsAccess, ClientsCreate, ClientsUpdate, ClientsDelete,
                 ScopesAccess, ScopesCreate, ScopesUpdate, ScopesDelete,
-                ClientClaimsAccess, ClientClaimsCreate, ClientClaimsUpdate, ClientClaimsDelete
+                ClientClaimsAccess, ClientClaimsCreate, ClientClaimsUpdate, ClientClaimsDelete,
+                ApiResourcesAccess, ApiResourcesCreate, ApiResourcesUpdate, ApiResourcesDelete,
+                ApiResourceClaimsAccess, ApiResourceClaimsCreate, ApiResourceClaimsUpdate, ApiResourceClaimsDelete,
+                IdentityResourcesAccess, IdentityResourcesCreate, IdentityResourcesUpdate, IdentityResourcesDelete,
+                IdentityResourceClaimsAccess, IdentityResourceClaimsCreate, IdentityResourceClaimsUpdate, IdentityResourceClaimsDelete
             }).AsReadOnly();
         }
 
@@ -154,6 +158,86 @@ namespace FluiTec.AppFx.AspNetCore
         /// <summary>Gets the ClientClaims delete.</summary>
         /// <value>The ClientClaims delete.</value>
         public DefaultPolicy ClientClaimsDelete { get; } = new DefaultPolicy(PolicyNames.ClientClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region ApiResources
+
+        /// <summary>Gets the ApiResources access.</summary>
+        /// <value>The ApiResources access.</value>
+        public DefaultPolicy ApiResourcesAccess { get; } = new DefaultPolicy(PolicyNames.ApiResourcesAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResources create.</summary>
+        /// <value>The ApiResources create.</value>
+        public DefaultPolicy ApiResourcesCreate { get; } = new DefaultPolicy(PolicyNames.ApiResourcesCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResources update.</summary>
+        /// <value>The ApiResources update.</value>
+        public DefaultPolicy ApiResourcesUpdate { get; } = new DefaultPolicy(PolicyNames.ApiResourcesUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResources delete.</summary>
+        /// <value>The ApiResources delete.</value>
+        public DefaultPolicy ApiResourcesDelete { get; } = new DefaultPolicy(PolicyNames.ApiResourcesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region ApiResourceClaims
+
+        /// <summary>Gets the ApiResourceClaims access.</summary>
+        /// <value>The ApiResourceClaims access.</value>
+        public DefaultPolicy ApiResourceClaimsAccess { get; } = new DefaultPolicy(PolicyNames.ApiResourceClaimsAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResourceClaims create.</summary>
+        /// <value>The ApiResourceClaims create.</value>
+        public DefaultPolicy ApiResourceClaimsCreate { get; } = new DefaultPolicy(PolicyNames.ApiResourceClaimsCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResourceClaims update.</summary>
+        /// <value>The ApiResourceClaims update.</value>
+        public DefaultPolicy ApiResourceClaimsUpdate { get; } = new DefaultPolicy(PolicyNames.ApiResourceClaimsUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the ApiResourceClaims delete.</summary>
+        /// <value>The ApiResourceClaims delete.</value>
+        public DefaultPolicy ApiResourceClaimsDelete { get; } = new DefaultPolicy(PolicyNames.ApiResourceClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region IdentityResources
+
+        /// <summary>Gets the IdentityResources access.</summary>
+        /// <value>The IdentityResources access.</value>
+        public DefaultPolicy IdentityResourcesAccess { get; } = new DefaultPolicy(PolicyNames.IdentityResourcesAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResources create.</summary>
+        /// <value>The IdentityResources create.</value>
+        public DefaultPolicy IdentityResourcesCreate { get; } = new DefaultPolicy(PolicyNames.IdentityResourcesCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResources update.</summary>
+        /// <value>The IdentityResources update.</value>
+        public DefaultPolicy IdentityResourcesUpdate { get; } = new DefaultPolicy(PolicyNames.IdentityResourcesUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResources delete.</summary>
+        /// <value>The IdentityResources delete.</value>
+        public DefaultPolicy IdentityResourcesDelete { get; } = new DefaultPolicy(PolicyNames.IdentityResourcesDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
+
+        #endregion
+
+        #region IdentityResourceClaims
+
+        /// <summary>Gets the IdentityResourceClaims access.</summary>
+        /// <value>The IdentityResourceClaims access.</value>
+        public DefaultPolicy IdentityResourceClaimsAccess { get; } = new DefaultPolicy(PolicyNames.IdentityResourceClaimsAccess, ResourceActivities.AccessRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResourceClaims create.</summary>
+        /// <value>The IdentityResourceClaims create.</value>
+        public DefaultPolicy IdentityResourceClaimsCreate { get; } = new DefaultPolicy(PolicyNames.IdentityResourceClaimsCreate, ResourceActivities.CreateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResourceClaims update.</summary>
+        /// <value>The IdentityResourceClaims update.</value>
+        public DefaultPolicy IdentityResourceClaimsUpdate { get; } = new DefaultPolicy(PolicyNames.IdentityResourceClaimsUpdate, ResourceActivities.UpdateRequirement(typeof(IdentityRoleEntity)));
+
+        /// <summary>Gets the IdentityResourceClaims delete.</summary>
+        /// <value>The IdentityResourceClaims delete.</value>
+        public DefaultPolicy IdentityResourceClaimsDelete { get; } = new DefaultPolicy(PolicyNames.IdentityResourceClaimsDelete, ResourceActivities.DeleteRequirement(typeof(IdentityRoleEntity)));
 
         #endregion
     }

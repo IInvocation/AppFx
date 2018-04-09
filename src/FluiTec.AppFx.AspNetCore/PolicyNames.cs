@@ -86,7 +86,7 @@
 
         #endregion
 
-        #region Claims
+        #region ClientClaims
 
         /// <summary>   The ClientClaims access. </summary>
         public const string ClientClaimsAccess = "ClientClaimsAccess";
@@ -99,6 +99,70 @@
 
         /// <summary>   The ClientClaims delete. </summary>
         public const string ClientClaimsDelete = "ClientClaimsDelete";
+
+        #endregion
+
+        #region ApiResources
+
+        /// <summary>   The ApiResources access. </summary>
+        public const string ApiResourcesAccess = "ApiResourcesAccess";
+
+        /// <summary>   The ApiResources create. </summary>
+        public const string ApiResourcesCreate = "ApiResourcesCreate";
+
+        /// <summary>   The ApiResources update. </summary>
+        public const string ApiResourcesUpdate = "ApiResourcesUpdate";
+
+        /// <summary>   The ApiResources delete. </summary>
+        public const string ApiResourcesDelete = "ApiResourcesDelete";
+
+        #endregion
+
+        #region ApiResourceClaims
+
+        /// <summary>   The ApiResourceClaims access. </summary>
+        public const string ApiResourceClaimsAccess = "ApiResourceClaimsAccess";
+
+        /// <summary>   The ApiResourceClaims create. </summary>
+        public const string ApiResourceClaimsCreate = "ApiResourceClaimsCreate";
+
+        /// <summary>   The ApiResourceClaims update. </summary>
+        public const string ApiResourceClaimsUpdate = "ApiResourceClaimsUpdate";
+
+        /// <summary>   The ApiResourceClaims delete. </summary>
+        public const string ApiResourceClaimsDelete = "ApiResourceClaimsDelete";
+
+        #endregion
+
+        #region IdentityResources
+
+        /// <summary>   The IdentityResources access. </summary>
+        public const string IdentityResourcesAccess = "IdentityResourcesAccess";
+
+        /// <summary>   The IdentityResources create. </summary>
+        public const string IdentityResourcesCreate = "IdentityResourcesCreate";
+
+        /// <summary>   The IdentityResources update. </summary>
+        public const string IdentityResourcesUpdate = "IdentityResourcesUpdate";
+
+        /// <summary>   The IdentityResources delete. </summary>
+        public const string IdentityResourcesDelete = "IdentityResourcesDelete";
+
+        #endregion
+
+        #region IdentityResourceClaims
+
+        /// <summary>   The IdentityResourceClaims access. </summary>
+        public const string IdentityResourceClaimsAccess = "IdentityResourceClaimsAccess";
+
+        /// <summary>   The IdentityResourceClaims create. </summary>
+        public const string IdentityResourceClaimsCreate = "IdentityResourceClaimsCreate";
+
+        /// <summary>   The IdentityResourceClaims update. </summary>
+        public const string IdentityResourceClaimsUpdate = "IdentityResourceClaimsUpdate";
+
+        /// <summary>   The IdentityResourceClaims delete. </summary>
+        public const string IdentityResourceClaimsDelete = "IdentityResourceClaimsDelete";
 
         #endregion
     }
