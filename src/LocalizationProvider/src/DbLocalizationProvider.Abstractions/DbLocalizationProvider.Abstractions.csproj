@@ -16,10 +16,4 @@
     <PackageId>LocalizationProvider.Abstractions</PackageId>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <RepositoryUrl>https://github.com/valdisiljuconoks/LocalizationProvider/</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-  </PropertyGroup>
-
 </Project>
