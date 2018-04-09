@@ -932,6 +932,44 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     (Restricted to PolicyNames.ScopesDelete) deletes the scope described by scopeId.
+        /// </summary>
+        /// <param name="scopeId">  Identifier for the scope. </param>
+        /// <returns>   An IActionResult. </returns>
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesDelete)]
+        public IActionResult DeleteScope(int scopeId)
+        {
+            return View(new ScopeDeleteModel {Id = scopeId});
+        }
+
+        /// <summary>
+        ///     (An Action that handles HTTP POST requests) (Restricted to PolicyNames.ScopesDelete)
+        ///     deletes the scope described by model.
+        /// </summary>
+        /// <param name="model">    The model. </param>
+        /// <returns>   An IActionResult. </returns>
+        [HttpPost]
+        [Authorize(PolicyNames.ScopesAccess)]
+        [Authorize(PolicyNames.ScopesDelete)]
+        public IActionResult DeleteScope(ScopeDeleteModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var uow = _identityServerDataService.StartUnitOfWork())
+                {
+                    var scope = uow.ScopeRepository.Get(model.Id);
+                    uow.ScopeRepository.Delete(scope);
+                    uow.Commit();
+                }
+
+                return RedirectToAction(nameof(ManageScopes));
+            }
+
+            return View(model);
+        }
+
         #endregion
 
         #region Helpers

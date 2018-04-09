@@ -52,8 +52,8 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 
         /// <summary>Gets or sets a value indicating whether the in discovery document is shown.</summary>
         /// <value>True if show in discovery document, false if not.</value>
-        [Display(Name = FullModelName + "Emphasize", Description = "Show in discovery")]
-        [DisplayTranslationForCulture("Emphasize", "Im Entdeckungsdokument zeigen", "de")]
+        [Display(Name = FullModelName + "ShowInDiscoveryDocument", Description = "Show in discovery")]
+        [DisplayTranslationForCulture("ShowInDiscoveryDocument", "Im Entdeckungsdokument zeigen", "de")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
         public bool ShowInDiscoveryDocument { get; set; }
     }
