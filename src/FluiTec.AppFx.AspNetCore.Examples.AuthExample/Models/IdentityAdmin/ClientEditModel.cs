@@ -2,14 +2,40 @@
 using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 {
-    /// <summary>A data Model for the client add.</summary>
+    /// <summary>A data Model for the edit client.</summary>
     [LocalizedModel]
-    public class ClientAddModel
+    public class ClientEditModel : UpdateModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientAddModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientEditModel";
+
+        /// <summary>Gets or sets the identifier.</summary>
+        /// <value>The identifier.</value>
+        /// <remarks>
+        /// Cant be edited         
+        /// </remarks>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
+        public int Id { get; set; }
+
+        /// <summary>Gets or sets the identifier of the client.</summary>
+        /// <value>The identifier of the client.</value>
+        /// <remarks>
+        /// Cant be edited         
+        /// </remarks>
+        [Display(Name = FullModelName + "ClientId", Description = "Id")]
+        [DisplayTranslationForCulture("ClientId", "Id", "de")]
+        public string ClientId { get; set; }
+
+        /// <summary>Gets or sets the client secret.</summary>
+        /// <value>The client secret.</value>
+        /// <remarks>
+        /// Cant be edited         
+        /// </remarks>
+        [Display(Name = FullModelName + "ClientSecret", Description = "Secret")]
+        [DisplayTranslationForCulture("ClientSecret", "Geheimnis", "de")]
+        public string ClientSecret { get; set; }
 
         [Display(Name = FullModelName + "Name", Description = "Name")]
         [DisplayTranslationForCulture("Name", "Name", "de")]

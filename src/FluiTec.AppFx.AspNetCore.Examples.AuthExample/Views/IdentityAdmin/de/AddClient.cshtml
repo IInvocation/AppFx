@@ -1,4 +1,5 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientAddModel
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
+@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientAddModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -8,7 +9,7 @@
         <section>
             <h4>Klient hinzufügen</h4>
             <hr />
-            <form asp-controller="Admin" asp-action="AddClient" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="AddClient" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
                 <div class="row uniform">
                     <div class="col-lg-6">
@@ -17,12 +18,12 @@
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="RedirectUri" placeholder="Redirect uri" />
+                        <input asp-for="RedirectUri" placeholder="Weiterleitungs-URL" />
                     </div>
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="PostLogoutUri" placeholder="Postlogout uri" />
+                        <input asp-for="PostLogoutUri" placeholder="Abmeldungs-URL" />
                     </div>
                 </div>
                 <div class="row uniform">
@@ -58,7 +59,7 @@
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageClients">Klientenverwaltung</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageClients">Klientenverwaltung</a>
                         </li>
                     </ul>
                 </div>

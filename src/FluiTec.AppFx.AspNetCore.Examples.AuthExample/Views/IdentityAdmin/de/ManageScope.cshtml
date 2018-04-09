@@ -1,4 +1,8 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeAddModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ScopeEditModel
+@using FluiTec.AppFx.AspNetCore
+@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -6,10 +10,12 @@
     </header>
     <div class="container">
         <section>
-            <h4>Aufgabenbereich hinzufügen</h4>
+            <h4>Aufgabenbereich verwalten</h4>
             <hr />
-            <form asp-controller="Admin" asp-action="AddScope" method="post">
+            @Html.Partial("_ModelUpdateResult", Model)
+            <form asp-controller="IdentityAdmin" asp-action="ManageScope" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
+                <input type="hidden" name="Id" id="Id" value="@Model?.Id" readonly />
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <input asp-for="Name" placeholder="Name" data-rule-required="true" data-msg-required="Name ist ein Pflichtfeld" />
@@ -17,7 +23,7 @@
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="DisplayName" placeholder="Anzeigename" data-rule-required="true" data-msg-required="Anezeigename ist ein Pflichtfeld" />
+                        <input asp-for="DisplayName" placeholder="Anzeigename" data-rule-required="true" data-msg-required="Anzeigename ist ein Pflichtfeld" />
                     </div>
                 </div>
                 <div class="row uniform">
@@ -43,11 +49,12 @@
                         <label asp-for="ShowInDiscoveryDocument"></label>
                     </div>
                 </div>
+                <br />
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="Hinzufügen" />
+                                <input type="submit" value="Bearbeiten" />
                             </li>
                             <li>
                                 <input type="reset" value="Zurücksetzen" />
@@ -57,12 +64,19 @@
                 </div>
             </form>
             <h4>Aktionen</h4>
+            <hr />
             <div class="row uniform">
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageScopes">Aufgabenbereichsverwaltung</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageScopes">Aufgabenbereichsverwaltung</a>
                         </li>
+                        @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.ScopesDelete)).Succeeded)
+                        {
+                        <li>
+                            <a asp-controller="IdentityAdmin" asp-action="DeleteScope" asp-route-scopeid="@Model.Id">Aufgabenbereich löschen</a>
+                        </li>
+                        }
                     </ul>
                 </div>
             </div>

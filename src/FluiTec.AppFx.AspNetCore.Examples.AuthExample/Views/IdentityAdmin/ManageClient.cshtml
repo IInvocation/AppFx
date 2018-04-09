@@ -1,24 +1,25 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClientEditModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientEditModel
 @using FluiTec.AppFx.AspNetCore
+@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Klientenverwaltung</h2>
+        <h2>Role management</h2>
     </header>
     <div class="container">
         <section>
-            <h4>Klient ändern</h4>
+            <h4>Edit client</h4>
             <hr />
             @Html.Partial("_ModelUpdateResult", Model)
-            <form asp-controller="Admin" asp-action="ManageClient" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="ManageClient" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
                 <input type="hidden" name="Id" id="Id" value="@Model?.Id" readonly />
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <label asp-for="Name"></label>
-                        <input asp-for="Name" placeholder="Name" data-rule-required="true" data-msg-required="Name ist ein Pflichtfeld" />
+                        <input asp-for="Name" placeholder="Name" data-rule-required="true" data-msg-required="Name is required" />
                     </div>
                 </div>
                 <div class="row uniform">
@@ -35,12 +36,12 @@
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="RedirectUri" placeholder="Weiterleitungs-URL" />
+                        <input asp-for="RedirectUri" placeholder="Redirect uri" />
                     </div>
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="PostLogoutUri" placeholder="Abemeldungs-URL" />
+                        <input asp-for="PostLogoutUri" placeholder="Postlogout uri" />
                     </div>
                 </div>
                 <div class="row uniform">
@@ -52,9 +53,9 @@
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <select asp-for="GrantTypes" class="custom-select">
-                            <option value="password">Passwort</option>
+                            <option value="password">Password</option>
                             <option value="hybrid">Hybrid</option>
-                            <option value="client_credentials">Anmeldeinformationen</option>
+                            <option value="client_credentials">Client credentials</option>
                         </select>
                     </div>
                 </div>
@@ -63,27 +64,27 @@
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="Bearbeiten" />
+                                <input type="submit" value="Edit" />
                             </li>
                             <li>
-                                <input type="reset" value="Zurücksetzen" />
+                                <input type="reset" value="Reset" />
                             </li>
                         </ul>
                     </div>
                 </div>
             </form>
-            <h4>Aktionen</h4>
+            <h4>Actions</h4>
             <hr />
             <div class="row uniform">
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageClients">Klientenverwaltung</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageClients">Client management</a>
                         </li>
                         @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsDelete)).Succeeded)
                         {
                         <li>
-                            <a asp-controller="Admin" asp-action="DeleteClient" asp-route-clientid="@Model.Id">Klient löschen</a>
+                            <a asp-controller="IdentityAdmin" asp-action="DeleteClient" asp-route-clientid="@Model.Id">Delete client</a>
                         </li>
                         }
                     </ul>

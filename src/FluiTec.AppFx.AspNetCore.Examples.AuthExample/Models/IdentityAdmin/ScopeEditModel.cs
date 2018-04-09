@@ -1,14 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 {
-    /// <summary>A data Model for the scope add.</summary>
+    /// <summary>A data Model for the scope edit.</summary>
     [LocalizedModel]
-    public class ScopeAddModel
+    public class ScopeEditModel : UpdateModel
     {
         /// <summary>Name of the full model.</summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeAddModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeEditModel";
+
+        /// <summary>Gets or sets the identifier.</summary>
+        /// <value>The identifier.</value>
+        [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
+        public int Id { get; set; }
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>

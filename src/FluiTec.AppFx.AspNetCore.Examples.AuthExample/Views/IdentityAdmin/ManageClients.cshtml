@@ -29,7 +29,7 @@
                     @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.RolesUpdate)).Succeeded)
                     {
                     <td>
-                        <a asp-controller="Admin" asp-action="ManageClient" asp-route-clientid="@client.Id">Edit</a>
+                        <a asp-controller="IdentityAdmin" asp-action="ManageClient" asp-route-clientid="@client.Id">Edit</a>
                     </td>
                     }
                 </tr>
@@ -45,7 +45,7 @@
                         @if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.ClientsCreate)).Succeeded)
                     {
                         <li>
-                            <a asp-controller="Admin" asp-action="AddClient">Add client</a>
+                            <a asp-controller="IdentityAdmin" asp-action="AddClient">Add client</a>
                         </li>
                     }
                     </ul>

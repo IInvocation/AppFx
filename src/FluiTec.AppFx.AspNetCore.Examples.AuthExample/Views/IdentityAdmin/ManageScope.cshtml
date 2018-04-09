@@ -1,5 +1,6 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeEditModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ScopeEditModel
 @using FluiTec.AppFx.AspNetCore
+@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
@@ -12,7 +13,7 @@
             <h4>Edit scope</h4>
             <hr />
             @Html.Partial("_ModelUpdateResult", Model)
-            <form asp-controller="Admin" asp-action="ManageScope" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="ManageScope" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
                 <input type="hidden" name="Id" id="Id" value="@Model?.Id" readonly />
                 <div class="row uniform">
@@ -68,12 +69,12 @@
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageScopes">Scopes management</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageScopes">Scopes management</a>
                         </li>
                         @if (Model != null && (await AuthorizationService.AuthorizeAsync(User, PolicyNames.ScopesDelete)).Succeeded)
                         {
                         <li>
-                            <a asp-controller="Admin" asp-action="DeleteScope" asp-route-scopeid="@Model.Id">Delete scope</a>
+                            <a asp-controller="IdentityAdmin" asp-action="DeleteScope" asp-route-scopeid="@Model.Id">Delete scope</a>
                         </li>
                         }
                     </ul>

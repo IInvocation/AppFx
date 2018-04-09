@@ -1,36 +1,37 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ScopeDeleteModel
+﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
+@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientDeleteModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Scope management</h2>
+        <h2>Klientenverwaltung</h2>
     </header>
     <div class="container">
         <section>
-            <h4>Delete scope</h4>
+            <h4>Klient löschen</h4>
             <hr />
-            <form asp-controller="Admin" asp-action="DeleteScope" method="post">
+            <form asp-controller="IdentityAdmin" asp-action="DeleteClient" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
                 <input asp-for="Id" value="@Model.Id" hidden />
-                <p>Are you sure you want to delete the scope?</p>
+                <p>Sind Sie sicher, dass Sie den Klienten löschen möchten?</p>
                 <div class="row uniform">
                     <div class="col-lg-6">
                         <ul class="actions">
                             <li>
-                                <input type="submit" value="Yes, i am" />
+                                <input type="submit" value="Ja, bin ich" />
                             </li>
                         </ul>
                     </div>
                 </div>
             </form>
-            <h4>Actions</h4>
+            <h4>Aktionen</h4>
             <div class="row uniform">
                 <div class="col-lg-6">
                     <ul class="actions">
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageScopes">Scope management</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageClients">Klientenverwaltung</a>
                         </li>
                         <li>
-                            <a asp-controller="Admin" asp-action="ManageScope" asp-route-scopeid="@Model.Id">Manage scope</a>
+                            <a asp-controller="IdentityAdmin" asp-action="ManageClient" asp-route-clientid="@Model.Id">Klient verwalten</a>
                         </li>
                     </ul>
                 </div>

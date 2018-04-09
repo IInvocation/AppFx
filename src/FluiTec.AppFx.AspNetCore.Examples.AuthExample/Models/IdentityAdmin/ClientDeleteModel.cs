@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 {
-    /// <summary>   A data Model for the scope delete. </summary>
+    /// <summary>A data Model for the delete client.</summary>
     [LocalizedModel]
-    public class ScopeDeleteModel
+    public class ClientDeleteModel
     {
         /// <summary>Gets or sets the identifier of the client.</summary>
         /// <value>The identifier of the client.</value>
