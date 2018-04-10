@@ -51,7 +51,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 rGroups.AddRange(groups.Select(g => new ResourceGroup { Name = g.Key, Entries = g.Count() }));
             }
 
-            var page = PageableModel<ResourceGroup>.Page(rGroups, pageNumber);
+            var page = PageableModel<ResourceGroup>.PageExisting(rGroups, pageNumber).InitRoute(this, nameof(Index));
 
             return View(page);
         }
