@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.Mail;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -13,6 +15,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
     /// <summary>A controller for handling homes.</summary>
     public class HomeController : Controller
     {
+        /// <summary>   The current language. </summary>
+        private string _currentLanguage;
+
         #region Constructors
 
         /// <summary>   Constructor. </summary>
@@ -96,6 +101,35 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             return View();
         }
 
+        /// <summary>   Redirect to default language. </summary>
+        /// <returns>   A response stream to send to the RedirectToDefaultLanguage View. </returns>
+        public ActionResult RedirectToDefaultLanguage()
+        {
+            var lang = CurrentLanguage;
+            return RedirectToAction("Index", new { language = lang });
+        }
+
         #endregion
+
+        private string CurrentLanguage
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_currentLanguage))
+                {
+                    return _currentLanguage;
+                }
+                if (RouteData.Values.ContainsKey("language"))
+                {
+                    _currentLanguage = RouteData.Values["language"].ToString().ToLower();
+                }
+                if (string.IsNullOrEmpty(_currentLanguage))
+                {
+                    var feature = HttpContext.Features.Get<IRequestCultureFeature>();
+                    _currentLanguage = feature.RequestCulture.Culture.TwoLetterISOLanguageName.ToLower();
+                }
+                return _currentLanguage;
+            }
+        }
     }
 }

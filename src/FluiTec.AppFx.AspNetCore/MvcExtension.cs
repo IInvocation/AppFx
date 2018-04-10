@@ -90,6 +90,52 @@ namespace Microsoft.Extensions.DependencyInjection
             return app;
         }
 
+        /// <summary>   An IApplicationBuilder extension method that use MVC with language. </summary>
+        /// <param name="app">              The app to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <returns>   An IApplicationBuilder. </returns>
+        public static IApplicationBuilder UseMvcWithLanguage(this IApplicationBuilder app, IConfigurationRoot configuration)
+        {
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    "default",
+                    "{language:language}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    "catchall",
+                    "{*catchall}",
+                    new { controller = "Home", action = "RedirectToDefaultLanguage" });
+            });
+            return app;
+        }
+
+        /// <summary>
+        ///     An IApplicationBuilder extension method that use MVC with language and API.
+        /// </summary>
+        /// <param name="app">              The app to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <returns>   An IApplicationBuilder. </returns>
+        public static IApplicationBuilder UseMvcWithLanguageAndApi(this IApplicationBuilder app, IConfigurationRoot configuration)
+        {
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    "default",
+                    "{language:language}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    "api",
+                    "api/[controller]");
+
+                routes.MapRoute(
+                    "catchall",
+                    "{*catchall}",
+                    new { controller = "Home", action = "RedirectToDefaultLanguage" });
+            });
+            return app;
+        }
+
         /// <summary>	An IApplicationBuilder extension method that use MVC. </summary>
         /// <param name="app">				The app to act on. </param>
         /// <param name="configuration">	The configuration. </param>

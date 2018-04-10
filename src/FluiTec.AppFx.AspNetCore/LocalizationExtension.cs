@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -47,6 +51,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+            services.PostConfigure<RequestLocalizationOptions>(options =>
+            {
+                var provider = new RouteDataRequestCultureProvider
+                {
+                    RouteDataStringKey = "language",
+                    UIRouteDataStringKey = "language",
+                    Options = options
+                };
+                options.RequestCultureProviders.Insert(0, provider);
+            });
 
             services.ConfigureLocalizationDataService(configuration);
             services.AddDbLocalizationProvider();
@@ -55,7 +69,16 @@ namespace Microsoft.Extensions.DependencyInjection
             var resourceOptions = configuration.GetConfiguration<DbLocalizationResourceOptions>();
             if (resourceOptions == null || !resourceOptions.Resources.Any())
                 return services;
+            ImportJsonLocalizations(services, resourceOptions);
 
+            return services;
+        }
+
+        /// <summary>   Import JSON localizations. </summary>
+        /// <param name="services">         The services to act on. </param>
+        /// <param name="resourceOptions">  Options for controlling the resource. </param>
+        private static void ImportJsonLocalizations(IServiceCollection services, DbLocalizationResourceOptions resourceOptions)
+        {
             var resources = resourceOptions.Resources;
             using (var uow = services.BuildServiceProvider().GetService<ILocalizationDataService>().StartUnitOfWork())
             {
@@ -85,8 +108,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 uow.Commit();
             }
-
-            return services;
         }
 
         /// <summary>	An IApplicationBuilder extension method that use localization. </summary>

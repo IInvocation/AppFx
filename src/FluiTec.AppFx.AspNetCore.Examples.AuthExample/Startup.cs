@@ -2,6 +2,8 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -58,10 +60,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             services.ConfigureIdentity(Configuration);
             services.ConfigureAuthentication(Configuration);
             services.ConfigureIdentityServer(Configuration);
-
             services.ConfigureAuthorization(Configuration);
-
             services.ConfigureMvc(Configuration);
+            services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap.Add("language", typeof(LanguageRouteConstraint));
+            });
             services.ConfigureLocalization(Configuration);
             services.ConfigureCaptcha(Configuration);
             services.ConfigureMailServiceTemplated(Environment, Configuration);
@@ -89,9 +93,22 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
             app.UseLocalization(Configuration);
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             app.UseStatusCodeHandler(Configuration);
-            app.UseMvcWithApi(Configuration);
+            app.UseMvcWithLanguageAndApi(Configuration);
         }
 
         #endregion
+    }
+
+    public class LanguageRouteConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            if (!values.ContainsKey("language"))
+            {
+                return false;
+            }
+            var lang = values["language"].ToString();
+            return lang == "ee" || lang == "en" || lang == "ru";
+        }
     }
 }

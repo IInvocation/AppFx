@@ -45,6 +45,12 @@
     <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Localization.Routing">
+      <HintPath>..\..\..\..\..\..\Users\aschnell\.nuget\packages\microsoft.aspnetcore.localization.routing\2.0.2\lib\netstandard2.0\Microsoft.AspNetCore.Localization.Routing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
 		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
 		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
