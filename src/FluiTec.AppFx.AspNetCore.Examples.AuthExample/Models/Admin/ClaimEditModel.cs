@@ -4,7 +4,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 {
     /// <summary>   A data Model for the edit claim. </summary>
     [LocalizedModel]
-    public class EditClaimModel : AddClaimModel
+    public class ClaimEditModel : ClaimAddModel
     {
     }
 }

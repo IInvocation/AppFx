@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DbLocalizationProvider.Abstractions;
 
-namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
+namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin
 {
     /// <summary>   A data Model for the delete claim. </summary>
     [LocalizedModel]
-    public class DeleteResourceClaimModel
+    public class ClaimDeleteModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddClaimModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Admin.ClaimDeleteModel";
 
-        /// <summary>   Gets or sets the identifier of the resource. </summary>
-        /// <value> The identifier of the resource. </value>
+        /// <summary>   Gets or sets the identifier of the user. </summary>
+        /// <value> The identifier of the user. </value>
         [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredMessage")]
-        public int ResourceId { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>   Gets or sets the type. </summary>
         /// <value> The type. </value>

@@ -5,10 +5,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 {
     /// <summary>   A data Model for the add claim. </summary>
     [LocalizedModel]
-    public class AddResourceClaimModel : UpdateModel
+    public class ResourceClaimAddModel : UpdateModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddResourceClaimModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ResourceClaimAddModel";
 
         /// <summary>   Gets or sets the identifier of the resource. </summary>
         /// <value> The identifier of the resource. </value>

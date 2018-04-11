@@ -14,6 +14,14 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper
         {
         }
 
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">      The data service. </param>
+        /// <param name="parentUnitOfWork"> The parent unit of work. </param>
+        public DapperAuthorizationUnitOfWork(DapperDataService dataService, DapperUnitOfWork parentUnitOfWork) : base(
+            dataService, parentUnitOfWork)
+        {
+        }
+
         #endregion
 
         #region Fields

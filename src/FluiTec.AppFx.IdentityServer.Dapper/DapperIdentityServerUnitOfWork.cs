@@ -14,6 +14,14 @@ namespace FluiTec.AppFx.IdentityServer.Dapper
         {
         }
 
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">      The data service. </param>
+        /// <param name="parentUnitOfWork"> The parent unit of work. </param>
+        public DapperIdentityServerUnitOfWork(DapperDataService dataService, DapperUnitOfWork parentUnitOfWork) : base(
+            dataService, parentUnitOfWork)
+        {
+        }
+
         #endregion
 
         #region Fields

@@ -5,7 +5,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization
 {
     /// <summary>   A translation. </summary>
     [LocalizedModel]
-    public class Translation : UpdateModel
+    public class TranslationEditModel : UpdateModel
     {
         /// <summary>   Name of the full model. </summary>
         private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.Translation";

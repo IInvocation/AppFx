@@ -32,6 +32,25 @@ namespace FluiTec.AppFx.Identity.Dapper.Mssql
             return new DapperIdentityUnitOfWork(this);
         }
 
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IIdentityUnitOfWork.</returns>
+        public IIdentityUnitOfWork StartUnitOfWork(IIdentityUnitOfWork other)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IIdentityUnitOfWork.</returns>
+        public IIdentityUnitOfWork StartUnitOfWork(IUnitOfWork other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (!(other is DapperUnitOfWork))
+                throw new ArgumentException($"Incompatible UnitOfWork. Must be of type {nameof(DapperUnitOfWork)}");
+            return new DapperIdentityUnitOfWork(this, (DapperUnitOfWork) other);
+        }
+
         #endregion
 
         #region Properties

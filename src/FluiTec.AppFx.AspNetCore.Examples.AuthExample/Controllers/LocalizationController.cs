@@ -42,7 +42,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.LocalizationAccess)]
         public IActionResult Index(int pageNumber = 1)
         {
-            var rGroups = new List<ResourceGroup>();
+            var rGroups = new List<ResourceGroupModel>();
             using (var uow = _localizationDataService.StartUnitOfWork())
             {
                 var resources = uow.ResourceRepository.GetAll().ToList();
@@ -52,11 +52,11 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 var groups = groupable.GroupBy(r =>
                     r.ResourceKey.Substring(0, r.ResourceKey.LastIndexOf(".", StringComparison.Ordinal))).OrderBy(g => g.Key);
 
-                rGroups.Add(new ResourceGroup { Name = _localizer.GetString(r => r.Ungrouped), Entries = ungroupable.Count});
-                rGroups.AddRange(groups.Select(g => new ResourceGroup { Name = g.Key, Entries = g.Count() }));
+                rGroups.Add(new ResourceGroupModel { Name = _localizer.GetString(r => r.Ungrouped), Entries = ungroupable.Count});
+                rGroups.AddRange(groups.Select(g => new ResourceGroupModel { Name = g.Key, Entries = g.Count() }));
             }
 
-            var page = PageableModel<ResourceGroup>.PageExisting(rGroups, pageNumber).InitRoute(this, nameof(Index));
+            var page = PageableModel<ResourceGroupModel>.PageExisting(rGroups, pageNumber).InitRoute(this, nameof(Index));
 
             return View(page);
         }
@@ -125,7 +125,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 var translation = uow.TranslationRepository.Get(id);
                 if (translation == null) return RedirectToAction(nameof(Index));
 
-                return View(new Translation {Id = translation.Id, Value = translation.Value});
+                return View(new TranslationEditModel {Id = translation.Id, Value = translation.Value});
             }
         }
 
@@ -135,7 +135,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        public IActionResult Translation(Translation model)
+        public IActionResult Translation(TranslationEditModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -171,14 +171,14 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             {
                 var resource = uow.ResourceRepository.Get(id);
                 if (resource == null) return RedirectToAction(nameof(Index));
-                return View(new AddTranslation { ResourceId = resource.Id });
+                return View(new TranslationAddModel { ResourceId = resource.Id });
             }
         }
 
         /// <summary>   Adds a translation. </summary>
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
-        public IActionResult AddTranslation(AddTranslation model)
+        public IActionResult AddTranslation(TranslationAddModel model)
         {
             if (ModelState.IsValid)
             {

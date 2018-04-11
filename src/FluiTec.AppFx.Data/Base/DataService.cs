@@ -41,6 +41,11 @@ namespace FluiTec.AppFx.Data
         /// <returns>	An IUnitOfWork. </returns>
         public abstract IUnitOfWork BeginUnitOfWork();
 
+        /// <summary>Begins unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IUnitOfWork.</returns>
+        public abstract IUnitOfWork BeginUnitOfWork(IUnitOfWork other);
+
         /// <summary>	Registers the repository provider described by repositoryProvider. </summary>
         /// <exception cref="ArgumentNullException">
         ///     Thrown when <see cref="repositoryProvider" /> is null.

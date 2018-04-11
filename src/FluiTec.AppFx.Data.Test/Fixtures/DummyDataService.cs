@@ -21,5 +21,10 @@
         {
             return new DummyUnitOfWork(this);
         }
+
+        public override IUnitOfWork BeginUnitOfWork(IUnitOfWork other)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

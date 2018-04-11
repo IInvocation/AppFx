@@ -4,10 +4,10 @@ using DbLocalizationProvider.Abstractions;
 namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization
 {
     [LocalizedModel]
-    public class AddTranslation
+    public class TranslationAddModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.Translation";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.TranslationAddModel";
 
         /// <summary>   Gets or sets the identifier. </summary>
         /// <value> The identifier. </value>

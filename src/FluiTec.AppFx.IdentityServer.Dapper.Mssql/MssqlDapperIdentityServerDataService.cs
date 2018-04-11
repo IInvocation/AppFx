@@ -32,6 +32,17 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql
             return new DapperIdentityServerUnitOfWork(this);
         }
 
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IIdentityServerUnitOfWork.</returns>
+        public virtual IIdentityServerUnitOfWork StartUnitOfWork(IUnitOfWork other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (!(other is DapperUnitOfWork))
+                throw new ArgumentException($"Incompatible UnitOfWork. Must be of type {nameof(DapperUnitOfWork)}");
+            return new DapperIdentityServerUnitOfWork(this, (DapperUnitOfWork) other);
+        }
+
         #endregion
 
         #region Properties
@@ -72,6 +83,11 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql
                 new Func<IUnitOfWork, ISigningCredentialRepository>(work =>
                     new MssqlSigningCredentialRepository(work)));
             RegisterRepositoryProvider(new Func<IUnitOfWork, IGrantRepository>(work => new MssqlGrantRepository(work)));
+        }
+
+        IIdentityServerUnitOfWork IIdentityServerDataService.StartUnitOfWork(IUnitOfWork other)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

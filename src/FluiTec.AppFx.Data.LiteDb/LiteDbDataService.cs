@@ -25,6 +25,22 @@ namespace FluiTec.AppFx.Data.LiteDb
             return new LiteDbUnitOfWork(this);
         }
 
+        /// <summary>Begins unit of work.</summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <exception cref="ArgumentException">        Thrown when one or more arguments have
+        ///                                             unsupported or illegal values. </exception>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IUnitOfWork.</returns>
+        public override IUnitOfWork BeginUnitOfWork(IUnitOfWork other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (!(other is LiteDbUnitOfWork))
+                throw new ArgumentException(
+                    $"Incompatible implementation of UnitOfWork. Must be of type {nameof(LiteDbUnitOfWork)}!");
+            return new LiteDbUnitOfWork(this, (LiteDbUnitOfWork)other);
+        }
+
         #endregion
 
         #region Methods

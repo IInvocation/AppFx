@@ -43,9 +43,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <summary>   The authorization data service. </summary>
         private readonly IAuthorizationDataService _authorizationDataService;
 
-        /// <summary>The identity server data service.</summary>
-        private readonly IIdentityServerDataService _identityServerDataService;
-
         #endregion
 
         #region Constructors
@@ -57,10 +54,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="emailSender">                  The email sender. </param>
         /// <param name="localizerFactory">             The localizer factory. </param>
         /// <param name="authorizationDataService">     The authorization data service. </param>
-        /// <param name="identityServerDataService">    The identity server data service. </param>
         public AdminController(IIdentityDataService identityDataService, UserManager<IdentityUserEntity> userManager,
             ApplicationOptions applicationOptions, ITemplatingMailService emailSender, IStringLocalizerFactory localizerFactory,
-            IAuthorizationDataService authorizationDataService, IIdentityServerDataService identityServerDataService)
+            IAuthorizationDataService authorizationDataService)
         {
             _identityDataService = identityDataService;
             _userManager = userManager;
@@ -68,7 +64,6 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             _emailSender = emailSender;
             _localizerFactory = localizerFactory;
             _authorizationDataService = authorizationDataService;
-            _identityServerDataService = identityServerDataService;
         }
 
         #endregion
@@ -473,17 +468,26 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var uow = _identityDataService.StartUnitOfWork())
+                using (var authUow = _authorizationDataService.StartUnitOfWork())
                 {
-                    var role = uow.RoleRepository.Get(model.Id);
-                    var userRoles = uow.UserRoleRepository.FindByRole(role);
+                    var activityRoles = authUow.ActivityRoleRepository.ByRole(model.Id);
+                    foreach (var activityRole in activityRoles)
+                        authUow.ActivityRoleRepository.Delete(activityRole);
 
-                    foreach (var userRole in userRoles)
-                        uow.UserRoleRepository.Delete(userRole);
-                    uow.RoleRepository.Delete(role);
+                    using (var identityUow = _identityDataService.StartUnitOfWork(authUow))
+                    {
+                        var role = identityUow.RoleRepository.Get(model.Id);
+                        var roleUsers = identityUow.UserRoleRepository.FindByRole(role).ToList();
+                        var userRoles = roleUsers
+                            .Select(rU => identityUow.UserRoleRepository.FindByUserIdAndRoleId(rU, role.Id)).ToList();
 
-                    uow.Commit();
-                    return RedirectToAction(nameof(ManageRoles));
+                        foreach (var userRole in userRoles)
+                            identityUow.UserRoleRepository.Delete(userRole);
+                        identityUow.RoleRepository.Delete(role);
+
+                        authUow.Commit();
+                        return RedirectToAction(nameof(ManageRoles));
+                    }
                 }
             }
 
@@ -521,7 +525,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ClaimsUpdate)]
         public IActionResult AddUserClaim(int userid)
         {
-            return View(new AddClaimModel {UserId = userid});
+            return View(new ClaimAddModel {UserId = userid});
         }
 
         /// <summary>   Adds a user claim. </summary>
@@ -530,7 +534,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClaimsAccess)]
         [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult AddUserClaim(AddClaimModel model)
+        public IActionResult AddUserClaim(ClaimAddModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -577,7 +581,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             {
                 var user = uow.UserRepository.Get(userid);
                 var claim = uow.ClaimRepository.GetByUser(user).SingleOrDefault(c => c.Type == claimType);
-                return View(new EditClaimModel { UserId = userid, Type = claimType, Value = claim?.Value});
+                return View(new ClaimEditModel { UserId = userid, Type = claimType, Value = claim?.Value});
             }
         }
 
@@ -587,7 +591,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClaimsAccess)]
         [Authorize(PolicyNames.ClaimsUpdate)]
-        public IActionResult EditUserClaim(EditClaimModel model)
+        public IActionResult EditUserClaim(ClaimEditModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -623,7 +627,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ClaimsDelete)]
         public IActionResult DeleteUserClaim(int userId, string claimType)
         {
-            return View(new DeleteClaimModel {UserId = userId, Type = claimType});
+            return View(new ClaimDeleteModel {UserId = userId, Type = claimType});
         }
 
         /// <summary>
@@ -635,7 +639,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClaimsAccess)]
         [Authorize(PolicyNames.ClaimsDelete)]
-        public IActionResult DeleteUserClaim(DeleteClaimModel model)
+        public IActionResult DeleteUserClaim(ClaimDeleteModel model)
         {
             if (ModelState.IsValid)
             {

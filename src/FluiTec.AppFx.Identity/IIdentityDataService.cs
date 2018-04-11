@@ -8,5 +8,10 @@ namespace FluiTec.AppFx.Identity
         /// <summary>	Starts unit of work. </summary>
         /// <returns>	An IIdentityUnitOfWork. </returns>
         IIdentityUnitOfWork StartUnitOfWork();
+
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IIdentityUnitOfWork.</returns>
+        IIdentityUnitOfWork StartUnitOfWork(IUnitOfWork other);
     }
 }

@@ -13,6 +13,11 @@ namespace FluiTec.AppFx.Data
         /// <returns>	An IUnitOfWork. </returns>
         IUnitOfWork BeginUnitOfWork();
 
+        /// <summary>Begins unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IUnitOfWork.</returns>
+        IUnitOfWork BeginUnitOfWork(IUnitOfWork other);
+
         /// <summary>	Registers the repository provider described by repositoryProvider. </summary>
         /// <typeparam name="TRepository">	Type of the repository. </typeparam>
         /// <param name="repositoryProvider">	The repository provider. </param>

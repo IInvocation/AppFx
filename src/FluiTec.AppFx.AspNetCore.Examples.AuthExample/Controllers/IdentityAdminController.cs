@@ -284,7 +284,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ClientClaimsUpdate)]
         public IActionResult AddClientClaim(int clientid)
         {
-            return View(new AddClientClaimModel { ClientId = clientid });
+            return View(new ClientClaimAddModel { ClientId = clientid });
         }
 
         /// <summary>   Adds a Client claim. </summary>
@@ -293,7 +293,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClientClaimsAccess)]
         [Authorize(PolicyNames.ClientClaimsUpdate)]
-        public IActionResult AddClientClaim(AddClientClaimModel model)
+        public IActionResult AddClientClaim(ClientClaimAddModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -337,7 +337,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityServerDataService.StartUnitOfWork())
             {
                 var claim = uow.ClientClaimRepository.GetAll().Where(c => c.ClientId == clientid).SingleOrDefault(c => c.ClaimType == claimType);
-                return View(new EditClientClaimModel { ClientId = clientid, Type = claimType, Value = claim?.ClaimValue });
+                return View(new ClientClaimEditModel { ClientId = clientid, Type = claimType, Value = claim?.ClaimValue });
             }
         }
 
@@ -347,7 +347,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClientClaimsAccess)]
         [Authorize(PolicyNames.ClientClaimsUpdate)]
-        public IActionResult EditClientClaim(EditClientClaimModel model)
+        public IActionResult EditClientClaim(ClientClaimEditModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -381,7 +381,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ClientClaimsDelete)]
         public IActionResult DeleteClientClaim(int clientId, string claimType)
         {
-            return View(new DeleteClientClaimModel { ClientId = clientId, Type = claimType });
+            return View(new ClientClaimDeleteModel { ClientId = clientId, Type = claimType });
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ClientClaimsAccess)]
         [Authorize(PolicyNames.ClientClaimsDelete)]
-        public IActionResult DeleteClientClaim(DeleteClientClaimModel model)
+        public IActionResult DeleteClientClaim(ClientClaimDeleteModel model)
         {
             if (ModelState.IsValid)
             {
@@ -824,7 +824,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ApiResourceClaimsUpdate)]
         public IActionResult AddApiResourceClaim(int resourceid)
         {
-            return View(new AddResourceClaimModel { ResourceId = resourceid });
+            return View(new ResourceClaimAddModel { ResourceId = resourceid });
         }
 
         /// <summary>
@@ -836,7 +836,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ApiResourceClaimsAccess)]
         [Authorize(PolicyNames.ApiResourceClaimsUpdate)]
-        public IActionResult AddApiResourceClaim(AddResourceClaimModel model)
+        public IActionResult AddApiResourceClaim(ResourceClaimAddModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -881,7 +881,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityServerDataService.StartUnitOfWork())
             {
                 var claim = uow.ApiResourceClaimRepository.GetAll().Where(c => c.ApiResourceId == resourceid).SingleOrDefault(c => c.ClaimType == claimType);
-                return View(new EditResourceClaimModel { ResourceId = resourceid, Type = claimType });
+                return View(new ResourceClaimEditModel { ResourceId = resourceid, Type = claimType });
             }
         }
 
@@ -894,7 +894,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ApiResourceClaimsAccess)]
         [Authorize(PolicyNames.ApiResourceClaimsUpdate)]
-        public IActionResult EditApiResourceClaim(EditResourceClaimModel model)
+        public IActionResult EditApiResourceClaim(ResourceClaimEditModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -927,7 +927,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.ApiResourceClaimsDelete)]
         public IActionResult DeleteApiResourceClaim(int resourceId, string claimType)
         {
-            return View(new DeleteResourceClaimModel { ResourceId = resourceId, Type = claimType });
+            return View(new ResourceClaimDeleteModel { ResourceId = resourceId, Type = claimType });
         }
 
         /// <summary>
@@ -939,7 +939,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.ApiResourceClaimsAccess)]
         [Authorize(PolicyNames.ApiResourceClaimsDelete)]
-        public IActionResult DeleteApiResourceClaim(DeleteResourceClaimModel model)
+        public IActionResult DeleteApiResourceClaim(ResourceClaimDeleteModel model)
         {
             if (ModelState.IsValid)
             {
@@ -1222,7 +1222,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.IdentityResourceClaimsUpdate)]
         public IActionResult AddIdentityResourceClaim(int resourceid)
         {
-            return View(new AddResourceClaimModel { ResourceId = resourceid });
+            return View(new ResourceClaimAddModel { ResourceId = resourceid });
         }
 
         /// <summary>
@@ -1234,7 +1234,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.IdentityResourceClaimsAccess)]
         [Authorize(PolicyNames.IdentityResourceClaimsUpdate)]
-        public IActionResult AddIdentityResourceClaim(AddResourceClaimModel model)
+        public IActionResult AddIdentityResourceClaim(ResourceClaimAddModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -1279,7 +1279,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
             using (var uow = _identityServerDataService.StartUnitOfWork())
             {
                 var claim = uow.IdentityResourceClaimRepository.GetAll().Where(c => c.IdentityResourceId == resourceid).SingleOrDefault(c => c.ClaimType == claimType);
-                return View(new EditResourceClaimModel { ResourceId = resourceid, Type = claimType });
+                return View(new ResourceClaimEditModel { ResourceId = resourceid, Type = claimType });
             }
         }
 
@@ -1292,7 +1292,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.IdentityResourceClaimsAccess)]
         [Authorize(PolicyNames.IdentityResourceClaimsUpdate)]
-        public IActionResult EditIdentityResourceClaim(EditResourceClaimModel model)
+        public IActionResult EditIdentityResourceClaim(ResourceClaimEditModel model)
         {
             model.Update();
             if (ModelState.IsValid)
@@ -1325,7 +1325,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [Authorize(PolicyNames.IdentityResourceClaimsDelete)]
         public IActionResult DeleteIdentityResourceClaim(int resourceId, string claimType)
         {
-            return View(new DeleteResourceClaimModel { ResourceId = resourceId, Type = claimType });
+            return View(new ResourceClaimDeleteModel { ResourceId = resourceId, Type = claimType });
         }
 
         /// <summary>
@@ -1337,7 +1337,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.IdentityResourceClaimsAccess)]
         [Authorize(PolicyNames.IdentityResourceClaimsDelete)]
-        public IActionResult DeleteIdentityResourceClaim(DeleteResourceClaimModel model)
+        public IActionResult DeleteIdentityResourceClaim(ResourceClaimDeleteModel model)
         {
             if (ModelState.IsValid)
             {

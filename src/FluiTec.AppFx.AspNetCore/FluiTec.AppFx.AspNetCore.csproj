@@ -19,6 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization.Routing" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
@@ -43,12 +44,6 @@
     <ProjectReference Include="..\FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Localization.Routing">
-      <HintPath>..\..\..\..\..\..\Users\aschnell\.nuget\packages\microsoft.aspnetcore.localization.routing\2.0.2\lib\netstandard2.0\Microsoft.AspNetCore.Localization.Routing.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

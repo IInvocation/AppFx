@@ -5,10 +5,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
 {
     /// <summary>   A data Model for the add claim. </summary>
     [LocalizedModel]
-    public class AddClientClaimModel : UpdateModel
+    public class ClientClaimAddModel : UpdateModel
     {
         /// <summary>   Name of the full model. </summary>
-        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.AddClaimModel";
+        private const string FullModelName = "FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ClientClaimAddModel";
 
         /// <summary>   Gets or sets the identifier of the client. </summary>
         /// <value> The identifier of the client. </value>

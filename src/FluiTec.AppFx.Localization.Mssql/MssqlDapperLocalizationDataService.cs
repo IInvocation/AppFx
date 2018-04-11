@@ -40,6 +40,17 @@ namespace FluiTec.AppFx.Localization.Mssql
             return new DapperLocalizationUnitOfWork(this);
         }
 
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An ILocalizationUnitOfWork.</returns>
+        public ILocalizationUnitOfWork StartUnitOfWork(IUnitOfWork other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (!(other is DapperUnitOfWork))
+                throw new ArgumentException($"Incompatible UnitOfWork. Must be of type {nameof(DapperUnitOfWork)}");
+            return new DapperLocalizationUnitOfWork(this, (DapperUnitOfWork)other);
+        }
+
         #endregion
 
         #region Methods

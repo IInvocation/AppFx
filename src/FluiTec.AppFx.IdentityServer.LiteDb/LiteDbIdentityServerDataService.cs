@@ -67,6 +67,17 @@ namespace FluiTec.AppFx.IdentityServer.LiteDb
             return new LiteDbIdentityServerUnitOfWork(this);
         }
 
+        /// <summary>Starts unit of work.</summary>
+        /// <param name="other">    The other. </param>
+        /// <returns>An IIdentityServerUnitOfWork.</returns>
+        public IIdentityServerUnitOfWork StartUnitOfWork(IUnitOfWork other)
+        {
+            if (other == null) throw new ArgumentNullException(nameof(other));
+            if (!(other is LiteDbUnitOfWork))
+                throw new ArgumentException($"Incompatible UnitOfWork. Must be of type {nameof(LiteDbUnitOfWork)}");
+            return new LiteDbIdentityServerUnitOfWork(this, (LiteDbUnitOfWork)other);
+        }
+
         /// <summary>
         ///     Begins unit of work.
         /// </summary>

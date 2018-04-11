@@ -5,6 +5,13 @@ namespace FluiTec.AppFx.Data.Dapper
 {
     public class DapperUnitOfWork : UnitOfWork
     {
+        #region Fields
+
+        /// <summary>True to owns connection.</summary>
+        private readonly bool _ownsConnection = true;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>	Constructor. </summary>
@@ -23,6 +30,17 @@ namespace FluiTec.AppFx.Data.Dapper
 
             // begin transaction
             Transaction = Connection.BeginTransaction();
+        }
+
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">      The data service. </param>
+        /// <param name="parentUnitOfWork"> The parent unit of work. </param>
+        public DapperUnitOfWork(DapperDataService dataService, DapperUnitOfWork parentUnitOfWork) : base(dataService)
+        {
+            _ownsConnection = false;
+            DapperDataService = dataService;
+            Connection = parentUnitOfWork.Connection;
+            Transaction = parentUnitOfWork.Transaction;
         }
 
         #endregion
@@ -52,12 +70,15 @@ namespace FluiTec.AppFx.Data.Dapper
             if (Transaction == null)
                 throw new InvalidOperationException(
                     "UnitOfWork can't be committed since it's already finished. (Missing transaction)");
-            Transaction.Commit();
-            Transaction.Dispose();
-            Transaction = null;
-            Connection.Close();
-            Connection.Dispose();
-            Connection = null;
+            if (_ownsConnection)
+            {
+                Transaction.Commit();
+                Transaction.Dispose();
+                Transaction = null;
+                Connection.Close();
+                Connection.Dispose();
+                Connection = null;
+            }
         }
 
         /// <summary>   Rolls back the UnitOfWork. </summary>
@@ -67,12 +88,15 @@ namespace FluiTec.AppFx.Data.Dapper
             if (Transaction == null)
                 throw new InvalidOperationException(
                     "UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
-            Transaction.Rollback();
-            Transaction.Dispose();
-            Transaction = null;
-            Connection.Close();
-            Connection.Dispose();
-            Connection = null;
+            if (_ownsConnection)
+            {
+                Transaction.Rollback();
+                Transaction.Dispose();
+                Transaction = null;
+                Connection.Close();
+                Connection.Dispose();
+                Connection = null;
+            }
         }
 
         #endregion

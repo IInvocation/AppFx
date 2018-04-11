@@ -16,6 +16,14 @@ namespace FluiTec.AppFx.Localization.LiteDb
         {
         }
 
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">      The data service. </param>
+        /// <param name="parentUnitOfWork"> The parent unit of work. </param>
+        public LiteDbLocalizationUnitOfWork(LiteDbDataService dataService, LiteDbUnitOfWork parentUnitOfWork) : base(
+            dataService, parentUnitOfWork)
+        {
+        }
+
         #endregion
 
         #region Fields

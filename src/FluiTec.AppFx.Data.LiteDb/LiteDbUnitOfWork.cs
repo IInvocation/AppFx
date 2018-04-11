@@ -5,6 +5,13 @@ namespace FluiTec.AppFx.Data.LiteDb
 {
     public class LiteDbUnitOfWork : UnitOfWork
     {
+        #region Fields
+
+        /// <summary>True to owns connection.</summary>
+        private readonly bool _ownsConnection = true;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>	Constructor. </summary>
@@ -17,6 +24,16 @@ namespace FluiTec.AppFx.Data.LiteDb
         {
             LiteDbDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             Transaction = LiteDbDataService.Database.BeginTrans();
+        }
+
+        /// <summary>Constructor.</summary>
+        /// <param name="dataService">      The data service. </param>
+        /// <param name="parentUnitOfWork"> The parent unit of work. </param>
+        public LiteDbUnitOfWork(LiteDbDataService dataService, LiteDbUnitOfWork parentUnitOfWork) : base(dataService)
+        {
+            _ownsConnection = false;
+            LiteDbDataService = dataService;;
+            Transaction = parentUnitOfWork.Transaction;
         }
 
         #endregion
@@ -72,9 +89,12 @@ namespace FluiTec.AppFx.Data.LiteDb
             if (Transaction == null)
                 throw new InvalidOperationException(
                     "UnitOfWork can't be committed since it's already finished. (Missing transaction)");
-            Transaction.Commit();
-            Transaction.Dispose();
-            Transaction = null;
+            if (_ownsConnection)
+            {
+                Transaction.Commit();
+                Transaction.Dispose();
+                Transaction = null;
+            }
         }
 
         /// <summary>	Rollbacks this object. </summary>
@@ -87,9 +107,12 @@ namespace FluiTec.AppFx.Data.LiteDb
             if (Transaction == null)
                 throw new InvalidOperationException(
                     "UnitOfWork can't be rolled back since it's already finished. (Missing transaction)");
-            Transaction.Rollback();
-            Transaction.Dispose();
-            Transaction = null;
+            if (_ownsConnection)
+            {
+                Transaction.Rollback();
+                Transaction.Dispose();
+                Transaction = null;
+            }
         }
 
         #endregion
