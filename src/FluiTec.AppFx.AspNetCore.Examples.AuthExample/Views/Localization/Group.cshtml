@@ -1,4 +1,4 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.PageableModel<FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.ResourceGroup>
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.PageableModel<FluiTec.AppFx.Localization.Entities.ResourceEntity>
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -7,23 +7,22 @@
     <!--Content-->
     <div class="container">
         <section>
-            <h3>Resource groups</h3>
+            <h3>Resources</h3>
             @Html.Partial("_PageNavigation", Model)
             @if (Model != null && Model.Items.Any())
             {
                 <ul class="list-group">
-                @foreach (var group in Model.Items)
-                {
+                    @foreach (var resource in Model.Items)
+                    {
                     <li class="list-group-item d-flex justify-content-between align-items-center text-truncate">
-                        <a asp-action="Group" asp-route-groupkey="@group.Name">@group.Name</a>
-                        <span class="badge badge-primary badge-pill">@group.Entries</span>
+                        <a asp-action="Translations" asp-route-resourceKey="@resource.ResourceKey">@resource.ResourceKey</a>
                     </li>
-                }
+                    }
                 </ul>
             }
             else
             {
-                <p>No localizations available.</p>
+                <p>No resources available.</p>
             }
         </section>
     </div>

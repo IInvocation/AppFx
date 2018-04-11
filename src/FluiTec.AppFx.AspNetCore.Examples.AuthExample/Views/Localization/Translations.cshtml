@@ -1,0 +1,45 @@
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.PageableModel<FluiTec.AppFx.Localization.Entities.TranslationEntity>
+
+<section id="maincontent" class="wrapper content-wrapper">
+    <header>
+        <h2>Localization</h2>
+    </header>
+    <!--Content-->
+    <div class="container">
+        <section>
+            <h3>Translations</h3>
+            @Html.Partial("_PageNavigation", Model)
+            @if (Model != null && Model.Items.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Language</th>
+                            <th>Translation</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    @foreach (var translation in Model.Items)
+                    {
+                        <tr>
+                        @if (translation.Language == null)
+                        {
+                            <td>default</td>
+                        }
+                        else
+                        {
+                            <td>@translation.Language</td>
+                        }                            
+                            <td>@translation.Value</td>
+                            <td><a asp-action="Translation" asp-route-id="@translation.Id">Edit</a></td>
+                        </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No translations available.</p>
+            }
+        </section>
+    </div>
+</section>

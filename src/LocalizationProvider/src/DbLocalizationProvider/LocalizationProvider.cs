@@ -40,6 +40,7 @@ namespace DbLocalizationProvider
 
         private readonly bool _fallbackEnabled;
 
+        /// <inheritdoc />
         public LocalizationProvider(bool fallbackEnabled)
         {
             _fallbackEnabled = fallbackEnabled;

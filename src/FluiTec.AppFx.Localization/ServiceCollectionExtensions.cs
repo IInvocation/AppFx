@@ -52,8 +52,6 @@ namespace FluiTec.AppFx.Localization
                 });
 
             services.AddSingleton<IStringLocalizerFactory, DbStringLocalizerFactory>();
-            //services.AddTransient<IHtmlLocalizerFactory, DbHtmlLocalizerFactory>();
-            //services.AddTransient<IViewLocalizer, DbHtmlLocalizer>();
             services.AddSingleton(_ => LocalizationProvider.Current);
 
             return services;
