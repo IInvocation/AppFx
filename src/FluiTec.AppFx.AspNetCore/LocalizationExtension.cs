@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
+using FluiTec.AppFx.AspNetCore;
 using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.CultureProviders;
+using FluiTec.AppFx.AspNetCore.RouteConstraints;
 using FluiTec.AppFx.Localization;
 using FluiTec.AppFx.Localization.Entities;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Localization.Routing;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Primitives;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -51,17 +51,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
-            services.PostConfigure<RequestLocalizationOptions>(options =>
-            {
-                var provider = new RouteDataRequestCultureProvider
-                {
-                    RouteDataStringKey = "language",
-                    UIRouteDataStringKey = "language",
-                    Options = options
-                };
-                options.RequestCultureProviders.Insert(0, provider);
-            });
-
+            
             services.ConfigureLocalizationDataService(configuration);
             services.AddDbLocalizationProvider();
 
@@ -70,6 +60,36 @@ namespace Microsoft.Extensions.DependencyInjection
             if (resourceOptions == null || !resourceOptions.Resources.Any())
                 return services;
             ImportJsonLocalizations(services, resourceOptions);
+
+            return services;
+        }
+
+        /// <summary>
+        ///     An IServiceCollection extension method that configure route localization.
+        /// </summary>
+        /// <param name="services">         The services to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <returns>   An IServiceCollection. </returns>
+        public static IServiceCollection ConfigureRouteLocalization(this IServiceCollection services,
+            IConfigurationRoot configuration)
+        {
+            services.PostConfigure<RequestLocalizationOptions>(options =>
+            {
+                var provider = new PathStringRequestCultureProvider
+                {
+                    RouteDataStringKey = "language",
+                    UIRouteDataStringKey = "language",
+                    Options = options
+                };
+                options.RequestCultureProviders.Insert(0, provider);
+                options.FallBackToParentCultures = true;
+                options.FallBackToParentUICultures = true;
+            });
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.ConstraintMap.Add("language", typeof(LanguageRouteConstraint));
+            });
 
             return services;
         }

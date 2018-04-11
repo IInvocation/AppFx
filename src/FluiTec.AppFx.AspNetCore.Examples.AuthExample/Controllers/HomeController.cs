@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Mail;
 using FluiTec.AppFx.Mail;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -115,11 +114,11 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         {
             get
             {
-                if (!string.IsNullOrEmpty(_currentLanguage))
+                if (!string.IsNullOrEmpty(_currentLanguage)) // return already determined language
                 {
                     return _currentLanguage;
                 }
-                if (RouteData.Values.ContainsKey("language"))
+                if (RouteData.Values.ContainsKey("language")) // return url-specified language
                 {
                     _currentLanguage = RouteData.Values["language"].ToString().ToLower();
                 }
