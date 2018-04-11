@@ -1,8 +1,12 @@
 ﻿using System;
+using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.Middlewares;
 using FluiTec.AppFx.AspNetCore.ViewLocationExpanders;
+using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json.Serialization;
@@ -18,6 +22,9 @@ namespace Microsoft.Extensions.DependencyInjection
     /// </remarks>
     public static class MvcExtension
     {
+        /// <summary>   Options for controlling the culture. </summary>
+        private static CultureOptions _cultureOptions;
+
         /// <summary>	An IServiceCollection extension method that configure MVC. </summary>
         /// <param name="services">						The services to act on. </param>
         /// <param name="configuration">				The configuration. </param>
@@ -33,6 +40,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<MvcDataAnnotationsLocalizationOptions> configureDataLocalization = null,
             Action<MvcOptions> configureMvc = null)
         {
+            _cultureOptions = configuration.GetConfiguration<CultureOptions>();
+
             var mvc = services.AddMvc();
 
             mvc.AddJsonOptions(options =>
@@ -102,10 +111,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     "default",
                     "{language:language}/{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapRoute(
-                    "catchall",
-                    "{*catchall}",
-                    new { controller = "Home", action = "RedirectToDefaultLanguage" });
+                routes.MapMiddlewareRoute("{*catchall}",
+                    builder => builder.UseMiddleware(typeof(LanguageRedirectMiddleware)));
             });
             return app;
         }
@@ -128,10 +135,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     "api",
                     "api/[controller]");
 
-                routes.MapRoute(
-                    "catchall",
-                    "{*catchall}",
-                    new { controller = "Home", action = "RedirectToDefaultLanguage" });
+                routes.MapMiddlewareRoute("{*catchall}",
+                    builder => builder.UseMiddleware(typeof(LanguageRedirectMiddleware)));
             });
             return app;
         }
