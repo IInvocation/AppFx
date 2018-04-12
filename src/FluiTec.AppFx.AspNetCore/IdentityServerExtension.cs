@@ -1,8 +1,8 @@
-﻿using FluiTec.AppFx.AspNetCore.Configuration;
+﻿using System.Security.Cryptography.X509Certificates;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.IdentityServer;
 using FluiTec.AppFx.IdentityServer.Configuration;
-using FluiTec.AppFx.IdentityServer.Dynamic.Configuration;
 using FluiTec.AppFx.IdentityServer.Validators;
 using FluiTec.AppFx.Options;
 using IdentityServer4.Stores;
@@ -25,18 +25,25 @@ namespace FluiTec.AppFx.AspNetCore
         {
             services.ConfigureIdentityServerDataService(configuration);
 
-            services.AddSingleton(configuration.GetConfiguration<SigningOptions>());
+            var signingOptions = configuration.GetConfiguration<SigningOptions>();
+            if (signingOptions != null)
+                services.AddSingleton(signingOptions);
+
+            var certificateOptions = configuration.GetConfiguration<CertificateOptions>();
+            if (certificateOptions != null)
+                services.AddSingleton(certificateOptions);
+
             services.AddSingleton(configuration.GetConfiguration<IdentityServerClaimOptions>());
 
             var idSrv = services.AddIdentityServer(options =>
-            {
-                options.UserInteraction.ConsentUrl = "/Identity/Consent";
-            })
-                .AddDeveloperSigningCredential();
+                {
+                    options.UserInteraction.ConsentUrl = "/Identity/Consent";
+                });
 
             idSrv.Services.AddScoped<IRedirectUriValidator, LocalhostRedirectUriValidator>();
             idSrv.Services.AddScoped<IExtensionGrantValidator, DelegationGrantValidator>();
-            idSrv.Services.AddScoped<IValidationKeysStore, SigningCredentialStore>();
+            idSrv.Services.AddScoped<ISigningCredentialStore, CertificateCredentialStore>();
+            idSrv.Services.AddScoped<IValidationKeysStore, CertificateCredentialStore>();
             idSrv.Services.AddScoped<IPersistedGrantStore, GrantStore>();
 
             idSrv.AddAspNetIdentity<IdentityUserEntity>();

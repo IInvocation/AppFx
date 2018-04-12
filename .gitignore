@@ -32,6 +32,7 @@ netstandard1.6/
 [Kk]ey[Vv]ault
 *.secret.json
 *.secret.key
+*.secret.txt
 
 # Local Settings
 *.local.xml

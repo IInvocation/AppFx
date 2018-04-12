@@ -274,6 +274,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore.Examples.AuthExample", "FluiTec.AppFx.AspNetCore.Examples.AuthExample\FluiTec.AppFx.AspNetCore.Examples.AuthExample.csproj", "{1ABE710B-CCAF-4BAD-8DB4-E607B7744268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AspNetCore.Examples.AuthExampleClient", "FluiTec.AspNetCore.Examples.AuthExampleClient\FluiTec.AspNetCore.Examples.AuthExampleClient.csproj", "{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -640,6 +642,10 @@ Global
 		{1ABE710B-CCAF-4BAD-8DB4-E607B7744268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ABE710B-CCAF-4BAD-8DB4-E607B7744268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ABE710B-CCAF-4BAD-8DB4-E607B7744268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -766,6 +772,7 @@ Global
 		{0E6319E6-0746-45B1-A281-1E34A229581F} = {6BABDD30-384B-41C0-95BD-AD8D8E1EE8E4}
 		{73DFC98C-5EBE-4306-B4C3-C08871A4619A} = {ADDCDAD6-650B-496C-868C-5BFF7983D825}
 		{1ABE710B-CCAF-4BAD-8DB4-E607B7744268} = {128A885E-1E8A-49F6-821D-9B03E1C4AA8A}
+		{6DC6AE74-4728-400D-9AA6-AE9A612FE8C7} = {128A885E-1E8A-49F6-821D-9B03E1C4AA8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6F86AA-89A7-41EB-B3D9-1511282B312A}
