@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Routing;
@@ -25,8 +26,8 @@ namespace FluiTec.AppFx.AspNetCore.Middlewares
         /// <returns>   An asynchronous result. </returns>
         public Task Invoke(HttpContext httpContext)
         {
-            // if an empty path was given - redirect to determined/default language
-            if (!httpContext.Request.Path.HasValue || string.IsNullOrWhiteSpace(httpContext.Request.Path.Value) || httpContext.Request.Path.Value == "/") 
+            var routeData = httpContext.GetRouteData();
+            if (!httpContext.Request.Path.HasValue || httpContext.Request.Path.Value == "/" || routeData != null && !routeData.Values.ContainsKey("language"))
                 return RedirectToLanguage(httpContext);
             // otherwise - let other handlers do their work
             return _next(httpContext); 
@@ -49,7 +50,12 @@ namespace FluiTec.AppFx.AspNetCore.Middlewares
                 language = feature.RequestCulture.Culture.TwoLetterISOLanguageName.ToLower();
             }
 
-            httpContext.Response.Redirect($"/{language}");
+            var newPath = $"/{language}";
+            if (httpContext.Request.Path != null && httpContext.Request.Path != "/")
+                newPath = newPath + httpContext.Request.Path;
+            if (httpContext.Request.QueryString.HasValue && httpContext.Request.QueryString.Value != string.Empty)
+                newPath = newPath + httpContext.Request.QueryString.Value;
+            httpContext.Response.Redirect(newPath);
             return Task.CompletedTask;
         }
     }

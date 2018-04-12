@@ -31,12 +31,12 @@ namespace FluiTec.AppFx.AspNetCore
             var idSrv = services.AddIdentityServer(options =>
             {
                 options.UserInteraction.ConsentUrl = "/Identity/Consent";
-            });
+            })
+                .AddDeveloperSigningCredential();
 
             idSrv.Services.AddScoped<IRedirectUriValidator, LocalhostRedirectUriValidator>();
             idSrv.Services.AddScoped<IExtensionGrantValidator, DelegationGrantValidator>();
             idSrv.Services.AddScoped<IValidationKeysStore, SigningCredentialStore>();
-            idSrv.Services.AddScoped<ISigningCredentialStore, SigningCredentialStore>();
             idSrv.Services.AddScoped<IPersistedGrantStore, GrantStore>();
 
             idSrv.AddAspNetIdentity<IdentityUserEntity>();

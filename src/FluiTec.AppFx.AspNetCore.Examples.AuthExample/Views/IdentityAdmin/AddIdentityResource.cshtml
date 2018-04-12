@@ -1,5 +1,4 @@
-﻿@using FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin
-@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ResourceAddModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.IdentityResourceAddModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -30,6 +29,24 @@
                     <div class="col-lg-6">
                         <input asp-for="Enabled" />
                         <label asp-for="Enabled"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Required" />
+                        <label asp-for="Required"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Emphasize" />
+                        <label asp-for="Emphasize"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="ShowInDiscoveryDocument" />
+                        <label asp-for="ShowInDiscoveryDocument"></label>
                     </div>
                 </div>
                 <div class="row uniform">

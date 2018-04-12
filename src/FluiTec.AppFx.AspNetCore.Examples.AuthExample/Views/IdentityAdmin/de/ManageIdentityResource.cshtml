@@ -1,4 +1,4 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.ResourceEditModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.IdentityAdmin.IdentityResourceEditModel
 @using FluiTec.AppFx.AspNetCore
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
@@ -37,6 +37,24 @@
                     <div class="col-lg-6">
                         <input asp-for="Enabled" />
                         <label asp-for="Enabled"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Required" />
+                        <label asp-for="Required"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="Emphasize" />
+                        <label asp-for="Emphasize"></label>
+                    </div>
+                </div>
+                <div class="row uniform">
+                    <div class="col-lg-6">
+                        <input asp-for="ShowInDiscoveryDocument" />
+                        <label asp-for="ShowInDiscoveryDocument"></label>
                     </div>
                 </div>
                 <br />

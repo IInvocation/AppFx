@@ -974,11 +974,11 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
 
         /// <summary>   (Restricted to PolicyNames.ClientsCreate) adds Identity resouurce. </summary>
         /// <returns>   An IActionResult. </returns>
-        [Authorize(PolicyNames.ClientsAccess)]
-        [Authorize(PolicyNames.ClientsCreate)]
+        [Authorize(PolicyNames.IdentityResourcesAccess)]
+        [Authorize(PolicyNames.IdentityResourcesCreate)]
         public IActionResult AddIdentityResource()
         {
-            return View(new ResourceAddModel());
+            return View(new IdentityResourceAddModel());
         }
 
         /// <summary>
@@ -988,9 +988,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         /// <param name="model">    The model. </param>
         /// <returns>   An IActionResult. </returns>
         [HttpPost]
-        [Authorize(PolicyNames.ClientsAccess)]
-        [Authorize(PolicyNames.ClientsCreate)]
-        public IActionResult AddIdentityResource(ResourceAddModel model)
+        [Authorize(PolicyNames.IdentityResourcesAccess)]
+        [Authorize(PolicyNames.IdentityResourcesCreate)]
+        public IActionResult AddIdentityResource(IdentityResourceAddModel model)
         {
             if (ModelState.IsValid)
             {
@@ -1001,7 +1001,10 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                         Name = model.Name,
                         DisplayName = model.DisplayName,
                         Description = model.Description,
-                        Enabled = model.Enabled
+                        Enabled = model.Enabled,
+                        Required = model.Required,
+                        Emphasize = model.Emphasize,
+                        ShowInDiscoveryDocument = model.ShowInDiscoveryDocument
                     });
                     uow.Commit();
                 }
@@ -1024,13 +1027,16 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                 var scopes = uow.ScopeRepository.GetAll();
                 var resourceScopes = uow.IdentityResourceScopeRepository.GetByIdentityIds(new[] { resource.Id }).Select(cs => scopes.Single(s => s.Id == cs.ScopeId)).ToList();
 
-                return View(new ResourceEditModel
+                return View(new IdentityResourceEditModel
                 {
                     Id = resource.Id,
                     Name = resource.Name,
                     DisplayName = resource.DisplayName,
                     Description = resource.Description,
                     Enabled = resource.Enabled,
+                    Required = resource.Required,
+                    Emphasize = resource.Emphasize,
+                    ShowInDiscoveryDocument = resource.ShowInDiscoveryDocument,
                     ResourceScopes = resourceScopes.Select(cs => new ResourceScopeModel { Id = resourceId, Name = cs.Name, DisplayName = cs.DisplayName }),
                     Scopes = scopes.Except(resourceScopes).Select(cs => new ResourceScopeModel { Id = resourceId, Name = cs.Name, DisplayName = cs.DisplayName })
                 });
@@ -1046,7 +1052,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
         [HttpPost]
         [Authorize(PolicyNames.IdentityResourcesAccess)]
         [Authorize(PolicyNames.IdentityResourcesUpdate)]
-        public IActionResult ManageIdentityResource(ResourceEditModel model)
+        public IActionResult ManageIdentityResource(IdentityResourceEditModel model)
         {
             model.Update();
 
@@ -1062,6 +1068,9 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     existing.DisplayName = model.DisplayName;
                     existing.Description = model.Description;
                     existing.Enabled = model.Enabled;
+                    existing.Required = model.Required;
+                    existing.Emphasize = model.Emphasize;
+                    existing.ShowInDiscoveryDocument = model.ShowInDiscoveryDocument;
                     uow.IdentityResourceRepository.Update(existing);
                     uow.Commit();
                     model.UpdateSuccess();
