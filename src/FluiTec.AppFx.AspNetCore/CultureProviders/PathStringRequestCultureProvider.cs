@@ -25,7 +25,7 @@ namespace FluiTec.AppFx.AspNetCore.CultureProviders
             var cultureOptions = httpContext.RequestServices.GetRequiredService<CultureOptions>();
             foreach (var culture in cultureOptions.SupportedCultures)
             {
-                var startsWithCulture = realPath.StartsWithSegments($"/{culture}/") || realPath.Value == $"/{culture}";
+                var startsWithCulture = realPath.StartsWithSegments($"/{culture}") || realPath.Value == $"/{culture}";
                 if (startsWithCulture) // if so - provide discovered culture
                 {
                     return Task.FromResult(new ProviderCultureResult(culture));
