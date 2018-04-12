@@ -8,12 +8,20 @@ namespace FluiTec.AspNetCore.Examples.AuthExampleClient
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment environment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile("appsettings.secret.json", false, true)
+                .AddJsonFile("appsettings.Localization.json", true, true)
+                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", true);
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -21,33 +29,7 @@ namespace FluiTec.AspNetCore.Examples.AuthExampleClient
             services.AddMvc();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = "Cookies";
-                    options.DefaultChallengeScheme = "oidc";
-                })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    // defines what will be used after we completed the challenge
-                    options.SignInScheme = "Cookies";
-
-                    // setup endpoint
-                    options.Authority = "http://localhost:54742";
-                    options.RequireHttpsMetadata = false;
-
-                    // init credentials
-                    options.ClientId = "IzziNn9qkWFvYqcJJHilVQdnual7RrVUm6dZvV84R8Bb8IZJLQaM2r8/1gBoIDs8zhrWELHEGSWeox2rEeLxBw==";
-                    options.ClientSecret = "IO0I4lxLsc6jPO9e5Lg9seKmVKKlxNl5RMjbHwOtLsJixWQGGZafBX6dK7WN8+TCSlqyTUpNq4AphbvASMfoIg==";
-                    options.ResponseType = "code id_token";
-
-                    // define behavior
-                    options.SaveTokens = true;
-                    options.GetClaimsFromUserInfoEndpoint = true;
-
-                    // add scopes
-                    options.Scope.Add("offline_access");
-                });
+            services.ConfigureOpenIdConnect(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

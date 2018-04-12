@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using FluiTec.AppFx.AspNetCore.Configuration;
+﻿using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Identity.Entities;
 using FluiTec.AppFx.IdentityServer;
 using FluiTec.AppFx.IdentityServer.Configuration;
