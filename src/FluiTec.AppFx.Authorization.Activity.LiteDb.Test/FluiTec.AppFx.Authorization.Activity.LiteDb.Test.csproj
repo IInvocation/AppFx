@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Identity.LiteDb" Version="1.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
@@ -15,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.LiteDb\FluiTec.AppFx.Authorization.Activity.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Test\FluiTec.AppFx.Authorization.Activity.Test.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Identity.LiteDb\FluiTec.AppFx.Identity.LiteDb.csproj" />
   </ItemGroup>
 
 </Project>

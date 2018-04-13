@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore.Examples.AuthExample", "FluiTec.AppFx.AspNetCore.Examples.AuthExample\FluiTec.AppFx.AspNetCore.Examples.AuthExample.csproj", "{B2D12F20-B106-4AA5-83F9-63D532373581}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AspNetCore.Examples.AuthExampleClient", "FluiTec.AspNetCore.Examples.AuthExampleClient\FluiTec.AspNetCore.Examples.AuthExampleClient.csproj", "{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2D12F20-B106-4AA5-83F9-63D532373581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D12F20-B106-4AA5-83F9-63D532373581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D12F20-B106-4AA5-83F9-63D532373581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D12F20-B106-4AA5-83F9-63D532373581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6238EF3A-1B31-45F0-9F77-F05F62C9E44B}
+	EndGlobalSection
+EndGlobal

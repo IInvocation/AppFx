@@ -10,17 +10,17 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.15</Version>
+	  <Version>1.0.16</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Data.Sql\FluiTec.AppFx.Data.Sql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

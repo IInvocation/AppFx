@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
@@ -11,17 +10,16 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.1</Version>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CliHelpers" Version="1.1.2.38" />
-    <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Localization.Dynamic\FluiTec.AppFx.Localization.Dynamic.csproj" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
   </ItemGroup>
 
   <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

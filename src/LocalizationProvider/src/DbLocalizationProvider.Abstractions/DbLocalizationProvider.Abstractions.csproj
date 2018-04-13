@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <Version>4.2.0</Version>
+    <NeutralLanguage>en</NeutralLanguage>
     <Description>Abstractions for Database driven localization provider.</Description>
     <Company>Valdis Iljuconoks, https://tech-fellow.net</Company>
     <Product>DbLocalizationProvider</Product>
@@ -13,7 +14,14 @@
     <PackageProjectUrl>https://projects-epi-localization.tech-fellow.net/</PackageProjectUrl>
     <PackageTags>Localization Provider DbLocalization DbLocalizationProvider LocalizationProvider Database Driven</PackageTags>
     <PackageLicenseUrl>https://github.com/valdisiljuconoks/LocalizationProvider/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageId>LocalizationProvider.Abstractions</PackageId>
+    <PackageId>DbLocalizationProvider.Abstractions</PackageId>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
   </PropertyGroup>
+
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
 
 </Project>

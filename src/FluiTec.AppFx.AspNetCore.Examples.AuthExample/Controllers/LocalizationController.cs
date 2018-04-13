@@ -326,7 +326,7 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample.Controllers
                     if (resource == null) return RedirectToAction(nameof(Index));
 
                     var translation = uow.TranslationRepository.ByResource(resource).SingleOrDefault(t => t.Language == model.Language);
-                    if (translation != null) return RedirectToAction(nameof(Translation), new {id = translation.Id});
+                    if (translation != null) return RedirectToAction(nameof(EditTranslation), new {id = translation.Id});
 
                     var newTranslation = new TranslationEntity
                     {

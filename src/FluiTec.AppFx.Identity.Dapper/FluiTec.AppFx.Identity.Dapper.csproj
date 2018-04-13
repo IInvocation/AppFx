@@ -10,12 +10,10 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.9</Version>
+	  <Version>1.0.10</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper\FluiTec.AppFx.Data.Dapper.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Identity\FluiTec.AppFx.Identity.csproj" />
   </ItemGroup>
 

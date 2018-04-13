@@ -173,16 +173,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.AspNetCore" Version="1.0.20" />
     <PackageReference Include="Localization.AspNetCore.TagHelpers" Version="0.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="PaulMiami.AspNetCore.Mvc.Recaptcha" Version="1.2.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.AspNetCore\FluiTec.AppFx.AspNetCore.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

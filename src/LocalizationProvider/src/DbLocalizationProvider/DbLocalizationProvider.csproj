@@ -13,25 +13,28 @@
     <PackageProjectUrl>https://projects-epi-localization.tech-fellow.net/</PackageProjectUrl>
     <PackageTags>Localization Provider DbLocalization DbLocalizationProvider LocalizationProvider Database Driven</PackageTags>
     <PackageLicenseUrl>https://github.com/valdisiljuconoks/LocalizationProvider/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageId>LocalizationProvider</PackageId>
+    <PackageId>DbLocalizationProvider</PackageId>
   </PropertyGroup>
 
   <PropertyGroup>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <RepositoryUrl>https://github.com/valdisiljuconoks/LocalizationProvider/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DbLocalizationProvider.Abstractions\DbLocalizationProvider.Abstractions.csproj" />
   </ItemGroup>
+
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
 
 </Project>

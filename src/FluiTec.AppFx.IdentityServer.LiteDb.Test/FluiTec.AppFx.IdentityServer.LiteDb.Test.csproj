@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Data.LiteDb\FluiTec.AppFx.Data.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.LiteDb\FluiTec.AppFx.IdentityServer.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Test\FluiTec.AppFx.IdentityServer.Test.csproj" />
   </ItemGroup>

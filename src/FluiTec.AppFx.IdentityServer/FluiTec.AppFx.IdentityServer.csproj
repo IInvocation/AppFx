@@ -10,18 +10,15 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.5</Version>
+	  <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.7" />
+    <PackageReference Include="FluiTec.AppFx.Identity" Version="1.0.5" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
     <PackageReference Include="IdentityServer4" Version="2.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Identity\FluiTec.AppFx.Identity.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

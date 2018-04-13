@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography", "FluiTec.AppFx.Cryptography\FluiTec.AppFx.Cryptography.csproj", "{D2DAFFF4-C2B2-4488-82B7-99C397641B43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography.Test", "FluiTec.AppFx.Cryptography.Test\FluiTec.AppFx.Cryptography.Test.csproj", "{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2DAFFF4-C2B2-4488-82B7-99C397641B43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DAFFF4-C2B2-4488-82B7-99C397641B43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DAFFF4-C2B2-4488-82B7-99C397641B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DAFFF4-C2B2-4488-82B7-99C397641B43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9DF68CB-B0B7-413E-A37F-6288713675E4}
+	EndGlobalSection
+EndGlobal

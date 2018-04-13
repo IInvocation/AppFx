@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.OpenId", "FluiTec.AppFx.OpenId\FluiTec.AppFx.OpenId.csproj", "{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42BEB4C2-747A-44EF-9770-6E6C3BB8FB5A}
+	EndGlobalSection
+EndGlobal

@@ -2,13 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageLicenseUrl>https://github.com/IInvocation/AppFx/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/IInvocation/AppFx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/IInvocation/AppFx</RepositoryUrl>
+    <NeutralLanguage>de</NeutralLanguage>
+    <PostBuildEvent></PostBuildEvent>
+    <PreBuildEvent></PreBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.9" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dapper\FluiTec.AppFx.Authorization.Activity.Dapper.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper.Mssql\FluiTec.AppFx.Data.Dapper.Mssql.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper\FluiTec.AppFx.Data.Dapper.csproj" />
   </ItemGroup>
+
+  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
+    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
+    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
+  </Target>
 
 </Project>

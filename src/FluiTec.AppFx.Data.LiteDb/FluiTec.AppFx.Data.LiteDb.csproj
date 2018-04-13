@@ -10,16 +10,16 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.7</Version>
+	  <Version>1.0.8</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
     <PackageReference Include="LiteDB" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

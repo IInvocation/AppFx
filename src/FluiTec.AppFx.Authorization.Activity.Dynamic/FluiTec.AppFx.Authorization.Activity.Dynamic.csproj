@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
@@ -19,6 +19,7 @@
   </Target>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>
@@ -29,12 +30,6 @@
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.LiteDb\FluiTec.AppFx.Authorization.Activity.LiteDb.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper.Mssql\FluiTec.AppFx.Data.Dapper.Mssql.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper.Mysql\FluiTec.AppFx.Data.Dapper.Mysql.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper.Pgsql\FluiTec.AppFx.Data.Dapper.Pgsql.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper\FluiTec.AppFx.Data.Dapper.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Data.LiteDb\FluiTec.AppFx.Data.LiteDb.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 </Project>

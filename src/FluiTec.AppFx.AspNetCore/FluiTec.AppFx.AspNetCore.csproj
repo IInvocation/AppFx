@@ -10,10 +10,19 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.17</Version>
+	  <Version>1.0.20</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Authentication.Amazon" Version="1.0.5" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity" Version="1.0.0" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.0" />
+    <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.7" />
+    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.8" />
+    <PackageReference Include="FluiTec.AppFx.Localization" Version="1.0.3" />
+    <PackageReference Include="FluiTec.AppFx.Localization.Dynamic" Version="1.0.3" />
+    <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.10" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
     <PackageReference Include="IdentityServer4" Version="2.1.3" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.0.3" />
@@ -32,18 +41,6 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Identity.Dynamic\FluiTec.AppFx.Identity.Dynamic.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dynamic\FluiTec.AppFx.IdentityServer.Dynamic.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Localization.Dynamic\FluiTec.AppFx.Localization.Dynamic.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Mail\FluiTec.AppFx.Mail.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Options\FluiTec.AppFx.Options.csproj" />
   </ItemGroup>
 
 	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">

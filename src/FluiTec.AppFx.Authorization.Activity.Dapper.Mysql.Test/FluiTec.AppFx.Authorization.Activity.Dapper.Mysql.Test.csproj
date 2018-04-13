@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Identity.Dapper.Mysql" Version="1.0.11" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
@@ -15,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Authorization.Activity.Test\FluiTec.AppFx.Authorization.Activity.Test.csproj" />
-    <ProjectReference Include="..\FluiTec.AppFx.Identity.Dapper.Mysql\FluiTec.AppFx.Identity.Dapper.Mysql.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj" />
   </ItemGroup>
 
