@@ -1,4 +1,4 @@
-﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.TranslationAddModel
+﻿@model FluiTec.AppFx.AspNetCore.Examples.AuthExample.Models.Localization.ResourceAddModel
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
@@ -6,19 +6,18 @@
     </header>
     <div class="container">
         <section>
-            <h4>Add translation</h4>
+            <h4>Add resource</h4>
             <hr />
-            <form asp-controller="Localization" asp-action="AddTranslation" method="post">
+            <form asp-controller="Localization" asp-action="AddResource" method="post">
                 <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
-                <input type="hidden" name="ResourceId" id="ResourceId" value="@Model?.ResourceId" readonly />
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="Language" placeholder="Language" data-rule-required="true" data-msg-required="Language is required" />
+                        <input asp-for="Name" placeholder="Name" data-rule-required="true" data-msg-required="Name is required" />
                     </div>
                 </div>
                 <div class="row uniform">
                     <div class="col-lg-6">
-                        <input asp-for="Value" placeholder="Translation" />
+                        <input asp-for="Author" placeholder="Author" data-rule-required="true" data-msg-required="Author is required" />
                     </div>
                 </div>
                 <br />
