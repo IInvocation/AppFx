@@ -5,10 +5,10 @@
 
 <section id="maincontent" class="wrapper content-wrapper">
     <header>
-        <h2>Redirected authentication</h2>
+        <h2>Weitergeleitete Anmeldung</h2>
     </header>
     <div class="container">
-        <h4>Consent scopes</h4>
+        <h4>Zustimmung erteilen</h4>
         <hr />
         <form asp-controller="Identity" asp-action="Consent" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
             <div asp-validation-summary="All" class="text-danger" data-vlmsg-summary="true"></div>
@@ -20,12 +20,12 @@
             </div>
             }
             <h3>
-                <small>The application "@Model.ClientName" wants your permission to access information about yourself.</small>
+                <small>Die Anwendung "@Model.ClientName" bittet um Ihre Erlaubnis um auf Ihre persönlichen Informationen zuzugreifen.</small>
             </h3>
             <br />
             @if (Model.IdentityScopes.Any())
             {
-                <h4>Requested personal scopes</h4>
+                <h4>Persönliche Informationen</h4>
                 <hr />
                 foreach (var scope in Model.IdentityScopes)
                 {   
@@ -39,7 +39,7 @@
             <br />
             @if (Model.ResourceScopes.Any())
             {
-            <h4>Requested application scopes</h4>
+            <h4>Anwendungsbezogene Informationen</h4>
             <hr />
                 foreach (var scope in Model.ResourceScopes)
                 {   

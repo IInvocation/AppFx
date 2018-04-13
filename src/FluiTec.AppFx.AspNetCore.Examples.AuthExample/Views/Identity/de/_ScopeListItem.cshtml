@@ -17,14 +17,14 @@ else
     <input id="scopes_@Model.Name" name="ScopesConsented" value="@Model.Name" type="checkbox" />
 }
 
-    <label for="scopes_@Model.Name">@Localizer.GetString(Model.DisplayName)</label>
+<label for="scopes_@Model.Name">@Localizer.GetString(Model.DisplayName)</label>
 @if (Model.Required)
 {
-    <p>(Must be confirmed)</p>
+    <small>(muss bestätigt werden)</small>
 }
 @if (Model.Description != null)
 {
-    <label for="scopes_@Model.Name">@Localizer.GetString(Model.Description)</label>
+    <p for="scopes_@Model.Name">@Localizer.GetString(Model.Description)</p>
 }
 @if (Model.Required)
 {
