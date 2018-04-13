@@ -6,7 +6,7 @@ $certificate = New-SelfSignedCertificate `
     -KeyLength 2048 `
     -NotBefore (Get-Date) `
     -NotAfter (Get-Date).AddYears(2) `
-    -CertStoreLocation "cert:CurrentUser\My" `
+    -CertStoreLocation "cert:LocalMachine\My" `
     -FriendlyName "Localhost Certificate for .NET Core" `
     -HashAlgorithm SHA256 `
     -KeyUsage DigitalSignature, KeyEncipherment, DataEncipherment `
