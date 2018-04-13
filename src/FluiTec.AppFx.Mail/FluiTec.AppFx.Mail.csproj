@@ -10,11 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.11</Version>
+	  <Version>1.0.13</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.5" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.7" />
     <PackageReference Include="MailKit" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.2" />
     <PackageReference Include="RazorLight" Version="2.0.0-beta1" />

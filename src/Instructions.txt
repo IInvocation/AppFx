@@ -1,1 +1,10 @@
 https://docs.microsoft.com/en-us/nuget/guides/install-nuget
+
+Build-Deps:
+Options, Reflection, Tooling, Cryptography
+Data, Networking, Authentication
+Localization
+Identity
+IdentityServer, Autorization.Activity
+AspNetCore
+Samples
