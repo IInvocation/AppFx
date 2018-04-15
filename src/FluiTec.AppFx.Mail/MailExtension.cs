@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using FluiTec.AppFx.Mail;
 using FluiTec.AppFx.Mail.Configuration;
 using FluiTec.AppFx.Mail.LocationExpanders;
 using FluiTec.AppFx.Mail.RazorLightProjects;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using RazorLight;
 using RazorLight.Caching;
 
-// ReSharper disable once CheckNamespace
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluiTec.AppFx.Mail
 {
     /// <summary>	A mail service extension. </summary>
     public static class MailServiceExtension

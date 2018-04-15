@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.AspNetCore.FileProviders;
 using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -55,10 +58,20 @@ namespace Microsoft.Extensions.DependencyInjection
             IHostingEnvironment environment)
         {
             if (environment.IsDevelopment())
-                app.UseStaticFiles();
+                app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
+                {
+                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.ContentRootPath, "wwwroot"))
+                    {
+                        CultureOptions = app.ApplicationServices.GetService<CultureOptions>()
+                    }
+                });
             else
                 app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
                 {
+                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.ContentRootPath, "wwwroot"))
+                    {
+                        CultureOptions = app.ApplicationServices.GetService<CultureOptions>()
+                    },
                     OnPrepareResponse = ctx =>
                     {
                         if (_options.EnableClientCaching)
