@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Routing;
@@ -9,6 +11,8 @@ namespace FluiTec.AppFx.AspNetCore.Middlewares
     /// <summary>   A language middleware. </summary>
     public class LanguageRedirectMiddleware
     {
+        private List<string> _cultures;
+
         /// <summary>   The next. </summary>
         private readonly RequestDelegate _next;
 
@@ -27,10 +31,25 @@ namespace FluiTec.AppFx.AspNetCore.Middlewares
         public Task Invoke(HttpContext httpContext)
         {
             var routeData = httpContext.GetRouteData();
-            if (!httpContext.Request.Path.HasValue || httpContext.Request.Path.Value == "/" || routeData != null && !routeData.Values.ContainsKey("language"))
+            if (!httpContext.Request.Path.HasValue || httpContext.Request.Path.Value == "/" || routeData != null && !routeData.Values.ContainsKey("language") && !ContainsLanguageSpecifier(httpContext))
                 return RedirectToLanguage(httpContext);
             // otherwise - let other handlers do their work
             return _next(httpContext); 
+        }
+
+        /// <summary>   Query if 'context' contains language specifier. </summary>
+        /// <param name="context">  The context. </param>
+        /// <returns>   True if it succeeds, false if it fails. </returns>
+        private bool ContainsLanguageSpecifier(HttpContext context)
+        {
+            if (_cultures == null)
+            {
+                var options = context.RequestServices.GetService(typeof(CultureOptions)) as CultureOptions;
+                _cultures = options == null ? Enumerable.Empty<string>().ToList() : options.SupportedCultures;
+            }
+
+            var path = context.Request.Path.Value;
+            return _cultures.Any(c => path.StartsWith($"/{c}") || path == $"/{c}");
         }
 
         /// <summary>   Redirect to language. </summary>
