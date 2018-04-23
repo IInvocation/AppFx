@@ -1,4 +1,6 @@
 ﻿using FluiTec.AppFx.Identity.Entities;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,10 @@ namespace FluiTec.AppFx.Identity
         /// <returns>	An IServiceCollection. </returns>
         public static IServiceCollection AddIdentityStores(this IServiceCollection services)
         {
+            services.AddScoped<IXmlRepository, DataProtectionKeyRepository>();
+            var built = services.BuildServiceProvider();
+            services.AddDataProtection().AddKeyManagementOptions(options => options.XmlRepository = built.GetService<IXmlRepository>());
+
             services.AddScoped<IdentityStore>();
             services.AddScoped<IUserStore<IdentityUserEntity>>(provider => provider.GetService<IdentityStore>());
             services.AddScoped<IUserPasswordStore<IdentityUserEntity>>(provider =>

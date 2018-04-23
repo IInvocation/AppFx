@@ -35,8 +35,8 @@ namespace FluiTec.AppFx.AspNetCore
             if (options.Amazon != null && options.Amazon.Enabled)
                 auth.AddAmazon(o =>
                 {
-                    o.ClientId = options.Google.ClientId;
-                    o.ClientSecret = options.Google.ClientSecret;
+                    o.ClientId = options.Amazon.ClientId;
+                    o.ClientSecret = options.Amazon.ClientSecret;
                 });
 
             return services;

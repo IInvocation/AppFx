@@ -45,6 +45,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Mysql
                 new Func<IUnitOfWork, IUserRoleRepository>(work => new DapperUserRoleRepository(work)));
             RegisterRepositoryProvider(
                 new Func<IUnitOfWork, IUserLoginRepository>(work => new MysqlDapperUserLoginRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IDataProtectionKeyRepository>(work => new DapperDataProtectionKeyRepository(work)));
         }
 
         #endregion

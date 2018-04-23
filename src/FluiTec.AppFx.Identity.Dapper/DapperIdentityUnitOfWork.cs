@@ -36,6 +36,8 @@ namespace FluiTec.AppFx.Identity.Dapper
 
         private IUserLoginRepository _loginRepository;
 
+        private IDataProtectionKeyRepository _dataProtectionKeyRepository;
+
         #endregion
 
         #region IIdentityUnitOfWork
@@ -59,6 +61,11 @@ namespace FluiTec.AppFx.Identity.Dapper
         /// <summary>	The user login repository. </summary>
         public IUserLoginRepository LoginRepository => _loginRepository ??
                                                        (_loginRepository = GetRepository<IUserLoginRepository>());
+
+        /// <summary>   Gets the data protection key repository. </summary>
+        /// <value> The data protection key repository. </value>
+        public IDataProtectionKeyRepository DataProtectionKeyRepository => _dataProtectionKeyRepository ??
+                                                       (_dataProtectionKeyRepository = GetRepository<IDataProtectionKeyRepository>());
 
         #endregion
     }

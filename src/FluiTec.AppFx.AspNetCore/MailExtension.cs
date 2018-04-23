@@ -9,6 +9,7 @@ using FluiTec.AppFx.Options;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RazorLight;
 using RazorLight.Caching;
 
@@ -139,6 +140,9 @@ namespace FluiTec.AppFx.AspNetCore
         private static void AddRazorLightTemplating(this IServiceCollection services, IHostingEnvironment environment,
             MailServiceOptions options, string root)
         {
+            var provider = services.BuildServiceProvider();
+            var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+
             var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
 
             var expanders = new ILocationExpander[]
@@ -149,7 +153,7 @@ namespace FluiTec.AppFx.AspNetCore
                 new DefaultLocationExpander()
             };
 
-            var project = new LocationExpandingRazorProject(options, absoluteRoot, expanders);
+            var project = new LocationExpandingRazorProject(options, absoluteRoot, expanders, loggerFactory);
             var engine = new RazorLightEngineBuilder()
                 .UseProject(project)
                 .UseCachingProvider(new MemoryCachingProvider())

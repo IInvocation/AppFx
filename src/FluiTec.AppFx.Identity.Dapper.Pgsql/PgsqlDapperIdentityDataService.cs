@@ -67,6 +67,8 @@ namespace FluiTec.AppFx.Identity.Dapper.Pgsql
                 new Func<IUnitOfWork, IUserRoleRepository>(work => new DapperUserRoleRepository(work)));
             RegisterRepositoryProvider(
                 new Func<IUnitOfWork, IUserLoginRepository>(work => new PgsqlDapperUserLoginRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IDataProtectionKeyRepository>(work => new DapperDataProtectionKeyRepository(work)));
         }
 
         #endregion

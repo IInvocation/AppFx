@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using FluiTec.AppFx.Mail.Configuration;
 using FluiTec.AppFx.Mail.LocationExpanders;
+using Microsoft.Extensions.Logging;
 using RazorLight.Razor;
 
 namespace FluiTec.AppFx.Mail.RazorLightProjects
@@ -13,20 +14,20 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
     {
         #region Constructors
 
-        /// <summary>Constructor.</summary>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when one or more required arguments are
-        ///     null.
-        /// </exception>
-        /// <param name="options">      Options for controlling the operation. </param>
-        /// <param name="root">         The root. </param>
-        /// <param name="expanders">    The expanders. </param>
+        /// <summary>   Constructor. </summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="options">          Options for controlling the operation. </param>
+        /// <param name="root">             The root. </param>
+        /// <param name="expanders">        The expanders. </param>
+        /// <param name="loggerFactory">    The logger factory. </param>
         public LocationExpandingRazorProject(MailServiceOptions options, string root,
-            IEnumerable<ILocationExpander> expanders) : base(root)
+            IEnumerable<ILocationExpander> expanders, ILoggerFactory loggerFactory) : base(root)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _root = root;
             _expanders = expanders ?? throw new ArgumentNullException(nameof(expanders));
+            _logger = loggerFactory.CreateLogger<LocationExpandingRazorProject>();
         }
 
         #endregion
@@ -42,6 +43,7 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
             foreach (var location in expander.Expand(templateKey))
             {
                 var absolutePath = NormalizeKey(location);
+                    _logger.LogInformation($"Trying to find MailTemplate {absolutePath}.");
                 if (File.Exists(absolutePath))
                     return Task.FromResult(
                         (RazorLightProjectItem) new FileSystemRazorProjectItem(location,
@@ -64,6 +66,9 @@ namespace FluiTec.AppFx.Mail.RazorLightProjects
 
         /// <summary>The expanders.</summary>
         private readonly IEnumerable<ILocationExpander> _expanders;
+
+        /// <summary>   The logger. </summary>
+        private readonly ILogger _logger;
 
         #endregion
     }

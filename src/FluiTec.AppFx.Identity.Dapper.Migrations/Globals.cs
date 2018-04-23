@@ -20,5 +20,8 @@
 
         /// <summary>	The claim table. </summary>
         public const string ClaimTable = "Claim";
+
+        /// <summary>   The data protection key table. </summary>
+        public const string DataProtectionKeyTable = "DataProtectionKey";
     }
 }

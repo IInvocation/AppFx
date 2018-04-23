@@ -102,6 +102,8 @@ namespace FluiTec.AppFx.Identity.LiteDb
                 new Func<IUnitOfWork, IUserRoleRepository>(work => new LiteDbUserRoleRepository(work)));
             RegisterRepositoryProvider(
                 new Func<IUnitOfWork, IUserLoginRepository>(work => new LiteDbUserLoginRepository(work)));
+            RegisterRepositoryProvider(
+                new Func<IUnitOfWork, IDataProtectionKeyRepository>(work => new LiteDbDataProtectionKeyRepository(work)));
         }
 
         #endregion

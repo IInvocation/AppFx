@@ -10,18 +10,18 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.28</Version>
+	  <Version>1.0.33</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluiTec.AppFx.Authentication.Amazon" Version="1.0.7" />
-    <PackageReference Include="FluiTec.AppFx.Authorization.Activity" Version="1.0.2" />
-    <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.2" />
-    <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.9" />
-    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.10" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity" Version="1.0.5" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.5" />
+    <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.11" />
+    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.12" />
     <PackageReference Include="FluiTec.AppFx.Localization" Version="1.0.4" />
     <PackageReference Include="FluiTec.AppFx.Localization.Dynamic" Version="1.0.5" />
-    <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.14" />
+    <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.15" />
     <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.7" />
     <PackageReference Include="IdentityServer4" Version="2.1.3" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />

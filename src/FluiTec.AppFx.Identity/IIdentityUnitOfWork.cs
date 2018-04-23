@@ -25,5 +25,9 @@ namespace FluiTec.AppFx.Identity
         /// <summary>	Gets the login repository. </summary>
         /// <value>	The login repository. </value>
         IUserLoginRepository LoginRepository { get; }
+
+        /// <summary>   Gets the data protection key repository. </summary>
+        /// <value> The data protection key repository. </value>
+        IDataProtectionKeyRepository DataProtectionKeyRepository { get; }
     }
 }
