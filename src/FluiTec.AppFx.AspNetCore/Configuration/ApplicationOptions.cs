@@ -14,6 +14,10 @@ namespace FluiTec.AppFx.AspNetCore.Configuration
         /// <value>The application root.</value>
         public string ApplicationRoot { get; set; }
 
+        /// <summary>   Gets or sets the application resource root. </summary>
+        /// <value> The application resource root. </value>
+        public string ApplicationResourceRoot { get; set; }
+
         /// <summary>Gets or sets the full pathname of the application login file.</summary>
         /// <value>The full pathname of the application login file.</value>
         public string ApplicationLoginPath { get; set; }
