@@ -25,9 +25,6 @@ namespace FluiTec.AppFx.AspNetCore
         {
             services.ConfigureIdentityDataService(configuration);
 
-            var apiOptions = configuration.GetConfiguration<ApiOptions>();
-            services.AddSingleton(apiOptions);
-
             var adminOptions = configuration.GetConfiguration<AdminOptions>();
             services.AddSingleton(adminOptions);
 
@@ -45,6 +42,20 @@ namespace FluiTec.AppFx.AspNetCore
             services.AddIdentityStores();
 
             // configure cookies
+            return services.ConfigureLoginCookieRedirect(configuration);
+        }
+
+        /// <summary>
+        ///     An IServiceCollection extension method that configure login cookie redirect.
+        /// </summary>
+        /// <param name="services">         The services to act on. </param>
+        /// <param name="configuration">    The configuration. </param>
+        /// <returns>   An IServiceCollection. </returns>
+        public static IServiceCollection ConfigureLoginCookieRedirect(this IServiceCollection services, IConfigurationRoot configuration)
+        {
+            var apiOptions = configuration.GetConfiguration<ApiOptions>();
+            services.AddSingleton(apiOptions);
+
             services.ConfigureApplicationCookie(cOptions =>
             {
                 cOptions.Events = new CookieAuthenticationEvents
@@ -53,8 +64,8 @@ namespace FluiTec.AppFx.AspNetCore
                     OnRedirectToLogin = context =>
                     {
                         if (context.Request.Path.StartsWithSegments(apiOptions.ApiOnlyPath) &&
-                            context.Response.StatusCode == (int) HttpStatusCode.OK)
-                            context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+                            context.Response.StatusCode == (int)HttpStatusCode.OK)
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         else
                             context.Response.Redirect(context.RedirectUri);
 
