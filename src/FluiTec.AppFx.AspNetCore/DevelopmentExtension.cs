@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluiTec.AppFx.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
 // ReSharper disable once CheckNamespace
@@ -18,9 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IApplicationBuilder UseDevelopmentExtension(this IApplicationBuilder app,
             IHostingEnvironment environment)
         {
-            if (environment.IsDevelopment()) app.UseBrowserLink();
-
-            return app;
+            return app.UseBrowserLinkExtension(environment);
         }
     }
 }
