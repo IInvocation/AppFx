@@ -7,11 +7,12 @@
 @inject IAuthorizationService AuthorizationService
 @inject SignInManager<IdentityUserEntity> SignInManager
 @inject CultureOptions CultureOptions
+@inject FluiTec.AppFx.AspNetCore.Configuration.ApplicationOptions AppOptions
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <a asp-controller="Home" asp-action="Index" class="navbar-brand">
-            <img src="/icons/favicon_32.png" width="30" height="30" class="d-inline-block align-top" alt="favicon">
+            <img src="@AppOptions.ApplicationResourceRoot/icons/favicon_32.png" width="30" height="30" class="d-inline-block align-top" alt="favicon">
         </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,28 +30,28 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item" is-active-route asp-controller="Manage" asp-action="Index">
-                        <a class="nav-link" asp-controller="Profile" asp-action="Index"><img src="/images/profile.png" alt="profile" />Profile</a>
+                        <a class="nav-link" asp-controller="Profile" asp-action="Index"><img src="@AppOptions.ApplicationResourceRoot/images/profile.png" alt="profile" />Profile</a>
                     </li>
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Logout">
-                        <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="/images/login.png" alt="logout" />Logout</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout"><img src="@AppOptions.ApplicationResourceRoot/images/login.png" alt="logout" />Logout</a>
                     </li>
                     if ((await AuthorizationService.AuthorizeAsync(User, PolicyNames.AdministrativeAccess)).Succeeded)
                     {
                         <li class="nav-item" is-active-route asp-controller="Admin" asp-action="Index">
-                            <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="/images/admin.png" alt="profile" />Admin</a>
+                            <a class="nav-link" asp-controller="Admin" asp-action="Index"><img src="@AppOptions.ApplicationResourceRoot/images/admin.png" alt="profile" />Admin</a>
                         </li>
                     }
                 }
                 else
                 {
                     <li class="nav-item" is-active-route asp-controller="Account" asp-action="Login">
-                        <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="/images/login.png" alt="login or register" />Login</a>
+                        <a class="nav-link" asp-controller="Account" asp-action="Login"><img src="@AppOptions.ApplicationResourceRoot/images/login.png" alt="login or register" />Login</a>
                     </li>
                 }
                 <li class="nav-item">
                     <div class="dropdown nav-link">
                         <a class="dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="False">
-                            <img src="~/images/globe.png" alt="globe image" />
+                            <img src="@AppOptions.ApplicationResourceRoot/images/globe.png" alt="globe image" />
                             Language
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
@@ -63,14 +64,14 @@
                                 if (isActive)
                                 {
                                     <a class="dropdown-item disabled" asp-all-route-data="routeData">
-                                        <img src="~/images/@cultureImageName" alt="@culture-Flag-Image" class="rounded" />
+                                        <img src="@AppOptions.ApplicationResourceRoot/images/@cultureImageName" alt="@culture-Flag-Image" class="rounded" />
                                         @cultureInfo.NativeName
                                     </a>
                                 }
                                 else
                                 {
                                     <a class="dropdown-item" asp-all-route-data="routeData">
-                                        <img src="~/images/@cultureImageName" alt="@culture-Flag-Image" class="rounded" />
+                                        <img src="@AppOptions.ApplicationResourceRoot/images/@cultureImageName" alt="@culture-Flag-Image" class="rounded" />
                                         @cultureInfo.NativeName
                                     </a>
                                 }

@@ -16,14 +16,14 @@
 
 /* OpenId-Buttons */
 .Amazon-btn {
-  background-image: url("/images/amazon.png");
+  background-image: url("/wwwroot/images/amazon.png");
   background-repeat: no-repeat;
   background-size: 32px;
   background-position-y: center;
   background-position-x: 5px; }
 
 .Google-btn {
-  background-image: url("/images/google.png");
+  background-image: url("/wwwroot/images/google.png");
   background-repeat: no-repeat;
   background-size: 25px;
   background-position-y: center;
@@ -31,7 +31,7 @@
 
 /* Landing */
 #landing-header {
-  background-image: url("/images/security_transparent.jpg");
+  background-image: url("/wwwroot/images/security_transparent.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -3,6 +3,7 @@ https://docs.microsoft.com/en-us/nuget/guides/install-nuget
 Build-Deps:
 Options, Reflection, Tooling, Cryptography
 Data, Networking, Authentication
+DataProtection
 Localization
 Identity
 IdentityServer, Autorization.Activity
