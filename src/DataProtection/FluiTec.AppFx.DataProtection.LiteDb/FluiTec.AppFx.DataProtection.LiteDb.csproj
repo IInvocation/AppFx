@@ -4,4 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluiTec.AppFx.DataProtection\FluiTec.AppFx.DataProtection.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -12,4 +12,9 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FluiTec.AppFx.DataProtection.LiteDb\FluiTec.AppFx.DataProtection.LiteDb.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.DataProtection\FluiTec.AppFx.DataProtection.csproj" />
+  </ItemGroup>
+
 </Project>
