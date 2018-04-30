@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authentication.Amazon", "Authentication\FluiTec.AppFx.Authentication.Amazon\FluiTec.AppFx.Authentication.Amazon.csproj", "{B82A175E-DA20-46B2-BACB-3FE0C7AF72DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.OpenId", "FluiTec.AppFx.OpenId\FluiTec.AppFx.OpenId.csproj", "{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.OpenId", "Authentication\FluiTec.AppFx.OpenId\FluiTec.AppFx.OpenId.csproj", "{AD4353C6-AFA0-478F-BA6E-6E8E23CE4A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

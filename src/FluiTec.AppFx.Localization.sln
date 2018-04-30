@@ -3,37 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization", "FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj", "{703AB2C4-9EAE-4C47-8A1C-272085C83598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization", "Localization\FluiTec.AppFx.Localization\FluiTec.AppFx.Localization.csproj", "{703AB2C4-9EAE-4C47-8A1C-272085C83598}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Dapper", "FluiTec.AppFx.Localization.Dapper\FluiTec.AppFx.Localization.Dapper.csproj", "{9F542EC4-0C9B-4D10-92DC-F72A0383F11D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Dapper", "Localization\FluiTec.AppFx.Localization.Dapper\FluiTec.AppFx.Localization.Dapper.csproj", "{9F542EC4-0C9B-4D10-92DC-F72A0383F11D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization.Dapper.Migrations", "FluiTec.AppFx.Localization.Dapper.Migrations\FluiTec.AppFx.Localization.Dapper.Migrations.csproj", "{4873D576-5FE5-4EDA-B204-CB1BDF4C78BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Localization.Dapper.Migrations", "Localization\FluiTec.AppFx.Localization.Dapper.Migrations\FluiTec.AppFx.Localization.Dapper.Migrations.csproj", "{4873D576-5FE5-4EDA-B204-CB1BDF4C78BC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Dynamic", "FluiTec.AppFx.Localization.Dynamic\FluiTec.AppFx.Localization.Dynamic.csproj", "{396196D7-49D4-41A9-B787-4C0843F91462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Dynamic", "Localization\FluiTec.AppFx.Localization.Dynamic\FluiTec.AppFx.Localization.Dynamic.csproj", "{396196D7-49D4-41A9-B787-4C0843F91462}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Exporter", "FluiTec.AppFx.Localization.Exporter\FluiTec.AppFx.Localization.Exporter.csproj", "{7749605F-5CB5-4340-8D48-13A4E65B4545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Exporter", "Localization\FluiTec.AppFx.Localization.Exporter\FluiTec.AppFx.Localization.Exporter.csproj", "{7749605F-5CB5-4340-8D48-13A4E65B4545}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb", "FluiTec.AppFx.Localization.LiteDb\FluiTec.AppFx.Localization.LiteDb.csproj", "{5393DAE2-9486-4A17-881A-739B49D7AEE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb", "Localization\FluiTec.AppFx.Localization.LiteDb\FluiTec.AppFx.Localization.LiteDb.csproj", "{5393DAE2-9486-4A17-881A-739B49D7AEE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb.Test", "FluiTec.AppFx.Localization.LiteDb.Test\FluiTec.AppFx.Localization.LiteDb.Test.csproj", "{F0469DFD-3461-43E1-9144-32CA739B8D31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.LiteDb.Test", "Localization\FluiTec.AppFx.Localization.LiteDb.Test\FluiTec.AppFx.Localization.LiteDb.Test.csproj", "{F0469DFD-3461-43E1-9144-32CA739B8D31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mssql", "FluiTec.AppFx.Localization.Mssql\FluiTec.AppFx.Localization.Mssql.csproj", "{0310F03E-C4D4-4F9F-8BE0-9FAC6338FFBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mssql", "Localization\FluiTec.AppFx.Localization.Mssql\FluiTec.AppFx.Localization.Mssql.csproj", "{0310F03E-C4D4-4F9F-8BE0-9FAC6338FFBE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mssql.Test", "FluiTec.AppFx.Localization.Mssql.Test\FluiTec.AppFx.Localization.Mssql.Test.csproj", "{6C656992-2503-4C86-B1E3-2CA2518C299C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mssql.Test", "Localization\FluiTec.AppFx.Localization.Mssql.Test\FluiTec.AppFx.Localization.Mssql.Test.csproj", "{6C656992-2503-4C86-B1E3-2CA2518C299C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mysql", "FluiTec.AppFx.Localization.Mysql\FluiTec.AppFx.Localization.Mysql.csproj", "{FED032F9-FFE1-4173-BD61-0C3FF726BF17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mysql", "Localization\FluiTec.AppFx.Localization.Mysql\FluiTec.AppFx.Localization.Mysql.csproj", "{FED032F9-FFE1-4173-BD61-0C3FF726BF17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mysql.Test", "FluiTec.AppFx.Localization.Mysql.Test\FluiTec.AppFx.Localization.Mysql.Test.csproj", "{45B7A48C-83B9-4A90-95B7-EA18262B0F73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Mysql.Test", "Localization\FluiTec.AppFx.Localization.Mysql.Test\FluiTec.AppFx.Localization.Mysql.Test.csproj", "{45B7A48C-83B9-4A90-95B7-EA18262B0F73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Pgsql", "FluiTec.AppFx.Localization.Pgsql\FluiTec.AppFx.Localization.Pgsql.csproj", "{04691F56-3DAF-4371-8F80-693C39139987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Pgsql", "Localization\FluiTec.AppFx.Localization.Pgsql\FluiTec.AppFx.Localization.Pgsql.csproj", "{04691F56-3DAF-4371-8F80-693C39139987}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Pgsql.Test", "FluiTec.AppFx.Localization.Pgsql.Test\FluiTec.AppFx.Localization.Pgsql.Test.csproj", "{9FDEF288-B29D-4D43-9226-565AD96B5B48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Pgsql.Test", "Localization\FluiTec.AppFx.Localization.Pgsql.Test\FluiTec.AppFx.Localization.Pgsql.Test.csproj", "{9FDEF288-B29D-4D43-9226-565AD96B5B48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Test", "FluiTec.AppFx.Localization.Test\FluiTec.AppFx.Localization.Test.csproj", "{2AB94899-B022-4B48-BFF7-B226C6C93CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Localization.Test", "Localization\FluiTec.AppFx.Localization.Test\FluiTec.AppFx.Localization.Test.csproj", "{2AB94899-B022-4B48-BFF7-B226C6C93CBA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider.Abstractions", "LocalizationProvider\src\DbLocalizationProvider.Abstractions\DbLocalizationProvider.Abstractions.csproj", "{E7FE29F6-5CF8-4932-BB17-5A8325ABF030}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider.Abstractions", "Localization\LocalizationProvider\src\DbLocalizationProvider.Abstractions\DbLocalizationProvider.Abstractions.csproj", "{E7FE29F6-5CF8-4932-BB17-5A8325ABF030}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider", "LocalizationProvider\src\DbLocalizationProvider\DbLocalizationProvider.csproj", "{B0600946-B7D8-4067-B169-25F663A1E85F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLocalizationProvider", "Localization\LocalizationProvider\src\DbLocalizationProvider\DbLocalizationProvider.csproj", "{B0600946-B7D8-4067-B169-25F663A1E85F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.UnitTesting.Helper", "FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj", "{A95C3C58-0182-473E-9C82-C0A72AD56B95}"
 EndProject

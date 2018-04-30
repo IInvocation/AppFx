@@ -3,33 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity", "FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj", "{BB6CDC40-4BDC-4176-8019-154E1B7F7D05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity\FluiTec.AppFx.Authorization.Activity.csproj", "{BB6CDC40-4BDC-4176-8019-154E1B7F7D05}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper", "FluiTec.AppFx.Authorization.Activity.Dapper\FluiTec.AppFx.Authorization.Activity.Dapper.csproj", "{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper\FluiTec.AppFx.Authorization.Activity.Dapper.csproj", "{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Migrations", "FluiTec.AppFx.Authorization.Activity.Dapper.Migrations\FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.csproj", "{0E6319E6-0746-45B1-A281-1E34A229581F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Migrations", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Migrations\FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.csproj", "{0E6319E6-0746-45B1-A281-1E34A229581F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql", "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.csproj", "{38349A01-F279-425F-A730-2FE16E587884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.csproj", "{38349A01-F279-425F-A730-2FE16E587884}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test", "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test.csproj", "{1FF7E57B-49D1-4510-913D-D57E240B7C1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test.csproj", "{1FF7E57B-49D1-4510-913D-D57E240B7C1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.UnitTesting.Helper", "FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj", "{7AB6A3BA-0901-4952-96AD-C77F9DBEFA65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Test", "FluiTec.AppFx.Authorization.Activity.Test\FluiTec.AppFx.Authorization.Activity.Test.csproj", "{2FDE2405-4F94-4C84-928A-514A67F58DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Test\FluiTec.AppFx.Authorization.Activity.Test.csproj", "{2FDE2405-4F94-4C84-928A-514A67F58DB7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql", "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.csproj", "{E9A402C0-F29D-4774-A800-4E367148CFC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.csproj", "{E9A402C0-F29D-4774-A800-4E367148CFC4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test", "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test.csproj", "{44B726B0-AD0B-4378-894E-05A609CB5B94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test.csproj", "{44B726B0-AD0B-4378-894E-05A609CB5B94}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql", "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.csproj", "{9587D4FC-DB0F-4C34-B70E-77EFB4010755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.csproj", "{9587D4FC-DB0F-4C34-B70E-77EFB4010755}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test", "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test.csproj", "{4E21F94B-B6FB-4E71-AF58-7DA0FC13D6DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test.csproj", "{4E21F94B-B6FB-4E71-AF58-7DA0FC13D6DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dynamic", "FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj", "{BB51B694-C681-4418-AAE9-9FFF383885E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dynamic", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dynamic\FluiTec.AppFx.Authorization.Activity.Dynamic.csproj", "{BB51B694-C681-4418-AAE9-9FFF383885E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.LiteDb", "FluiTec.AppFx.Authorization.Activity.LiteDb\FluiTec.AppFx.Authorization.Activity.LiteDb.csproj", "{B47C7C47-ADA0-45C7-8190-1C4A7AEF8FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.LiteDb", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.LiteDb\FluiTec.AppFx.Authorization.Activity.LiteDb.csproj", "{B47C7C47-ADA0-45C7-8190-1C4A7AEF8FC4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.LiteDb.Test", "FluiTec.AppFx.Authorization.Activity.LiteDb.Test\FluiTec.AppFx.Authorization.Activity.LiteDb.Test.csproj", "{1609B1C1-27E2-4C93-84A9-E97B0C9F9DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.LiteDb.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.LiteDb.Test\FluiTec.AppFx.Authorization.Activity.LiteDb.Test.csproj", "{1609B1C1-27E2-4C93-84A9-E97B0C9F9DD3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{0EB4CF70-C030-4177-B255-7ABEE8469DDE}"
 EndProject

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore.Examples.AuthExample", "FluiTec.AppFx.AspNetCore.Examples.AuthExample\FluiTec.AppFx.AspNetCore.Examples.AuthExample.csproj", "{B2D12F20-B106-4AA5-83F9-63D532373581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.AspNetCore.Examples.AuthExample", "AspNetCore\FluiTec.AppFx.AspNetCore.Examples.AuthExample\FluiTec.AppFx.AspNetCore.Examples.AuthExample.csproj", "{B2D12F20-B106-4AA5-83F9-63D532373581}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AspNetCore.Examples.AuthExampleClient", "FluiTec.AspNetCore.Examples.AuthExampleClient\FluiTec.AspNetCore.Examples.AuthExampleClient.csproj", "{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AspNetCore.Examples.AuthExampleClient", "AspNetCore\FluiTec.AspNetCore.Examples.AuthExampleClient\FluiTec.AspNetCore.Examples.AuthExampleClient.csproj", "{1C021ECB-F1A4-4403-B5D0-CD344E44C96B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

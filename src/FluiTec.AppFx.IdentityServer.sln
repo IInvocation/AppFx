@@ -3,33 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer", "FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj", "{69304745-7BB5-48B9-9749-CC21E432035C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer", "IdentityServer\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj", "{69304745-7BB5-48B9-9749-CC21E432035C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper", "FluiTec.AppFx.IdentityServer.Dapper\FluiTec.AppFx.IdentityServer.Dapper.csproj", "{7324B79E-67AA-455F-A96E-4AFDEB116044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper\FluiTec.AppFx.IdentityServer.Dapper.csproj", "{7324B79E-67AA-455F-A96E-4AFDEB116044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Migrations", "FluiTec.AppFx.IdentityServer.Dapper.Migrations\FluiTec.AppFx.IdentityServer.Dapper.Migrations.csproj", "{CD2E6380-1A43-49B6-9C67-31FFB62F1396}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Migrations", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Migrations\FluiTec.AppFx.IdentityServer.Dapper.Migrations.csproj", "{CD2E6380-1A43-49B6-9C67-31FFB62F1396}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql", "FluiTec.AppFx.IdentityServer.Dapper.Mssql\FluiTec.AppFx.IdentityServer.Dapper.Mssql.csproj", "{FD8063FD-3535-4F8E-B2F7-C49368FBB039}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mssql\FluiTec.AppFx.IdentityServer.Dapper.Mssql.csproj", "{FD8063FD-3535-4F8E-B2F7-C49368FBB039}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test.csproj", "{E4D74927-E994-4215-8A23-72ED32858516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test.csproj", "{E4D74927-E994-4215-8A23-72ED32858516}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.UnitTesting.Helper", "FluiTec.AppFx.UnitTesting.Helper\FluiTec.AppFx.UnitTesting.Helper.csproj", "{FAA77A24-0334-4C49-9200-8BB9E679D7A1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Test", "FluiTec.AppFx.IdentityServer.Test\FluiTec.AppFx.IdentityServer.Test.csproj", "{D5CDFC8E-DF98-42DF-A67E-FB6D453DB415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.Test\FluiTec.AppFx.IdentityServer.Test.csproj", "{D5CDFC8E-DF98-42DF-A67E-FB6D453DB415}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql", "FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj", "{32F6A10E-67CB-4AFD-8BC4-596AE9153B3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mysql\FluiTec.AppFx.IdentityServer.Dapper.Mysql.csproj", "{32F6A10E-67CB-4AFD-8BC4-596AE9153B3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test.csproj", "{30132934-3DDF-4C8B-BAFA-60C3A15CA941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test.csproj", "{30132934-3DDF-4C8B-BAFA-60C3A15CA941}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.csproj", "{E9FC72AC-8CF6-4B94-9153-EE97A9DDB3D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Pgsql\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.csproj", "{E9FC72AC-8CF6-4B94-9153-EE97A9DDB3D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test", "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test.csproj", "{2D15B9BE-9580-4617-A564-4B9DA97C788D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test\FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Test.csproj", "{2D15B9BE-9580-4617-A564-4B9DA97C788D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dynamic", "FluiTec.AppFx.IdentityServer.Dynamic\FluiTec.AppFx.IdentityServer.Dynamic.csproj", "{16D0DD4B-8150-46D2-8040-1AC0D5E9E416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dynamic", "IdentityServer\FluiTec.AppFx.IdentityServer.Dynamic\FluiTec.AppFx.IdentityServer.Dynamic.csproj", "{16D0DD4B-8150-46D2-8040-1AC0D5E9E416}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.LiteDb", "FluiTec.AppFx.IdentityServer.LiteDb\FluiTec.AppFx.IdentityServer.LiteDb.csproj", "{CC0B38C1-36E1-45F2-A2B3-5C69983187D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.LiteDb", "IdentityServer\FluiTec.AppFx.IdentityServer.LiteDb\FluiTec.AppFx.IdentityServer.LiteDb.csproj", "{CC0B38C1-36E1-45F2-A2B3-5C69983187D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.LiteDb.Test", "FluiTec.AppFx.IdentityServer.LiteDb.Test\FluiTec.AppFx.IdentityServer.LiteDb.Test.csproj", "{AABAABD8-509C-4132-801F-8A2FECBC5937}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.LiteDb.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.LiteDb.Test\FluiTec.AppFx.IdentityServer.LiteDb.Test.csproj", "{AABAABD8-509C-4132-801F-8A2FECBC5937}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AFB72A4F-2CDA-4F30-BABB-727B4D2A276A}"
 EndProject

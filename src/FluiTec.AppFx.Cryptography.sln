@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography", "FluiTec.AppFx.Cryptography\FluiTec.AppFx.Cryptography.csproj", "{D2DAFFF4-C2B2-4488-82B7-99C397641B43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography", "Cryptography\FluiTec.AppFx.Cryptography\FluiTec.AppFx.Cryptography.csproj", "{D2DAFFF4-C2B2-4488-82B7-99C397641B43}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography.Test", "FluiTec.AppFx.Cryptography.Test\FluiTec.AppFx.Cryptography.Test.csproj", "{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Cryptography.Test", "Cryptography\FluiTec.AppFx.Cryptography.Test\FluiTec.AppFx.Cryptography.Test.csproj", "{F8F6ACC9-3A6C-428C-8E12-5EFB42AC597F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
