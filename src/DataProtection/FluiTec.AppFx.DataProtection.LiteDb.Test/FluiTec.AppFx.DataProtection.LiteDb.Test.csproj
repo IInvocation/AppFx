@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.DataProtection.LiteDb\FluiTec.AppFx.DataProtection.LiteDb.csproj" />
+    <ProjectReference Include="..\FluiTec.AppFx.DataProtection.Test\FluiTec.AppFx.DataProtection.Test.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.DataProtection\FluiTec.AppFx.DataProtection.csproj" />
   </ItemGroup>
 
