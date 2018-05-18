@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -41,7 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     .CreateLogger();
 
                 // add static Log to AspNetCoreLogging
-                loggerFactory.AddSerilog();
+                var fact = loggerFactory.AddSerilog();
 
                 // close and flush on stopping application
                 appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
