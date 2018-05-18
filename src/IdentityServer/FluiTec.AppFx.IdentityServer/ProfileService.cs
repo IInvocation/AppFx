@@ -88,7 +88,7 @@ namespace FluiTec.AppFx.IdentityServer
             var claims = new List<Claim>
             {
                 new Claim(JwtClaimTypes.Subject, user.Identifier.ToString()),
-                new Claim(JwtClaimTypes.PreferredUserName, user.Name)
+                new Claim(JwtClaimTypes.Name, user.Name)
             };
 
             if (_userManager.SupportsUserEmail)
@@ -96,6 +96,14 @@ namespace FluiTec.AppFx.IdentityServer
                 {
                     new Claim(JwtClaimTypes.Email, user.Email),
                     new Claim(JwtClaimTypes.EmailVerified, user.EmailConfirmed ? "true" : "false",
+                        ClaimValueTypes.Boolean)
+                });
+
+            if (_userManager.SupportsUserPhoneNumber)
+                claims.AddRange(new[]
+                {
+                    new Claim(JwtClaimTypes.PhoneNumber, user.Phone),
+                    new Claim(JwtClaimTypes.PhoneNumberVerified, user.PhoneConfirmed ? "true" : "false",
                         ClaimValueTypes.Boolean)
                 });
 

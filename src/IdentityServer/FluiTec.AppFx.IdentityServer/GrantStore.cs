@@ -65,16 +65,23 @@ namespace FluiTec.AppFx.IdentityServer
                 using (var uow = _dataService.StartUnitOfWork())
                 {
                     var entity = uow.GrantRepository.GetByGrantKey(key);
-                    return new PersistedGrant
+                    if (entity != null)
                     {
-                        ClientId = entity.ClientId,
-                        CreationTime = entity.CreationTime,
-                        Data = entity.Data,
-                        Expiration = entity.Expiration,
-                        Key = entity.GrantKey,
-                        SubjectId = entity.SubjectId,
-                        Type = entity.Type
-                    };
+                        return new PersistedGrant
+                        {
+                            ClientId = entity.ClientId,
+                            CreationTime = entity.CreationTime,
+                            Data = entity.Data,
+                            Expiration = entity.Expiration,
+                            Key = entity.GrantKey,
+                            SubjectId = entity.SubjectId,
+                            Type = entity.Type
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             });
         }
