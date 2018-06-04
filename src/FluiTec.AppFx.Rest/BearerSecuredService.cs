@@ -65,7 +65,7 @@ namespace FluiTec.AppFx.Rest
         private async Task<string> FetchAccessToken()
         {
             var tokenClient = new TokenClient(_discoveryClient.TokenEndpoint, Options.ClientId, Options.ClientSecret);
-            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("authorization_api");
+            var tokenResponse = await tokenClient.RequestClientCredentialsAsync(Options.Scope);
 
             if (tokenResponse.IsError)
                 throw new TokenResponseException(tokenResponse);
@@ -91,6 +91,8 @@ namespace FluiTec.AppFx.Rest
         protected virtual bool ValidateOptions(TOptions options)
         {
             if (options == null)
+                return false;
+            if (string.IsNullOrWhiteSpace(options.Scope))
                 return false;
             if (string.IsNullOrWhiteSpace(options.BearerServiceUrl))
                 return false;

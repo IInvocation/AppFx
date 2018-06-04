@@ -14,5 +14,9 @@
         /// <summary>   Gets or sets the client secret. </summary>
         /// <value> The client secret. </value>
         public string ClientSecret { get; set; }
+
+        /// <summary>   Gets or sets the scope. </summary>
+        /// <value> The scope. </value>
+        public string Scope { get; set; }
     }
 }

@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 
 namespace FluiTec.AppFx.Rest
 {
-    /// <summary>   A default bearer secured JSON service. </summary>
-    /// <typeparam name="TOptions"> Type of the options. </typeparam>
+    /// <summary>   A default JSON api. </summary>
     /// <typeparam name="TModel">   Type of the model. </typeparam>
-    public abstract class DefaultBearerSecuredJsonService<TOptions, TModel> : BearerSecuredJsonService<TOptions, TModel> where TModel : class where TOptions : BearerSecuredServiceOptions
+    public abstract class DefaultJsonApi<TModel> : JsonApi<TModel> where TModel : class
     {
         /// <summary>   Specialised constructor for use only by derived class. </summary>
-        /// <param name="options">  Options for controlling the operation. </param>
-        protected DefaultBearerSecuredJsonService(TOptions options) : base(options)
+        /// <param name="service">  The service. </param>
+        /// <param name="subPath">  Full pathname of the sub file. </param>
+        protected DefaultJsonApi(IWebService service, string subPath) : base(service, subPath)
         {
         }
 
