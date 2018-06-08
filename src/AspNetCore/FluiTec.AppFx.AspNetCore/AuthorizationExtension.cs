@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.AspNetCore.Configuration;
+﻿using System;
+using FluiTec.AppFx.AspNetCore.Configuration;
 using FluiTec.AppFx.Authorization.Activity;
 using FluiTec.AppFx.Authorization.Activity.AuthorizationHandlers;
 using Microsoft.Extensions.Configuration;
@@ -17,11 +18,12 @@ namespace FluiTec.AppFx.AspNetCore
     /// <summary>An authorization extension.</summary>
     public static class AuthorizationExtension
     {
-        /// <summary>An IServiceCollection extension method that configure authorization.</summary>
+        /// <summary>   An IServiceCollection extension method that configure authorization. </summary>
         /// <param name="services">         The services to act on. </param>
         /// <param name="configuration">    The configuration. </param>
-        /// <returns>An IServiceCollection.</returns>
-        public static IServiceCollection ConfigureAuthorization(this IServiceCollection services, IConfigurationRoot configuration)
+        /// <param name="configureAction">  (Optional) The configure action. </param>
+        /// <returns>   An IServiceCollection. </returns>
+        public static IServiceCollection ConfigureAuthorization(this IServiceCollection services, IConfigurationRoot configuration, Action<AuthorizationOptions> configureAction = null)
         {
             services.ConfigureAppFxAuthorizationData(configuration);
             services.AddScoped<IAuthorizationHandler, ResourceTypOperationAuthorizationHandler>();
@@ -44,6 +46,7 @@ namespace FluiTec.AppFx.AspNetCore
 
                 AddConfigurationActivities(services, options, configuration);
                 AddDefaultPolicies(services, options);
+                configureAction?.Invoke(options);
             });
 
             return services;
