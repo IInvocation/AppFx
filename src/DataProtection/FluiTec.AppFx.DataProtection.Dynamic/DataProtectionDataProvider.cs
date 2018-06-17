@@ -9,6 +9,8 @@ using FluiTec.AppFx.DataProtection.Mssql;
 using FluiTec.AppFx.Options;
 using Microsoft.Extensions.Configuration;
 using System;
+using FluiTec.AppFx.DataProtection.Mysql;
+using FluiTec.AppFx.DataProtection.Pgsql;
 
 namespace FluiTec.AppFx.DataProtection.Dynamic
 {

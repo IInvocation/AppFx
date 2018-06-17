@@ -1,7 +1,7 @@
 ﻿using FluiTec.AppFx.DataProtection.Test;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FluiTec.AppFx.DataProtection.Mssql.Test
+namespace FluiTec.AppFx.DataProtection.Pgsql.Test
 {
     [TestClass]
     public class PgsqlDataProtectionKeyTest : DataProtectionKeyTest

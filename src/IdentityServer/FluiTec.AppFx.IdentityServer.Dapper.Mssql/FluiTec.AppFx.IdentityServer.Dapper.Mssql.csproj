@@ -10,11 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.19</Version>
+	  <Version>1.0.22</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.11" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.13" />
   </ItemGroup>
 
   <ItemGroup>

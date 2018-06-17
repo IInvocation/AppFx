@@ -13,6 +13,8 @@
         protected IdentityServerTest(IIdentityServerDataService dataService)
         {
             DataService = dataService;
+            if (dataService.CanMigrate())
+                dataService.Migrate();
         }
     }
 }

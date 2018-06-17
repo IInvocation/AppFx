@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test
         /// <returns>	The data service. </returns>
         public static IAuthorizationDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MysqlDapperServiceOptions
             {
                 ConnectionFactory = new MysqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MYSQL")
@@ -26,7 +26,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Mysql.Test
         /// <returns>	The data service. </returns>
         public static IIdentityDataService GetIdentityDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MysqlDapperServiceOptions
             {
                 ConnectionFactory = new MysqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MYSQL")

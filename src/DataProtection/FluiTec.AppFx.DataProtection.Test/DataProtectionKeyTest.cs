@@ -9,6 +9,8 @@ namespace FluiTec.AppFx.DataProtection.Test
     {
         public DataProtectionKeyTest(IDataProtectionDataService dataService) : base(dataService)
         {
+            if (dataService.CanMigrate())
+                dataService.Migrate();
         }
 
         public virtual void CanAddAndGetKey()

@@ -61,7 +61,7 @@ namespace FluiTec.AppFx.Options
             // parse config-section
             Settings = section.Get<TSettings>();
 
-            _logger.LogDebug($"Parsed Configuration for \"{typeof(TSettings).Name}\", Content: {ObjectDumper.Dump(Settings)}");
+            _logger?.LogDebug($"Parsed Configuration for \"{typeof(TSettings).Name}\", Content: {ObjectDumper.Dump(Settings)}");
 
             return Settings;
         }

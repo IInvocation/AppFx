@@ -10,5 +10,9 @@
 
         /// <summary>	The name. </summary>
         public override string Name => "DummyLiteDbDataService";
+
+        public override bool CanMigrate() => false;
+
+        public override void Migrate() => throw new System.NotImplementedException();
     }
 }

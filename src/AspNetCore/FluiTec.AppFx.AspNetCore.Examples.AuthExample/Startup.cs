@@ -1,4 +1,6 @@
 ﻿using System;
+using FluiTec.AppFx.AspNetCore.Configuration;
+using FluiTec.AppFx.Options;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,9 +51,12 @@ namespace FluiTec.AppFx.AspNetCore.Examples.AuthExample
         }
 
         /// <summary>Configure services.</summary>
-        /// <param name="services">     The services. </param>
+        /// <param name="services">         The services. </param>
         public void ConfigureServices(IServiceCollection services)
         {
+            var service = services.BuildServiceProvider();
+            var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+
             services.ConfigureApplication(Configuration);
             services.ConfigureOperator(Configuration);
             services.ConfigureErrorHandling(Configuration);

@@ -1,4 +1,6 @@
 ﻿using System;
+using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.Authorization.Activity.Dapper.Migration;
 using FluiTec.AppFx.Authorization.Activity.Dapper.Repositories;
 using FluiTec.AppFx.Authorization.Activity.Repositories;
 using FluiTec.AppFx.Data;
@@ -27,6 +29,10 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Mysql
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
         public override string Name => "MysqlDapperAuthorizationDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

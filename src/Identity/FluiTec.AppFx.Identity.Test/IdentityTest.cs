@@ -14,6 +14,8 @@
         protected IdentityTest(IIdentityDataService dataService)
         {
             DataService = dataService;
+            if (DataService.CanMigrate())
+                DataService.Migrate();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test
         /// <returns>	The data service. </returns>
         public static IAuthorizationDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MssqlDapperServiceOptions
             {
                 ConnectionFactory = new MssqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")
@@ -26,7 +26,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test
         /// <returns>The identity data service.</returns>
         public static IIdentityDataService GetIdentityDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MssqlDapperServiceOptions
             {
                 ConnectionFactory = new MssqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")

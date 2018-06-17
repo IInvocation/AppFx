@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,20 +10,20 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\FluiTec.AppFx.DataProtection.Dapper\FluiTec.AppFx.DataProtection.Dapper.csproj" />
-  </ItemGroup>
 
   <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
     <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
     <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
   </Target>
+
+  <ItemGroup>
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluiTec.AppFx.DataProtection.Dapper\FluiTec.AppFx.DataProtection.Dapper.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,7 +1,9 @@
 ﻿using System;
+using FluentMigrator.Runner.VersionTableInfo;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Pgsql;
+using FluiTec.AppFx.IdentityServer.Dapper.Migration;
 using FluiTec.AppFx.IdentityServer.Dapper.Pgsql.Repositories;
 using FluiTec.AppFx.IdentityServer.Dapper.Repositories;
 using FluiTec.AppFx.IdentityServer.Repositories;
@@ -50,6 +52,10 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Pgsql
         /// <summary>	Gets the name. </summary>
         /// <value>	The name. </value>
         public override string Name => "PgsqlDapperIdentityServerDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

@@ -13,7 +13,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test
         /// <returns>	The data service. </returns>
         public static IAuthorizationDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new PgsqlDapperServiceOptions
             {
                 ConnectionFactory = new PgsqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")
@@ -24,7 +24,7 @@ namespace FluiTec.AppFx.Authorization.Activity.Dapper.Pgsql.Test
 
         public static IIdentityDataService GetIdentityDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new PgsqlDapperServiceOptions
             {
                 ConnectionFactory = new PgsqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")

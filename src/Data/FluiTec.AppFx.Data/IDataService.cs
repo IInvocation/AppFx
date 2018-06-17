@@ -23,5 +23,12 @@ namespace FluiTec.AppFx.Data
         /// <param name="repositoryProvider">	The repository provider. </param>
         void RegisterRepositoryProvider<TRepository>(Func<IUnitOfWork, TRepository> repositoryProvider)
             where TRepository : class, IRepository;
+
+        /// <summary>Determine if we can migrate.</summary>
+        /// <returns>True if we can migrate, false if not.</returns>
+        bool CanMigrate();
+
+        /// <summary>Migrates this object.</summary>
+        void Migrate();
     }
 }

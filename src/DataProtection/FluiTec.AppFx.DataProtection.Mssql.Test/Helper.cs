@@ -1,5 +1,4 @@
-﻿using FluiTec.AppFx.Data.Dapper;
-using FluiTec.AppFx.Data.Dapper.Mssql;
+﻿using FluiTec.AppFx.Data.Dapper.Mssql;
 using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.DataProtection.Mssql.Test
@@ -11,7 +10,7 @@ namespace FluiTec.AppFx.DataProtection.Mssql.Test
         /// <returns>	The data service. </returns>
         public static IDataProtectionDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MssqlDapperServiceOptions
             {
                 ConnectionFactory = new MssqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")

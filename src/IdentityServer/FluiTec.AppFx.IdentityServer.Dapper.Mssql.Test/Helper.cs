@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test
         /// <returns>	The data service. </returns>
         public static IIdentityServerDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MssqlDapperServiceOptions
             {
                 ConnectionFactory = new MssqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")

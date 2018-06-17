@@ -26,5 +26,9 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override bool CanMigrate() => false;
+
+        public override void Migrate() => throw new System.NotImplementedException();
     }
 }

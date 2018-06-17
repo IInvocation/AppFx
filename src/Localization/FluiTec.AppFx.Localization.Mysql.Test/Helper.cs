@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Localization.Mysql.Test
         /// <returns>	The data service. </returns>
         public static ILocalizationDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MysqlDapperServiceOptions
             {
                 ConnectionFactory = new MysqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MYSQL")

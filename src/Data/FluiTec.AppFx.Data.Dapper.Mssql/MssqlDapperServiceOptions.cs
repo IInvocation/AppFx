@@ -9,8 +9,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql
         /// <summary>	Default constructor. </summary>
         public MssqlDapperServiceOptions()
         {
-            // ReSharper disable once VirtualMemberCallInConstructor
+            // ReSharper disable VirtualMemberCallInConstructor
             ConnectionFactory = new MssqlConnectionFactory();
+            // ReSharper enable VirtualMemberCallInConstructor
         }
 
         /// <summary>	Gets or sets the connection factory. </summary>
