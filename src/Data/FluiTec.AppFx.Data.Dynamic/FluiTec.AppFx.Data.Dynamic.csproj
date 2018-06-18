@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
@@ -19,10 +19,10 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.11" />
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.14" />
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.13" />
-    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.9" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mssql" Version="1.0.15" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.18" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.17" />
+    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.13" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0" />
   </ItemGroup>
 
