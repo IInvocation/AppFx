@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqlite", "Sqlite", "{D27DE6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{36D08C0F-D802-42BD-80FC-3FF2B81A33EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Data.Dynamic", "Data\FluiTec.AppFx.Data.Dynamic\FluiTec.AppFx.Data.Dynamic.csproj", "{14674104-A1F8-40DC-9A06-B5061533B5E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{EB8598A1-824A-49C8-8E95-B37DADB26B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB8598A1-824A-49C8-8E95-B37DADB26B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB8598A1-824A-49C8-8E95-B37DADB26B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14674104-A1F8-40DC-9A06-B5061533B5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14674104-A1F8-40DC-9A06-B5061533B5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14674104-A1F8-40DC-9A06-B5061533B5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14674104-A1F8-40DC-9A06-B5061533B5E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

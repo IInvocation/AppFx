@@ -2,7 +2,6 @@
 using System.Linq;
 using FluiTec.AppFx.OpenId;
 using FluiTec.AppFx.Options;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
 // ReSharper disable once CheckNamespace
@@ -20,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             var settings = configuration.GetConfiguration<OpenIdConnectOptions>();
-
+            services.AddSingleton(settings);
             services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = "Cookies";
