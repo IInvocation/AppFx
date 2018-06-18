@@ -18,5 +18,13 @@
         }
 
         #endregion
+
+        #region Migration
+
+        /// <summary>Gets or sets the type of the SQL.</summary>
+        /// <value>The type of the SQL.</value>
+        public override SqlType SqlType => SqlType.Mssql;
+
+        #endregion
     }
 }

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper\FluiTec.AppFx.IdentityServer.Dapper.csproj", "{7324B79E-67AA-455F-A96E-4AFDEB116044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.IdentityServer.Dapper.Migrations", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Migrations\FluiTec.AppFx.IdentityServer.Dapper.Migrations.csproj", "{CD2E6380-1A43-49B6-9C67-31FFB62F1396}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mssql\FluiTec.AppFx.IdentityServer.Dapper.Mssql.csproj", "{FD8063FD-3535-4F8E-B2F7-C49368FBB039}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test", "IdentityServer\FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test\FluiTec.AppFx.IdentityServer.Dapper.Mssql.Test.csproj", "{E4D74927-E994-4215-8A23-72ED32858516}"
@@ -55,10 +53,6 @@ Global
 		{7324B79E-67AA-455F-A96E-4AFDEB116044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7324B79E-67AA-455F-A96E-4AFDEB116044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7324B79E-67AA-455F-A96E-4AFDEB116044}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD2E6380-1A43-49B6-9C67-31FFB62F1396}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD8063FD-3535-4F8E-B2F7-C49368FBB039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD8063FD-3535-4F8E-B2F7-C49368FBB039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD8063FD-3535-4F8E-B2F7-C49368FBB039}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,7 +103,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7324B79E-67AA-455F-A96E-4AFDEB116044} = {AFB72A4F-2CDA-4F30-BABB-727B4D2A276A}
-		{CD2E6380-1A43-49B6-9C67-31FFB62F1396} = {AFB72A4F-2CDA-4F30-BABB-727B4D2A276A}
 		{FD8063FD-3535-4F8E-B2F7-C49368FBB039} = {4211F1E9-1130-4FD5-924E-CD237ACC5889}
 		{E4D74927-E994-4215-8A23-72ED32858516} = {4211F1E9-1130-4FD5-924E-CD237ACC5889}
 		{32F6A10E-67CB-4AFD-8BC4-596AE9153B3A} = {4CEF9F33-BB38-4818-B6B1-462CE1A9AE37}

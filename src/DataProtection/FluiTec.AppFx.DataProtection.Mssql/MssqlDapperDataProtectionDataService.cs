@@ -4,6 +4,8 @@ using FluiTec.AppFx.Data.Dapper.Mssql;
 using FluiTec.AppFx.DataProtection.Dapper.Repositories;
 using FluiTec.AppFx.DataProtection.Repositories;
 using System;
+using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.DataProtection.Dapper.Migration;
 
 namespace FluiTec.AppFx.DataProtection.Mssql
 {
@@ -48,6 +50,10 @@ namespace FluiTec.AppFx.DataProtection.Mssql
 
         /// <summary>	The name. </summary>
         public override string Name => "MssqlDapperDataProtectionDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

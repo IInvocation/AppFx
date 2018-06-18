@@ -1,8 +1,7 @@
-﻿using FluiTec.AppFx.Data.Dapper;
-using FluiTec.AppFx.Data.Dapper.Pgsql;
+﻿using FluiTec.AppFx.Data.Dapper.Pgsql;
 using FluiTec.AppFx.UnitTesting.Helper;
 
-namespace FluiTec.AppFx.DataProtection.Mssql.Test
+namespace FluiTec.AppFx.DataProtection.Pgsql.Test
 {
     /// <summary>	A helper. </summary>
     public static class Helper
@@ -11,7 +10,7 @@ namespace FluiTec.AppFx.DataProtection.Mssql.Test
         /// <returns>	The data service. </returns>
         public static IDataProtectionDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new PgsqlDapperServiceOptions
             {
                 ConnectionFactory = new PgsqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("PGSQL")

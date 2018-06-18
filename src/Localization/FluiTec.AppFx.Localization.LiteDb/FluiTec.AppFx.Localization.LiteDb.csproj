@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,11 +10,11 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.5</Version>
+    <Version>1.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.9" />
+    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.11" />
   </ItemGroup>
 
   <ItemGroup>

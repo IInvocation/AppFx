@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.UnitTesting.Helper;
+﻿using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.Data.Dapper.Mysql.Test.Fixtures
 {
@@ -16,5 +17,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mysql.Test.Fixtures
 
         /// <summary>	The name. </summary>
         public override string Name => "DummyMysqlDataService";
+
+        public override SqlType SqlType => SqlType.Mssql;
+
+        public override IVersionTableMetaData MetaData => null;
     }
 }

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper\FluiTec.AppFx.Authorization.Activity.Dapper.csproj", "{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Migrations", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Migrations\FluiTec.AppFx.Authorization.Activity.Dapper.Migrations.csproj", "{0E6319E6-0746-45B1-A281-1E34A229581F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.csproj", "{38349A01-F279-425F-A730-2FE16E587884}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test", "Authorization.Activity\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test\FluiTec.AppFx.Authorization.Activity.Dapper.Mssql.Test.csproj", "{1FF7E57B-49D1-4510-913D-D57E240B7C1C}"
@@ -55,10 +53,6 @@ Global
 		{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBDFEF04-1BF9-444D-91CF-D7B01480C91E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E6319E6-0746-45B1-A281-1E34A229581F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E6319E6-0746-45B1-A281-1E34A229581F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E6319E6-0746-45B1-A281-1E34A229581F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E6319E6-0746-45B1-A281-1E34A229581F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38349A01-F279-425F-A730-2FE16E587884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38349A01-F279-425F-A730-2FE16E587884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38349A01-F279-425F-A730-2FE16E587884}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,7 +103,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BBDFEF04-1BF9-444D-91CF-D7B01480C91E} = {0EB4CF70-C030-4177-B255-7ABEE8469DDE}
-		{0E6319E6-0746-45B1-A281-1E34A229581F} = {0EB4CF70-C030-4177-B255-7ABEE8469DDE}
 		{38349A01-F279-425F-A730-2FE16E587884} = {1FA0365E-B0D9-4ECB-91A3-C3FA1F3FF2D5}
 		{1FF7E57B-49D1-4510-913D-D57E240B7C1C} = {1FA0365E-B0D9-4ECB-91A3-C3FA1F3FF2D5}
 		{E9A402C0-F29D-4774-A800-4E367148CFC4} = {03DC5CBF-6EB9-4BD7-80C4-482C8901EB7C}

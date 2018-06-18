@@ -1,4 +1,5 @@
-﻿using FluiTec.AppFx.UnitTesting.Helper;
+﻿using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.UnitTesting.Helper;
 
 namespace FluiTec.AppFx.Data.Dapper.Mssql.Test.Fixtures
 {
@@ -12,5 +13,9 @@ namespace FluiTec.AppFx.Data.Dapper.Mssql.Test.Fixtures
 
         /// <summary>	The name. </summary>
         public override string Name => "DummyMssqlDataService";
+
+        public override SqlType SqlType => SqlType.Mssql;
+
+        public override IVersionTableMetaData MetaData => null;
     }
 }

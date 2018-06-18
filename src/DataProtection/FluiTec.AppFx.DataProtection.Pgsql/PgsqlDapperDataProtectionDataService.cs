@@ -1,11 +1,13 @@
-﻿using FluiTec.AppFx.Data;
+﻿using System;
+using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Pgsql;
+using FluiTec.AppFx.DataProtection.Dapper.Migration;
 using FluiTec.AppFx.DataProtection.Dapper.Repositories;
 using FluiTec.AppFx.DataProtection.Repositories;
-using System;
 
-namespace FluiTec.AppFx.DataProtection.Mssql
+namespace FluiTec.AppFx.DataProtection.Pgsql
 {
     /// <summary>   A pgsql dapper data protection data service. </summary>
     public class PgsqlDapperDataProtectionDataService : PgsqlDapperDataService, IDataProtectionDataService
@@ -48,6 +50,10 @@ namespace FluiTec.AppFx.DataProtection.Mssql
 
         /// <summary>	The name. </summary>
         public override string Name => "PgsqlDapperDataProtectionDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

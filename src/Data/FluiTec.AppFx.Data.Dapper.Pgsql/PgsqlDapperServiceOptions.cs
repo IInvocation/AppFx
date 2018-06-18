@@ -8,8 +8,9 @@ namespace FluiTec.AppFx.Data.Dapper.Pgsql
         /// <summary>	Default constructor. </summary>
         public PgsqlDapperServiceOptions()
         {
-            // ReSharper disable once VirtualMemberCallInConstructor
+            // ReSharper disable VirtualMemberCallInConstructor
             ConnectionFactory = new PgsqlConnectionFactory();
+            // ReSharper enable VirtualMemberCallInConstructor
         }
 
         /// <summary>	Gets or sets the connection factory. </summary>

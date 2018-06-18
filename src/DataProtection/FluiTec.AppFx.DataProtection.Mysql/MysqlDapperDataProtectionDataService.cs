@@ -1,11 +1,13 @@
-﻿using FluiTec.AppFx.Data;
+﻿using System;
+using FluentMigrator.Runner.VersionTableInfo;
+using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mysql;
+using FluiTec.AppFx.DataProtection.Dapper.Migration;
 using FluiTec.AppFx.DataProtection.Dapper.Repositories;
 using FluiTec.AppFx.DataProtection.Repositories;
-using System;
 
-namespace FluiTec.AppFx.DataProtection.Mssql
+namespace FluiTec.AppFx.DataProtection.Mysql
 {
     /// <summary>   A mysql dapper data protection data service. </summary>
     public class MysqlDapperDataProtectionDataService : MysqlDapperDataService, IDataProtectionDataService
@@ -48,6 +50,10 @@ namespace FluiTec.AppFx.DataProtection.Mssql
 
         /// <summary>	The name. </summary>
         public override string Name => "MysqlDapperDataProtectionDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

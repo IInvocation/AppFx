@@ -67,6 +67,13 @@ namespace FluiTec.AppFx.Data
             RepositoryProviders.Add(repoType, repositoryProvider);
         }
 
+        /// <summary>Determine if we can migrate.</summary>
+        /// <returns>True if we can migrate, false if not.</returns>
+        public abstract bool CanMigrate();
+
+        /// <summary>Migrates this object.</summary>
+        public abstract void Migrate();
+
         #endregion
     }
 }

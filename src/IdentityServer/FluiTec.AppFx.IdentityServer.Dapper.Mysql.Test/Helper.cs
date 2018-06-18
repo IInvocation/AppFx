@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.IdentityServer.Dapper.Mysql.Test
         /// <returns>	The data service. </returns>
         public static IIdentityServerDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MysqlDapperServiceOptions
             {
                 ConnectionFactory = new MysqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MYSQL")

@@ -12,6 +12,8 @@ namespace FluiTec.AppFx.Localization.Test
         /// <param name="dataService">  The data service. </param>
         public ResourceTest(ILocalizationDataService dataService) : base(dataService)
         {
+            if (dataService.CanMigrate())
+                dataService.Migrate();
         }
 
         /// <summary>Can add and get resource.</summary>

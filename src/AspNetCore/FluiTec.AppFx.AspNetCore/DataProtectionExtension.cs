@@ -1,4 +1,5 @@
 ﻿using FluiTec.AppFx.DataProtection;
+using FluiTec.AppFx.DataProtection.Dynamic;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.Extensions.Configuration;

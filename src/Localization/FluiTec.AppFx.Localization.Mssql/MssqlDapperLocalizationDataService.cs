@@ -1,8 +1,10 @@
 ﻿using System;
+using FluentMigrator.Runner.VersionTableInfo;
 using FluiTec.AppFx.Data;
 using FluiTec.AppFx.Data.Dapper;
 using FluiTec.AppFx.Data.Dapper.Mssql;
 using FluiTec.AppFx.Localization.Dapper;
+using FluiTec.AppFx.Localization.Dapper.Migration;
 using FluiTec.AppFx.Localization.Mssql.Repositories;
 using FluiTec.AppFx.Localization.Repositories;
 
@@ -28,6 +30,10 @@ namespace FluiTec.AppFx.Localization.Mssql
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
         public override string Name => "MssqlDapperLocalizationDataService";
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public override IVersionTableMetaData MetaData => new VersionTable();
 
         #endregion
 

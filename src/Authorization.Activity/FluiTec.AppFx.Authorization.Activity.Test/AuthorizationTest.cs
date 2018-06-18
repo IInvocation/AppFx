@@ -13,6 +13,8 @@
         protected AuthorizationTest(IAuthorizationDataService dataService)
         {
             DataService = dataService;
+            if (dataService.CanMigrate())
+                dataService.Migrate();
         }
     }
 }

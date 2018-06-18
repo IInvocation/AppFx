@@ -58,6 +58,13 @@ namespace FluiTec.AppFx.DataProtection.LiteDb
             return new LiteDbDataProtectionUnitOfWork(this, (LiteDbUnitOfWork)other);
         }
 
+        /// <summary>Determine if we can migrate.</summary>
+        /// <returns>True if we can migrate, false if not.</returns>
+        public bool CanMigrate() => false;
+
+        /// <summary>Migrates this object.</summary>
+        public void Migrate() => throw new NotImplementedException();
+
         /// <summary>Registers the identity repositories.</summary>
         protected virtual void RegisterIdentityRepositories()
         {

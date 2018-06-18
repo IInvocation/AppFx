@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Localization.Mssql.Test
         /// <returns>	The data service. </returns>
         public static ILocalizationDataService GetDataService()
         {
-            var options = new DapperServiceOptions
+            var options = new MssqlDapperServiceOptions
             {
                 ConnectionFactory = new MssqlConnectionFactory(),
                 ConnectionString = ConnectionStringHelper.GetConnectionStringFor("MSSQL")

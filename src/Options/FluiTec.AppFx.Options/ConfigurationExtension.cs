@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FluiTec.AppFx.Options
 {
@@ -25,26 +26,28 @@ namespace FluiTec.AppFx.Options
             return ConfigurationNames[entityType];
         }
 
-        /// <summary>	An IConfigurationRoot extension method that gets a configuration. </summary>
-        /// <typeparam name="TSettings">	Type of the settings. </typeparam>
-        /// <param name="configuration">   	The configuration to act on. </param>
-        /// <param name="configurationKey">	The configuration key. </param>
-        /// <returns>	The configuration. </returns>
+        /// <summary>An IConfigurationRoot extension method that gets a configuration.</summary>
+        /// <typeparam name="TSettings">    Type of the settings. </typeparam>
+        /// <param name="configuration">    The configuration to act on. </param>
+        /// <param name="configurationKey"> The configuration key. </param>
+        /// <param name="loggerFactory">    (Optional) The logger factory. </param>
+        /// <returns>The configuration.</returns>
         public static TSettings GetConfiguration<TSettings>(this IConfigurationRoot configuration,
-            string configurationKey)
+            string configurationKey, ILoggerFactory loggerFactory = null)
             where TSettings : new()
         {
-            return new ConfigurationSettingsService<TSettings>(configuration, configurationKey).Get();
+            return new ConfigurationSettingsService<TSettings>(configuration, configurationKey, loggerFactory).Get();
         }
 
-        /// <summary>	An IConfigurationRoot extension method that gets a configuration. </summary>
-        /// <typeparam name="TSettings">	Type of the settings. </typeparam>
-        /// <param name="configuration">	The configuration to act on. </param>
-        /// <returns>	The configuration. </returns>
-        public static TSettings GetConfiguration<TSettings>(this IConfigurationRoot configuration)
+        /// <summary>An IConfigurationRoot extension method that gets a configuration.</summary>
+        /// <typeparam name="TSettings">    Type of the settings. </typeparam>
+        /// <param name="configuration">    The configuration to act on. </param>
+        /// <param name="loggerFactory">    (Optional) The logger factory. </param>
+        /// <returns>The configuration.</returns>
+        public static TSettings GetConfiguration<TSettings>(this IConfigurationRoot configuration, ILoggerFactory loggerFactory = null)
             where TSettings : new()
         {
-            return new ConfigurationSettingsService<TSettings>(configuration, NameByType(typeof(TSettings))).Get();
+            return new ConfigurationSettingsService<TSettings>(configuration, NameByType(typeof(TSettings)), loggerFactory).Get();
         }
     }
 }

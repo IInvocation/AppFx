@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Ssl", "Networ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Upnp", "Networking\FluiTec.AppFx.Upnp\FluiTec.AppFx.Upnp.csproj", "{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluiTec.AppFx.Rest", "FluiTec.AppFx.Rest\FluiTec.AppFx.Rest.csproj", "{F116CA51-2DB5-4EFA-A3D9-CB2F5FC7E999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.Rest", "Networking\FluiTec.AppFx.Rest\FluiTec.AppFx.Rest.csproj", "{A2A59D84-3D3F-48FB-8EF1-CABE81DCC15E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC391009-4E81-4FE1-A59F-CDC4ABA8776E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F116CA51-2DB5-4EFA-A3D9-CB2F5FC7E999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F116CA51-2DB5-4EFA-A3D9-CB2F5FC7E999}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F116CA51-2DB5-4EFA-A3D9-CB2F5FC7E999}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F116CA51-2DB5-4EFA-A3D9-CB2F5FC7E999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A59D84-3D3F-48FB-8EF1-CABE81DCC15E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A59D84-3D3F-48FB-8EF1-CABE81DCC15E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A59D84-3D3F-48FB-8EF1-CABE81DCC15E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A59D84-3D3F-48FB-8EF1-CABE81DCC15E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

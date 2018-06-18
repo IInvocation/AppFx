@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,11 +10,11 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.13" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.15" />
   </ItemGroup>
 
   <ItemGroup>

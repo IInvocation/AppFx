@@ -156,5 +156,16 @@ namespace FluiTec.AppFx.Data.LiteDb
         }
 
         #endregion
+
+        #region Migration
+
+        /// <summary>Determine if we can migrate.</summary>
+        /// <returns>True if we can migrate, false if not.</returns>
+        public override bool CanMigrate() => false;
+
+        /// <summary>Migrates the database.</summary>
+        public override void Migrate() => throw new NotImplementedException();
+
+        #endregion
     }
 }

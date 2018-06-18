@@ -1,4 +1,6 @@
 ﻿using System;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.VersionTableInfo;
 
 namespace FluiTec.AppFx.Data.Dapper
 {
@@ -34,21 +36,20 @@ namespace FluiTec.AppFx.Data.Dapper
 
         #region Constructors
 
-        /// <summary>	Specialised constructor for use only by derived class. </summary>
-        /// <exception cref="ArgumentNullException">
-        ///     Thrown when one or more required arguments are
-        ///     null.
-        /// </exception>
-        /// <param name="connectionString"> 	The connection string. </param>
-        /// <param name="connectionFactory">	The connectionfactory. </param>
+        /// <summary>Specialised constructor for use only by derived class.</summary>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="connectionString">     The connection string. </param>
+        /// <param name="connectionFactory">    The connectionfactory. </param>
         protected DapperDataService(string connectionString, IConnectionFactory connectionFactory)
         {
             ConnectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
             ConnectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
         }
 
-        /// <summary>	Specialised constructor for use only by derived class. </summary>
-        /// <param name="options">	Options for controlling the operation. </param>
+        /// <summary>Specialised constructor for use only by derived class.</summary>
+        /// <param name="options">  Options for controlling the operation. </param>
+        /// 
         protected DapperDataService(IDapperServiceOptions options) :
             this(options?.ConnectionString, options?.ConnectionFactory)
         {
@@ -95,6 +96,52 @@ namespace FluiTec.AppFx.Data.Dapper
         /// <summary>	Gets or sets the connection factory. </summary>
         /// <value>	The connection factory. </value>
         public IConnectionFactory ConnectionFactory { get; protected set; }
+
+        /// <summary>Gets or sets the type of the SQL.</summary>
+        /// <value>The type of the SQL.</value>
+        public abstract SqlType SqlType { get; }
+
+        /// <summary>Gets or sets information describing the meta.</summary>
+        /// <value>Information describing the meta.</value>
+        public abstract IVersionTableMetaData MetaData { get; }
+
+        #endregion
+
+        #region Migration
+
+        /// <summary>Determine if we can migrate.</summary>
+        /// <returns>True if we can migrate, false if not.</returns>
+        public override bool CanMigrate() => MetaData != null;
+
+        /// <summary>Migrates the database.</summary>
+        public override void Migrate()
+        {
+            var migrationRunner = new MigrationRunner(ConnectionString, MetaData.GetType(), SelectDatabase);
+            migrationRunner.MigrateUp();
+        }
+
+        /// <summary>Select database.</summary>
+        /// <param name="runner">  The migration-runner. </param>
+        private void SelectDatabase(IMigrationRunnerBuilder runner)
+        {
+            switch (SqlType)
+            {
+                case SqlType.Mssql:
+                    runner.AddSqlServer2014();
+                    break;
+                case SqlType.Mysql:
+                    runner.AddMySql5();
+                    break;
+                case SqlType.Pgsql:
+                    runner.AddPostgres();
+                    break;
+                case SqlType.Sqlite:
+                    runner.AddSQLite();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         #endregion
     }
