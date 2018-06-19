@@ -39,8 +39,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.DataProtectio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluiTec.AppFx.DataProtection.Dynamic", "DataProtection\FluiTec.AppFx.DataProtection.Dynamic\FluiTec.AppFx.DataProtection.Dynamic.csproj", "{82E32DD5-7A32-4BFA-A28D-35DFAF15658D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B70325F2-9E77-4A47-8C93-A0FE66C7E5C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,10 +97,6 @@ Global
 		{82E32DD5-7A32-4BFA-A28D-35DFAF15658D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82E32DD5-7A32-4BFA-A28D-35DFAF15658D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82E32DD5-7A32-4BFA-A28D-35DFAF15658D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B70325F2-9E77-4A47-8C93-A0FE66C7E5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B70325F2-9E77-4A47-8C93-A0FE66C7E5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B70325F2-9E77-4A47-8C93-A0FE66C7E5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B70325F2-9E77-4A47-8C93-A0FE66C7E5C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
