@@ -10,7 +10,7 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.48</Version>
+	  <Version>1.0.50</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +19,7 @@
     <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.10" />
     <PackageReference Include="FluiTec.AppFx.DataProtection.Dynamic" Version="1.0.4" />
     <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.15" />
-    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.21" />
+    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.23" />
     <PackageReference Include="FluiTec.AppFx.Localization" Version="1.0.9" />
     <PackageReference Include="FluiTec.AppFx.Localization.Dynamic" Version="1.0.9" />
     <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.16" />

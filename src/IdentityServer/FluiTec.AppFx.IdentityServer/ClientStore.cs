@@ -47,8 +47,8 @@ namespace FluiTec.AppFx.IdentityServer
                     ClientSecrets = new List<Secret>(new[] {new Secret(entity.Client.Secret.Sha256())}),
                     AllowedGrantTypes = entity.Client.GrantTypes?.Split(','),
                     AllowedScopes = entity.Scopes.Select(s => s.Name).ToList(),
-                    RedirectUris = new List<string>(new[] {entity.Client.RedirectUri}),
-                    PostLogoutRedirectUris = new List<string>(new[] {entity.Client.PostLogoutUri}),
+                    RedirectUris = new List<string>(GetUrisSplit(entity.Client.RedirectUri)),
+                    PostLogoutRedirectUris = new List<string>(GetUrisSplit(entity.Client.PostLogoutUri)),
                     AllowOfflineAccess = entity.Client.AllowOfflineAccess,
                     AlwaysIncludeUserClaimsInIdToken = true,
                     AlwaysSendClientClaims = false,
@@ -58,6 +58,23 @@ namespace FluiTec.AppFx.IdentityServer
                 };
 
                 return Task.FromResult(client);
+            }
+        }
+
+        /// <summary>   Gets uris split. </summary>
+        /// <param name="value">    The value. </param>
+        /// <returns>   The uris split. </returns>
+        private List<string> GetUrisSplit(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return new List<string>();
+            if (value.Contains(','))
+            {
+                return value.Split(',').ToList();
+            }
+            else
+            {
+                return new List<string>(new [] {value});
             }
         }
 
