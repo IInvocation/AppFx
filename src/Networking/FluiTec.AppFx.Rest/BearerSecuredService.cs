@@ -16,7 +16,6 @@ namespace FluiTec.AppFx.Rest
         private const int TokenValiditySafetySeconds = 10;
         private readonly TimeSpan _tokenValiditySafety = new TimeSpan(0, 0, 0, TokenValiditySafetySeconds);
         private DiscoveryResponse _discoveryClient;
-        private KeyValuePair<SecurityToken, string> _accessToken;
 
         #endregion
 
@@ -28,7 +27,7 @@ namespace FluiTec.AppFx.Rest
 
         /// <summary>   Gets the access token. </summary>
         /// <value> The access token. </value>
-        protected KeyValuePair<SecurityToken, string> AccessToken => _accessToken;
+        protected KeyValuePair<SecurityToken, string> AccessToken { get; private set; }
 
         #endregion
 
@@ -54,9 +53,9 @@ namespace FluiTec.AppFx.Rest
         /// <returns>   An asynchronous result that yields the access token. </returns>
         protected async Task<string> GetAccessToken()
         {
-            if (_accessToken.Key != null &&
-                _accessToken.Key.ValidTo.Subtract(_tokenValiditySafety) > DateTime.Now.ToUniversalTime())
-                return _accessToken.Value;
+            if (AccessToken.Key != null &&
+                AccessToken.Key.ValidTo.Subtract(_tokenValiditySafety) > DateTime.Now.ToUniversalTime())
+                return AccessToken.Value;
             return await FetchAccessToken();
         }
 
@@ -71,7 +70,7 @@ namespace FluiTec.AppFx.Rest
                 throw new TokenResponseException(tokenResponse);
 
             var handler = new JwtSecurityTokenHandler();
-            _accessToken = new KeyValuePair<SecurityToken, string>(handler.ReadToken(tokenResponse.AccessToken), tokenResponse.AccessToken);
+            AccessToken = new KeyValuePair<SecurityToken, string>(handler.ReadToken(tokenResponse.AccessToken), tokenResponse.AccessToken);
             return tokenResponse.AccessToken;
         }
 
