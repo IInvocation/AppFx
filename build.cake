@@ -42,19 +42,6 @@ class ProjectInfo
 	public List<string> Packages {get; set;}
 }
 
-class PackageReference
-{
-	public PackageReference(string name, string version)
-	{
-		Name = name;
-		Version = version;
-	}
-	
-	public string Name {get; set;}
-	
-	public string Version {get; set;}
-}
-
 //////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 //////////////////////////////////////////////////////////////////////
@@ -461,75 +448,26 @@ Task("Info")
 	Information("Executing cake-script using configuration :'" + configuration + "'.");
 });
 
-Task("Clean")
-	.IsDependentOn("Info")
-    .Does(() =>
-{
-	foreach(var project in projects)
-	{
-		CleanDirectory(project.ProjectDirectory);
-	}
-});
-
-Task("Update-NuGet-Packages")
-	.IsDependentOn("Clean")
-    .Does(() =>
-{
-	foreach(var project in projects)
-	{
-		if (project.Packages != null && project.Packages.Count > 0)
-		{
-			UpdateNugetPackages(project);
-		}
-	}
-});
-
-Task("Restore-NuGet-Packages")
-    .IsDependentOn("Update-NuGet-Packages")
-    .Does(() =>
-{
-	foreach(var project in projects)
-	{
-		NuGetRestore(project.ProjectFile);
-	}
-});
-
-Task("Increase-Version-Numbers")
-	.IsDependentOn("Restore-NuGet-Packages")
-	.Does(() =>
-{
-	foreach(var project in projects)
-	{
-		if (project.IncreaseVersion)
-		{
-			IncreaseVersionNumber(project.ProjectFile);
-		}
-	}
-});
-
-Task("Build")
-    .IsDependentOn("Increase-Version-Numbers")
-    .Does(() =>
-{
-	foreach(var project in projects)
-	{
-		BuildProject(project.ProjectFile);
-	}
-});
-
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
+	.IsDependentOn("Info")
 	.Does(() =>
 {
 	foreach(var project in projects)
 	{
 		CleanDirectory(project.ProjectDirectory);
-		UpdateNugetPackages(project);
+		if (configuration == "Release")
+		{
+			UpdateNugetPackages(project);
+		}
 		NuGetRestore(project.ProjectFile);
-		IncreaseVersionNumber(project.ProjectFile);
+		if (configuration == "Release")
+		{
+			IncreaseVersionNumber(project.ProjectFile);
+		}
 		BuildProject(project.ProjectFile);
 	}
 });
