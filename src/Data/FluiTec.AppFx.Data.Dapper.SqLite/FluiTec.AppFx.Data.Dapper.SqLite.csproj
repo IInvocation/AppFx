@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.9</Version>
+    <Version>1.0.11</Version>
     <AssemblyName>FluiTec.AppFx.Data.Dapper.SqLite</AssemblyName>
     <RootNamespace>FluiTec.AppFx.Data.Dapper.SqLite</RootNamespace>
   </PropertyGroup>

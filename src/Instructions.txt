@@ -2,7 +2,7 @@ https://docs.microsoft.com/en-us/nuget/guides/install-nuget
 
 Build-Deps:
 Options, Reflection, Tooling, Cryptography
-Data, Networking, Authentication
+Networking, Data, Authentication
 DataProtection
 Localization
 Identity
