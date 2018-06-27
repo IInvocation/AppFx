@@ -9,6 +9,7 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var increaseVersion = configuration == "Release";
+var localNugetTarget = @"\\localhost\nuget";
 
 //////////////////////////////////////////////////////////////////////
 // CONFIGURATION
@@ -47,7 +48,7 @@ Task("Default")
 		if (configuration == "Release")
 		{
 			CreateNugetPackage(project, configuration);
-			PublishNugetPackageLocal(project, configuration, @"\\localhost\nuget");
+			PublishNugetPackageLocal(project, configuration, localNugetTarget);
 		}
 	}
 });
