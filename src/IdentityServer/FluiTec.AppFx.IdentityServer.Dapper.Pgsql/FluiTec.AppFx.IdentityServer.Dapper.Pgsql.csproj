@@ -10,21 +10,16 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.25</Version>
+	  <Version>1.0.26</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.19" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.20" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer.Dapper\FluiTec.AppFx.IdentityServer.Dapper.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.IdentityServer\FluiTec.AppFx.IdentityServer.csproj" />
   </ItemGroup>
-
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
 
 </Project>

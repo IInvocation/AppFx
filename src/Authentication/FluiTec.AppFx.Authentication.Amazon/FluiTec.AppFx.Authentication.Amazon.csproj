@@ -10,7 +10,7 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.9</Version>
+	  <Version>1.0.10</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,10 +19,5 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.1" />
   </ItemGroup>
-
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
 
 </Project>

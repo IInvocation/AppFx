@@ -10,16 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.25</Version>
+	  <Version>1.0.26</Version>
   </PropertyGroup>
 
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
-
 	<ItemGroup>
-	  <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.20" />
+	  <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.21" />
 	</ItemGroup>
 
 	<ItemGroup>

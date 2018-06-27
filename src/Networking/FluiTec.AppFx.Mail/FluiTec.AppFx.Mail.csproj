@@ -10,19 +10,14 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.26</Version>
+	  <Version>1.0.27</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.29" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.53" />
     <PackageReference Include="MailKit" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.2" />
     <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
   </ItemGroup>
-
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
 
 </Project>

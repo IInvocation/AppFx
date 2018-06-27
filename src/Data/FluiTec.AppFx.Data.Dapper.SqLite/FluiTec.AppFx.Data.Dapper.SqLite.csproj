@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <AssemblyName>FluiTec.AppFx.Data.Dapper.SqLite</AssemblyName>
     <RootNamespace>FluiTec.AppFx.Data.Dapper.SqLite</RootNamespace>
   </PropertyGroup>
@@ -23,10 +23,5 @@
     <ProjectReference Include="..\FluiTec.AppFx.Data.Dapper\FluiTec.AppFx.Data.Dapper.csproj" />
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
   </ItemGroup>
-
-  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-  </Target>
 
 </Project>

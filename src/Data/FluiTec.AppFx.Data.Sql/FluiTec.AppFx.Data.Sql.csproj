@@ -10,7 +10,7 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.14</Version>
+	  <Version>1.0.15</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,9 +24,4 @@
     <ProjectReference Include="..\FluiTec.AppFx.Data\FluiTec.AppFx.Data.csproj" />
   </ItemGroup>
 
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
-	
 </Project>

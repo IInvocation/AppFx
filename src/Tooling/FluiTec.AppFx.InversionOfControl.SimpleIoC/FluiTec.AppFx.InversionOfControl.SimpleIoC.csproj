@@ -10,7 +10,7 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.4</Version>
+	  <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,9 +22,4 @@
     <ProjectReference Include="..\FluiTec.AppFx.InversionOfControl\FluiTec.AppFx.InversionOfControl.csproj" />
   </ItemGroup>
 
-	<Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-		<Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-		<Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-	</Target>
-	
 </Project>

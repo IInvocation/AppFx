@@ -10,23 +10,18 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.1.1" />
     <PackageReference Include="FluentMigrator.Runner.Core" Version="3.1.1" />
-    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.15" />
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.24" />
+    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.16" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.25" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluiTec.AppFx.DataProtection\FluiTec.AppFx.DataProtection.csproj" />
   </ItemGroup>
-
-  <Target Name="NugetTarget" AfterTargets="Build" Condition="'$(ConfigurationName)'=='Release'">
-    <Exec Command="dotnet pack --no-build -c $(ConfigurationName)"></Exec>
-    <Exec Command="nuget add $(ProjectDir)bin\$(ConfigurationName)\$(TargetName).$(Version).nupkg -Source \\localhost\nuget"></Exec>
-  </Target>
 
 </Project>
