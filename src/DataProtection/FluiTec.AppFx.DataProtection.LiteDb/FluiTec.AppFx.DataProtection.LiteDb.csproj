@@ -10,11 +10,11 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.17" />
+    <PackageReference Include="FluiTec.AppFx.Data.LiteDb" Version="1.0.18" />
   </ItemGroup>
 
   <ItemGroup>

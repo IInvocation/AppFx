@@ -5,6 +5,18 @@ var conf = Argument("configuration", "Release");
 
 // Define projects
 var projects = new[] {
+	new ProjectInfo // LocalizationProvider
+	(
+		Directory("../src/Localization/LocalizationProvider/src/DbLocalizationProvider.Abstractions/bin") + Directory(conf), 
+		File("../src/Localization/LocalizationProvider/src/DbLocalizationProvider.Abstractions/DbLocalizationProvider.Abstractions.csproj"), 
+		increaseVersion
+	),
+	new ProjectInfo
+	(
+		Directory("../src/Localization/LocalizationProvider/src/DbLocalizationProvider/bin") + Directory(conf), 
+		File("../src/Localization/LocalizationProvider/src/DbLocalizationProvider/DbLocalizationProvider.csproj"), 
+		increaseVersion
+	),
 	new ProjectInfo // Options
 	(
 		Directory("../src/Options/FluiTec.AppFx.Options/bin") + Directory(conf), 

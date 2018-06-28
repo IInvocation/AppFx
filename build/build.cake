@@ -16,6 +16,11 @@ var localNugetTarget = @"\\localhost\nuget";
 //////////////////////////////////////////////////////////////////////
 
 var autoUpdatePrefix = "FluiTec.AppFx";
+var autoUpdateProjects = new [] 
+{
+	"DbLocalizationProvider",
+	"DbLocalizationProvider.Abstractions"
+};
 
 //////////////////////////////////////////////////////////////////////
 // TASKS

@@ -14,7 +14,9 @@ namespace FluiTec.AppFx.Rest
 
         /// <summary>   Specialised constructor for use only by derived class. </summary>
         /// <param name="options">  Options for controlling the operation. </param>
-        protected BearerSecuredJsonService(TOptions options) : base(options) { }
+        protected BearerSecuredJsonService(TOptions options) : base(options)
+        {
+        }
 
         #endregion
 

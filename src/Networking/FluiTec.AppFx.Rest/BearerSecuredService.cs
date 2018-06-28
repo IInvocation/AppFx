@@ -11,6 +11,24 @@ namespace FluiTec.AppFx.Rest
     /// <typeparam name="TOptions"> Type of the options. </typeparam>
     public class BearerSecuredService<TOptions> where TOptions : BearerSecuredServiceOptions
     {
+        #region Constructors
+
+        /// <summary>   Specialised constructor for use only by derived class. </summary>
+        /// <exception cref="ArgumentException">
+        ///     Thrown when one or more arguments have unsupported or
+        ///     illegal values.
+        /// </exception>
+        /// <param name="options">  Options for controlling the operation. </param>
+        protected BearerSecuredService(TOptions options)
+        {
+            // ReSharper disable once VirtualMemberCallInConstructor
+            if (!ValidateOptions(options))
+                throw new ArgumentException("Invalid options.");
+            Options = options;
+        }
+
+        #endregion
+
         #region Fields
 
         private const int TokenValiditySafetySeconds = 10;
@@ -28,22 +46,6 @@ namespace FluiTec.AppFx.Rest
         /// <summary>   Gets the access token. </summary>
         /// <value> The access token. </value>
         protected KeyValuePair<SecurityToken, string> AccessToken { get; private set; }
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>   Specialised constructor for use only by derived class. </summary>
-        /// <exception cref="ArgumentException">    Thrown when one or more arguments have unsupported or
-        ///                                         illegal values. </exception>
-        /// <param name="options">  Options for controlling the operation. </param>
-        protected BearerSecuredService(TOptions options)
-        {
-            // ReSharper disable once VirtualMemberCallInConstructor
-            if (!ValidateOptions(options))
-                throw new ArgumentException("Invalid options.");
-            Options = options;
-        }
 
         #endregion
 
@@ -70,15 +72,22 @@ namespace FluiTec.AppFx.Rest
                 throw new TokenResponseException(tokenResponse);
 
             var handler = new JwtSecurityTokenHandler();
-            AccessToken = new KeyValuePair<SecurityToken, string>(handler.ReadToken(tokenResponse.AccessToken), tokenResponse.AccessToken);
+            AccessToken = new KeyValuePair<SecurityToken, string>(handler.ReadToken(tokenResponse.AccessToken),
+                tokenResponse.AccessToken);
             return tokenResponse.AccessToken;
         }
 
         /// <summary>   Prepare access token. </summary>
-        public async void PrepareAccessToken() => await GetAccessToken();
+        public async void PrepareAccessToken()
+        {
+            await GetAccessToken();
+        }
 
         /// <summary>   Refetch access token. </summary>
-        public async void RefetchAccessToken() => await FetchAccessToken();
+        public async void RefetchAccessToken()
+        {
+            await FetchAccessToken();
+        }
 
         #endregion
 

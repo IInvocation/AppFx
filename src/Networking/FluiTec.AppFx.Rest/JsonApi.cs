@@ -10,16 +10,6 @@ namespace FluiTec.AppFx.Rest
     /// <summary>   A JSON api. </summary>
     public abstract class JsonApi<TModel> where TModel : class
     {
-        #region Fields
-
-        /// <summary>   Full pathname of the sub file. </summary>
-        protected readonly string SubPath;
-
-        /// <summary>   The service. </summary>
-        protected readonly IWebService Service;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>   Specialised constructor for use only by derived class. </summary>
@@ -30,6 +20,16 @@ namespace FluiTec.AppFx.Rest
             Service = service;
             SubPath = subPath;
         }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>   Full pathname of the sub file. </summary>
+        protected readonly string SubPath;
+
+        /// <summary>   The service. </summary>
+        protected readonly IWebService Service;
 
         #endregion
 

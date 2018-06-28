@@ -74,7 +74,7 @@ void UpdateNugetPackages(ProjectInfo project, string prefix)
 			var startIndex = trimmed.IndexOf("Include=") + 9;
 			var length = trimmed.IndexOf("Version=")-2-startIndex;
 			var id = trimmed.Substring(startIndex, length);
-			if (id.StartsWith(prefix))
+			if (id.StartsWith(prefix) || (autoUpdateProjects != null && autoUpdateProjects.Contains(trimmed)))
 			{
 				DotNetCoreTool(project.ProjectFile, "add package " + id);
 			}

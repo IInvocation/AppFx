@@ -11,15 +11,7 @@ namespace FluiTec.AppFx.Rest
     public abstract class CachingJsonApi<TModel> : JsonApi<TModel> where TModel : class
     {
         /// <summary>   The default cache expiration seconds. </summary>
-        private int _defaultCacheExpirationSeconds = 3600;
-
-        /// <summary>   Gets or sets the cache expiration. </summary>
-        /// <value> The cache expiration. </value>
-        public TimeSpan CacheExpiration { get; set; }
-
-        /// <summary>   Gets or sets the cache. </summary>
-        /// <value> The cache. </value>
-        protected IMemoryCache Cache { get; }
+        private readonly int _defaultCacheExpirationSeconds = 3600;
 
         /// <summary>   Specialised constructor for use only by derived class. </summary>
         /// <param name="service">  The service. </param>
@@ -30,6 +22,14 @@ namespace FluiTec.AppFx.Rest
             CacheExpiration = TimeSpan.FromSeconds(_defaultCacheExpirationSeconds);
             Cache = cache;
         }
+
+        /// <summary>   Gets or sets the cache expiration. </summary>
+        /// <value> The cache expiration. </value>
+        public TimeSpan CacheExpiration { get; set; }
+
+        /// <summary>   Gets or sets the cache. </summary>
+        /// <value> The cache. </value>
+        protected IMemoryCache Cache { get; }
 
         /// <summary>   Gets the name of the model type. </summary>
         /// <value> The name of the model type. </value>
@@ -53,7 +53,9 @@ namespace FluiTec.AppFx.Rest
             var key = $"{ModelTypeName}.{nameof(GetAll)}";
             if (Cache.TryGetValue(key, out IEnumerable<TModel> entry)) return entry;
 
-            var options = new MemoryCacheEntryOptions().SetAbsoluteExpiration(new DateTimeOffset(DateTime.Now.Add(CacheExpiration)));
+            var options =
+                new MemoryCacheEntryOptions().SetAbsoluteExpiration(
+                    new DateTimeOffset(DateTime.Now.Add(CacheExpiration)));
             entry = await base.GetAll();
             Cache.Set(key, entry, options);
 
@@ -68,7 +70,9 @@ namespace FluiTec.AppFx.Rest
             var key = GetCacheKey(id);
             if (Cache.TryGetValue(key, out TModel entry)) return entry;
 
-            var options = new MemoryCacheEntryOptions().SetAbsoluteExpiration(new DateTimeOffset(DateTime.Now.Add(CacheExpiration)));
+            var options =
+                new MemoryCacheEntryOptions().SetAbsoluteExpiration(
+                    new DateTimeOffset(DateTime.Now.Add(CacheExpiration)));
             entry = await base.Get(id);
             Cache.Set(key, entry, options);
 

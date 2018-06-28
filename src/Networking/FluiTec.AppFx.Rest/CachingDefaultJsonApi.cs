@@ -12,7 +12,8 @@ namespace FluiTec.AppFx.Rest
         /// <param name="service">  The service. </param>
         /// <param name="subPath">  Full pathname of the sub file. </param>
         /// <param name="cache">    The cache. </param>
-        protected CachingDefaultJsonApi(IWebService service, string subPath, IMemoryCache cache) : base(service, subPath, cache)
+        protected CachingDefaultJsonApi(IWebService service, string subPath, IMemoryCache cache) : base(service,
+            subPath, cache)
         {
         }
 
