@@ -10,13 +10,13 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.17</Version>
+	  <Version>1.0.18</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DbLocalizationProvider.Abstractions" Version="4.2.0" />
-    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.17" />
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.26" />
+    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.18" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="2.0.2" />
