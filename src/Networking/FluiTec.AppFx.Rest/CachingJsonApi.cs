@@ -11,7 +11,7 @@ namespace FluiTec.AppFx.Rest
     public abstract class CachingJsonApi<TModel> : JsonApi<TModel> where TModel : class
     {
         /// <summary>   The default cache expiration seconds. </summary>
-        private readonly int _defaultCacheExpirationSeconds = 3600;
+        private const int _defaultCacheExpirationSeconds = 3600;
 
         /// <summary>   Specialised constructor for use only by derived class. </summary>
         /// <param name="service">  The service. </param>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -37,9 +38,11 @@ namespace FluiTec.AppFx.Rest
 
         /// <summary>   Builds the client. </summary>
         /// <returns>   An asynchronous result that yields a HttpClient. </returns>
-        protected virtual Task<HttpClient> BuildClient()
+        protected virtual async Task<HttpClient> BuildClient()
         {
-            return Service.BuildClient(SubPath);
+            var client = await Service.BuildClient(SubPath);
+            client.Timeout = TimeSpan.FromSeconds(5);
+            return client;
         }
 
         /// <summary>   Gets all items in this collection. </summary>
@@ -49,6 +52,7 @@ namespace FluiTec.AppFx.Rest
         protected virtual async Task<IEnumerable<TModel>> GetAll()
         {
             var client = await BuildClient();
+            client.Timeout = TimeSpan.FromSeconds(5);
             var response = await client.GetAsync(string.Empty);
 
             if (!response.IsSuccessStatusCode)

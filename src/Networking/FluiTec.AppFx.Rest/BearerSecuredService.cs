@@ -108,7 +108,7 @@ namespace FluiTec.AppFx.Rest
                 return false;
             if (string.IsNullOrWhiteSpace(options.ClientSecret))
                 return false;
-            if (!ValidateDiscovery(options).Result)
+            if (!ValidateDiscovery(options))
                 return false;
 
             return true;
@@ -117,11 +117,11 @@ namespace FluiTec.AppFx.Rest
         /// <summary>   Validates the discovery described by options. </summary>
         /// <param name="options">  Options for controlling the operation. </param>
         /// <returns>   An asynchronous result that yields true if it succeeds, false if it fails. </returns>
-        private async Task<bool> ValidateDiscovery(TOptions options)
+        private bool ValidateDiscovery(TOptions options)
         {
             try
             {
-                var disco = await DiscoveryClient.GetAsync(options.BearerServiceUrl);
+                var disco = DiscoveryClient.GetAsync(options.BearerServiceUrl).Result;
                 if (disco == null || disco.IsError) return false;
                 _discoveryClient = disco;
                 return true;

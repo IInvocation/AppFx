@@ -10,12 +10,12 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.27</Version>
+	  <Version>1.0.30</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="3.1.1" />
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.55" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.61" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 
