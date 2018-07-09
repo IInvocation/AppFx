@@ -10,12 +10,20 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+<<<<<<< HEAD
 	  <Version>1.0.30</Version>
+=======
+	  <Version>1.0.29</Version>
+>>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="3.1.1" />
+<<<<<<< HEAD
     <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.61" />
+=======
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.57" />
+>>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 

@@ -12,7 +12,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+<<<<<<< HEAD
 	  <Version>1.0.26</Version>
+=======
+	  <Version>1.0.25</Version>
+>>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
   </PropertyGroup>
 
   <ItemGroup>

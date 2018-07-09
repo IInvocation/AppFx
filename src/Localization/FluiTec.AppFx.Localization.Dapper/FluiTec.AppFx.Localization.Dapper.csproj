@@ -16,7 +16,11 @@
   <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="3.1.1" />
     <PackageReference Include="FluentMigrator.Runner.Core" Version="3.1.1" />
+<<<<<<< HEAD
     <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.30" />
+=======
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper" Version="1.0.29" />
+>>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
   </ItemGroup>
 
   <ItemGroup>

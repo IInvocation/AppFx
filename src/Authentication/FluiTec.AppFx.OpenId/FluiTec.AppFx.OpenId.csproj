@@ -14,7 +14,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.61" />
+=======
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.57" />
+>>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.0.3" />
