@@ -121,8 +121,17 @@
             </summary>
             <returns>The files which match the regular expression and globber pattern.</returns>
             <param name="context">The context.</param>
-            <param name="globberPattern">The globber pattern to match files to replace text in.</param>
-            <param name="findPattern">The regular expression to find.</param>
+            <param name="globberPattern">The globber pattern to match files to find text in.</param>
+            <param name="substring">The substring to find.</param>
+        </member>
+        <member name="M:Cake.FileHelpers.FileHelperAliases.FindTextInFiles(Cake.Core.ICakeContext,System.Collections.Generic.IEnumerable{Cake.Core.IO.FilePath},System.String)">
+            <summary>
+            Finds files with the given text in files matching the given collection of files.
+            </summary>
+            <returns>The files which match the regular expession in the files.</returns>
+            <param name="context">The context.</param>
+            <param name="files">The files to find text in.</param>
+            <param name="substring">The substring to find.</param>
         </member>
         <member name="M:Cake.FileHelpers.FileHelperAliases.FindRegexMatchesInFile(Cake.Core.ICakeContext,Cake.Core.IO.FilePath,System.String,System.Text.RegularExpressions.RegexOptions)">
             <summary>

@@ -10,15 +10,11 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.17</Version>
+    <Version>1.0.18</Version>
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.61" />
-=======
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.57" />
->>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.62" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>

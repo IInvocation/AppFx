@@ -10,15 +10,11 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.21" />
-=======
-    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.20" />
->>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
+    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
   </ItemGroup>

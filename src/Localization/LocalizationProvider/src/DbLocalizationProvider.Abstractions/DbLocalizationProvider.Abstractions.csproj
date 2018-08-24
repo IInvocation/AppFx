@@ -4,11 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
-<<<<<<< HEAD
-    <Version>4.2.10</Version>
-=======
-    <Version>4.2.7</Version>
->>>>>>> d53bd1516a53f3ca01b4c9a720333326b3293250
+    <Version>4.2.11</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Abstractions for Database driven localization provider.</Description>
     <Company>Valdis Iljuconoks, https://tech-fellow.net</Company>
