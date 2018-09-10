@@ -10,13 +10,13 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.17</Version>
+    <Version>1.0.18</Version>
     <AssemblyName>FluiTec.AppFx.Data.Dapper.SqLite</AssemblyName>
     <RootNamespace>FluiTec.AppFx.Data.Dapper.SqLite</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Data.SQLite" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>

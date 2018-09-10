@@ -10,11 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.27</Version>
+	  <Version>1.0.28</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.27" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Mysql" Version="1.0.28" />
   </ItemGroup>
 
   <ItemGroup>

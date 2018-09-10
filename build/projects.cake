@@ -168,13 +168,13 @@ var projects = new[] {
 		File("../src/DataProtection/FluiTec.AppFx.DataProtection.Dynamic/FluiTec.AppFx.DataProtection.Dynamic.csproj"), 
 		increaseVersion
 	),
-	new ProjectInfo
+	new ProjectInfo // Localization
 	(
 		Directory("../src/Localization/FluiTec.AppFx.Localization/bin") + Directory(conf), 
 		File("../src/Localization/FluiTec.AppFx.Localization/FluiTec.AppFx.Localization.csproj"), 
 		increaseVersion
 	),
-	new ProjectInfo // Localization
+	new ProjectInfo 
 	(
 		Directory("../src/Localization/FluiTec.AppFx.Localization/bin") + Directory(conf), 
 		File("../src/Localization/FluiTec.AppFx.Localization/FluiTec.AppFx.Localization.csproj"), 
