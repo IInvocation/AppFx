@@ -23,6 +23,10 @@ namespace FluiTec.AppFx.Identity.Entities
         /// <value>	The name of the lowered user. </value>
         public string NormalizedName { get; set; }
 
+        /// <summary>   Gets or sets the name of the full. </summary>
+        /// <value> The name of the full. </value>
+        public string FullName { get; set; }
+
         /// <summary>	Gets or sets the mobile alias. </summary>
         /// <value>	The mobile alias. </value>
         public string MobileAlias { get; set; }

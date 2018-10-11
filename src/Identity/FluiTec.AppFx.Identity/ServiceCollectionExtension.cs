@@ -1,6 +1,4 @@
 ﻿using FluiTec.AppFx.Identity.Entities;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

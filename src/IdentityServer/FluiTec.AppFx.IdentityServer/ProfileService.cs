@@ -88,6 +88,7 @@ namespace FluiTec.AppFx.IdentityServer
             var claims = new List<Claim>
             {
                 new Claim(JwtClaimTypes.Subject, user.Identifier.ToString()),
+                new Claim("identifier", user.Identifier.ToString()),
                 new Claim(JwtClaimTypes.Name, user.Name)
             };
 
