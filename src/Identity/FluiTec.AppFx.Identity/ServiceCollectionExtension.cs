@@ -12,6 +12,11 @@ namespace FluiTec.AppFx.Identity
         /// <returns>	An IServiceCollection. </returns>
         public static IServiceCollection AddIdentityStores(this IServiceCollection services)
         {
+            // allow unchecked UserNames (since we only use EMail)
+            services.AddScoped<IUserValidator<IdentityUserEntity>, UserValidator<IdentityUserEntity>>();
+            services.AddScoped<UserManager<IdentityUserEntity>, NameIgnoringUserManager>();
+
+            // add customized stores
             services.AddScoped<IdentityStore>();
             services.AddScoped<IUserStore<IdentityUserEntity>>(provider => provider.GetService<IdentityStore>());
             services.AddScoped<IUserPasswordStore<IdentityUserEntity>>(provider =>

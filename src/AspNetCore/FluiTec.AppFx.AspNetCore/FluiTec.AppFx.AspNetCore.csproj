@@ -10,20 +10,20 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.62</Version>
+	  <Version>1.0.66</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Authentication.Amazon" Version="1.0.20" />
-    <PackageReference Include="FluiTec.AppFx.Authorization.Activity" Version="1.0.22" />
-    <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.22" />
-    <PackageReference Include="FluiTec.AppFx.DataProtection.Dynamic" Version="1.0.17" />
-    <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.27" />
-    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.35" />
-    <PackageReference Include="FluiTec.AppFx.Localization" Version="1.0.35" />
-    <PackageReference Include="FluiTec.AppFx.Localization.Dynamic" Version="1.0.22" />
-    <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.38" />
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.67" />
+    <PackageReference Include="FluiTec.AppFx.Authentication.Amazon" Version="1.0.24" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity" Version="1.0.26" />
+    <PackageReference Include="FluiTec.AppFx.Authorization.Activity.Dynamic" Version="1.0.26" />
+    <PackageReference Include="FluiTec.AppFx.DataProtection.Dynamic" Version="1.0.21" />
+    <PackageReference Include="FluiTec.AppFx.Identity.Dynamic" Version="1.0.31" />
+    <PackageReference Include="FluiTec.AppFx.IdentityServer.Dynamic" Version="1.0.39" />
+    <PackageReference Include="FluiTec.AppFx.Localization" Version="1.0.43" />
+    <PackageReference Include="FluiTec.AppFx.Localization.Dynamic" Version="1.0.26" />
+    <PackageReference Include="FluiTec.AppFx.Mail" Version="1.0.42" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.71" />
     <PackageReference Include="IdentityServer4" Version="2.2.0" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.1.2" />

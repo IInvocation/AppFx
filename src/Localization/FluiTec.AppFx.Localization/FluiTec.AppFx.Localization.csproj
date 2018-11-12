@@ -10,12 +10,12 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.35</Version>
+    <Version>1.0.43</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.27" />
-    <PackageReference Include="FluiTec.AppFx.Reflection" Version="1.0.28" />
+    <PackageReference Include="FluiTec.AppFx.Data" Version="1.0.31" />
+    <PackageReference Include="FluiTec.AppFx.Reflection" Version="1.0.32" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.1.2" />

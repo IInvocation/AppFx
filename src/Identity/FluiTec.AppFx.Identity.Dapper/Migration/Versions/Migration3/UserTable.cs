@@ -33,14 +33,14 @@ namespace FluiTec.AppFx.Identity.Dapper.Migration.Versions.Migration3
         {
             IfDatabase("sqlserver", "postgres")
                 .Delete
-                .UniqueConstraint(UniqueMailIndexName)
-                .FromTable(Globals.UserTable)
+                .Index(UniqueMailIndexName)
+                .OnTable(Globals.UserTable)
                 .InSchema(Globals.Schema);
 
             IfDatabase("sqlserver", "postgres")
                 .Delete
-                .UniqueConstraint(UniqueNameIndexName)
-                .FromTable(Globals.UserTable)
+                .Index(UniqueNameIndexName)
+                .OnTable(Globals.UserTable)
                 .InSchema(Globals.Schema);
         }
     }

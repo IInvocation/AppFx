@@ -31,8 +31,8 @@ namespace FluiTec.AppFx.AspNetCore
             // configure aspnet-identity
             services.AddIdentity<IdentityUserEntity, IdentityRoleEntity>(config =>
                 {
-                    config.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ öäüÖÄÜ ß 12345678";
+                    config.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ öäüÖÄÜ ß 12345678";
+                    config.User.RequireUniqueEmail = true;
                     config.SignIn.RequireConfirmedEmail = true;
                     config.Lockout.AllowedForNewUsers = true;
                     config.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
