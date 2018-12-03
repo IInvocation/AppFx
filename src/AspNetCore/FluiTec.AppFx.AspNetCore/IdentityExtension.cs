@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using FluiTec.AppFx.AspNetCore.Configuration;
@@ -40,6 +41,10 @@ namespace FluiTec.AppFx.AspNetCore
                 .AddErrorDescriber<MultiLanguageIdentityErrorDescriber>()
                 .AddDefaultTokenProviders();
             services.AddIdentityStores();
+
+            var serviceDescriptor = services.SingleOrDefault(descriptor => descriptor.ImplementationType == typeof(Microsoft.AspNetCore.Identity.UserValidator<IdentityUserEntity>));
+            if (serviceDescriptor != null)
+                services.Remove(serviceDescriptor);
 
             // configure cookies
             return services.ConfigureLoginCookieRedirect(configuration);

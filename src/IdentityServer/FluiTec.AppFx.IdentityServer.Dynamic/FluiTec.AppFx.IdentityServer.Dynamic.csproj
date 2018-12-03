@@ -10,11 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.39</Version>
+	  <Version>1.0.40</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.71" />
+    <PackageReference Include="FluiTec.AppFx.Options" Version="1.0.72" />
   </ItemGroup>
 
   <ItemGroup>
