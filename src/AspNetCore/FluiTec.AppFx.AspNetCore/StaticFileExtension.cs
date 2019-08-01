@@ -60,7 +60,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (environment.IsDevelopment())
                 app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
                 {
-                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.ContentRootPath))
+                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.WebRootPath))
                     {
                         CultureOptions = app.ApplicationServices.GetService<CultureOptions>()
                     }
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
             else
                 app.UseStaticFiles(new AspNetCore.Builder.StaticFileOptions
                 {
-                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.ContentRootPath))
+                    FileProvider = new LanguageAwarePhysicalFileProvider(Path.Combine(environment.WebRootPath))
                     {
                         CultureOptions = app.ApplicationServices.GetService<CultureOptions>()
                     },

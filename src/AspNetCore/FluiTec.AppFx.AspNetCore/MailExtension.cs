@@ -53,7 +53,7 @@ namespace FluiTec.AppFx.AspNetCore
         private static void AddRazorLight(this IServiceCollection services, IHostingEnvironment environment,
             string root)
         {
-            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.WebRootPath, root);
 
             var engine = new RazorLightEngineBuilder()
                 .UseFilesystemProject(absoluteRoot)
@@ -98,7 +98,7 @@ namespace FluiTec.AppFx.AspNetCore
         private static void AddRazorLightLocalized(this IServiceCollection services, IHostingEnvironment environment,
             string root, MailServiceOptions options, Func<CultureInfo, string, string> templateKeyExpander)
         {
-            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.WebRootPath, root);
 
             var project = new CultureAwareRazorProject(options, absoluteRoot, templateKeyExpander);
             var engine = new RazorLightEngineBuilder()
@@ -143,7 +143,7 @@ namespace FluiTec.AppFx.AspNetCore
             var provider = services.BuildServiceProvider();
             var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
 
-            var absoluteRoot = Path.Combine(environment.ContentRootPath, root);
+            var absoluteRoot = Path.Combine(environment.WebRootPath, root);
 
             var expanders = new ILocationExpander[]
             {

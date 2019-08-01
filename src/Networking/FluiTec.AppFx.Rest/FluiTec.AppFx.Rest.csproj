@@ -10,7 +10,7 @@
     <PostBuildEvent></PostBuildEvent>
     <PreBuildEvent></PreBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <Version>1.0.37</Version>
+    <Version>1.0.38</Version>
   </PropertyGroup>
 
   <ItemGroup>
