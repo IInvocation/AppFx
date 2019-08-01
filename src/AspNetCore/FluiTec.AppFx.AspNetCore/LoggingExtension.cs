@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -31,8 +29,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (environment.IsDevelopment())
             {
+#pragma warning disable CS0618 // Typ oder Element ist veraltet
                 loggerFactory.AddConsole(configuration.GetSection("Logging"));
                 loggerFactory.AddDebug();
+#pragma warning restore CS0618 // Typ oder Element ist veraltet
             }
             else
             {

@@ -10,11 +10,11 @@
 	  <PostBuildEvent></PostBuildEvent>
 	  <PreBuildEvent></PreBuildEvent>
 	  <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	  <Version>1.0.41</Version>
+	  <Version>1.0.42</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.36" />
+    <PackageReference Include="FluiTec.AppFx.Data.Dapper.Pgsql" Version="1.0.37" />
   </ItemGroup>
 
   <ItemGroup>

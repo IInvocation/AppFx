@@ -57,8 +57,7 @@ namespace FluiTec.AppFx.AspNetCore
         /// <param name="app">				The app to act on. </param>
         /// <param name="configuration">	The configuration. </param>
         /// <returns>	An IApplicationBuilder. </returns>
-        public static IApplicationBuilder UseIdentityServer(this IApplicationBuilder app,
-            IConfigurationRoot configuration)
+        public static IApplicationBuilder UseIdentityServer(this IApplicationBuilder app, IConfigurationRoot configuration)
         {
             // enable identityserver
             app.UseIdentityServer();
